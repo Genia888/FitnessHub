@@ -1,3 +1,5 @@
+![FitnessHub Logo](assets/images/FitnessHub.png)
+
 # FitnessHub
 
 ### Your coach, your way – anywhere, anytime.
