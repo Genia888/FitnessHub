@@ -9,6 +9,7 @@ Create a fitness website/mobile between coach/diet and users
 # 2. Idea Evaluation
 - Create a website/mobile to communicate between coach and users
 - The user can choose a coach from sport and diet
+- The user can see on his app the training menu and diet menu of the day
 - Fitness Hub can sell goodies to user
 - The user pay an abonnement to get the training of the coach
 
