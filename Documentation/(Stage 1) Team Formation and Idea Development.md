@@ -1,7 +1,7 @@
 # 0. Team Formation
 ## Initial Meeting
 
-We held our first team meeting on [insert date] to introduce ourselves, share our backgrounds, strengths, and interests, and discuss how we would collaborate throughout the project. The meeting allowed us to better understand each member’s skill set and define a clear structure for working together.
+We held our first team meeting to introduce ourselves, share our backgrounds, strengths, and interests, and discuss how we would collaborate throughout the project. The meeting allowed us to better understand each member’s skill set and define a clear structure for working together.
 ## Team Members and Initial Roles
 
 | Name | Role       | Strenghts/Skills          |
