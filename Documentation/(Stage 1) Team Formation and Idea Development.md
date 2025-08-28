@@ -12,7 +12,7 @@ We held our first team meeting on [insert date] to introduce ourselves, share ou
 
 ## Team Norms for Collaboration
 - Communication Tools : Slack, Discord, Trelo
-- Meeting Schedule : Every monday at 10AM
+- Meeting Schedule : on first phase of project every monday and thursday at 10AM and on seconde phase every day at 10AM.
 - Decision-Making Process : Open team discussions to share perspectives
  ## Summary
  By establishing these roles, tools, and collaboration strategies early, we ensure clear communication, efficient teamwork, and smooth coordination throughout the project lifecycle.
