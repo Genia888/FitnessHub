@@ -18,8 +18,20 @@ We held our first team meeting to introduce ourselves, share our backgrounds, st
  By establishing these roles, tools, and collaboration strategies early, we ensure clear communication, efficient teamwork, and smooth coordination throughout the project lifecycle.
 
 # 1. Research and Brainstorming
-Create a fitness website/mobile between coach/diet and users
+## Individual and Group Research
 
+- Each team member conducted initial research to identify potential project opportunities. We explored:
+- Real-world problems such as lack of affordable access to fitness and nutrition guidance.
+- Industry trends like the growth of digital health, fitness apps, and remote coaching platforms.
+- Innovative solutions in mobile technology, wearable integration, and AI-driven personalization.
+
+This research highlighted the increasing demand for accessible, personalized health and fitness solutions, inspiring us to generate ideas around digital platforms for wellness.
+
+## Brainstorming Session
+We created a mind map centered on the theme health and fitness solution.
+You can view the full document here: 
+ 
+[Mind Mapping](https://mm.tt/map/3802122130?t=KvdiA52QPg)
 # 2. Idea Evaluation
 - Create a website/mobile to communicate between coach and users
 - The user can choose a coach from sport and diet
