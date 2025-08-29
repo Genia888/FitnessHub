@@ -32,6 +32,10 @@ We created a mind map centered on the theme health and fitness solution.
 You can view the full document here: 
  
 [Mind Mapping](https://mm.tt/map/3802122130?t=KvdiA52QPg)
+
+![screen mind mapping](../public/images/ready/screen_mind_mapping.png)
+
+
 # 2. Idea Evaluation
 - Create a website/mobile to communicate between coach and users
 - The user can choose a coach from sport and diet
