@@ -11,7 +11,7 @@ We held our first team meeting to introduce ourselves, share our backgrounds, st
 |[Sébastien Salgues](https://github.com/SebSa12000)  | Backend developer     | Python, SQLite, testing, debugging, documentation      |
 
 ## Team Norms for Collaboration
-- Communication Tools : Slack, Discord, Trelo
+- Communication Tools : Slack, Discord, Trello
 - Meeting Schedule : on first phase of project every monday and thursday at 10AM and on seconde phase every day at 10AM.
 - Decision-Making Process : Open team discussions to share perspectives
  ## Summary
