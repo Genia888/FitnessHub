@@ -44,14 +44,12 @@ You can view the full document here:
 | Personalized fitness programs   | 9/10            | 10/10      | 8/10                    | 9/10            |
 | Online diet tracking            | 8/10            | 9/10       | 8/10                    | 8/10            |
 | Real-time chat                  | 6/10            | 7/10       | 6/10                    | 9/10            |
-| Injury tracking system          | 7/10            | 8/10       | 7/10                    | 7/10            |
 | Integrated multilingual support | 7/10            | 7/10       | 8/10                    | 8/10            |
 | Online store                    | 6/10            | 8/10       | 8/10                    | 9/10            |
 | Badges and rewards              | 5/10            | 8/10       | 7/10                    | 9/10            |
 | FAQ integration                 | 7/10            | 5/10       | 7/10                    | 9/10            |
 | Online subscription system      | 6/10            | 8/10       | 7/10                    | 9/10            |
 | Video calls for private coaching sessions| 6/10            | 8/10       | 7/10                    | 9/10            |
-| Badges and rewards              | 6/10            | 8/10       | 7/10                    | 9/10            |
 | Responsive design across all devices| 6/10        | 8/10       | 7/10                    | 9/10            |
 | Client photos & coach reviews   | 6/10            | 8/10       | 7/10                    | 9/10            |
 | Body analysis tools             | 6/10            | 7/10       | 6/10                    | 9/10            |
