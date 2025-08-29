@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="styles/main.css">
+
+  <script src="vendor/gsap/gsap.min.js" defer></script>
+  <script src="vendor/gsap/ScrollTrigger.min.js" defer></script>
+  <script src="vendor/lenis/lenis.min.js" defer></script>
+
+  <script src="scripts/app.js" defer></script>
+</head>
+<body>
+
+  <div class="pattern"></div>
+
+  <div class="gradient-bg">
+    <div class="gradients-container">
+      <div class="g1"></div>
+      <div class="g2"></div>
+      <div class="g3"></div>
+      <div class="interactive"></div>
+    </div>
+  </div>
+
+  <header class="header-top">
+    <div class="top-line">
+
+      <div class="top-line__left">
+        <a href="#" class="logo">
+          <img src="assets/images/FitnessHub.svg" alt="Alt">
+        </a>
+      </div>
+
+      <div class="top-line__center">
+        <nav class="top-mnu">
+          <ul>
+            <li><a href="#" data-text="Abonnement">Abonnement</a></li>
+            <li><a href="#" data-text="Coach">Coach</a></li>
+            <li><a href="#" data-text="Boutique">Boutique</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="top-line__right">
+        <div class="mnu-button">
+          <button class="mnu-button__menu">
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+        <div class="main-menu-background"></div>
+        <div class="main-menu">
+          <nav class="main-menu__inner">
+            <ul>
+              <li><a href="#" data-text="Abonnement">Abonnement<span></span></a></li>
+              <li><a href="#" data-text="Coach">Coach<span></span></a></li>
+              <li><a href="#" data-text="Boutique">Boutique<span></span></a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <div class="container">
+
+    <section class="accordion">
+
+      <div class="accordion__col active" data-parallax-wrapper>
+        <div class="accordion__bg">
+          <img src="public/images/ready/1.jpg" alt="Alt" data-parallax-target>
+        </div>
+        <div class="accordion__start">Abonnement</div>
+        <div class="accordion__content">
+          <div class="accordion__header">
+            <h2>Abonnement</h2>
+          </div>
+          <div class="accordion__description">
+             C'est la plateforme qui réunit votre coach et vous, où que vous soyez. Notre mission est de vous offrir un accompagnement sportif et nutritionnel personnalisé, directement dans votre poche.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion__col" data-parallax-wrapper>
+        <div class="accordion__bg">
+          <img src="public/images/ready/2.jpg" alt="Alt" data-parallax-target>
+        </div>
+        <div class="accordion__start">Coach</div>
+        <div class="accordion__content">
+          <div class="accordion__header">
+            <h2>Coach</h2>
+          </div>
+          <div class="accordion__description">
+            Passionné par la forme physique et la nutrition, Je vous accompagne dans chaque étape de votre transformation.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion__col" data-parallax-wrapper>
+        <div class="accordion__bg">
+          <img src="public/images/ready/3.jpg" alt="Alt" data-parallax-target>
+        </div>
+        <div class="accordion__start">Boutique</div>
+        <div class="accordion__content">
+          <div class="accordion__header">
+            <h2>Boutique</h2>
+          </div>
+          <div class="accordion__description">
+             Boutique 
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="gallery">
+
+      <div class="section-head">
+        <h2>Concept</h2>
+        <div class="section-head__right">
+          <a href="#" class="btn-secondary">
+            <span data-text="App FitnessHub">Telechargement</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="gallery__wrapper">
+
+        <div class="gallery__item">
+          <a href="#">
+            <div class="gallery__preview" data-parallax-wrapper>
+              <img src="public/images/ready/1.jpg" alt="Alt" data-parallax-target>
+            </div>
+          </a>
+        </div>
+
+        <div class="gallery__item">
+          <a href="#">
+            <div class="gallery__preview" data-parallax-wrapper>
+              <img src="public/images/ready/4.jpg" alt="Alt" data-parallax-target>
+            </div>
+          </a>
+        </div>
+
+        <div class="gallery__item">
+          <a href="#">
+            <div class="gallery__preview" data-parallax-wrapper>
+              <img src="public/images/ready/5.jpg" alt="Alt" data-parallax-target>
+            </div>
+          </a>
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</body>
+</html>
