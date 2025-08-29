@@ -4,11 +4,11 @@
 We held our first team meeting to introduce ourselves, share our backgrounds, strengths, and interests, and discuss how we would collaborate throughout the project. The meeting allowed us to better understand each member’s skill set and define a clear structure for working together.
 ## Team Members and Initial Roles
 
-| Name | Role       | Strenghts/Skills          |
-|--------|------------------|----------------------|
-|[Evgeni Khalepo](https://github.com/Genia888) | Front developer       | HTML, CSS, JavaScript, task coordination        |
-|[Elhadj Reziga](https://github.com/hedjouj)  |Front developer | HTML, CSS, JavaScript, communication   |
-|[Sébastien Salgues](https://github.com/SebSa12000)  | Backend developer    | Python, SQLite, testing, debugging, documentation       |
+| Name                                               | Role                  | Strenghts/Skills                                       |
+|----------------------------------------------------|-----------------------|--------------------------------------------------------|
+|[Evgeni Khalepo](https://github.com/Genia888)       | Front developer       | HTML, CSS, JavaScript, task coordination               |
+|[Elhadj Reziga](https://github.com/hedjouj)         |Front developer        | HTML, CSS, JavaScript, communication                   |
+|[Sébastien Salgues](https://github.com/SebSa12000)  | Backend developer     | Python, SQLite, testing, debugging, documentation      |
 
 ## Team Norms for Collaboration
 - Communication Tools : Slack, Discord, Trelo
@@ -38,6 +38,29 @@ You can view the full document here:
 - The user can see on his app the training menu and diet menu of the day
 - Fitness Hub can sell goodies to user
 - The user pay an abonnement to get the training of the coach
+ 
+| **Idea**                        | **Feasibility** | **Impact** | **Technical Alignment** | **Scalability** |
+| ------------------------------- | --------------- | ---------- | ----------------------- | --------------- |
+| Personalized fitness programs   | 9/10            | 10/10      | 8/10                    | 9/10            |
+| Online diet tracking            | 8/10            | 9/10       | 8/10                    | 8/10            |
+| Real-time chat                  | 6/10            | 7/10       | 6/10                    | 9/10            |
+| Injury tracking system          | 7/10            | 8/10       | 7/10                    | 7/10            |
+| Integrated multilingual support | 7/10            | 7/10       | 8/10                    | 8/10            |
+| Online store                    | 6/10            | 8/10       | 8/10                    | 9/10            |
+| Badges and rewards              | 5/10            | 8/10       | 7/10                    | 9/10            |
+| FAQ integration                 | 7/10            | 5/10       | 7/10                    | 9/10            |
+| Online subscription system      | 6/10            | 8/10       | 7/10                    | 9/10            |
+| Video calls for private coaching sessions| 6/10            | 8/10       | 7/10                    | 9/10            |
+| Badges and rewards              | 6/10            | 8/10       | 7/10                    | 9/10            |
+| Responsive design across all devices| 6/10        | 8/10       | 7/10                    | 9/10            |
+| Client photos & coach reviews   | 6/10            | 8/10       | 7/10                    | 9/10            |
+| Body analysis tools             | 6/10            | 7/10       | 6/10                    | 9/10            |
+| Coach database                  | 7/10            | 8/10       | 7/10                    | 7/10            |
+| Web site                        | 9/10            | 10/10      | 10/10                   | 10/10           |
+| App mobile iOS and Android      | 3/10            | 7/10       | 6/10                    | 9/10            |
+| Workout and meal history        | 7/10            | 8/10       | 7/10                    | 7/10            |
+| Payment gateways                | 7/10            | 7/10       | 8/10                    | 8/10            |
+| Online store                    | 6/10            | 8/10       | 8/10                    | 9/10            |
 
 # 3. Decision and Refinement  
 
