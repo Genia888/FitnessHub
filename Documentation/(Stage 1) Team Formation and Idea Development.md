@@ -38,3 +38,47 @@ You can view the full document here:
 - The user can see on his app the training menu and diet menu of the day
 - Fitness Hub can sell goodies to user
 - The user pay an abonnement to get the training of the coach
+
+# 3. Decision and Refinement  
+
+## Selected MVP  
+**FitnessHub – Platform connecting fitness coaches and clients**  
+
+## Main Objective  
+Develop an intuitive web platform that connects fitness coaches, nutritionists, and dietitians with users seeking personalized guidance (fitness programs + nutrition) accessible from anywhere.  
+
+## MVP Description  
+For the MVP, we aim to build a simplified version of the platform that includes:  
+- A client area to create a profile, set goals (weight loss, performance, wellness, etc.), and track progress.  
+- A coach area with detailed profiles (experience, specialization, photos) and the ability to provide personalized programs.  
+- A basic communication system (real-time chat or integrated messaging).  
+- A simple progress tracking module (basic statistics: calories, completed sessions, progression).  
+
+## Problem It Solves  
+- Difficulty finding the right coach (fitness/nutrition) in a simple, centralized way.  
+- Lack of accessible tools to clearly track progress.  
+- Limited personalization in existing online programs.  
+
+## Target Users  
+**Clients:**  
+- Individuals looking to lose weight or improve their health.  
+- Amateur athletes seeking structured support.  
+- Users looking for simple, easy-to-use solutions.  
+
+**Coaches:**  
+- Certified fitness trainers.  
+- Nutritionists and dietitians.  
+- Specialized coaches (yoga, CrossFit, bodybuilding, etc.).  
+
+## Key Features (MVP)  
+- Profile creation (clients and coaches).  
+- Personalized programs based on goals.  
+- Direct messaging (chat or integrated system).  
+- Progress tracking (calories, sessions, weight, objectives).  
+- Simple and responsive interface.  
+
+## Expected Outcomes  
+- Allow users to quickly find the right coach for their needs.  
+- Provide coaches with a platform to grow their client base.  
+- Build an initial community around fitness and nutrition.  
+- Validate the relevance of the approach before adding advanced features (wearable integration, gamification, e-commerce).  
