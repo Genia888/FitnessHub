@@ -55,7 +55,7 @@ You can view the full document here:
 | Body analysis tools             | 6/10            | 7/10       | 6/10                    | 9/10            |
 | Coach database                  | 7/10            | 8/10       | 7/10                    | 7/10            |
 | Web site                        | 9/10            | 10/10      | 10/10                   | 10/10           |
-| App mobile iOS and Android      | 3/10            | 7/10       | 6/10                    | 9/10            |
+| App mobile iOS and Android      | 1/10            | 7/10       | 6/10                    | 9/10            |
 | Workout and meal history        | 7/10            | 8/10       | 7/10                    | 7/10            |
 | Payment gateways                | 7/10            | 7/10       | 8/10                    | 8/10            |
 | Online store                    | 6/10            | 8/10       | 8/10                    | 9/10            |
