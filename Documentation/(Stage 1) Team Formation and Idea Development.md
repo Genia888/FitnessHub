@@ -20,7 +20,7 @@ We held our first team meeting to introduce ourselves, share our backgrounds, st
 # 1. Research and Brainstorming
 ## Individual and Group Research
 
-- Each team member conducted initial research to identify potential project opportunities. We explored:
+Each team member conducted initial research to identify potential project opportunities. We explored :
 - Real-world problems such as lack of affordable access to fitness and nutrition guidance.
 - Industry trends like the growth of digital health, fitness apps, and remote coaching platforms.
 - Innovative solutions in mobile technology, wearable integration, and AI-driven personalization.
