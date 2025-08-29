@@ -30,7 +30,7 @@ This research highlighted the increasing demand for accessible, personalized hea
 ## Brainstorming Session
 We created a mind map centered on the theme health and fitness solution.
  [Mind Mapping](https://mm.tt/map/3802122130?t=KvdiA52QPg)
-![screen mind mapping](../public/images/ready/screen_mind_mapping.png)
+![screen mind mapping](screen_mind_mapping.png)
 
 
 # 2. Idea Evaluation
