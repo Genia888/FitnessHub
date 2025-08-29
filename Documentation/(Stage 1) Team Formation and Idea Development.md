@@ -26,3 +26,5 @@ Create a fitness website/mobile between coach/diet and users
 - The user can see on his app the training menu and diet menu of the day
 - Fitness Hub can sell goodies to user
 - The user pay an abonnement to get the training of the coach
+
+# 3.
