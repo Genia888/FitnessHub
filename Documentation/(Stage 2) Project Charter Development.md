@@ -1,7 +1,7 @@
-# 0
+# 0. Define Project Objectives
 
-# 1
+# 1. Identify Stakeholders and Team Roles
 
-# 2 
+# 2. Define Scope
 
-# 3
+# 3. Identify Risks
