@@ -59,7 +59,6 @@ We created a mind map centered on the theme health and fitness solution.
 | App mobile iOS and Android      | 1/10            | 7/10       | 6/10                    | 9/10            |
 | Workout and meal history        | 7/10            | 8/10       | 7/10                    | 7/10            |
 | Payment gateways                | 7/10            | 7/10       | 8/10                    | 8/10            |
-| Online store                    | 6/10            | 8/10       | 8/10                    | 9/10            |
 
 # 3. Decision and Refinement  
 
