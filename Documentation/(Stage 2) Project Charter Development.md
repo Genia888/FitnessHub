@@ -36,6 +36,15 @@ We created a mind map SMART [Mind Mapping](https://mm.tt/map/3808942400?t=xMeTVX
 |List of workout                                |Online diet tracking                       |
 
 # 3. Identify Risks
+| **Risk**                                             |  **Mitigation Strategy**                                 |
+| ---------------------------------------------------- | -------------------------------------------------------- |
+| Team members don’t know all the tools                | Plan short tutorials and learn together at the start     |
+| Project timeline is short (12 weeks)                 | Focus only on MVP core features and avoid adding extras  |
+| Miscommunication in the team                         | Use Slack/Discord and have weekly meetings               |
+| Data privacy (user health and chat data)             | Use secure login, encrypt data, and follow privacy rules |
+| Integration challenges (chat, video, gamification)   | Start with proven APIs/libraries, test early integrations, and avoid over-customization in MVP |
+| Bugs or technical problems                           | Test regularly and keep some buffer time for debugging   |
+
 
 # 4. Develop a High-Level Plan
 We created a Gantt chart showing the project plan
