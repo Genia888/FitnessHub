@@ -5,8 +5,8 @@ We created a mind map SMART [Mind Mapping](https://mm.tt/map/3808942400?t=xMeTVX
 ![screen mind mapping](smartmap.png)
 
 # 1. Identify Stakeholders and Team Roles
-
-| **Stakeholder type**                        | **Stakeholder** | **Description** | **Role/Interest in the project**   | **Influence** |
+### Stakeholders
+| **Stakeholder type**                             | **Name**        | **Description** | **Role/Interest in the project**   | **Influence** |
 | --------------------------------------------|-----------------| ----------------| -----------------------------------|---------------|
 | Internal                                    |Evgeni           |Team member      |Responsible for frontend development|    ★★★★★    |
 | Internal                                    |Sebastien        |Team member      |Responsible for backenddevelopment  |    ★★★★★    |
@@ -14,27 +14,25 @@ We created a mind map SMART [Mind Mapping](https://mm.tt/map/3808942400?t=xMeTVX
 | Internal | Holberton Instructors & Reviewers      | Instructors     | Evaluate deliverables and give advices/reviews   |★★★★☆      |
 | External                    | Other Holberton students      | Potential end users      | Give feedback, reviews, advices | ★★★☆☆   |
 
+### Team Roles
+
+| **Role**                  | **Assigned To**     | **Responsibilities**                                                                 |
+| --------------------- | --------------- | -------------------------------------------------------------------------------- |
+| Team lead / Project Manager       | Evgeni          | Organize timeline, ensures coordination and ensure the plan is respected              |
+| Team lead / Frontend Developer    | Evgeni / Elhadj | Develop the frontend, make sure every features work, make report to the backend developer if needed   |
+| Team lead / Backend Developer     | Sebastien       | Develop the backend, make sure It is link correctly with the website          |
+
 # 2. Define Scope
-### In-scope
-- User inscription + forms (height, weight, age…)
-- Development of a website (fonctional)
-- Link back end with the website
-- Database with a list of exercises
-- Web frontend
-- List of Coaches (prototypes + photos)
-- Nutrition section
-- List of workout 
 
-### Out-Of-Scope
-- Body analysis tools
-- App mobile
-- Payment gateway
-- Videos calls for private coaching
-- Online subscription
-- Badges & rewards
-- Multilingual support
-- Realtime chat
-- Online diet tracking
-
+| **In-scope**                                  | **Out-of-scope**                          |
+|-----------------------------------------------|-------------------------------------------|
+|User inscription + forms (height, weight, age…)| Body analysis tools                       |
+|Development of a website (fonctional)          |App mobile                                 |
+|Link back end with the website                 |Payment gateway                            |
+|Database with a list of exercises              |Videos calls for private coaching          |
+|Web frontend                                   |Online subscription                        |
+|List of Coaches (prototypes + photos)          |Badges & rewards                           |
+|Nutrition section                              |Realtime chat                              |
+|List of workout                                |Online diet tracking                       |
 
 # 3. Identify Risks
