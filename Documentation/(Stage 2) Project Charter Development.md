@@ -56,8 +56,8 @@ We created a Gantt chart showing the project plan
 
 - Brainstorming
 - Idea selection
-
 - Documentation
+  
 </details>
 
 <details>
