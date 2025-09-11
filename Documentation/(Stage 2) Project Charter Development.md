@@ -36,3 +36,8 @@ We created a mind map SMART [Mind Mapping](https://mm.tt/map/3808942400?t=xMeTVX
 |List of workout                                |Online diet tracking                       |
 
 # 3. Identify Risks
+
+# 4. Develop a High-Level Plan
+We created a Gantt chart showing the project plan
+
+![Gantt](Creative_Template_Gantt_Chart_FitnessHub.png)
