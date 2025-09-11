@@ -49,4 +49,53 @@ We created a mind map SMART [Mind Mapping](https://mm.tt/map/3808942400?t=xMeTVX
 # 4. Develop a High-Level Plan
 We created a Gantt chart showing the project plan
 
-![Gantt](Creative_Template_Gantt_Chart_FitnessHub.png)
+![Gantt](Fitnesshub_gantt.png)
+*Click for more details*
+<details>
+<summary><strong>Week 1-2:</strong> Team Formation and Idea Development</summary>
+
+- Brainstorming
+- Idea selection
+
+- Documentation
+</details>
+
+<details>
+
+<summary><strong>Week 3-4:</strong> Project Charter creation</summary>
+
+- Project Objectives  
+- Stakeholders and Roles  
+- Scope  
+- Risks  
+- High-Level Plan  
+- Documentation
+
+</details>
+
+<details>
+<summary><strong>Week 5-6:</strong> Technical Documentation</summary>
+
+- High-Level Package Diagram  
+- Detailed Class Diagram for Business Logic Layer  
+- Sequence Diagrams for API Calls  
+- Documentation  
+
+</details>
+
+<details>
+<summary><strong>Week 7-10:</strong> MVP Development & Execution</summary>
+
+- Business Logic and API Endpoints  
+- Backend with Authentication and Database Integration  
+- Front-end (UI)  
+
+</details>
+
+<details>
+<summary><strong>Week 11-12</strong>: Final presentation and closure</summary>
+
+- Project Closure  
+
+</details>
+
