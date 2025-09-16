@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coach - FitnessHub</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <script src="../vendor/gsap/gsap.min.js" defer></script>
+  <script src="../vendor/gsap/ScrollTrigger.min.js" defer></script>
+  <script src="../vendor/lenis/lenis.min.js" defer></script>
+  <script src="../scripts/app.js" defer></script>
+</head>
+<body>
+  <div class="pattern"></div>
+  
+  <div class="gradient-bg">
+    <div class="gradients-container">
+      <div class="g1"></div>
+      <div class="g2"></div>
+      <div class="g3"></div>
+      <div class="interactive"></div>
+    </div>
+  </div>
+
+  <header class="header-top">
+    <div class="top-line">
+      <div class="top-line__left">
+        <a href="../index.html" class="logo">
+          <img src="../assets/images/FitnessHub.svg" alt="FitnessHub">
+        </a>
+      </div>
+
+      <div class="top-line__center">
+        <nav class="top-mnu">
+          <ul>
+            <li><a href="abonnement.html" data-text="Abonnement">Abonnement</a></li>
+            <li><a href="coach.html" data-text="Coach">Coach</a></li>
+            <li><a href="boutique.html" data-text="Boutique">Boutique</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="top-line__right">
+        <div class="mnu-button">
+          <button class="mnu-button__menu">
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+        <div class="main-menu-background"></div>
+        <div class="main-menu">
+          <nav class="main-menu__inner">
+            <ul>
+              <li><a href="abonnement.html" data-text="Abonnement">Abonnement<span></span></a></li>
+              <li><a href="coach.html" data-text="Coach">Coach<span></span></a></li>
+              <li><a href="boutique.html" data-text="Boutique">Boutique<span></span></a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="page-content">
+      <div class="section-head">
+        <h2>Nos Coachs</h2>
+      </div>
+      
+      <div class="coaches-grid">
+        <div class="coach-card">
+          <div class="coach-image">
+            <img src="../public/images/ready/coach1.jpg" alt="Coach Elhadj">
+          </div>
+          <div class="coach-info">
+            <h3>Elhadj Reziga</h3>
+            <p class="specialty">Spécialiste Fitness & Nutrition</p>
+            <p class="experience">5 ans d'expérience</p>
+            <div class="rating">⭐⭐⭐⭐⭐ 4.9/5</div>
+            <button class="btn-primary">Choisir ce coach</button>
+          </div>
+        </div>
+        
+        <div class="coach-card">
+          <div class="coach-image">
+            <img src="../public/images/ready/coach2.jpg" alt="Coach Sebastien">
+          </div>
+          <div class="coach-info">
+            <h3>Sebastien Salgue</h3>
+            <p class="specialty">Expert Musculation</p>
+            <p class="experience">8 ans d'expérience</p>
+            <div class="rating">⭐⭐⭐⭐⭐ 4.8/5</div>
+            <button class="btn-primary">Choisir ce coach</button>
+          </div>
+        </div>
+        
+        <div class="coach-card">
+          <div class="coach-image">
+            <img src="../public/images/ready/coach3.jpg" alt="Coach Sarah">
+          </div>
+          <div class="coach-info">
+            <h3>Sarah Elhadj</h3>
+            <p class="specialty">Yoga & Bien-être</p>
+            <p class="experience">6 ans d'expérience</p>
+            <div class="rating">⭐⭐⭐⭐⭐ 4.9/5</div>
+            <button class="btn-primary">Choisir ce coach</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

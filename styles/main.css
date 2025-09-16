@@ -216,7 +216,7 @@ ul {
   align-items: center;
   background: var(--gradient-1);
   background-clip: text;
-  text-fill-color: transparent;
+  text-emphasis-color: transparent;
   -webkit-text-fill-color: transparent;
   content: attr(data-text);
   opacity: 0;
@@ -304,7 +304,7 @@ ul {
   left: 0;
   background: var(--gradient-1);
   background-clip: text;
-  text-fill-color: transparent;
+  text-emphasis-color: transparent;
   -webkit-text-fill-color: transparent;
   opacity: 0;
   z-index: 1;
@@ -479,7 +479,7 @@ ul {
   padding-bottom: 10px;
   margin-bottom: -10px;
   background: var(--gradient-3);
-  text-fill-color: transparent;
+  text-emphasis-color: transparent;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   display: inline-block;
@@ -544,7 +544,7 @@ ul {
   font-size: 80px;
   line-height: 105%;
   background: var(--gradient-3);
-  text-fill-color: transparent;
+  text-emphasis-color: transparent;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   display: inline-block;
@@ -596,7 +596,7 @@ ul {
   position: absolute;
   inset: 0;
   background: var(--gradient-1);
-  text-fill-color: transparent;
+  text-emphasis-color: transparent;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   transition: var(--transition);
@@ -605,6 +605,236 @@ ul {
 
 .btn-secondary:hover span::after {
   opacity: 1;
+}
+
+.coaches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.coach-card {
+  background: rgba(255, 255, 255, .05);
+  border-radius: 20px;
+  padding: 25px;
+  backdrop-filter: blur(15px);
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, .1);
+}
+
+.coach-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, .08);
+}
+
+.coach-image {
+  width: 100%;
+  height: 280px;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.coach-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.coach-card:hover .coach-image img {
+  transform: scale(1.05);
+}
+
+.coach-info h3 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  background: var(--gradient-3);
+  text-emphasis-color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.coach-info .specialty {
+  font-size: 16px;
+  color: rgba(255, 255, 255, .7);
+  margin-bottom: 5px;
+}
+
+.coach-info .experience {
+  font-size: 14px;
+  color: rgba(255, 255, 255, .5);
+  margin-bottom: 10px;
+}
+
+.coach-info .rating {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #ffd700;
+}
+
+.btn-primary {
+  background: var(--gradient-1);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: var(--transition);
+  width: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.product-card {
+  background: rgba(255, 255, 255, .05);
+  border-radius: 20px;
+  padding: 25px;
+  backdrop-filter: blur(15px);
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, .1);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, .08);
+}
+
+.product-image {
+  width: 100%;
+  height: 250px;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.05);
+}
+
+.product-info h3 {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  background: var(--gradient-3);
+  text-emphasis-color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.product-info .price {
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffd700;
+  margin-bottom: 15px;
+}
+
+.subscription-plans {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.plan-card {
+  background: rgba(255, 255, 255, .05);
+  border-radius: 20px;
+  padding: 35px 25px;
+  backdrop-filter: blur(15px);
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, .1);
+  text-align: center;
+  position: relative;
+}
+
+.plan-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, .08);
+}
+
+.plan-card.featured {
+  border: 2px solid rgba(255, 215, 0, .5);
+  background: rgba(255, 215, 0, .08);
+}
+
+.plan-card.featured::before {
+  content: 'POPULAIRE';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gradient-1);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.plan-card h3 {
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  background: var(--gradient-3);
+  text-emphasis-color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.plan-card .price {
+  font-size: 36px;
+  font-weight: 700;
+  color: #ffd700;
+  margin-bottom: 25px;
+}
+
+.plan-card .features {
+  list-style: none;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.plan-card .features li {
+  padding: 8px 0;
+  font-size: 16px;
+  color: rgba(255, 255, 255, .8);
+  position: relative;
+  padding-left: 25px;
+}
+
+.plan-card .features li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.plan-card .btn-primary {
+  width: 100%;
+  margin-top: auto;
 }
 
 @media (max-width: 991.98px) {
@@ -661,6 +891,27 @@ ul {
   .gallery {
     margin-top: 65px;
   }
+  .coaches-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .coach-image {
+    height: 220px;
+  }
+  .products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  .product-image {
+    height: 200px;
+  }
+  .subscription-plans {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .plan-card {
+    padding: 30px 20px;
+  }
 }
 
 @media (max-width: 575.98px) {
@@ -672,5 +923,38 @@ ul {
   }
   .main-menu__inner li a {
     font-size: 45px;
+  }
+  .coaches-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .coach-image {
+    height: 200px;
+  }
+  .coach-card {
+    padding: 20px;
+  }
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .product-image {
+    height: 180px;
+  }
+  .product-card {
+    padding: 20px;
+  }
+  .subscription-plans {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .plan-card {
+    padding: 25px 15px;
+  }
+  .plan-card h3 {
+    font-size: 24px;
+  }
+  .plan-card .price {
+    font-size: 30px;
   }
 }
