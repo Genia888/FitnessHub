@@ -1,25 +1,2 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/home/seb/dev2/TestBackFitness/instance/development.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="5854"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,5:mainusers"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE &quot;users&quot; ( 
-    &quot;id&quot; VARCHAR(36), 
-    &quot;first_name&quot; VARCHAR(50) NOT NULL, 
-    &quot;last_name&quot; VARCHAR(50) NOT NULL, 
-    &quot;email&quot; VARCHAR(120) NOT NULL UNIQUE,
-    &quot;password&quot; VARCHAR(128) NOT NULL, 
-    &quot;is_admin&quot; BOOLEAN DEFAULT FALSE, 
-    &quot;created_at&quot; TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
-    &quot;updated_at&quot; TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
-    &quot;is_coach&quot; BOOLEAN DEFAULT FALSE, 
-    &quot;is_diet&quot; BOOLEAN DEFAULT FALSE, 
-    &quot;is_abonne&quot; BOOLEAN DEFAULT FALSE, 
-    &quot;adresse1&quot; VARCHAR(100), 
-    &quot;adresse2&quot; VARCHAR(100), 
-    &quot;code_postal&quot; VARCHAR(20) DEFAULT '', 
-    &quot;ville&quot; VARCHAR(100) DEFAULT '', 
-    &quot;texte_allergie&quot; TEXT DEFAULT '',
-    &quot;limitation_exercice&quot; TEXT DEFAULT '',
-    &quot;coach_certif&quot; VARCHAR(1000) DEFAULT '',
-    &quot;coach_experience&quot; TEXT DEFAULT '',
-    &quot;coach_description&quot; TEXT DEFAULT '',
-    &quot;taille&quot; FLOAT DEFAULT 0,
-    &quot;poids&quot; FLOAT DEFAULT 0,
-    &quot;photo&quot; VARCHAR(1000) DEFAULT '',
-    PRIMARY KEY(&quot;id&quot;) )</sql><current_tab id="0"/></tab_sql></sqlb_project>
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/home/seb/dev2/FitnessHub/instance/development.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="1"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="5854"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,5:mainusers"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="users" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="283"/><column index="2" value="81"/><column index="3" value="79"/><column index="4" value="83"/><column index="5" value="300"/><column index="6" value="68"/><column index="7" value="199"/><column index="8" value="199"/><column index="9" value="66"/><column index="10" value="52"/><column index="11" value="77"/><column index="12" value="71"/><column index="13" value="71"/><column index="14" value="91"/><column index="15" value="45"/><column index="16" value="105"/><column index="17" value="143"/><column index="18" value="93"/><column index="19" value="134"/><column index="20" value="136"/><column index="21" value="42"/><column index="22" value="44"/><column index="23" value="47"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">insert into users( id,first_name,last_name,email,password,is_admin,created_at,updated_at,is_coach,is_diet,is_abonne,adresse1,adresse2,code_postal,ville,texte_allergie,limitation_exercice,coach_certif,coach_experience,coach_description,taille,poids,photo )
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae5972f','Sebastien','Salgues','sebastien.salgues@gmail.com','$2b$12$9XQ4sIB26KdtyY7Aiq8jjeMqFuJ9fRgFWiaiBpi7xlvPklUZ5.GHG',1,'2025-09-15 17:05:36.374418','2025-09-15 17:05:36.374432',0,0,0,'23 Avenue Hippolyte de Barrau','','12000','Rodez','Allergique aux pollens','Pas trop dur !','','','',0.0,0.0,'')</sql><current_tab id="0"/></tab_sql></sqlb_project>
