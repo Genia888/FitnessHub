@@ -1,3 +1,5 @@
+```mermaid
+erDiagram
 classDiagram
 direction TB
     class Article {
@@ -93,3 +95,4 @@ direction TB
     Personne <|-- Coach
 
 
+```
