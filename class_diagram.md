@@ -1,5 +1,4 @@
 ```mermaid
-erDiagram
 classDiagram
 direction TB
     class Article {
