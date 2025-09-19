@@ -95,3 +95,8 @@ direction TB
 
 
 ```
+
+# Architecture : 
+- Front-end: CSS, JS, HTML
+- Back-end: Python
+- Database: sqlite 
