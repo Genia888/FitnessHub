@@ -23,3 +23,17 @@ CREATE TABLE "users" (
     "poids" FLOAT DEFAULT 0,
     "photo" VARCHAR(1000) DEFAULT '',
     PRIMARY KEY("id") )
+
+-- Create Review
+CREATE TABLE IF NOT EXISTS reviews (
+    id CHAR(36) PRIMARY KEY,
+    text TEXT NOT NULL,
+    rating INT,
+    user_id CHAR(36),
+    coach_id CHAR(36),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (coach_id) REFERENCES users(id),
+    UNIQUE (user_id, coach_id)
+);

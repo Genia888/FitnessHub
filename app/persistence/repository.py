@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from app.extensions import db
 from app.models.user import User
+from app.models.review import Review
 from sqlalchemy.sql.expression import false
 
 class Repository(ABC):
@@ -118,4 +119,6 @@ class UserRepository(BaseRepository):
     def get_user_by_email(self, email):
         return self.model.query.filter_by(email=email).first()
 
-
+class ReviewRepository(BaseRepository):
+    def __init__(self):
+        super().__init__(Review)

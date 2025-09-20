@@ -29,6 +29,7 @@ class User(BaseModel):
     taille = db.Column(db.Float, nullable=False)
     poids = db.Column(db.Float, nullable=False)
     photo = db.Column(db.String(1000), nullable=False)
+    reviews = db.relationship('Review', backref='Author', lazy=True, foreign_keys='Review.coach_id')
 
     def __init__(self, first_name: str, last_name: str, email: str, password: str, is_admin=False, is_coach=False, is_diet=False, is_abonne=False, adresse1="", adresse2="", code_postal="", ville="", texte_allergie="", limitation_exercice="", coach_certif="", coach_experience="", coach_description="", taille="", poids="", photo=""):
         super().__init__()
@@ -98,5 +99,7 @@ class User(BaseModel):
             "coach_description": self.coach_description,
             "taille": self.taille,
             "poids": self.poids,
-            "photo": self.photo
+            "photo": self.photo,
+            "reviews": [{'id': review.id, 'text': review.text, 'rating': review.rating}
+                          for review in self.reviews]
         }

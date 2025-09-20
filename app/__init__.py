@@ -4,6 +4,7 @@ from config import config
 from flask_jwt_extended import JWTManager
 from app.extensions import db
 from app.api.v1.users import api as users_ns
+from app.api.v1.reviews import api as reviews_ns
 from app.api.v1.auth import api as auth_ns
 from app.extension_bcrypt import bcrypt
 from flask_cors import CORS
@@ -36,6 +37,7 @@ def create_app(config_name='default'):
               description='HBnB Application API')
 
     api.add_namespace(users_ns, path='/api/v1/users')
+    api.add_namespace(reviews_ns, path='/api/v1/reviews')
     api.add_namespace(auth_ns, path='/api/v1/auth')
 
     return app

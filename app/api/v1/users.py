@@ -28,6 +28,14 @@ user_model = api.model("User", {
     "photo": fields.String(required=True, max_length=1000),
 })
 
+# Adding the review model
+review_model = api.model('CoachReview', {
+    'id': fields.String(description='Review ID'),
+    'text': fields.String(description='Text of the review'),
+    'rating': fields.Integer(description='Rating of the place (1-5)'),
+    'user_id': fields.String(description='ID of the user')
+})
+
 @api.route('/')
 class UserList(Resource):
     @api.expect(user_model, validate=True)
