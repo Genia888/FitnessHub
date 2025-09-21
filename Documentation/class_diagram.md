@@ -82,8 +82,8 @@ direction TB
 	    +String texte
     }
     
-    Exercice <|-- Planning_Exercice
-    User <|-- Planning_Exercice
+    Exercice <-- Planning_Exercice
+    User <-- Planning_Exercice
     Coach <|-- Exercice
     Personne <|-- Admin
     Personne <|-- User
