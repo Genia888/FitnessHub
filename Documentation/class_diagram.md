@@ -84,15 +84,15 @@ direction TB
     
     Exercice <-- Planning_Exercice
     User <-- Planning_Exercice
-    Coach <|-- Exercice
+    Coach <-- Exercice
     Personne <|-- Admin
     Personne <|-- User
-    Coach <|-- Reviews
-    User <|-- Reviews
-    Coach <|-- Abonnement
-    User <|-- Abonnement
-    Coach <|-- Message
-    User <|-- Message
+    Coach <-- Reviews
+    User <-- Reviews
+    Coach <-- Abonnement
+    User <-- Abonnement
+    Coach <-- Message
+    User <-- Message
     Personne <|-- Coach
 
 
