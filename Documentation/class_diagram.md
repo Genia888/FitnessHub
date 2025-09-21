@@ -67,7 +67,7 @@ direction TB
 
     class Reviews {
 	    +String text
-	    +Float rating
+	    +Integer rating
     }
 
     class Abonnement {
