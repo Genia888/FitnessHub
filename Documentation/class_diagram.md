@@ -67,7 +67,7 @@ direction TB
 
     class Reviews {
 	    +String text
-	    +Float note
+	    +Integer rating
     }
 
     class Abonnement {
@@ -82,17 +82,17 @@ direction TB
 	    +String texte
     }
     
-    Exercice <|-- Planning_Exercice
-    User <|-- Planning_Exercice
-    Coach <|-- Exercice
+    Exercice <-- Planning_Exercice
+    User <-- Planning_Exercice
+    Coach <-- Exercice
     Personne <|-- Admin
     Personne <|-- User
-    Coach <|-- Reviews
-    User <|-- Reviews
-    Coach <|-- Abonnement
-    User <|-- Abonnement
-    Coach <|-- Message
-    User <|-- Message
+    Coach <-- Reviews
+    User <-- Reviews
+    Coach <-- Abonnement
+    User <-- Abonnement
+    Coach <-- Message
+    User <-- Message
     Personne <|-- Coach
 
 
