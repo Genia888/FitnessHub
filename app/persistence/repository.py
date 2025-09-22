@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from app.extensions import db
 from app.models.user import User
 from app.models.review import Review
+from sqlalchemy import and_ 
 from sqlalchemy.sql.expression import false
 
 class Repository(ABC):
@@ -106,6 +107,9 @@ class UserRepository(BaseRepository):
 
     def get_all_coach(self):
         return self.model.query.filter_by(is_coach=True).all()
+
+    def get_simple_user(self):
+        return self.model.query.filter_by(is_abonne=False , is_admin=False , is_diet=False , is_coach=False).all()
 
     def get_all_abonne(self):
         return self.model.query.filter_by(is_abonne=True).all()

@@ -37,6 +37,10 @@ class HBnBFacade:
         return self.user_repo.get_all_diet()
     
     # list all of abonne
+    def get_simple_user(self):
+        return self.user_repo.get_simple_user()
+
+    # list all of abonne
     def get_all_abonne(self):
         return self.user_repo.get_all_abonne()
     

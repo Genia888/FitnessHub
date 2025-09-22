@@ -167,6 +167,14 @@ class Admin(Resource):
         users = facade.get_all_admin()
         return [user.to_dict() for user in users], 200
 
+@api.route('/all_simple_user/')
+class SimpleUser(Resource):
+    @api.response(200, 'List of simple user retrieved successfully')
+    def get(self):
+        """Retrieve a list of all simple user"""
+        users = facade.get_simple_user()
+        return [user.to_dict() for user in users], 200
+
 @api.route('/abonne/')
 class Abonne(Resource):
     @api.response(200, 'List of abonne retrieved successfully')
