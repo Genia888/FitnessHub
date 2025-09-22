@@ -96,6 +96,27 @@ class UserResource(Resource):
             "photo": user.photo
                 }, 200              
     
+    @api.doc(security="token")
+    @jwt_required()
+    def delete(self, user_id):
+        """Delete a user"""
+        user_id2 = get_jwt_identity()
+        #claims = get_jwt()
+        #is_admin = claims.get("is_admin", False)
+
+        try:
+            user = facade.get_user(user_id)
+            if not user:
+                return {'error': 'User not found'}, 404
+
+            #if user.user_id != user_id and not is_admin:
+            #    return {'error': 'Unauthorized action'}, 403
+            
+            result = facade.delete_user(user_id)
+            return result, 200
+        except ValueError as e:
+            return {'error': str(e)}, 404
+
     @api.expect(user_model, validate=True)
     @api.response(200, 'User updated successfully')
     @api.response(404, 'User not found')

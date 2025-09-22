@@ -83,6 +83,7 @@ class ReviewResource(Resource):
     @api.response(200, 'Review updated successfully')
     @api.response(404, 'Review not found')
     @api.response(400, 'Invalid input data')
+    @api.doc(security="token")
     @jwt_required()
     def put(self, review_id):
         """Update a review's information"""
@@ -94,15 +95,12 @@ class ReviewResource(Resource):
 
             current_user = get_jwt_identity()
 
-            if current_user['id'] != review.user.id:
-                return {'error': 'Unauthorized action'}, 403
-
             updated_review = facade.update_review(review_id, review_data)
             return {
                 'id': updated_review.id,
                 'text': updated_review.text,
-                'user_id': updated_review.user.id,
-                'coach_id': updated_review.coach.id,
+                'user_id': updated_review.user_id,
+                'coach_id': updated_review.coach_id,
                 'rating': updated_review.rating
             }, 200
         except ValueError as e:

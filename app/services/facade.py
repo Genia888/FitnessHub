@@ -50,6 +50,13 @@ class HBnBFacade:
         self.user_repo.save(user)
         return user
         
+    def delete_user(self, user_id):
+        user = self.user_repo.get(user_id)
+        if not user:
+            raise ValueError("User not found")
+        self.user_repo.delete(user_id)
+        return {'message': 'User deleted successfully'}
+
     # Review Facade
     def create_review(self, review_data):
         """Create a new review."""
