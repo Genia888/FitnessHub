@@ -65,6 +65,11 @@ direction TB
 	    +addReview()
     }
 
+    class Reviews {
+	    +String text
+	    +Integer rating
+    }
+
     class Coach {
 	    +String certif
 	    +String description
@@ -72,11 +77,6 @@ direction TB
 	    +bool is_coach
 	    +bool is_diet
 	    +addTraining()
-    }
-
-    class Reviews {
-	    +String text
-	    +Integer rating
     }
 
     class Subscription {
