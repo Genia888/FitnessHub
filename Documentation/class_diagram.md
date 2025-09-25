@@ -9,7 +9,7 @@ direction TB
 		+Timestamp updated_at
 	}
 
-    class Article {
+    class Product_shop {
       +String name
       +String description
       +String picture
