@@ -3,6 +3,12 @@
 ```mermaid
 classDiagram
 direction TB
+	class UUID {
+		+String id
+		+Timestamp created_at
+		+Timestamp updated_at
+	}
+
     class Article {
       +String name
       +String description
@@ -81,7 +87,13 @@ direction TB
 	    +Boolean is_read
 	    +String text
     }
-    
+
+	UUID <|-- Personne
+	UUID <|-- Exercise_schedule
+	UUID <|-- Exercice
+	UUID <|-- Subscription
+	UUID <|-- Message
+	UUID <|-- Reviews
     Exercice <-- Exercise_schedule
     User <-- Exercise_schedule
     Coach <-- Exercice
