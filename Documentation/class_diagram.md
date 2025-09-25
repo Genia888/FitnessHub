@@ -3,7 +3,8 @@
 ```mermaid
 classDiagram
 direction TB
-	class UUID {
+	
+	class ClasseId_For_All_Tables {
 		+String id
 		+Timestamp created_at
 		+Timestamp updated_at
@@ -87,13 +88,6 @@ direction TB
 	    +Boolean is_read
 	    +String text
     }
-	UUID <|-- Product_shop
-	UUID <|-- Personne
-	UUID <|-- Exercise_schedule
-	UUID <|-- Exercice
-	UUID <|-- Subscription
-	UUID <|-- Message
-	UUID <|-- Reviews
     Exercice <-- Exercise_schedule
     User <-- Exercise_schedule
     Coach <-- Exercice
