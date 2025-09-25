@@ -37,7 +37,7 @@ direction TB
       +Float time
     }
 
-    class Exercise schedule {
+    class Exercise_schedule {
       +Date date_exercice
       +String comment
     }
