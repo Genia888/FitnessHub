@@ -4,12 +4,12 @@
 classDiagram
 direction TB
     class Article {
-      +String nom
+      +String name
       +String description
-      +String photo
-	    +String photo2
-	    +String photo3
-	    +Float prix
+      +String picture
+	    +String picture2
+	    +String picture3
+	    +Float price
 	    +bool is_active
 	    +bool is_in_stock
     }
@@ -20,26 +20,26 @@ direction TB
       +String password
 	    +String last_name
 	    +String first_name
-	    +String adresse1
-	    +String adresse2
-	    +String code_postal
-	    +String ville
-      +String photo
-      +Float poids
-      +Float taille
+	    +String adress1
+	    +String adress2
+	    +String postal code
+	    +String city
+      +String picture
+      +Float weight
+      +Float size
     }
 
 
     class Exercice {
       +String description
-      +String photo
-      +String categorie<BRAS,JAMBES,DOS,...>
-      +Float duree
+      +String picture
+      +String category<Arms,Legs,Back,...>
+      +Float time
     }
 
     class Planning_Exercice {
       +Date date_exercice
-      +String commentaire
+      +String comment
     }
 
 
@@ -50,9 +50,9 @@ direction TB
     }
 
     class User {
-	    +bool is_abonne
-      +String limitation_exercice
-      +String texte_allergie
+	    +bool is_subscribe
+      +String physical_constraint
+      +String allergy_comment
 	    +addReview()
     }
 
@@ -71,26 +71,26 @@ direction TB
     }
 
     class Abonnement {
-	    +Date dateDebut
+	    +Date date
 	    +Boolean OptionDiet
 	    +Boolean OptionMessage
     }
 
     class Message {
-	    +Date dateDebut
+	    +Date dateStar
 	    +Boolean is_read
-	    +String texte
+	    +String text
     }
     
-    Exercice <-- Planning_Exercice
-    User <-- Planning_Exercice
+    Exercice <-- Exercise schedule
+    User <-- Exercise schedule
     Coach <-- Exercice
     Personne <|-- Admin
     Personne <|-- User
     Coach <-- Reviews
     User <-- Reviews
-    Coach <-- Abonnement
-    User <-- Abonnement
+    Coach <-- Subscription
+    User <-- subscription
     Coach <-- Message
     User <-- Message
     Personne <|-- Coach
