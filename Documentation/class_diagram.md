@@ -82,8 +82,8 @@ direction TB
 	    +String text
     }
     
-    Exercice <-- Exercise schedule
-    User <-- Exercise schedule
+    Exercice <-- Exercise_schedule
+    User <-- Exercise_schedule
     Coach <-- Exercice
     Personne <|-- Admin
     Personne <|-- User
