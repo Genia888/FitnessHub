@@ -70,7 +70,7 @@ direction TB
 	    +Integer rating
     }
 
-    class Abonnement {
+    class Subscription {
 	    +Date date
 	    +Boolean OptionDiet
 	    +Boolean OptionMessage
