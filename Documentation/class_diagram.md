@@ -113,4 +113,11 @@ direction TB
 # Architecture : 
 - Front-end: CSS, JS, HTML
 - Back-end: Python
-- Database: sqlite 
+- Database: sqlite
+
+
+  ### CURL Function 
+
+| Action         | REST API Endpoint           |
+| -------------- | --------------------------- |
+| GET USER       | POST `/api/v1/users`        | 
