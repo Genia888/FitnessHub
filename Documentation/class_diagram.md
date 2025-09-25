@@ -1,9 +1,12 @@
 # Class Diagram
 
+ClasseId_For_All_Tables is the parent of Product_shop, Personne, Exercice, Exercise_schedule, Reviews, Subscription, Message
+
 ```mermaid
 classDiagram
 direction TB
-	class UUID {
+	
+	class ClasseId_For_All_Tables {
 		+String id
 		+Timestamp created_at
 		+Timestamp updated_at
@@ -62,6 +65,11 @@ direction TB
 	    +addReview()
     }
 
+    class Reviews {
+	    +String text
+	    +Integer rating
+    }
+
     class Coach {
 	    +String certif
 	    +String description
@@ -69,11 +77,6 @@ direction TB
 	    +bool is_coach
 	    +bool is_diet
 	    +addTraining()
-    }
-
-    class Reviews {
-	    +String text
-	    +Integer rating
     }
 
     class Subscription {
@@ -87,13 +90,6 @@ direction TB
 	    +Boolean is_read
 	    +String text
     }
-	UUID <|-- Product_shop
-	UUID <|-- Personne
-	UUID <|-- Exercise_schedule
-	UUID <|-- Exercice
-	UUID <|-- Subscription
-	UUID <|-- Message
-	UUID <|-- Reviews
     Exercice <-- Exercise_schedule
     User <-- Exercise_schedule
     Coach <-- Exercice
@@ -113,4 +109,11 @@ direction TB
 # Architecture : 
 - Front-end: CSS, JS, HTML
 - Back-end: Python
-- Database: sqlite 
+- Database: sqlite
+
+
+  ### CURL Function 
+
+| Action         | REST API Endpoint           |
+| -------------- | --------------------------- |
+| GET USER       | POST `/api/v1/users`        | 
