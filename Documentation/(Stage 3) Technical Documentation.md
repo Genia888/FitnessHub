@@ -6,4 +6,5 @@
 
 
 ### First wireframes
-![Wireframes](wireframes.png)
+
+[![Preview de la maquette](./maquette.png)](https://www.figma.com/site/pXa4R4BEWpKBJKWSCMSXLB/Untitled?node-id=0-1&t=jpmidpSvAxUgBVX2-1)
