@@ -1,5 +1,7 @@
 # Class Diagram
 
+ClasseId_For_All_Tables is the parent of Product_shop, Personne, Exercice, Exercise_schedule, Reviews, Subscription, Message
+
 ```mermaid
 classDiagram
 direction TB
