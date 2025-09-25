@@ -87,7 +87,7 @@ direction TB
 	    +Boolean is_read
 	    +String text
     }
-
+	UUID <|-- Article
 	UUID <|-- Personne
 	UUID <|-- Exercise_schedule
 	UUID <|-- Exercice
