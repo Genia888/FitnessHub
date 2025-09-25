@@ -90,7 +90,7 @@ direction TB
     Coach <-- Reviews
     User <-- Reviews
     Coach <-- Subscription
-    User <-- subscription
+    User <-- Subscription
     Coach <-- Message
     User <-- Message
     Personne <|-- Coach
