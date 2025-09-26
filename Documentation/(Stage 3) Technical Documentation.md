@@ -125,6 +125,9 @@ direction TB
 
   # 4. Document External and Internal APIs
 
+FitnessHub API Documentation
+This document provides a high-level overview of the REST API endpoints for the FitnessHub project. 
+It defines the structure of requests (inputs) and responses (outputs) for each module, including:
 ### Users API
 
 | **Action**            | **Endpoint**               | **Method** | **Input**                                                                                                         | **Output**                                                                                                                                                                             |
