@@ -187,7 +187,14 @@ direction TB
 
 
 1. User Authentification
+
 ![Sequence Diagram](/Documentation/sequence_diagram_authentification.png)
+
+
+2. Update profile
+
+![Sequence Diagram](/Documentation/sequence_diagram_update_profile.png)
+
 
 
 
