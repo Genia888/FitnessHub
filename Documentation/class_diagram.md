@@ -1,4 +1,4 @@
-# Class Diagram
+# 2. Define Components, Classes, and Database Design  
 
 ClasseId_For_All_Tables is the parent of Product_shop, Personne, Exercice, Exercise_schedule, Reviews, Subscription, Message
 
@@ -106,13 +106,13 @@ direction TB
 
 ```
 
-# Architecture : 
+# 1. Design System Architecture: 
 - Front-end: CSS, JS, HTML
 - Back-end: Python
 - Database: sqlite
 
 
-  ### CURL Function 
+  # 4. Document External and Internal APIs
 
 | Action         | REST API Endpoint                   |
 | -------------- | ----------------------------------- |
@@ -132,3 +132,4 @@ All users are in a table users but they have Boolean/TYPE to specify if there ar
 -Coach
 -Subscriber
 -Simple user register
+
