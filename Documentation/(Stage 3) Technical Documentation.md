@@ -1,13 +1,80 @@
 # 0. Define User Stories and Mockups
 ## User Stories (with MoSCoW Prioritization)
 
+## Client
+
 ### Must Have
+- As a client, I want to create my account, so I can follow trainings
+- As a client, I want to book a coaching session, so I can get personalized guidance
+- As a client, I want to connect to my account, so I can choose a coach
 
+### Should Have
+- As a client, I want to track my stats, so I can measure my progress.
+- As a client, I want to receive notifications before a training, so I don’t forget
 
+### Could Have
+- As a client, I want to access exercise videos, so that I can do the right movements
+
+### Won’t Have
+- As a client, I want to sync my data with my Apple Watch, so that I can integrate my workouts
+
+## Coach
+### Must Have
+- As a coach, I want to create an account, so I can post my profile on the platform
+- As a coach, I want to log in, so I can update my profile
+- As a coach, I want to log in, so I can check the profile of my clients and give personalized guidance
+- As a coach, I want to manage my availability, so my clients can book a slot
+
+### Should Have
+- As a coach, I want to see my reviews, so I can improve myself
+
+### Could Have
+- As a coach, I want to share pre-established nutrition plans, so I can save time
+
+### Won’t Have
+- As a coach, I want to receive notifications on my smartwatch, so I don’t miss messages
+
+## Admin
+### Must Have
+- As an admin, I want to manage user accounts, so I can help coaches and clients with their login problems.
+- As an admin, I want to see how many people register on the platform, so I can manage the flow.
+
+### Should Have
+- As an admin, I want to generate reports, so I can track platform growth.
+
+### Could Have
+- As an admin, I want to configure/add discount codes, so I can attract more users
 
 ### First wireframes
 
 [![Preview de la maquette](./maquette.png)](https://www.figma.com/site/pXa4R4BEWpKBJKWSCMSXLB/Untitled?node-id=0-1&t=jpmidpSvAxUgBVX2-1)
+
+# 1. Design System Architecture: 
+### FitnessHub MVP Architecture
+
+**Front-end (Client side)**
+- Built with HTML, CSS, JavaScript
+- Provides UI for login, booking, workouts, nutrition, progress, and chat
+- Sends requests to the back-end via HTTP (REST API calls)
+
+**Back-end (Server side)**
+- Developed with Python (Flask or Django)
+- Handles authentication, business logic, user management, workouts, chat
+- Connects with database for storing/retrieving data
+
+**Database**
+- SQLite (lightweight, good for MVP)
+- Stores users, coaches, workouts, nutrition plans, progress, messages
+
+### Data Flow
+- User interacts with the front-end (HTML/CSS/JS).
+- The front-end makes an HTTP request to the Python back-end.
+- Example: POST /api/v1/users/login
+- The back-end processes the request and queries SQLite.
+- SQLite returns data (e.g., user profile, progress).
+- Python back-end formats response into JSON and sends it back.
+- Front-end updates the UI for the user.
+
 
 # 2. Define Components, Classes, and Database Design  
 
@@ -117,13 +184,7 @@ direction TB
 
 ```
 
-# 1. Design System Architecture: 
-- Front-end: CSS, JS, HTML
-- Back-end: Python
-- Database: sqlite
-
-
-  # 4. Document External and Internal APIs
+# 4. Document External and Internal APIs
 
 FitnessHub API Documentation
 This document provides a high-level overview of the REST API endpoints for the FitnessHub project. 
@@ -172,3 +233,29 @@ All users are in a table users but they have Boolean/TYPE to specify if there ar
 | Get Messages   | `/api/v1/chat/{conversation_id}` | GET        | `conversation_id` (URL param)                                               | `json { "conversation_id": 1, "messages": [ { "sender": "coach", "text": "Great job today!", "timestamp": "2025-09-25T12:00:00Z" } ] } ` |
 | Send Message   | `/api/v1/chat`                   | POST       | `json { "conversation_id": 1, "sender": "user", "text": "Thanks coach!" } ` | `json { "message": "Message sent", "chat": { "id": 10, "sender": "user", "text": "Thanks coach!" } } `                                   |
 | Delete Message | `/api/v1/chat/{message_id}`      | DELETE     | `message_id` (URL param)                                                    | `json { "message": "Message deleted successfully" } `                                                                                    |
+
+# 5. Plan SCM and QA Strategies
+### SCM (Source Code Management) Strategy
+**Tool: Git (hosted on GitHub)**
+- Branching Strategy:
+- ``main`` - stable code only (production-ready)
+- ``dev`` - integration branch for tested features
+- ``feature`` - one branch per feature (e.g., feature/login)
+### Workflow:
+- Developers create feature branches
+- Submit Pull Requests reviewed by another team member
+- Merge into dev once validated
+- After testing, merge dev into main
+
+### Commit Rules: 
+- Small, frequent commits with clear messages
+
+### QA (Quality Assurance) Strategy
+**Testing Types:**
+- Unit Tests - test individual functions (e.g., user authentication)
+- Integration Tests - ensure database & API work together
+- Manual Tests → check UI/UX flows (booking, login, progress tracking)
+
+**Testing Tools:**
+-Pycodestyle (for Python back-end unit & integration tests)
+-Postman (API testing)
