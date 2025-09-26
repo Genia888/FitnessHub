@@ -114,6 +114,21 @@ direction TB
 
   ### CURL Function 
 
-| Action         | REST API Endpoint           |
-| -------------- | --------------------------- |
-| GET USER       | POST `/api/v1/users`        | 
+| Action         | REST API Endpoint                   |
+| -------------- | ----------------------------------- |
+| GET USER       | GET `/api/v1/users`                 | 
+| GET USER<TYPE> | GET `/api/v1/users/admin`           | 
+| GET USER<TYPE> | GET `/api/v1/users/diet`            | 
+| GET USER<TYPE> | GET `/api/v1/users/all_simple_user` | 
+| GET USER<TYPE> | GET `/api/v1/users/coach`           | 
+| PUT USER       | PUT  `/api/v1/users/{user_id}`      | 
+| POST USER      | POST `/api/v1/users`                | 
+| DELETE USER    | PUT  `/api/v1/users/{user_id}`      | 
+| GET USER       | GET  `/api/v1/users/{user_id}`      | 
+
+All users are in a table users but they have Boolean/TYPE to specify if there are
+-Admin
+-Diet
+-Coach
+-Subscriber
+-Simple user register
