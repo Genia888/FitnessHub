@@ -197,7 +197,7 @@ direction TB
 
 3. Book a coach
 
-![Sequence Diagram](/Documentation/sequence_diagram_book_coach.png
+![Sequence Diagram](/Documentation/sequence_diagram_book_coach.png)
 
 
 
