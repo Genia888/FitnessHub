@@ -183,6 +183,14 @@ direction TB
 
 
 ```
+# 3. Create High-Level Sequence Diagrams
+
+
+1. User Authentification
+![Sequence Diagram](/Documentation/sequence_diagram_authentification.png)
+
+
+
 
 # 4. Document External and Internal APIs
 
