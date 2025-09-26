@@ -195,6 +195,11 @@ direction TB
 
 ![Sequence Diagram](/Documentation/sequence_diagram_update_profile.png)
 
+3. Book a coach
+
+![Sequence Diagram](/Documentation/sequence_diagram_book_coach.png
+
+
 
 
 
