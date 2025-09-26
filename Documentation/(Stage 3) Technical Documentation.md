@@ -125,7 +125,7 @@ direction TB
     }
 
     class Workouts_schedule {
-      +Date date_exercice
+      +Date date_workout
       +String comment
     }
 
