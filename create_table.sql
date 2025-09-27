@@ -37,3 +37,19 @@ CREATE TABLE IF NOT EXISTS reviews (
     FOREIGN KEY (coach_id) REFERENCES users(id),
     UNIQUE (user_id, coach_id)
 );
+
+-- Create subscription
+CREATE TABLE IF NOT EXISTS subscription (
+    id CHAR(36) PRIMARY KEY,
+    begin_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    end_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    option_diet BOOLEAN DEFAULT FALSE, 
+    option_message BOOLEAN DEFAULT FALSE, 
+    user_id CHAR(36),
+    coach_id CHAR(36),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (coach_id) REFERENCES users(id),
+    UNIQUE (user_id, coach_id)
+);
