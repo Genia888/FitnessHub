@@ -283,5 +283,5 @@ All users are in a table users but they have Boolean/TYPE to specify if there ar
 - Manual Tests → check UI/UX flows (booking, login, progress tracking)
 
 **Testing Tools:**
--Pycodestyle (for Python back-end unit & integration tests)
--Postman (API testing)
+- Pycodestyle (for Python back-end unit & integration tests)
+- Postman (API testing)
