@@ -109,13 +109,12 @@ direction TB
 	    +String first_name
 	    +String adress1
 	    +String adress2
-	    +String postal code
+	    +String postal_code
 	    +String city
       +String picture
       +Float weight
       +Float size
     }
-
 
     class Workouts {
       +String description
@@ -124,11 +123,18 @@ direction TB
       +Float time
     }
 
+    class Nutrition {
+      +String description
+      +String picture
+      +String category<Protein,Carbs,Fats,...>
+      +Float calories
+      +Float quantity
+    }
+
     class Workouts_schedule {
       +Date date_workout
       +String comment
     }
-
 
     class Admin {
 	    +bool is_admin
@@ -168,19 +174,22 @@ direction TB
 	    +Boolean is_read
 	    +String text
     }
+
+    %% Relations
     Workouts <-- Workouts_schedule
     User <-- Workouts_schedule
     Coach <-- Workouts
+    Coach <-- Nutrition
+    User <-- Nutrition
     Personne <|-- Admin
     Personne <|-- User
+    Personne <|-- Coach
     Coach <-- Reviews
     User <-- Reviews
     Coach <-- Subscription
     User <-- Subscription
     Coach <-- Message
     User <-- Message
-    Personne <|-- Coach
-
 
 ```
 # 3. Create High-Level Sequence Diagrams
