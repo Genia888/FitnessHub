@@ -109,10 +109,10 @@ class UserRepository(BaseRepository):
         return self.model.query.filter_by(is_coach=True).all()
 
     def get_simple_user(self):
-        return self.model.query.filter_by(is_abonne=False , is_admin=False , is_diet=False , is_coach=False).all()
+        return self.model.query.filter_by(is_subscribe=False , is_admin=False , is_diet=False , is_coach=False).all()
 
     def get_all_abonne(self):
-        return self.model.query.filter_by(is_abonne=True).all()
+        return self.model.query.filter_by(is_subscribe=True).all()
 
     def get_all_diet(self):
         return self.model.query.filter_by(is_diet=True).all()

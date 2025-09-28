@@ -16,22 +16,22 @@ class User(BaseModel):
     is_admin = db.Column(db.Boolean, default=False)
     is_diet = db.Column(db.Boolean, default=False)
     is_coach = db.Column(db.Boolean, default=False)
-    is_abonne = db.Column(db.Boolean, default=False)
-    adresse1 = db.Column(db.String(100), nullable=False)
-    adresse2 = db.Column(db.String(100), nullable=False)
-    code_postal = db.Column(db.String(20), nullable=False)
-    ville = db.Column(db.String(100), nullable=False)
-    texte_allergie = db.Column(db.String(10000), nullable=False)
-    limitation_exercice = db.Column(db.String(10000), nullable=False)
+    is_subscribe = db.Column(db.Boolean, default=False)
+    adress1 = db.Column(db.String(100), nullable=False)
+    adress2 = db.Column(db.String(100), nullable=False)
+    postal_code = db.Column(db.String(20), nullable=False)
+    city = db.Column(db.String(100), nullable=False)
+    allergy_comment = db.Column(db.String(10000), nullable=False)
+    physical_constraint = db.Column(db.String(10000), nullable=False)
     coach_certif = db.Column(db.String(1000), nullable=False)
     coach_experience = db.Column(db.String(10000), nullable=False)
     coach_description = db.Column(db.String(10000), nullable=False)
-    taille = db.Column(db.Float, nullable=False)
-    poids = db.Column(db.Float, nullable=False)
-    photo = db.Column(db.String(1000), nullable=False)
+    size = db.Column(db.Float, nullable=False)
+    weight = db.Column(db.Float, nullable=False)
+    picture = db.Column(db.String(1000), nullable=False)
     reviews = db.relationship('Review', backref='Author', lazy=True, foreign_keys='Review.coach_id')
 
-    def __init__(self, first_name: str, last_name: str, email: str, password: str, is_admin=False, is_coach=False, is_diet=False, is_abonne=False, adresse1="", adresse2="", code_postal="", ville="", texte_allergie="", limitation_exercice="", coach_certif="", coach_experience="", coach_description="", taille="", poids="", photo=""):
+    def __init__(self, first_name: str, last_name: str, email: str, password: str, is_admin=False, is_coach=False, is_diet=False, is_subscribe=False, adress1="", adress2="", postal_code="", city="", allergy_comment="", physical_constraint="", coach_certif="", coach_experience="", coach_description="", size="", weight="", picture=""):
         super().__init__()
         if not first_name or len(first_name) > 50:
             raise ValueError("First name is required and must be ≤ 50 characters.")
@@ -47,19 +47,19 @@ class User(BaseModel):
         self.is_admin = is_admin
         self.is_coach = is_coach
         self.is_diet = is_diet
-        self.is_abonne = is_abonne
-        self.adresse1 = adresse1
-        self.adresse2 = adresse2
-        self.code_postal = code_postal
-        self.ville = ville
-        self.texte_allergie = texte_allergie
-        self.limitation_exercice = limitation_exercice
+        self.is_subscribe = is_subscribe
+        self.adress1 = adress1
+        self.adress2 = adress2
+        self.postal_code = postal_code
+        self.city = city
+        self.allergy_comment = allergy_comment
+        self.physical_constraint = physical_constraint
         self.coach_certif = coach_certif
         self.coach_experience = coach_experience
         self.coach_description = coach_description
-        self.taille = taille
-        self.poids = poids
-        self.photo = photo
+        self.size = size
+        self.weight = weight
+        self.picture = picture
         self.hash_password(password)
 
     def hash_password(self, password):
@@ -86,7 +86,7 @@ class User(BaseModel):
             "is_admin": self.is_admin,
             "is_coach": self.is_coach,
             "is_diet": self.is_diet,
-            "is_abonne": self.is_abonne,
+            "is_subscribe": self.is_subscribe,
             "password": self.password, 
             "adresse1": self.adresse1,
             "adresse2": self.adresse2, 

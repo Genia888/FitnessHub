@@ -13,19 +13,19 @@ user_model = api.model("User", {
     "is_admin" : fields.Boolean(required=True, default=False),
     "is_coach" : fields.Boolean(required=True, default=False),
     "is_diet" : fields.Boolean(required=True, default=False),
-    "adresse1": fields.String(required=True, max_length=100),
-    "adresse2": fields.String(required=True, max_length=100),
-    "code_postal": fields.String(required=True, max_length=20),
-    "ville": fields.String(required=True, max_length=100),
-    "texte_allergie": fields.String(Require=True, max_length=10000),
-    "limitation_exercice": fields.String(Require=True, max_length=10000),
+    "adress1": fields.String(required=True, max_length=100),
+    "adress2": fields.String(required=True, max_length=100),
+    "postal_code": fields.String(required=True, max_length=20),
+    "city": fields.String(required=True, max_length=100),
+    "allergy_comment": fields.String(Require=True, max_length=10000),
+    "physical_constraint": fields.String(Require=True, max_length=10000),
     "coach_certif": fields.String(Require=True, max_length=1000),
     "coach_experience": fields.String(Require=True, max_length=10000),
     "coach_description": fields.String(Require=True, max_length=10000),
     "email": fields.String(required=True),
-    "taille": fields.Float(Require=True),
-    "poids": fields.Float(Require=True),
-    "photo": fields.String(required=True, max_length=1000),
+    "size": fields.Float(Require=True),
+    "weight": fields.Float(Require=True),
+    "picture": fields.String(required=True, max_length=1000),
 })
 
 # Adding the review model
@@ -57,13 +57,13 @@ class UserList(Resource):
                 "password": new_user.password, 'email': new_user.email,
                 "is_admin": new_user.is_admin, "is_coach": new_user.is_coach,
                 "is_diet": new_user.is_diet, "password": new_user.password, 
-                "adresse1": new_user.adresse1, "adresse2": new_user.adresse2, 
-                "code_postal": new_user.code_postal, "ville": new_user.ville, 
-                "texte_allergie": new_user.texte_allergie, "limitation_exercice": new_user.limitation_exercice,
+                "adress1": new_user.adress1, "adress2": new_user.adress2, 
+                "postal_code": new_user.postal_code, "city": new_user.city, 
+                "allergy_comment": new_user.allergy_comment, "physical_constraint": new_user.physical_constraint,
                 "coach_certif" : new_user.coach_certif, "coach_experience" : new_user.coach_experience,
                   "coach_description": new_user.coach_description,
-                    "taille" : new_user.taille, "poids" : new_user.poids,
-                  "photo": new_user.photo  }, 201
+                    "size" : new_user.size, "weight" : new_user.weight,
+                  "picture": new_user.picture  }, 201
 
     @api.response(200, 'List of users retrieved successfully')
     def get(self):
@@ -84,16 +84,16 @@ class UserResource(Resource):
             return {'error': 'User not found'}, 404
         return {'id': user.id, 'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email,
                 "is_admin": user.is_admin, "is_coach": user.is_coach,
-                "is_diet": user.is_diet, "is_abonne": user.is_abonne, "password": user.password, 
-                "adresse1": user.adresse1, "adresse2": user.adresse2, 
-                "code_postal": user.code_postal, "ville": user.ville, "texte_allergie": user.texte_allergie,
-            "limitation_exercice": user.limitation_exercice,
+                "is_diet": user.is_diet, "is_subscribe": user.is_subscribe, "password": user.password, 
+                "adresse1": user.adress1, "adresse2": user.adress2, 
+                "code_postal": user.postal_code, "ville": user.city, "allergy_comment": user.allergy_comment,
+            "physical_constraint": user.physical_constraint,
             "coach_certif": user.coach_certif,
             "coach_experience": user.coach_experience,
             "coach_description": user.coach_description,
-            "taille": user.taille,
-            "poids": user.poids,
-            "photo": user.photo
+            "size": user.size,
+            "weight": user.weight,
+            "picture": user.picture
                 }, 200              
     
     @api.doc(security="token")
