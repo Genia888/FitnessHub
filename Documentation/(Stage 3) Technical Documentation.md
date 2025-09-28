@@ -215,6 +215,8 @@ direction TB
 ![Sequence Diagram](/Documentation/sequence_diagram_authentification.png)
 
 
+The user logs in by typing their username and password. The system checks the data in the database and tells the user if the login is successful or not.
+
 ## Update profile
 
 
