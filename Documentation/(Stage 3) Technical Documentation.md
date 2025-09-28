@@ -208,20 +208,20 @@ direction TB
 # 3. Create High-Level Sequence Diagrams
 
 
-1. User Authentification
+## User Authentification
 
 
 
 ![Sequence Diagram](/Documentation/sequence_diagram_authentification.png)
 
 
-2. Update profile
+## Update profile
 
 
 
 ![Sequence Diagram](/Documentation/sequence_diagram_update_profile.png)
 
-3. Book a coach
+## Book a coach
 
 
 
