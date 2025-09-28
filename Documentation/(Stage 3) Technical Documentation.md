@@ -215,7 +215,7 @@ direction TB
 ![Sequence Diagram](/Documentation/sequence_diagram_authentification.png)
 
 
-The user logs in by typing their username and password. The system checks the data in the database and tells the user if the login is successful or not.
+<div align="center">The user logs in by typing their username and password. The system checks the data in the database and tells the user if the login is successful or not.</div>
 
 ## Update profile
 
@@ -233,7 +233,7 @@ The user logs in by typing their username and password. The system checks the da
 ![Sequence Diagram](/Documentation/sequence_diagram_book_coach.png)
 
 
-The user chooses a coach and a time, then sends a booking request. The database checks if the time is free and either confirms the booking or shows that it is not available.
+<div align="center">The user chooses a coach and a time, then sends a booking request. The database checks if the time is free and either confirms the booking or shows that it is not available.</div>
 
 
 
