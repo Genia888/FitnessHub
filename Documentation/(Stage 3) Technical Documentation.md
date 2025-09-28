@@ -6,11 +6,14 @@
 # Must Have
 
 As a client, I want to create my account so I can follow trainings
+
 As a client, I want to book a coaching session so I can get personalized guidance
+
 As a client, I want to connect to my account so I can choose a coach
 
 # Should Have
 As a client, I want to track my stats so I can measure my progress.
+
 As a client, I want to receive notifications before a training, so I don’t forget
 
 
@@ -25,8 +28,11 @@ As a client, I want to sync my data with my Apple Watch so that I can integrate 
 # Must Have
 
 As a coach, I want to create an account so I can post my profile on the platform
+
 As a coach, I want to log in so I can update my profile.
+
 As a coach, I want to log in so I can check the profile of my clients and give personalized guidance.
+
 As a coach, I want to manage my availability so my clients can book a slot.
 
 # Should Have
@@ -43,6 +49,7 @@ As a coach, I want to receive notifications on my smartwatch so I don’t miss m
 
 # Must Have
 As an admin, I want to manage user accounts so I can help coaches and clients with their login problems.
+
 As an admin, I want to see how many people register on the platform so I can manage the flow.
 
 # Should Have
