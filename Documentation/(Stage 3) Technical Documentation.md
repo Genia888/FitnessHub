@@ -224,7 +224,7 @@ The user logs in by typing their username and password. The system checks the da
 ![Sequence Diagram](/Documentation/sequence_diagram_update_profile.png)
 
 
-The user changes their profile information and sends it to the system. The database checks the new data and confirms if the update worked or gives an error.
+<div align="center"> The user changes their profile information and sends it to the system. The database checks the new data and confirms if the update worked or gives an error.</div>
 
 ## Book a coach
 
