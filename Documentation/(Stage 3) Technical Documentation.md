@@ -233,7 +233,7 @@ The user changes their profile information and sends it to the system. The datab
 ![Sequence Diagram](/Documentation/sequence_diagram_book_coach.png)
 
 
-
+The user chooses a coach and a time, then sends a booking request. The database checks if the time is free and either confirms the booking or shows that it is not available.
 
 
 
