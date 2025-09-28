@@ -60,7 +60,10 @@ As an admin, I want to configure/add discount codes so I can attract more users.
 
 ### First wireframes
 
-[![Preview de la maquette](./maquette.png)](https://www.figma.com/site/pXa4R4BEWpKBJKWSCMSXLB/Untitled?node-id=0-1&t=jpmidpSvAxUgBVX2-1)
+![maquette](./maquette.png)
+![maquette](./maquette1.png)
+![maquette](./maquette2.png)
+
 
 # 1. Design System Architecture: 
 ### FitnessHub MVP Architecture
