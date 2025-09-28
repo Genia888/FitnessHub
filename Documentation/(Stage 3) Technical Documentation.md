@@ -3,60 +3,49 @@
 
 ## Client
 
-# Must Have
+### Must Have
+- As a client, I want to create my account so I can follow trainings
+- As a client, I want to book a coaching session so I can get personalized guidance
+- As a client, I want to connect to my account so I can choose a coach
 
-As a client, I want to create my account so I can follow trainings
+### Should Have
+- As a client, I want to track my stats so I can measure my progress.
+- As a client, I want to receive notifications before a training, so I don’t forget
 
-As a client, I want to book a coaching session so I can get personalized guidance
+### Could Have
+- As a client, I want to access exercise videos so that I can do the right movements
 
-As a client, I want to connect to my account so I can choose a coach
-
-# Should Have
-As a client, I want to track my stats so I can measure my progress.
-
-As a client, I want to receive notifications before a training, so I don’t forget
-
-
-# Could Have
-As a client, I want to access exercise videos so that I can do the right movements
-
-# Won’t Have
-As a client, I want to sync my data with my Apple Watch so that I can integrate my workouts
+### Won’t Have
+- As a client, I want to sync my data with my Apple Watch so that I can integrate my workouts
 
 ## Coach
 
-# Must Have
+### Must Have
+- As a coach, I want to create an account so I can post my profile on the platform
+- As a coach, I want to log in so I can update my profile
+- As a coach, I want to log in so I can check the profile of my clients and give personalized guidance
+- As a coach, I want to manage my availability so my clients can book a slot
 
-As a coach, I want to create an account so I can post my profile on the platform
+### Should Have
+- As a coach, I want to see my reviews so I can improve myself.
 
-As a coach, I want to log in so I can update my profile.
+### Could Have
+- As a coach, I want to share pre-established nutrition plans so I can save time
 
-As a coach, I want to log in so I can check the profile of my clients and give personalized guidance.
-
-As a coach, I want to manage my availability so my clients can book a slot.
-
-# Should Have
-
-As a coach, I want to see my reviews so I can improve myself.
-
-# Could Have
-As a coach, I want to share pre-established nutrition plans so I can save time.
-
-# Won’t Have
-As a coach, I want to receive notifications on my smartwatch so I don’t miss messages
+### Won’t Have
+- As a coach, I want to receive notifications on my smartwatch so I don’t miss messages
 
 ## Admin
 
-# Must Have
-As an admin, I want to manage user accounts so I can help coaches and clients with their login problems.
+### Must Have
+- As an admin, I want to manage user accounts so I can help coaches and clients with their login problems
+- As an admin, I want to see how many people register on the platform so I can manage the flow
 
-As an admin, I want to see how many people register on the platform so I can manage the flow.
+### Should Have
+- As an admin, I want to generate reports so I can track platform growth
 
-# Should Have
-As an admin, I want to generate reports so I can track platform growth.
-
-# Could Have
-As an admin, I want to configure/add discount codes so I can attract more users.
+### Could Have
+- As an admin, I want to configure/add discount codes so I can attract more users
 
 ### First wireframes
 
