@@ -208,7 +208,7 @@ direction TB
 # 3. Create High-Level Sequence Diagrams
 
 
-## User Authentification
+<div align="center"> ## User Authentification </div>
 
 
 
