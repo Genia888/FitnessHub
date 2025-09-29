@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abonnement - FitnessHub</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <script src="../vendor/gsap/gsap.min.js" defer></script>
+  <script src="../vendor/gsap/ScrollTrigger.min.js" defer></script>
+  <script src="../vendor/lenis/lenis.min.js" defer></script>
+  <script src="../scripts/app.js" defer></script>
+</head>
+<body>
+  <div class="pattern"></div>
+  
+  <div class="gradient-bg">
+    <div class="gradients-container">
+      <div class="g1"></div>
+      <div class="g2"></div>
+      <div class="g3"></div>
+      <div class="interactive"></div>
+    </div>
+  </div>
+
+  <header class="header-top">
+    <div class="top-line">
+      <div class="top-line__left">
+        <a href="../index.html" class="logo">
+          <img src="../assets/images/FitnessHub.svg" alt="FitnessHub">
+        </a>
+      </div>
+
+      <div class="top-line__center">
+        <nav class="top-mnu">
+          <ul>
+            <li><a href="abonnement.html" data-text="Abonnement">Abonnement</a></li>
+            <li><a href="coach.html" data-text="Coach">Coach</a></li>
+            <li><a href="boutique.html" data-text="Boutique">Boutique</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="top-line__right">
+        <div class="mnu-button">
+          <button class="mnu-button__menu">
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+        <div class="main-menu-background"></div>
+        <div class="main-menu">
+          <nav class="main-menu__inner">
+            <ul>
+              <li><a href="abonnement.html" data-text="Abonnement">Abonnement<span></span></a></li>
+              <li><a href="coach.html" data-text="Coach">Coach<span></span></a></li>
+              <li><a href="boutique.html" data-text="Boutique">Boutique<span></span></a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="page-content">
+      <div class="section-head">
+        <h2>Abonnement</h2>
+      </div>
+      
+      <div class="subscription-plans">
+        <div class="plan-card">
+          <h3>Plan Basique</h3>
+          <div class="price">29€/mois</div>
+          <ul class="features">
+            <li>Programmes d'entraînement personnalisés</li>
+            <li>Suivi nutritionnel de base</li>
+            <li>Chat avec votre coach</li>
+          </ul>
+          <button class="btn-primary">Choisir ce plan</button>
+        </div>
+        
+        <div class="plan-card featured">
+          <h3>Plan Premium</h3>
+          <div class="price">59€/mois</div>
+          <ul class="features">
+            <li>Tout du plan basique</li>
+            <li>Plans nutritionnels détaillés</li>
+            <li>Appels vidéo hebdomadaires</li>
+            <li>Suivi avancé des progrès</li>
+          </ul>
+          <button class="btn-primary">Choisir ce plan</button>
+        </div>
+        
+        <div class="plan-card">
+          <h3>Plan Elite</h3>
+          <div class="price">99€/mois</div>
+          <ul class="features">
+            <li>Tout du plan premium</li>
+            <li>Coach personnel dédié</li>
+            <li>Consultations illimitées</li>
+            <li>Programmes sur mesure</li>
+          </ul>
+          <button class="btn-primary">Choisir ce plan</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
