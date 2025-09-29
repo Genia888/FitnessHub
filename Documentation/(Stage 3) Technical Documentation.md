@@ -4,50 +4,55 @@
 ## Client
 
 ### Must Have
-- As a client, I want to create my account, so I can follow trainings
-- As a client, I want to book a coaching session, so I can get personalized guidance
-- As a client, I want to connect to my account, so I can choose a coach
+- As a client, I want to create my account so I can follow trainings
+- As a client, I want to book a coaching session so I can get personalized guidance
+- As a client, I want to connect to my account so I can choose a coach
 
 ### Should Have
-- As a client, I want to track my stats, so I can measure my progress.
+- As a client, I want to track my stats so I can measure my progress.
 - As a client, I want to receive notifications before a training, so I don’t forget
 
 ### Could Have
-- As a client, I want to access exercise videos, so that I can do the right movements
+- As a client, I want to access exercise videos so that I can do the right movements
 
 ### Won’t Have
-- As a client, I want to sync my data with my Apple Watch, so that I can integrate my workouts
+- As a client, I want to sync my data with my Apple Watch so that I can integrate my workouts
 
 ## Coach
+
 ### Must Have
-- As a coach, I want to create an account, so I can post my profile on the platform
-- As a coach, I want to log in, so I can update my profile
-- As a coach, I want to log in, so I can check the profile of my clients and give personalized guidance
-- As a coach, I want to manage my availability, so my clients can book a slot
+- As a coach, I want to create an account so I can post my profile on the platform
+- As a coach, I want to log in so I can update my profile
+- As a coach, I want to log in so I can check the profile of my clients and give personalized guidance
+- As a coach, I want to manage my availability so my clients can book a slot
 
 ### Should Have
-- As a coach, I want to see my reviews, so I can improve myself
+- As a coach, I want to see my reviews so I can improve myself.
 
 ### Could Have
-- As a coach, I want to share pre-established nutrition plans, so I can save time
+- As a coach, I want to share pre-established nutrition plans so I can save time
 
 ### Won’t Have
-- As a coach, I want to receive notifications on my smartwatch, so I don’t miss messages
+- As a coach, I want to receive notifications on my smartwatch so I don’t miss messages
 
 ## Admin
+
 ### Must Have
-- As an admin, I want to manage user accounts, so I can help coaches and clients with their login problems.
-- As an admin, I want to see how many people register on the platform, so I can manage the flow.
+- As an admin, I want to manage user accounts so I can help coaches and clients with their login problems
+- As an admin, I want to see how many people register on the platform so I can manage the flow
 
 ### Should Have
-- As an admin, I want to generate reports, so I can track platform growth.
+- As an admin, I want to generate reports so I can track platform growth
 
 ### Could Have
-- As an admin, I want to configure/add discount codes, so I can attract more users
+- As an admin, I want to configure/add discount codes so I can attract more users
 
 ### First wireframes
 
-[![Preview de la maquette](./maquette.png)](https://www.figma.com/site/pXa4R4BEWpKBJKWSCMSXLB/Untitled?node-id=0-1&t=jpmidpSvAxUgBVX2-1)
+![maquette](./maquette.png)
+![maquette](./maquette1.png)
+![maquette](./maquette2.png)
+
 
 # 1. Design System Architecture: 
 ### FitnessHub MVP Architecture
@@ -101,7 +106,7 @@ direction TB
 	    +bool is_in_stock
     }
 
-    class Personne {
+    class User {
       +String pseudo
       +String email
       +String password
@@ -123,7 +128,7 @@ direction TB
       +Float time
     }
 
-    class Nutrition {
+    class Diet {
       +String description
       +String picture
       +String category<Protein,Carbs,Fats,...>
@@ -142,7 +147,7 @@ direction TB
       +addArticle()
     }
 
-    class User {
+    class Customer {
 	    +bool is_subscribe
       +String physical_constraint
       +String allergy_comment
@@ -177,45 +182,50 @@ direction TB
 
     %% Relations
     Workouts <-- Workouts_schedule
-    User <-- Workouts_schedule
+    Customer <-- Workouts_schedule
     Coach <-- Workouts
-    Coach <-- Nutrition
-    User <-- Nutrition
-    Personne <|-- Admin
-    Personne <|-- User
-    Personne <|-- Coach
+    Coach <-- Diet
+    Customer <-- Diet
+    User <|-- Admin
+    User <|-- Customer
+    User <|-- Coach
     Coach <-- Reviews
-    User <-- Reviews
+    Customer <-- Reviews
     Coach <-- Subscription
-    User <-- Subscription
+    Customer <-- Subscription
     Coach <-- Message
-    User <-- Message
+    Customer <-- Message
 
 ```
 # 3. Create High-Level Sequence Diagrams
 
 
-1. User Authentification
+## User Authentification
 
 
 
 ![Sequence Diagram](/Documentation/sequence_diagram_authentification.png)
 
 
-2. Update profile
+<div align="center">The user logs in by typing their username and password. The system checks the data in the database and tells the user if the login is successful or not.</div>
+
+## Update profile
 
 
 
 ![Sequence Diagram](/Documentation/sequence_diagram_update_profile.png)
 
-3. Book a coach
+
+<div align="center"> The user changes their profile information and sends it to the system. The database checks the new data and confirms if the update worked or gives an error.</div>
+
+## Book a coach
 
 
 
 ![Sequence Diagram](/Documentation/sequence_diagram_book_coach.png)
 
 
-
+<div align="center">The user chooses a coach and a time, then sends a booking request. The database checks if the time is free and either confirms the booking or shows that it is not available.</div>
 
 
 
