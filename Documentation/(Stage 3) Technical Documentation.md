@@ -182,19 +182,19 @@ direction TB
 
     %% Relations
     Workouts <-- Workouts_schedule
-    User <-- Workouts_schedule
+    Customer <-- Workouts_schedule
     Coach <-- Workouts
     Coach <-- Diet
-    User <-- Diet
-    Personne <|-- Admin
-    Personne <|-- User
-    Personne <|-- Coach
+    Customer <-- Diet
+    User <|-- Admin
+    User <|-- User
+    User <|-- Coach
     Coach <-- Reviews
-    User <-- Reviews
+    Customer <-- Reviews
     Coach <-- Subscription
-    User <-- Subscription
+    Customer <-- Subscription
     Coach <-- Message
-    User <-- Message
+    Customer <-- Message
 
 ```
 # 3. Create High-Level Sequence Diagrams
