@@ -187,7 +187,7 @@ direction TB
     Coach <-- Diet
     Customer <-- Diet
     User <|-- Admin
-    User <|-- User
+    User <|-- Customer
     User <|-- Coach
     Coach <-- Reviews
     Customer <-- Reviews
