@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coach Dashboard - FitnessHub</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/coach-dashboard.css">
+  <script src="../vendor/gsap/gsap.min.js" defer></script>
+  <script src="../vendor/gsap/ScrollTrigger.min.js" defer></script>
+  <script src="../vendor/lenis/lenis.min.js" defer></script>
+  <script src="../scripts/app.js" defer></script>
+  <script src="../scripts/coach-dashboard.js" defer></script>
+</head>
+<body>
+  <div class="pattern"></div>
+  
+  <div class="gradient-bg">
+    <div class="gradients-container">
+      <div class="g1"></div>
+      <div class="g2"></div>
+      <div class="g3"></div>
+      <div class="interactive"></div>
+    </div>
+  </div>
+
+  <header class="header-top">
+    <div class="top-line">
+      <div class="top-line__left">
+        <a href="../index.html" class="logo">
+          <img src="../assets/images/FitnessHub.svg" alt="FitnessHub">
+        </a>
+      </div>
+
+      <div class="top-line__center">
+        <nav class="top-mnu">
+          <ul>
+            <li><a href="abonnement.html" data-text="Subscription">Subscription</a></li>
+            <li><a href="coach.html" data-text="Coach">Coach</a></li>
+            <li><a href="boutique.html" data-text="Shop">Shop</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="top-line__right">
+        <div class="mnu-button">
+          <button class="mnu-button__menu">
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+        <div class="main-menu-background"></div>
+        <div class="main-menu">
+          <nav class="main-menu__inner">
+            <ul>
+              <li><a href="abonnement.html" data-text="Subscription">Subscription<span></span></a></li>
+              <li><a href="coach.html" data-text="Coach">Coach<span></span></a></li>
+              <li><a href="boutique.html" data-text="Shop">Shop<span></span></a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="page-content">
+      <div class="section-head">
+        <h2>Coach Dashboard</h2>
+      </div>
+      
+      <!-- Loading State -->
+      <div class="loading-state" id="loadingState">
+        <div class="spinner"></div>
+        <p>Loading coaches...</p>
+      </div>
+
+      <!-- Error State -->
+      <div class="error-state" id="errorState" style="display: none;">
+        <p class="error-message">Unable to load coaches. Please try again later.</p>
+        <button class="retry-btn" onclick="loadCoaches()">
+          <span data-text="Retry">Retry</span>
+        </button>
+      </div>
+
+      <!-- Coaches Grid -->
+      <div class="coaches-dashboard-grid" id="coachesGrid">
+        <!-- Coach cards will be populated by JavaScript -->
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <p>No coaches available at the moment.</p>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
