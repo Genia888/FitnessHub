@@ -4,7 +4,7 @@
 -- Subscriber
 -- Simple user
 -- This information are visible by function in back end
-CREATE TABLE IF NOT EXISTS "users" ( 
+CREATE TABLE IF NOT EXISTS "User" ( 
     "id" VARCHAR(36), 
     "first_name" VARCHAR(50) NOT NULL, 
     "last_name" VARCHAR(50) NOT NULL, 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS "users" (
     PRIMARY KEY("id") );
 
 -- Create Review
-CREATE TABLE IF NOT EXISTS "reviews" (
+CREATE TABLE IF NOT EXISTS "Reviews" (
     "id" CHAR(36) PRIMARY KEY,
     "text" TEXT NOT NULL,
     "rating" INT,
@@ -39,13 +39,13 @@ CREATE TABLE IF NOT EXISTS "reviews" (
     "coach_id" CHAR(36),
     "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY ("user_id") REFERENCES users("id"),
-    FOREIGN KEY ("coach_id") REFERENCES users("id"),
+    FOREIGN KEY ("user_id") REFERENCES User("id"),
+    FOREIGN KEY ("coach_id") REFERENCES User("id"),
     UNIQUE ("user_id", "coach_id")
 );
 
 -- Create diet
-CREATE TABLE IF NOT EXISTS "diet" (
+CREATE TABLE IF NOT EXISTS "Diet" (
     "id" CHAR(36) PRIMARY KEY,
     "description" TEXT NOT NULL,
     "picture" VARCHAR(1000) DEFAULT '',
@@ -56,13 +56,13 @@ CREATE TABLE IF NOT EXISTS "diet" (
     "coach_id" CHAR(36),
     "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY ("user_id") REFERENCES users("id"),
-    FOREIGN KEY ("coach_id") REFERENCES users("id"),
+    FOREIGN KEY ("user_id") REFERENCES User("id"),
+    FOREIGN KEY ("coach_id") REFERENCES User("id"),
     UNIQUE ("user_id", "coach_id")
 );
 
 -- Create subscription
-CREATE TABLE IF NOT EXISTS "subscription" (
+CREATE TABLE IF NOT EXISTS "Subscription" (
     "id" CHAR(36) PRIMARY KEY,
     "begin_date" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "end_date" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -72,13 +72,13 @@ CREATE TABLE IF NOT EXISTS "subscription" (
     "coach_id" CHAR(36),
     "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY ("user_id") REFERENCES users("id"),
-    FOREIGN KEY ("coach_id") REFERENCES users("id"),
+    FOREIGN KEY ("user_id") REFERENCES User("id"),
+    FOREIGN KEY ("coach_id") REFERENCES User("id"),
     UNIQUE ("user_id", "coach_id")
 );
 
 -- Create product shop
-CREATE TABLE IF NOT EXISTS "product_shop" (
+CREATE TABLE IF NOT EXISTS "Product_shop" (
     "id" CHAR(36) PRIMARY KEY,
     "name" VARCHAR(200) DEFAULT '', 
     "description" VARCHAR(2000) DEFAULT '', 
@@ -90,5 +90,34 @@ CREATE TABLE IF NOT EXISTS "product_shop" (
     "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "is_active" BOOLEAN DEFAULT FALSE, 
     "is_in_stock" BOOLEAN DEFAULT FALSE,
+    PRIMARY KEY("id")
+);
+
+
+-- Create Workouts time is in minutes
+CREATE TABLE IF NOT EXISTS "Workouts" (
+    "id" CHAR(36) PRIMARY KEY,
+    "description" VARCHAR(2000) DEFAULT '', 
+    "picture" VARCHAR(2000) DEFAULT '', 
+    "category" VARCHAR(200) DEFAULT '', 
+    "time" Float Default 0,
+    "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "coach_id" CHAR(36),
+    FOREIGN KEY ("coach_id") REFERENCES User("id"),
+    PRIMARY KEY("id")
+);
+
+-- Create Workouts_schedule 
+CREATE TABLE IF NOT EXISTS "Workouts_schedule" (
+    "id" CHAR(36) PRIMARY KEY,
+    "comment" VARCHAR(2000) DEFAULT '', 
+    "date_workout" DATETIME DEFAULT NULL, 
+    "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "user_id" CHAR(36),
+    "workout_id" CHAR(36),
+    FOREIGN KEY ("user_id") REFERENCES User("id"),
+    FOREIGN KEY ("workout_id") REFERENCES Workouts("id"),
     PRIMARY KEY("id")
 );
