@@ -106,7 +106,7 @@ direction TB
 	    +bool is_in_stock
     }
 
-    class Personne {
+    class User {
       +String pseudo
       +String email
       +String password
@@ -147,7 +147,7 @@ direction TB
       +addArticle()
     }
 
-    class User {
+    class Customer {
 	    +bool is_subscribe
       +String physical_constraint
       +String allergy_comment
