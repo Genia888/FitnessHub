@@ -6,11 +6,6 @@
   <title>Coach Dashboard - FitnessHub</title>
   <link rel="stylesheet" href="../styles/main.css">
   <link rel="stylesheet" href="../styles/coach-dashboard.css">
-  <script src="../vendor/gsap/gsap.min.js" defer></script>
-  <script src="../vendor/gsap/ScrollTrigger.min.js" defer></script>
-  <script src="../vendor/lenis/lenis.min.js" defer></script>
-  <script src="../scripts/app.js" defer></script>
-  <script src="../scripts/coach-dashboard.js" defer></script>
 </head>
 <body>
   <div class="pattern"></div>
@@ -70,7 +65,7 @@
       </div>
       
       <!-- Loading State -->
-      <div class="loading-state" id="loadingState">
+      <div class="loading-state" id="loadingState" style="display: none;">
         <div class="spinner"></div>
         <p>Loading coaches...</p>
       </div>
@@ -85,7 +80,307 @@
 
       <!-- Coaches Grid -->
       <div class="coaches-dashboard-grid" id="coachesGrid">
-        <!-- Coach cards will be populated by JavaScript -->
+        <!-- Coach cards avec données statiques pour démo -->
+        
+        <div class="coach-dashboard-card">
+          <div class="coach-card-image">
+            <img src="../public/images/ready/coach1.jpg" alt="Marie Dupont" onerror="this.style.display='none'">
+            <div class="coach-rating-badge">
+              <span>⭐</span>
+              <span>4.7/5</span>
+            </div>
+          </div>
+          
+          <div class="coach-card-info">
+            <div class="coach-card-header">
+              <h3>Marie Dupont</h3>
+              <p class="coach-specialty">Personal Trainer Certifié</p>
+              <p class="coach-experience">5 ans d'expérience en musculation et cardio</p>
+            </div>
+            
+            <div class="coach-card-details">
+              <div class="coach-detail-item">
+                <span class="icon">📋</span>
+                <span>Spécialisée dans la remise en forme et la perte de poids. J'aide mes clients à atteindre leurs objectifs.</span>
+              </div>
+              <div class="coach-detail-item">
+                <span class="icon">📍</span>
+                <span>Paris</span>
+              </div>
+            </div>
+            
+            <div class="coach-reviews-preview">
+              <div class="reviews-header">
+                <h4>Avis Récents</h4>
+                <span class="reviews-count">(3)</span>
+              </div>
+              <div class="review-item">
+                <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">Excellente coach ! Très professionnelle et motivante. J'ai perdu 10kg en 3 mois.</p>
+              </div>
+              <div class="review-item">
+                <div class="review-rating">⭐⭐⭐⭐</div>
+                <p class="review-text">Super accompagnement, programmes adaptés à mes besoins.</p>
+              </div>
+            </div>
+            
+            <div class="coach-card-action">
+              <button class="btn-select-coach" onclick="alert('Coach Marie sélectionné!')">
+                Choisir ce Coach
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="coach-dashboard-card">
+          <div class="coach-card-image">
+            <img src="../public/images/ready/coach2.jpg" alt="Thomas Martin" onerror="this.style.display='none'">
+            <div class="coach-rating-badge">
+              <span>⭐</span>
+              <span>4.9/5</span>
+            </div>
+          </div>
+          
+          <div class="coach-card-info">
+            <div class="coach-card-header">
+              <h3>Thomas Martin</h3>
+              <p class="coach-specialty">Coach Sportif Diplômé</p>
+              <p class="coach-experience">8 ans dans le coaching fitness</p>
+            </div>
+            
+            <div class="coach-card-details">
+              <div class="coach-detail-item">
+                <span class="icon">📋</span>
+                <span>Expert en préparation physique et musculation. Je vous accompagne pour développer votre force.</span>
+              </div>
+              <div class="coach-detail-item">
+                <span class="icon">📍</span>
+                <span>Lyon</span>
+              </div>
+            </div>
+            
+            <div class="coach-reviews-preview">
+              <div class="reviews-header">
+                <h4>Avis Récents</h4>
+                <span class="reviews-count">(2)</span>
+              </div>
+              <div class="review-item">
+                <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">Thomas m'a aidé à prendre 8kg de muscle en 6 mois. Un vrai pro !</p>
+              </div>
+              <div class="review-item">
+                <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">Méthodes efficaces et suivi personnalisé. Parfait !</p>
+              </div>
+            </div>
+            
+            <div class="coach-card-action">
+              <button class="btn-select-coach" onclick="alert('Coach Thomas sélectionné!')">
+                Choisir ce Coach
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="coach-dashboard-card">
+          <div class="coach-card-image">
+            <img src="../public/images/ready/coach3.jpg" alt="Sophie Bernard" onerror="this.style.display='none'">
+            <div class="coach-rating-badge">
+              <span>⭐</span>
+              <span>4.6/5</span>
+            </div>
+          </div>
+          
+          <div class="coach-card-info">
+            <div class="coach-card-header">
+              <h3>Sophie Bernard</h3>
+              <p class="coach-specialty">Instructrice Yoga & Pilates</p>
+              <p class="coach-experience">6 ans en yoga et bien-être</p>
+            </div>
+            
+            <div class="coach-card-details">
+              <div class="coach-detail-item">
+                <span class="icon">📋</span>
+                <span>Passionnée de yoga et pilates, je vous guide vers un équilibre corps-esprit.</span>
+              </div>
+              <div class="coach-detail-item">
+                <span class="icon">📍</span>
+                <span>Marseille</span>
+              </div>
+            </div>
+            
+            <div class="coach-reviews-preview">
+              <div class="reviews-header">
+                <h4>Avis Récents</h4>
+                <span class="reviews-count">(3)</span>
+              </div>
+              <div class="review-item">
+                <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">Les cours de yoga avec Sophie sont incroyables ! Très relaxants.</p>
+              </div>
+              <div class="review-item">
+                <div class="review-rating">⭐⭐⭐⭐</div>
+                <p class="review-text">Bonne pédagogie, j'ai beaucoup progressé en souplesse.</p>
+              </div>
+            </div>
+            
+            <div class="coach-card-action">
+              <button class="btn-select-coach" onclick="alert('Coach Sophie sélectionné!')">
+                Choisir ce Coach
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="coach-dashboard-card">
+          <div class="coach-card-image">
+            <img src="../public/images/ready/coach4.jpg" alt="Alexandre Rousseau" onerror="this.style.display='none'">
+            <div class="coach-rating-badge">
+              <span>⭐</span>
+              <span>4.5/5</span>
+            </div>
+          </div>
+          
+          <div class="coach-card-info">
+            <div class="coach-card-header">
+              <h3>Alexandre Rousseau</h3>
+              <p class="coach-specialty">Coach CrossFit Level 2</p>
+              <p class="coach-experience">4 ans en CrossFit et entraînement fonctionnel</p>
+            </div>
+            
+            <div class="coach-card-details">
+              <div class="coach-detail-item">
+                <span class="icon">📋</span>
+                <span>Spécialisé en CrossFit et entraînement haute intensité.</span>
+              </div>
+              <div class="coach-detail-item">
+                <span class="icon">📍</span>
+                <span>Toulouse</span>
+              </div>
+            </div>
+            
+            <div class="coach-reviews-preview">
+              <div class="reviews-header">
+                <h4>Avis Récents</h4>
+                <span class="reviews-count">(2)</span>
+              </div>
+              <div class="review-item">
+                <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">Alex est un excellent coach ! Très technique et motivant.</p>
+              </div>
+              <div class="review-item">
+                <div class="review-rating">⭐⭐⭐⭐</div>
+                <p class="review-text">Entraînements intenses mais très efficaces.</p>
+              </div>
+            </div>
+            
+            <div class="coach-card-action">
+              <button class="btn-select-coach" onclick="alert('Coach Alexandre sélectionné!')">
+                Choisir ce Coach
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="coach-dashboard-card">
+          <div class="coach-card-image">
+            <img src="../public/images/ready/coach5.jpg" alt="Camille Moreau" onerror="this.style.display='none'">
+            <div class="coach-rating-badge">
+              <span>⭐</span>
+              <span>4.8/5</span>
+            </div>
+          </div>
+          
+          <div class="coach-card-info">
+            <div class="coach-card-header">
+              <h3>Camille Moreau</h3>
+              <p class="coach-specialty">Nutritionniste Sportive</p>
+              <p class="coach-experience">7 ans en nutrition et coaching</p>
+            </div>
+            
+            <div class="coach-card-details">
+              <div class="coach-detail-item">
+                <span class="icon">📋</span>
+                <span>Alliant nutrition et sport, je vous accompagne pour une transformation complète.</span>
+              </div>
+              <div class="coach-detail-item">
+                <span class="icon">📍</span>
+                <span>Bordeaux</span>
+              </div>
+            </div>
+            
+            <div class="coach-reviews-preview">
+              <div class="reviews-header">
+                <h4>Avis Récents</h4>
+                <span class="reviews-count">(3)</span>
+              </div>
+              <div class="review-item">
+                <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">Approche holistique fantastique ! Résultats visibles rapidement.</p>
+              </div>
+              <div class="review-item">
+                <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">Camille est très à l'écoute et donne d'excellents conseils.</p>
+              </div>
+            </div>
+            
+            <div class="coach-card-action">
+              <button class="btn-select-coach" onclick="alert('Coach Camille sélectionné!')">
+                Choisir ce Coach
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="coach-dashboard-card">
+          <div class="coach-card-image">
+            <img src="../public/images/ready/coach6.jpg" alt="Julien Leroy" onerror="this.style.display='none'">
+            <div class="coach-rating-badge">
+              <span>⭐</span>
+              <span>4.4/5</span>
+            </div>
+          </div>
+          
+          <div class="coach-card-info">
+            <div class="coach-card-header">
+              <h3>Julien Leroy</h3>
+              <p class="coach-specialty">Entraîneur Personal Running</p>
+              <p class="coach-experience">3 ans en course à pied et endurance</p>
+            </div>
+            
+            <div class="coach-card-details">
+              <div class="coach-detail-item">
+                <span class="icon">📋</span>
+                <span>Passionné de course à pied, je vous prépare pour vos défis running.</span>
+              </div>
+              <div class="coach-detail-item">
+                <span class="icon">📍</span>
+                <span>Nantes</span>
+              </div>
+            </div>
+            
+            <div class="coach-reviews-preview">
+              <div class="reviews-header">
+                <h4>Avis Récents</h4>
+                <span class="reviews-count">(2)</span>
+              </div>
+              <div class="review-item">
+                <div class="review-rating">⭐⭐⭐⭐</div>
+                <p class="review-text">Julien m'a aidé à finir mon premier semi-marathon !</p>
+              </div>
+              <div class="review-item">
+                <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                <p class="review-text">Excellent pour la préparation course. Très pédagogue.</p>
+              </div>
+            </div>
+            
+            <div class="coach-card-action">
+              <button class="btn-select-coach" onclick="alert('Coach Julien sélectionné!')">
+                Choisir ce Coach
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Empty State -->
@@ -94,5 +389,11 @@
       </div>
     </section>
   </div>
+
+  <script src="../vendor/gsap/gsap.min.js" defer></script>
+  <script src="../vendor/gsap/ScrollTrigger.min.js" defer></script>
+  <script src="../vendor/lenis/lenis.min.js" defer></script>
+  <script src="../scripts/app.js" defer></script>
+  <script src="../scripts/coach-dashboard-simple.js" defer></script>
 </body>
 </html>
