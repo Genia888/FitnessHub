@@ -1,4 +1,10 @@
-CREATE TABLE "users" ( 
+-- Consider that User is split in subtable 
+-- Coach/diet
+-- Admin 
+-- Subscriber
+-- Simple user
+-- This information are visible by function in back end
+CREATE TABLE IF NOT EXISTS "users" ( 
     "id" VARCHAR(36), 
     "first_name" VARCHAR(50) NOT NULL, 
     "last_name" VARCHAR(50) NOT NULL, 
@@ -22,66 +28,67 @@ CREATE TABLE "users" (
     "weight" FLOAT DEFAULT 0,
     "size" FLOAT DEFAULT 0,
     "picture" VARCHAR(1000) DEFAULT '',
-    PRIMARY KEY("id") )
+    PRIMARY KEY("id") );
 
 -- Create Review
-CREATE TABLE IF NOT EXISTS reviews (
-    id CHAR(36) PRIMARY KEY,
-    text TEXT NOT NULL,
-    rating INT,
-    user_id CHAR(36),
-    coach_id CHAR(36),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (coach_id) REFERENCES users(id),
-    UNIQUE (user_id, coach_id)
+CREATE TABLE IF NOT EXISTS "reviews" (
+    "id" CHAR(36) PRIMARY KEY,
+    "text" TEXT NOT NULL,
+    "rating" INT,
+    "user_id" CHAR(36),
+    "coach_id" CHAR(36),
+    "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY ("user_id") REFERENCES users("id"),
+    FOREIGN KEY ("coach_id") REFERENCES users("id"),
+    UNIQUE ("user_id", "coach_id")
 );
 
 -- Create diet
-CREATE TABLE IF NOT EXISTS diet (
-    id CHAR(36) PRIMARY KEY,
-    description TEXT NOT NULL,
-    picture VARCHAR(1000) DEFAULT '',
-    category VARCHAR(36) DEFAULT '',
-    calories FLOAT DEFAULT 0,
-    quantity FLOAT DEFAULT 0,
-    user_id CHAR(36),
-    coach_id CHAR(36),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (coach_id) REFERENCES users(id),
-    UNIQUE (user_id, coach_id)
+CREATE TABLE IF NOT EXISTS "diet" (
+    "id" CHAR(36) PRIMARY KEY,
+    "description" TEXT NOT NULL,
+    "picture" VARCHAR(1000) DEFAULT '',
+    "category" VARCHAR(36) DEFAULT '',
+    "calories" FLOAT DEFAULT 0,
+    "quantity" FLOAT DEFAULT 0,
+    "user_id" CHAR(36),
+    "coach_id" CHAR(36),
+    "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY ("user_id") REFERENCES users("id"),
+    FOREIGN KEY ("coach_id") REFERENCES users("id"),
+    UNIQUE ("user_id", "coach_id")
 );
 
 -- Create subscription
-CREATE TABLE IF NOT EXISTS subscription (
-    id CHAR(36) PRIMARY KEY,
-    begin_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    end_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    option_diet BOOLEAN DEFAULT FALSE, 
-    option_message BOOLEAN DEFAULT FALSE, 
-    user_id CHAR(36),
-    coach_id CHAR(36),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (coach_id) REFERENCES users(id),
-    UNIQUE (user_id, coach_id)
+CREATE TABLE IF NOT EXISTS "subscription" (
+    "id" CHAR(36) PRIMARY KEY,
+    "begin_date" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "end_date" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "option_diet" BOOLEAN DEFAULT FALSE, 
+    "option_message" BOOLEAN DEFAULT FALSE, 
+    "user_id" CHAR(36),
+    "coach_id" CHAR(36),
+    "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY ("user_id") REFERENCES users("id"),
+    FOREIGN KEY ("coach_id") REFERENCES users("id"),
+    UNIQUE ("user_id", "coach_id")
 );
 
 -- Create product shop
-CREATE TABLE IF NOT EXISTS product_shop (
-    id CHAR(36) PRIMARY KEY,
-    name VARCHAR(200) DEFAULT '', 
-    description VARCHAR(2000) DEFAULT '', 
-    picture VARCHAR(2000) DEFAULT '', 
-    picture2 VARCHAR(2000) DEFAULT '', 
-    picture3 VARCHAR(2000) DEFAULT '',
-    price Float Default 0,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    is_active BOOLEAN DEFAULT FALSE, 
-    is_in_stock BOOLEAN DEFAULT FALSE
+CREATE TABLE IF NOT EXISTS "product_shop" (
+    "id" CHAR(36) PRIMARY KEY,
+    "name" VARCHAR(200) DEFAULT '', 
+    "description" VARCHAR(2000) DEFAULT '', 
+    "picture" VARCHAR(2000) DEFAULT '', 
+    "picture2" VARCHAR(2000) DEFAULT '', 
+    "picture3" VARCHAR(2000) DEFAULT '',
+    "price" Float Default 0,
+    "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "is_active" BOOLEAN DEFAULT FALSE, 
+    "is_in_stock" BOOLEAN DEFAULT FALSE,
+    PRIMARY KEY("id")
 );
