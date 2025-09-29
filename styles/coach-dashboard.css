@@ -1,0 +1,328 @@
+/* Coach Dashboard Extension - S'ajoute à main.css sans rien modifier */
+
+/* Extension du grid existant pour le dashboard */
+.coaches-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+/* Extension de .coach-card pour le dashboard */
+.coach-dashboard-card {
+  background: rgba(255, 255, 255, .05);
+  border-radius: 20px;
+  padding: 0;
+  backdrop-filter: blur(15px);
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, .1);
+  overflow: hidden;
+}
+
+.coach-dashboard-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, .08);
+  border-color: rgba(255, 255, 255, .2);
+}
+
+/* Image du coach - réutilise le style de .coach-image */
+.coach-card-image {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  position: relative;
+}
+
+.coach-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.coach-dashboard-card:hover .coach-card-image img {
+  transform: scale(1.05);
+}
+
+/* Badge de rating superposé */
+.coach-rating-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 8px 15px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffd700;
+  z-index: 1;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+/* Info section - hérite du padding des cards existantes */
+.coach-card-info {
+  padding: 25px;
+}
+
+.coach-card-header h3 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  background: var(--gradient-3);
+  text-emphasis-color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.coach-specialty {
+  font-size: 16px;
+  color: rgba(255, 255, 255, .7);
+  margin-bottom: 5px;
+}
+
+.coach-experience {
+  font-size: 14px;
+  color: rgba(255, 255, 255, .5);
+  margin-bottom: 10px;
+}
+
+/* Section des détails */
+.coach-card-details {
+  margin: 20px 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, .1);
+}
+
+.coach-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, .7);
+  line-height: 1.5;
+}
+
+.coach-detail-item:last-child {
+  margin-bottom: 0;
+}
+
+.coach-detail-item .icon {
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+/* Section reviews */
+.coach-reviews-preview {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, .1);
+}
+
+.reviews-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.reviews-header h4 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.reviews-count {
+  font-size: 14px;
+  color: rgba(255, 255, 255, .5);
+}
+
+.review-item {
+  background: rgba(255, 255, 255, .03);
+  padding: 12px;
+  border-radius: var(--radius);
+  margin-bottom: 10px;
+  border-left: 2px solid rgba(255, 255, 255, .1);
+}
+
+.review-item:last-child {
+  margin-bottom: 0;
+}
+
+.review-rating {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 6px;
+  color: #ffd700;
+  font-size: 12px;
+}
+
+.review-text {
+  font-size: 14px;
+  color: rgba(255, 255, 255, .7);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Bouton d'action - utilise btn-primary existant avec override minimal */
+.coach-card-action {
+  margin-top: 20px;
+}
+
+.btn-select-coach {
+  background: var(--gradient-1);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: var(--transition);
+  width: 100%;
+}
+
+.btn-select-coach:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* États de chargement/erreur */
+.loading-state,
+.error-state,
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.loading-state p,
+.empty-state p {
+  color: rgba(255, 255, 255, .7);
+  font-size: 18px;
+  line-height: 130%;
+}
+
+.error-message {
+  color: #ff6b6b;
+  font-size: 18px;
+  line-height: 130%;
+  margin-bottom: 20px;
+}
+
+/* Spinner avec ton style de gradient */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, .1);
+  border-top-color: var(--color-gradient-1);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Bouton retry avec ton style de bouton secondaire */
+.retry-btn {
+  height: 60px;
+  display: inline-flex;
+  align-items: center;
+  padding-left: 34px;
+  padding-right: 34px;
+  font-size: 18px;
+  line-height: 130%;
+  font-weight: 400;
+  color: rgba(255, 255, 255, .8);
+  border-radius: 10px;
+  position: relative;
+  transition: var(--transition);
+  background: none;
+  border: 1px solid rgba(255, 255, 255, .1);
+  cursor: pointer;
+}
+
+.retry-btn:hover {
+  background: rgba(255, 255, 255, .05);
+  transform: scale(1.05);
+}
+
+/* Animation d'apparition progressive */
+.coach-dashboard-card {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.coach-dashboard-card.animate-in {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive - suit les mêmes breakpoints que main.css */
+@media (max-width: 991.98px) {
+  .coaches-dashboard-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .coaches-dashboard-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  
+  .coach-card-image {
+    height: 220px;
+  }
+  
+  .coach-card-info {
+    padding: 20px;
+  }
+  
+  .coach-card-header h3 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .coaches-dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .coach-card-image {
+    height: 200px;
+  }
+  
+  .coach-card-info {
+    padding: 20px;
+  }
+  
+  .coach-card-header h3 {
+    font-size: 20px;
+  }
+  
+  .coach-detail-item {
+    font-size: 13px;
+  }
+  
+  .review-text {
+    font-size: 13px;
+  }
+}
