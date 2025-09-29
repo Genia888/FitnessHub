@@ -1,8 +1,10 @@
+|               |                                                                        |
+| ------------- | ---------------------------------------------------------------------- |
 | Login page    | to log an user                                                         |
 | Register page | to add a new page                                                      |
 | list of coach | to list the woach for un unconnected user                              |
 | choose coach  | To choose a coach when a user don't have coach an when he is connected |
-| purchase      [ list the product to buy                                                |
+| purchase      | list the product to buy                                                |
 | add workout   | for a coach who want to create work out                                |
 | update workout| to update a workout                                                    |
 | delete workout|                                                                        |
