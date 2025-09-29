@@ -38,6 +38,23 @@ CREATE TABLE IF NOT EXISTS reviews (
     UNIQUE (user_id, coach_id)
 );
 
+-- Create diet
+CREATE TABLE IF NOT EXISTS diet (
+    id CHAR(36) PRIMARY KEY,
+    description TEXT NOT NULL,
+    picture VARCHAR(1000) DEFAULT '',
+    category VARCHAR(36) DEFAULT '',
+    calories FLOAT DEFAULT 0,
+    quantity FLOAT DEFAULT 0,
+    user_id CHAR(36),
+    coach_id CHAR(36),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (coach_id) REFERENCES users(id),
+    UNIQUE (user_id, coach_id)
+);
+
 -- Create subscription
 CREATE TABLE IF NOT EXISTS subscription (
     id CHAR(36) PRIMARY KEY,
