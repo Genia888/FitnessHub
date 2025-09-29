@@ -258,8 +258,8 @@
 
 /* Animation d'apparition progressive */
 .coach-dashboard-card {
-  opacity: 0;
-  transform: translateY(30px);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .coach-dashboard-card.animate-in {
