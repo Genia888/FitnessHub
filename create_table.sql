@@ -53,3 +53,18 @@ CREATE TABLE IF NOT EXISTS subscription (
     FOREIGN KEY (coach_id) REFERENCES users(id),
     UNIQUE (user_id, coach_id)
 );
+
+-- Create product shop
+CREATE TABLE IF NOT EXISTS product_shop (
+    id CHAR(36) PRIMARY KEY,
+    name VARCHAR(200) DEFAULT '', 
+    description VARCHAR(2000) DEFAULT '', 
+    picture VARCHAR(2000) DEFAULT '', 
+    picture2 VARCHAR(2000) DEFAULT '', 
+    picture3 VARCHAR(2000) DEFAULT '',
+    price Float Default 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_active BOOLEAN DEFAULT FALSE, 
+    is_in_stock BOOLEAN DEFAULT FALSE
+);
