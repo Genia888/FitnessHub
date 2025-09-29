@@ -128,7 +128,7 @@ direction TB
       +Float time
     }
 
-    class Nutrition {
+    class Diet {
       +String description
       +String picture
       +String category<Protein,Carbs,Fats,...>
@@ -184,8 +184,8 @@ direction TB
     Workouts <-- Workouts_schedule
     User <-- Workouts_schedule
     Coach <-- Workouts
-    Coach <-- Nutrition
-    User <-- Nutrition
+    Coach <-- Diet
+    User <-- Diet
     Personne <|-- Admin
     Personne <|-- User
     Personne <|-- Coach
