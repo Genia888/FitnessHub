@@ -121,7 +121,7 @@ direction TB
       +Float size
     }
 
-    class Workouts {
+    class Workout {
       +String description
       +String picture
       +String category<Arms,Legs,Back,...>
@@ -136,7 +136,7 @@ direction TB
       +Float quantity
     }
 
-    class Workouts_schedule {
+    class Workout_schedule {
       +Date date_workout
       +String comment
     }
@@ -159,7 +159,7 @@ direction TB
 	    +addReview()
     }
 
-    class Reviews {
+    class Review {
 	    +String text
 	    +Integer rating
     }
@@ -188,15 +188,15 @@ direction TB
     %% Relations
 	Nutrition <-- Nutrition_schedule
     Customer <-- Nutrition_schedule
-    Workouts <-- Workouts_schedule
-    Customer <-- Workouts_schedule
-    Coach <-- Workouts
+    Workout <-- Workout_schedule
+    Customer <-- Workout_schedule
+    Coach <-- Workout
     Coach <-- Nutrition
     User <|-- Admin
     User <|-- Customer
     User <|-- Coach
-    Coach <-- Reviews
-    Customer <-- Reviews
+    Coach <-- Review
+    Customer <-- Review
     Coach <-- Subscription
     Customer <-- Subscription
     Coach <-- Message
