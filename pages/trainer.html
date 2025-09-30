@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Espace Coach - FitnessHub</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/trainer.css">
+  <script src="../vendor/gsap/gsap.min.js" defer></script>
+  <script src="../vendor/gsap/ScrollTrigger.min.js" defer></script>
+  <script src="../vendor/lenis/lenis.min.js" defer></script>
+  <script src="../scripts/app.js" defer></script>
+</head>
+<body>
+  <div class="pattern"></div>
+  
+  <div class="gradient-bg">
+    <div class="gradients-container">
+      <div class="g1"></div>
+      <div class="g2"></div>
+      <div class="g3"></div>
+      <div class="interactive"></div>
+    </div>
+  </div>
+
+  <header class="header-top">
+    <div class="top-line">
+      <div class="top-line__left">
+        <a href="../index.html" class="logo">
+          <img src="../assets/images/FitnessHub.svg" alt="FitnessHub">
+        </a>
+      </div>
+
+      <div class="top-line__center">
+        <nav class="top-mnu">
+          <ul>
+            <li><a href="trainer.html" data-text="Espace Coach">Espace Coach</a></li>
+            <li><a href="coach.html" data-text="Mes Clients">Mes Clients</a></li>
+            <li><a href="#" data-text="Paramètres">Paramètres</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="top-line__right">
+        <div class="mnu-button">
+          <button class="mnu-button__menu">
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+        <div class="main-menu-background"></div>
+        <div class="main-menu">
+          <nav class="main-menu__inner">
+            <ul>
+              <li><a href="trainer.html" data-text="Espace Coach">Espace Coach<span></span></a></li>
+              <li><a href="coach.html" data-text="Mes Clients">Mes Clients<span></span></a></li>
+              <li><a href="#" data-text="Paramètres">Paramètres<span></span></a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="page-content">
+      <div class="section-head">
+        <h2>Espace Coach</h2>
+        <div class="section-head__right">
+          <button class="btn-secondary">
+            <span data-text="Déconnexion">Déconnexion</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Section Client Profile -->
+      <div class="trainer-dashboard">
+        <div class="client-profile-card">
+          <div class="client-image">
+            <img src="../public/images/ready/client1.jpg" alt="Client Profile">
+          </div>
+          <div class="client-info">
+            <h3>Hedjouj Reziga</h3>
+            <p class="client-goal">Objectif : Summer body</p>
+            <p class="client-stats">80kg • 1m70 • 29 ans</p>
+            <p class="client-progress">Progrès : -5kg en 2 mois</p>
+          </div>
+        </div>
+
+        <!-- Planning Section -->
+        <div class="trainer-grid">
+          <!-- Exercices Planning -->
+          <div class="planning-card">
+            <h3>Planning Exercices</h3>
+            <div class="exercise-list">
+              <div class="exercise-item">
+                <span class="exercise-name">Squats</span>
+                <span class="exercise-details">3x15 répétitions</span>
+              </div>
+              <div class="exercise-item">
+                <span class="exercise-name">Pompes</span>
+                <span class="exercise-details">3x10 répétitions</span>
+              </div>
+              <div class="exercise-item">
+                <span class="exercise-name">Planche</span>
+                <span class="exercise-details">3x30 secondes</span>
+              </div>
+              <div class="exercise-item">
+                <span class="exercise-name">Cardio</span>
+                <span class="exercise-details">20 minutes</span>
+              </div>
+            </div>
+            <button class="btn-primary">Modifier le planning</button>
+          </div>
+
+          <!-- Nutrition Planning -->
+          <div class="planning-card">
+            <h3>Planning Nutrition</h3>
+            <div class="nutrition-list">
+              <div class="meal-item">
+                <span class="meal-time">Petit-déjeuner</span>
+                <span class="meal-details">Avoine + Fruits + Yaourt</span>
+              </div>
+              <div class="meal-item">
+                <span class="meal-time">Déjeuner</span>
+                <span class="meal-details">Salade de quinoa + Poulet</span>
+              </div>
+              <div class="meal-item">
+                <span class="meal-time">Collation</span>
+                <span class="meal-details">Amandes + Pomme</span>
+              </div>
+              <div class="meal-item">
+                <span class="meal-time">Dîner</span>
+                <span class="meal-details">Saumon + Légumes vapeur</span>
+              </div>
+            </div>
+            <button class="btn-primary">Modifier le régime</button>
+          </div>
+
+          <!-- Calendar -->
+          <div class="calendar-card">
+            <h3>Calendrier de la semaine</h3>
+            <div class="calendar-grid">
+              <div class="calendar-day">
+                <span class="day-name">Lun</span>
+                <span class="day-number">15</span>
+                <div class="day-exercises">
+                  <span>Haut du corps</span>
+                </div>
+              </div>
+              <div class="calendar-day active">
+                <span class="day-name">Mar</span>
+                <span class="day-number">16</span>
+                <div class="day-exercises">
+                  <span>Cardio</span>
+                </div>
+              </div>
+              <div class="calendar-day">
+                <span class="day-name">Mer</span>
+                <span class="day-number">17</span>
+                <div class="day-exercises">
+                  <span>Repos</span>
+                </div>
+              </div>
+              <div class="calendar-day">
+                <span class="day-name">Jeu</span>
+                <span class="day-number">18</span>
+                <div class="day-exercises">
+                  <span>Bas du corps</span>
+                </div>
+              </div>
+              <div class="calendar-day">
+                <span class="day-name">Ven</span>
+                <span class="day-number">19</span>
+                <div class="day-exercises">
+                  <span>Full body</span>
+                </div>
+              </div>
+              <div class="calendar-day">
+                <span class="day-name">Sam</span>
+                <span class="day-number">20</span>
+                <div class="day-exercises">
+                  <span>Yoga</span>
+                </div>
+              </div>
+              <div class="calendar-day">
+                <span class="day-name">Dim</span>
+                <span class="day-number">21</span>
+                <div class="day-exercises">
+                  <span>Repos</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Section -->
+          <div class="chat-card">
+            <h3>Chat avec Hedjouj</h3>
+            <div class="chat-messages">
+              <div class="message client-message">
+                <span class="message-time">10:30</span>
+                <p>Salut coach ! J'ai terminé ma séance d'hier 💪</p>
+              </div>
+              <div class="message coach-message">
+                <span class="message-time">10:45</span>
+                <p>Parfait Hedjouj ! Comment t'es-tu sentie pendant les squats ?</p>
+              </div>
+              <div class="message client-message">
+                <span class="message-time">11:00</span>
+                <p>Ça va mieux qu'avant, je sens que je progresse !</p>
+              </div>
+            </div>
+            <div class="chat-input">
+              <input type="text" placeholder="Tapez votre message...">
+              <button class="btn-primary">Envoyer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
