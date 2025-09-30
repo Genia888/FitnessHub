@@ -128,7 +128,7 @@ direction TB
       +Float time
     }
 
-    class Diet {
+    class Nutrition {
       +String description
       +String picture
       +String category<Protein,Carbs,Fats,...>
@@ -138,6 +138,11 @@ direction TB
 
     class Workouts_schedule {
       +Date date_workout
+      +String comment
+    }
+
+    class Nutrition_schedule {
+      +Date date_nutrition
       +String comment
     }
 
@@ -181,11 +186,12 @@ direction TB
     }
 
     %% Relations
+	Nutrition <-- Nutrition_schedule
+    Customer <-- Nutrition_schedule
     Workouts <-- Workouts_schedule
     Customer <-- Workouts_schedule
     Coach <-- Workouts
-    Coach <-- Diet
-    Customer <-- Diet
+    Coach <-- Nutrition
     User <|-- Admin
     User <|-- Customer
     User <|-- Coach
