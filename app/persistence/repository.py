@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from app.extensions import db
 from app.models.user import User
 from app.models.review import Review
+from app.models.diet import Diet
 from sqlalchemy import and_ 
 from sqlalchemy.sql.expression import false
 
@@ -126,3 +127,7 @@ class UserRepository(BaseRepository):
 class ReviewRepository(BaseRepository):
     def __init__(self):
         super().__init__(Review)
+
+class DietRepository(BaseRepository):
+    def __init__(self):
+        super().__init__(Diet)

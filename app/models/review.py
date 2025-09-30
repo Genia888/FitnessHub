@@ -4,13 +4,13 @@ from app import db
 from sqlalchemy.orm import validates
 
 class Review(BaseModel):
-    __tablename__ = 'reviews'
+    __tablename__ = 'Reviews'
 
     text = db.Column(db.String(500), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
-    user_id = db.Column(db.String(36), db.ForeignKey('users.id'),
+    user_id = db.Column(db.String(36), db.ForeignKey('User.id'),
                         nullable=False)
-    coach_id = db.Column(db.String(36), db.ForeignKey('users.id'),
+    coach_id = db.Column(db.String(36), db.ForeignKey('User.id'),
                          nullable=False)
 
 

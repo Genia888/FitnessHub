@@ -7,7 +7,7 @@ from app.models import user
 from app.models.base_model import BaseModel
 
 class User(BaseModel):
-    __tablename__ = 'users'  # Use plural for consistency
+    __tablename__ = 'User'  # Use plural for consistency
 
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
