@@ -169,12 +169,12 @@ direction TB
 
     class Subscription {
 	    +Date date
-	    +Boolean OptionDiet
-	    +Boolean OptionMessage
+	    +Boolean option_diet
+	    +Boolean option_message
     }
 
     class Message {
-	    +DateTime dateMessage
+	    +DateTime date_message
 	    +Boolean is_read
 	    +String text
     }
