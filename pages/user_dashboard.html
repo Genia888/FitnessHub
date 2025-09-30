@@ -74,30 +74,32 @@
 
       <!-- Section User & Coach Profile -->
       <div class="trainer-dashboard">
-        <!-- User Profile Card -->
-        <div class="client-profile-card">
-          <div class="client-image">
-            <img src="../public/images/ready/client1.jpg" alt="My Profile">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 30px;">
+          <!-- User Profile Card -->
+          <div class="client-profile-card" style="margin-bottom: 0;">
+            <div class="client-image">
+              <img src="../public/images/ready/client1.jpg" alt="My Profile">
+            </div>
+            <div class="client-info">
+              <h3>Hedjouj Reziga</h3>
+              <p class="client-goal">Goal: Summer body</p>
+              <p class="client-stats">80kg • 1m70 • 29 years old</p>
+              <p class="client-progress">Progress: -5kg in 2 months</p>
+            </div>
           </div>
-          <div class="client-info">
-            <h3>Hedjouj Reziga</h3>
-            <p class="client-goal">Goal: Summer body</p>
-            <p class="client-stats">80kg • 1m70 • 29 years old</p>
-            <p class="client-progress">Progress: -5kg in 2 months</p>
-          </div>
-        </div>
 
-        <!-- Coach Profile Card -->
-        <div class="client-profile-card" style="margin-top: 20px;">
-          <div class="client-image">
-            <img src="../public/images/ready/coach1.jpg" alt="Coach Elhadj">
-          </div>
-          <div class="client-info">
-            <h3>Elhadj Reziga</h3>
-            <p class="client-goal">Your Coach</p>
-            <p class="client-stats">Fitness & Nutrition Specialist</p>
-            <p class="client-progress">5 years of experience</p>
-            <div class="rating" style="margin-top: 10px;">⭐⭐⭐⭐⭐ 4.9/5</div>
+          <!-- Coach Profile Card -->
+          <div class="client-profile-card" style="margin-bottom: 0;">
+            <div class="client-image" style="width: 80px; height: 80px; flex-shrink: 0;">
+              <img src="../public/images/ready/coach1.jpg" alt="Coach Elhadj">
+            </div>
+            <div class="client-info">
+              <h3 style="font-size: 22px;">Elhadj Reziga</h3>
+              <p class="client-goal">Your Coach</p>
+              <p class="client-stats">Fitness & Nutrition Specialist</p>
+              <p class="client-progress">5 years of experience</p>
+              <div class="rating" style="margin-top: 8px; font-size: 13px;">⭐⭐⭐⭐⭐ 4.9/5</div>
+            </div>
           </div>
         </div>
 
