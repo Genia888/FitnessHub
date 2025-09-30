@@ -121,27 +121,21 @@ direction TB
       +Float size
     }
 
-    class Workout {
+    class Workout_schedule {
       +String description
       +String picture
       +String category<Arms,Legs,Back,...>
       +Float time
-    }
-
-    class Nutrition {
-      +String description
-      +String picture
-      +String category<Protein,Carbs,Fats,...>
-      +Float calories
-      +Float quantity
-    }
-
-    class Workout_schedule {
       +Date date_workout
       +String comment
     }
 
     class Nutrition_schedule {
+      +String description
+      +String picture
+      +String category<Protein,Carbs,Fats,...>
+      +Float calories
+      +Float quantity
       +Date date_nutrition
       +String comment
     }
@@ -186,12 +180,10 @@ direction TB
     }
 
     %% Relations
-	Nutrition <-- Nutrition_schedule
+	Coach <-- Nutrition_schedule
     Customer <-- Nutrition_schedule
-    Workout <-- Workout_schedule
+    Coach <-- Workout_schedule
     Customer <-- Workout_schedule
-    Coach <-- Workout
-    Coach <-- Nutrition
     User <|-- Customer
     User <|-- Coach
     User <|-- Admin
