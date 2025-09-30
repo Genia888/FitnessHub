@@ -174,7 +174,7 @@ direction TB
     }
 
     class Message {
-	    +Date dateStar
+	    +DateTime dateMessage
 	    +Boolean is_read
 	    +String text
     }
