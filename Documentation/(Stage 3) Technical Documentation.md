@@ -192,9 +192,9 @@ direction TB
     Customer <-- Workout_schedule
     Coach <-- Workout
     Coach <-- Nutrition
-    User <|-- Admin
     User <|-- Customer
     User <|-- Coach
+    User <|-- Admin
     Coach <-- Review
     Customer <-- Review
     Coach <-- Subscription
