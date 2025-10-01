@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Space - FitnessHub</title>
+  <title>Mon Espace - FitnessHub</title>
   <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/trainer.css">
   <script src="../vendor/gsap/gsap.min.js" defer></script>
   <script src="../vendor/gsap/ScrollTrigger.min.js" defer></script>
   <script src="../vendor/lenis/lenis.min.js" defer></script>
@@ -33,9 +34,9 @@
       <div class="top-line__center">
         <nav class="top-mnu">
           <ul>
-            <li><a href="user.html" data-text="My Space">My Space</a></li>
-            <li><a href="abonnement.html" data-text="My Subscription">My Subscription</a></li>
-            <li><a href="boutique.html" data-text="Shop">Shop</a></li>
+            <li><a href="user_dashboard.html" data-text="Mon Espace">Mon Espace</a></li>
+            <li><a href="abonnement.html" data-text="Mon Abonnement">Mon Abonnement</a></li>
+            <li><a href="boutique.html" data-text="Boutique">Boutique</a></li>
           </ul>
         </nav>
       </div>
@@ -51,9 +52,9 @@
         <div class="main-menu">
           <nav class="main-menu__inner">
             <ul>
-              <li><a href="user.html" data-text="My Space">My Space<span></span></a></li>
-              <li><a href="abonnement.html" data-text="My Subscription">My Subscription<span></span></a></li>
-              <li><a href="boutique.html" data-text="Shop">Shop<span></span></a></li>
+              <li><a href="user_dashboard.html" data-text="Mon Espace">Mon Espace<span></span></a></li>
+              <li><a href="abonnement.html" data-text="Mon Abonnement">Mon Abonnement<span></span></a></li>
+              <li><a href="boutique.html" data-text="Boutique">Boutique<span></span></a></li>
             </ul>
           </nav>
         </div>
@@ -64,41 +65,42 @@
   <div class="container">
     <section class="page-content">
       <div class="section-head">
-        <h2>My Space</h2>
+        <h2>Mon Espace</h2>
         <div class="section-head__right">
           <button class="btn-secondary">
-            <span data-text="Logout">Logout</span>
+            <span data-text="Déconnexion">Déconnexion</span>
           </button>
         </div>
       </div>
 
       <!-- Section User & Coach Profile -->
       <div class="trainer-dashboard">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 30px;">
+        <!-- Grid de profils -->
+        <div class="profiles-grid">
           <!-- User Profile Card -->
-          <div class="client-profile-card" style="margin-bottom: 0;">
+          <div class="client-profile-card">
             <div class="client-image">
-              <img src="../public/images/ready/client1.jpg" alt="My Profile">
+              <img src="../public/images/ready/client1.jpg" alt="Mon Profil">
             </div>
             <div class="client-info">
               <h3>Hedjouj Reziga</h3>
-              <p class="client-goal">Goal: Summer body</p>
-              <p class="client-stats">80kg • 1m70 • 29 years old</p>
-              <p class="client-progress">Progress: -5kg in 2 months</p>
+              <p class="client-goal">Objectif : Summer body</p>
+              <p class="client-stats">80kg • 1m70 • 29 ans</p>
+              <p class="client-progress">Progrès : -5kg en 2 mois</p>
             </div>
           </div>
 
           <!-- Coach Profile Card -->
-          <div class="client-profile-card" style="margin-bottom: 0;">
-            <div class="client-image" style="width: 80px; height: 80px; flex-shrink: 0;">
+          <div class="client-profile-card">
+            <div class="client-image">
               <img src="../public/images/ready/coach1.jpg" alt="Coach Elhadj">
             </div>
             <div class="client-info">
-              <h3 style="font-size: 22px;">Elhadj Reziga</h3>
-              <p class="client-goal">Your Coach</p>
-              <p class="client-stats">Fitness & Nutrition Specialist</p>
-              <p class="client-progress">5 years of experience</p>
-              <div class="rating" style="margin-top: 8px; font-size: 13px;">⭐⭐⭐⭐⭐ 4.9/5</div>
+              <h3>Elhadj Reziga</h3>
+              <p class="client-goal">Votre Coach</p>
+              <p class="client-stats">Spécialiste Fitness & Nutrition</p>
+              <p class="client-progress">5 ans d'expérience</p>
+              <div class="rating" style="margin-top: 8px; font-size: 13px; color: #ffd700;">⭐⭐⭐⭐⭐ 4.9/5</div>
             </div>
           </div>
         </div>
@@ -107,103 +109,103 @@
         <div class="trainer-grid">
           <!-- Exercices Planning -->
           <div class="planning-card">
-            <h3>My Training Program</h3>
+            <h3>Mon Programme d'Entraînement</h3>
             <div class="exercise-list">
               <div class="exercise-item">
                 <span class="exercise-name">Squats</span>
-                <span class="exercise-details">3x15 reps</span>
+                <span class="exercise-details">3x15 répétitions</span>
               </div>
               <div class="exercise-item">
-                <span class="exercise-name">Push-ups</span>
-                <span class="exercise-details">3x10 reps</span>
+                <span class="exercise-name">Pompes</span>
+                <span class="exercise-details">3x10 répétitions</span>
               </div>
               <div class="exercise-item">
-                <span class="exercise-name">Plank</span>
-                <span class="exercise-details">3x30 seconds</span>
+                <span class="exercise-name">Planche</span>
+                <span class="exercise-details">3x30 secondes</span>
               </div>
               <div class="exercise-item">
                 <span class="exercise-name">Cardio</span>
                 <span class="exercise-details">20 minutes</span>
               </div>
             </div>
-            <button class="btn-primary">Mark as completed</button>
+            <button class="btn-primary">Marquer comme terminé</button>
           </div>
 
           <!-- Nutrition Planning -->
           <div class="planning-card">
-            <h3>My Nutrition Plan</h3>
+            <h3>Mon Plan Nutrition</h3>
             <div class="nutrition-list">
               <div class="meal-item">
-                <span class="meal-time">Breakfast</span>
-                <span class="meal-details">Oats + Fruits + Yogurt</span>
+                <span class="meal-time">Petit-déjeuner</span>
+                <span class="meal-details">Avoine + Fruits + Yaourt</span>
               </div>
               <div class="meal-item">
-                <span class="meal-time">Lunch</span>
-                <span class="meal-details">Quinoa salad + Chicken</span>
+                <span class="meal-time">Déjeuner</span>
+                <span class="meal-details">Salade de quinoa + Poulet</span>
               </div>
               <div class="meal-item">
-                <span class="meal-time">Snack</span>
-                <span class="meal-details">Almonds + Apple</span>
+                <span class="meal-time">Collation</span>
+                <span class="meal-details">Amandes + Pomme</span>
               </div>
               <div class="meal-item">
-                <span class="meal-time">Dinner</span>
-                <span class="meal-details">Salmon + Steamed vegetables</span>
+                <span class="meal-time">Dîner</span>
+                <span class="meal-details">Saumon + Légumes vapeur</span>
               </div>
             </div>
-            <button class="btn-primary">View details</button>
+            <button class="btn-primary">Voir les détails</button>
           </div>
 
           <!-- Calendar -->
           <div class="calendar-card">
-            <h3>My Weekly Calendar</h3>
+            <h3>Mon Calendrier Hebdomadaire</h3>
             <div class="calendar-grid">
               <div class="calendar-day">
-                <span class="day-name">Mon</span>
+                <span class="day-name">Lun</span>
                 <span class="day-number">15</span>
                 <div class="day-exercises">
-                  <span>Upper body</span>
+                  <span>Haut du corps</span>
                 </div>
               </div>
               <div class="calendar-day active">
-                <span class="day-name">Tue</span>
+                <span class="day-name">Mar</span>
                 <span class="day-number">16</span>
                 <div class="day-exercises">
                   <span>Cardio</span>
                 </div>
               </div>
               <div class="calendar-day">
-                <span class="day-name">Wed</span>
+                <span class="day-name">Mer</span>
                 <span class="day-number">17</span>
                 <div class="day-exercises">
-                  <span>Rest</span>
+                  <span>Repos</span>
                 </div>
               </div>
               <div class="calendar-day">
-                <span class="day-name">Thu</span>
+                <span class="day-name">Jeu</span>
                 <span class="day-number">18</span>
                 <div class="day-exercises">
-                  <span>Lower body</span>
+                  <span>Bas du corps</span>
                 </div>
               </div>
               <div class="calendar-day">
-                <span class="day-name">Fri</span>
+                <span class="day-name">Ven</span>
                 <span class="day-number">19</span>
                 <div class="day-exercises">
                   <span>Full body</span>
                 </div>
               </div>
               <div class="calendar-day">
-                <span class="day-name">Sat</span>
+                <span class="day-name">Sam</span>
                 <span class="day-number">20</span>
                 <div class="day-exercises">
                   <span>Yoga</span>
                 </div>
               </div>
               <div class="calendar-day">
-                <span class="day-name">Sun</span>
+                <span class="day-name">Dim</span>
                 <span class="day-number">21</span>
                 <div class="day-exercises">
-                  <span>Rest</span>
+                  <span>Repos</span>
                 </div>
               </div>
             </div>
@@ -211,28 +213,28 @@
 
           <!-- Chat Section -->
           <div class="chat-card">
-            <h3>Chat with my Coach</h3>
+            <h3>Chat avec mon Coach</h3>
             <div class="chat-messages">
               <div class="message coach-message">
                 <span class="message-time">10:15</span>
-                <p>Hello Hedjouj! Ready for today's session? 💪</p>
+                <p>Salut Hedjouj ! Prêt pour la séance d'aujourd'hui ? 💪</p>
               </div>
               <div class="message client-message">
                 <span class="message-time">10:30</span>
-                <p>Hi coach! I finished yesterday's workout 💪</p>
+                <p>Salut coach ! J'ai terminé ma séance d'hier 💪</p>
               </div>
               <div class="message coach-message">
                 <span class="message-time">10:45</span>
-                <p>Perfect Hedjouj! How did you feel during the squats?</p>
+                <p>Parfait Hedjouj ! Comment t'es-tu senti pendant les squats ?</p>
               </div>
               <div class="message client-message">
                 <span class="message-time">11:00</span>
-                <p>Better than before, I can feel I'm making progress!</p>
+                <p>Ça va mieux qu'avant, je sens que je progresse !</p>
               </div>
             </div>
             <div class="chat-input">
-              <input type="text" placeholder="Type your message...">
-              <button class="btn-primary">Send</button>
+              <input type="text" placeholder="Tapez votre message...">
+              <button class="btn-primary">Envoyer</button>
             </div>
           </div>
         </div>
