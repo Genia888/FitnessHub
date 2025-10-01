@@ -4,6 +4,7 @@ from app.models.user import User
 from app.models.review import Review
 from app.models.message import Message
 from app.models.nutrition_schedule import Nutrition
+from app.models.workout_schedule import Workout
 from sqlalchemy import and_ 
 from sqlalchemy.sql.expression import false
 
@@ -136,3 +137,7 @@ class MessageRepository(BaseRepository):
 class NutritionRepository(BaseRepository):
     def __init__(self):
         super().__init__(Nutrition)
+
+class WorkoutRepository(BaseRepository):
+    def __init__(self):
+        super().__init__(Workout)

@@ -7,6 +7,7 @@ from app.api.v1.user import api as user_ns
 from app.api.v1.review import api as review_ns
 from app.api.v1.message import api as message_ns
 from app.api.v1.nutrition_schedule import api as nutrition_ns
+from app.api.v1.workout_schedule import api as workout_ns
 from app.api.v1.auth import api as auth_ns
 from app.extension_bcrypt import bcrypt
 from flask_cors import CORS
@@ -42,6 +43,7 @@ def create_app(config_name='default'):
     api.add_namespace(review_ns, path='/api/v1/review')
     api.add_namespace(message_ns, path='/api/v1/message')
     api.add_namespace(nutrition_ns, path='/api/v1/nutrition')
+    api.add_namespace(workout_ns, path='/api/v1/workout')
     api.add_namespace(auth_ns, path='/api/v1/auth')
 
     return app

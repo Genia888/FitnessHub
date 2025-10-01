@@ -2,13 +2,15 @@ from app.models.user import User
 from app.models.review import Review
 from app.models.message import Message
 from app.models.nutrition_schedule import Nutrition
-from app.persistence.repository import UserRepository, MessageRepository, NutritionRepository, ReviewRepository
+from app.models.workout_schedule import Workout
+from app.persistence.repository import UserRepository, MessageRepository, NutritionRepository, ReviewRepository, WorkoutRepository
 
 class HBnBFacade:
     def __init__(self):
         self.user_repo = UserRepository()
         self.review_repo = ReviewRepository()
         self.nutrition_repo = NutritionRepository()
+        self.workout_repo = WorkoutRepository()
         self.message_repo = MessageRepository()
 
     # Placeholder method for creating a user
@@ -163,7 +165,47 @@ class HBnBFacade:
 
 
 
-    # nutrition Facade
+    # workout Facade
+    def create_workout(self, workout_data):
+        """Create a new workout."""
+        user = self.get_user(workout_data['user_id'])
+        if not user:
+            raise ValueError("User not found.")
+        coach = self.get_user(workout_data['coach_id'])
+        if not coach:
+            raise ValueError("Coach not found.")
+        workout = workout(workout_data['text'], workout_data['rating'], workout_data['user_id'], workout_data['coach_id'])
+        self.workout_repo.add(workout)
+        return workout      
+
+
+    def get_workout(self, workout_id):
+        workout = self.workout_repo.get(workout_id)
+        if not workout:
+            raise ValueError("workout not found")
+        return workout
+
+    def get_all_workout_schedule(self):
+        return self.workout_repo.get_all()
+
+    def update_workout(self, workout_id, workout_update):
+        workout = self.review_repo.get(workout_id)
+        if not workout:
+            raise ValueError("workout not found")
+        for key, value in workout_update.items():
+            if hasattr(workout, key):
+                setattr(workout, key, value)
+        self.workout_repo.update(workout_id, workout.__dict__)
+        return workout
+
+    def delete_workout(self, workout_id):
+        workout = self.workout_repo.get(workout_id)
+        if not workout:
+            raise ValueError("workout not found")
+        self.workout_repo.delete(workout_id)
+        return {'message': 'workout deleted succesessfully'}
+
+    # workout Facade
     def create_nutrition(self, nutrition_data):
         """Create a new nutrition."""
         user = self.get_user(nutrition_data['user_id'])
@@ -202,7 +244,6 @@ class HBnBFacade:
             raise ValueError("nutrition not found")
         self.nutrition_repo.delete(nutrition_id)
         return {'message': 'nutrition deleted succesessfully'}
-
 
 # Instance globale
 facade = HBnBFacade()

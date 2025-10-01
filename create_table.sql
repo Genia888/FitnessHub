@@ -49,8 +49,8 @@ CREATE TABLE IF NOT EXISTS "Review" (
 -- Create subscription
 CREATE TABLE IF NOT EXISTS "Subscription" (
     "id" CHAR(36) PRIMARY KEY,
-    "begin_date" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    "end_date" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "begin_date" DATE DEFAULT NULL,
+    "end_date" DATE DEFAULT NULL,
     "option_nutrition" BOOLEAN DEFAULT FALSE, 
     "option_message" BOOLEAN DEFAULT FALSE, 
     "user_id" CHAR(36),
