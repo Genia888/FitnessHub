@@ -6,9 +6,10 @@ api = Namespace('subscription', description='Subscription operations')
 
 # Define the review model for input validation and documentation
 message_model = api.model('Subscription', {
-    'date_message': fields.DateTime(required=True, description='Date of the message'),
-    'text': fields.String(required=True, description='Text of the coach'),
-    'is_read': fields.Boolean(required=True, description='Message read T/F'),
+    'begin_date': fields.Date(required=True, description='Date of the subscription'),
+    'end_date': fields.Date(required=True, description='End of the subscription'),
+    'option_nutrition': fields.Boolean(required=True, description='Nutrition T/F'),
+    'option_message': fields.Boolean(required=True, description='Message T/F'),
     'user_id': fields.String(required=True, description='ID of the user'),
     'coach_id': fields.String(required=True, description='ID of the coach')
 })
@@ -35,9 +36,10 @@ class messageList(Resource):
 
             return {
                 'id': new_message.id,
-                'text': new_message.text,
-                'date_message': new_message.date_message,
-                'is_read': new_message.is_read,
+                'begin_date': new_message.begin_date,
+                'end_date': new_message.end_date,
+                'option_nutrition': new_message.option_nutrition,
+                'option_message': new_message.option_message,
                 'user_id': new_message.user_id,
                 'coach_id': new_message.coach_id
             }, 201
@@ -51,9 +53,10 @@ class messageList(Resource):
         return [
             {
                 'id': message.id,
-                'text': message.text,
-                'date_message': message.date_message,
-                'is_read': message.is_read,
+                'begin_date': new_message.begin_date,
+                'end_date': new_message.end_date,
+                'option_nutrition': new_message.option_nutrition,
+                'option_message': new_message.option_message,
                 'user_id': message.user_id,
                 'coach_id': message.coach_id
             }
@@ -74,9 +77,10 @@ class MessageResource(Resource):
 
             return {
                 'id': message.id,
-                'text': message.text,
-                'date_message': message.date_message,
-                'is_read': message.is_read,
+                'begin_date': new_message.begin_date,
+                'end_date': new_message.end_date,
+                'option_nutrition': new_message.option_nutrition,
+                'option_message': new_message.option_message,
                 'user_id': message.user_id,
                 'coach_id': message.coach_id
             }, 200
