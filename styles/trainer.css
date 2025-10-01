@@ -1,0 +1,613 @@
+/* Trainer Dashboard & User Dashboard Styles */
+.container {
+  position: relative;
+  z-index: 10;
+}
+
+.page-content {
+  position: relative;
+  z-index: 10;
+  padding-bottom: 60px;
+}
+
+/* Dashboard principal */
+.trainer-dashboard {
+  position: relative;
+  z-index: 10;
+}
+
+/* Profil Card */
+.client-profile-card {
+  background: rgba(255, 255, 255, .05);
+  border-radius: 20px;
+  padding: 25px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, .1);
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  margin-bottom: 30px;
+  transition: var(--transition);
+}
+
+.client-profile-card:hover {
+  background: rgba(255, 255, 255, .08);
+  transform: translateY(-2px);
+}
+
+.client-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 15px;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.client-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.client-info {
+  flex: 1;
+}
+
+.client-info h3 {
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  background: var(--gradient-3);
+  text-emphasis-color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.client-goal {
+  font-size: 16px;
+  color: rgba(255, 255, 255, .8);
+  margin-bottom: 6px;
+}
+
+.client-stats {
+  font-size: 15px;
+  color: rgba(255, 255, 255, .6);
+  margin-bottom: 6px;
+}
+
+.client-progress {
+  font-size: 14px;
+  color: #4CAF50;
+  font-weight: 500;
+}
+
+/* Grid de profils (pour user dashboard) */
+.profiles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+/* Grid principal du trainer */
+.trainer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+/* Cards communes */
+.planning-card,
+.calendar-card,
+.chat-card {
+  background: rgba(255, 255, 255, .05);
+  border-radius: 20px;
+  padding: 25px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, .1);
+  transition: var(--transition);
+}
+
+.planning-card:hover,
+.calendar-card:hover,
+.chat-card:hover {
+  background: rgba(255, 255, 255, .08);
+}
+
+.planning-card h3,
+.calendar-card h3,
+.chat-card h3 {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  background: var(--gradient-3);
+  text-emphasis-color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Exercise List */
+.exercise-list {
+  margin-bottom: 20px;
+}
+
+.exercise-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+
+.exercise-item:last-child {
+  border-bottom: none;
+}
+
+.exercise-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, .9);
+}
+
+.exercise-details {
+  font-size: 14px;
+  color: rgba(255, 255, 255, .6);
+}
+
+/* Nutrition List */
+.nutrition-list {
+  margin-bottom: 20px;
+}
+
+.meal-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+
+.meal-item:last-child {
+  border-bottom: none;
+}
+
+.meal-time {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, .9);
+}
+
+.meal-details {
+  font-size: 14px;
+  color: rgba(255, 255, 255, .6);
+  text-align: right;
+}
+
+/* Calendar */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.calendar-day {
+  background: rgba(255, 255, 255, .03);
+  border-radius: 10px;
+  padding: 12px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, .05);
+}
+
+.calendar-day:hover {
+  background: rgba(255, 255, 255, .08);
+  border-color: rgba(255, 255, 255, .15);
+}
+
+.calendar-day.active {
+  background: rgba(142, 48, 246, 0.2);
+  border-color: rgba(142, 48, 246, 0.5);
+}
+
+.day-name {
+  display: block;
+  font-size: 12px;
+  color: rgba(255, 255, 255, .6);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.day-number {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, .9);
+  margin-bottom: 6px;
+}
+
+.day-exercises {
+  margin-top: 6px;
+}
+
+.day-exercises span {
+  display: block;
+  font-size: 11px;
+  color: rgba(255, 255, 255, .5);
+  line-height: 1.3;
+}
+
+/* Chat Section */
+.chat-messages {
+  height: 300px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(0, 0, 0, .2);
+  border-radius: 10px;
+}
+
+.message {
+  margin-bottom: 15px;
+  padding: 12px 15px;
+  border-radius: 10px;
+  max-width: 80%;
+  position: relative;
+}
+
+.coach-message {
+  background: rgba(142, 48, 246, 0.2);
+  border: 1px solid rgba(142, 48, 246, 0.3);
+  margin-right: auto;
+}
+
+.client-message {
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .1);
+  margin-left: auto;
+}
+
+.message-time {
+  font-size: 11px;
+  color: rgba(255, 255, 255, .5);
+  display: block;
+  margin-bottom: 5px;
+}
+
+.message p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, .9);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 10px;
+  padding: 12px 15px;
+  color: #fff;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.chat-input input::placeholder {
+  color: rgba(255, 255, 255, .4);
+}
+
+.chat-input input:focus {
+  outline: none;
+  border-color: rgba(142, 48, 246, 0.5);
+  background: rgba(255, 255, 255, .08);
+}
+
+.chat-input button {
+  flex-shrink: 0;
+  width: auto;
+  padding: 12px 24px;
+}
+
+/* Coach Details Page (trainer.html when viewing coach details) */
+.coach-details-hero {
+  background: rgba(255, 255, 255, .05);
+  border-radius: 20px;
+  padding: 40px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, .1);
+  margin-bottom: 30px;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.coach-details-image {
+  width: 250px;
+  height: 350px;
+  border-radius: 15px;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.coach-details-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.coach-details-content {
+  flex: 1;
+}
+
+.coach-details-header {
+  margin-bottom: 20px;
+}
+
+.coach-details-header h2 {
+  font-size: 48px;
+  font-weight: 300;
+  margin-bottom: 10px;
+  background: var(--gradient-3);
+  text-emphasis-color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+
+.coach-specialty-detail {
+  font-size: 20px;
+  color: rgba(255, 255, 255, .8);
+  margin-bottom: 8px;
+}
+
+.coach-experience-detail {
+  font-size: 16px;
+  color: rgba(255, 255, 255, .6);
+  margin-bottom: 15px;
+}
+
+.coach-rating-detail {
+  font-size: 18px;
+  color: #ffd700;
+  margin-bottom: 20px;
+}
+
+.coach-location {
+  font-size: 16px;
+  color: rgba(255, 255, 255, .7);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.coach-bio {
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, .8);
+  margin-bottom: 30px;
+}
+
+.coach-action-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.coach-action-buttons .btn-primary,
+.coach-action-buttons .btn-secondary {
+  width: auto;
+  padding: 15px 35px;
+}
+
+/* Reviews Section */
+.reviews-section {
+  background: rgba(255, 255, 255, .05);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, .1);
+}
+
+.reviews-section h3 {
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  background: var(--gradient-3);
+  text-emphasis-color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.review-item-full {
+  background: rgba(255, 255, 255, .03);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  border-left: 3px solid rgba(142, 48, 246, 0.5);
+}
+
+.review-item-full:last-child {
+  margin-bottom: 0;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.reviewer-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, .9);
+}
+
+.review-date {
+  font-size: 13px;
+  color: rgba(255, 255, 255, .5);
+}
+
+.review-rating-full {
+  font-size: 14px;
+  color: #ffd700;
+  margin-bottom: 10px;
+}
+
+.review-text-full {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, .8);
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+  .trainer-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+  }
+  
+  .profiles-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .coach-details-hero {
+    flex-direction: column;
+    padding: 30px;
+  }
+  
+  .coach-details-image {
+    width: 100%;
+    height: 300px;
+  }
+  
+  .coach-details-header h2 {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .client-profile-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .client-image {
+    margin: 0 auto;
+  }
+  
+  .calendar-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  
+  .calendar-day {
+    padding: 10px 6px;
+  }
+  
+  .day-number {
+    font-size: 16px;
+  }
+  
+  .day-exercises span {
+    font-size: 10px;
+  }
+  
+  .chat-messages {
+    height: 250px;
+  }
+  
+  .message {
+    max-width: 90%;
+  }
+  
+  .coach-details-hero {
+    padding: 25px;
+  }
+  
+  .coach-details-header h2 {
+    font-size: 32px;
+  }
+  
+  .coach-action-buttons {
+    flex-direction: column;
+  }
+  
+  .coach-action-buttons .btn-primary,
+  .coach-action-buttons .btn-secondary {
+    width: 100%;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .trainer-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .client-profile-card {
+    padding: 20px;
+  }
+  
+  .client-info h3 {
+    font-size: 24px;
+  }
+  
+  .planning-card,
+  .calendar-card,
+  .chat-card {
+    padding: 20px;
+  }
+  
+  .calendar-grid {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+  }
+  
+  .calendar-day {
+    padding: 8px 4px;
+  }
+  
+  .day-name {
+    font-size: 10px;
+  }
+  
+  .day-number {
+    font-size: 14px;
+  }
+  
+  .day-exercises span {
+    font-size: 9px;
+  }
+  
+  .chat-input {
+    flex-direction: column;
+  }
+  
+  .chat-input button {
+    width: 100%;
+  }
+  
+  .coach-details-image {
+    height: 250px;
+  }
+  
+  .coach-details-header h2 {
+    font-size: 28px;
+  }
+  
+  .reviews-section {
+    padding: 20px;
+  }
+  
+  .reviews-section h3 {
+    font-size: 24px;
+  }
+}
