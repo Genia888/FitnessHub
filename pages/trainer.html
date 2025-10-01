@@ -1,233 +1,75 @@
-Parfait! Je comprends maintenant la structure complète. Je vais:
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Détails Coach - FitnessHub</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/trainer.css">
+  <script src="../vendor/gsap/gsap.min.js" defer></script>
+  <script src="../vendor/gsap/ScrollTrigger.min.js" defer></script>
+  <script src="../vendor/lenis/lenis.min.js" defer></script>
+  <script src="../scripts/app.js" defer></script>
+  <script src="../scripts/coach-navigation.js" defer></script>
+</head>
+<body>
+  <div class="pattern"></div>
+  
+  <div class="gradient-bg">
+    <div class="gradients-container">
+      <div class="g1"></div>
+      <div class="g2"></div>
+      <div class="g3"></div>
+      <div class="interactive"></div>
+    </div>
+  </div>
 
-1. **Vérifier trainer.html** (la page de détails du coach)
-2. **Créer les liens fonctionnels** entre list-coach.html → trainer.html
-3. **Corriger toutes les incohérences** (langue, styles inline, formats)
-4. **Adapter user_dashboard.html** pour l'utilisateur coaché
+  <header class="header-top">
+    <div class="top-line">
+      <div class="top-line__left">
+        <a href="../index.html" class="logo">
+          <img src="../assets/images/FitnessHub.svg" alt="FitnessHub">
+        </a>
+      </div>
 
-Commençons par analyser trainer.html:
-Action: file_editor view /app/pages/trainer.html
-Observation: /app/pages/trainer.html:
-1|<!DOCTYPE html>
-2|<html lang="fr">
-3|<head>
-4|  <meta charset="UTF-8">
-5|  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-6|  <title>Espace Coach - FitnessHub</title>
-7|  <link rel="stylesheet" href="../styles/main.css">
-8|  <link rel="stylesheet" href="../styles/trainer.css">
-9|  <script src="../vendor/gsap/gsap.min.js" defer></script>
-10|  <script src="../vendor/gsap/ScrollTrigger.min.js" defer></script>
-11|  <script src="../vendor/lenis/lenis.min.js" defer></script>
-12|  <script src="../scripts/app.js" defer></script>
-13|</head>
-14|<body>
-15|  <div class="pattern"></div>
-16|  
-17|  <div class="gradient-bg">
-18|    <div class="gradients-container">
-19|      <div class="g1"></div>
-20|      <div class="g2"></div>
-21|      <div class="g3"></div>
-22|      <div class="interactive"></div>
-23|    </div>
-24|  </div>
-25|
-26|  <header class="header-top">
-27|    <div class="top-line">
-28|      <div class="top-line__left">
-29|        <a href="../index.html" class="logo">
-30|          <img src="../assets/images/FitnessHub.svg" alt="FitnessHub">
-31|        </a>
-32|      </div>
-33|
-34|      <div class="top-line__center">
-35|        <nav class="top-mnu">
-36|          <ul>
-37|            <li><a href="trainer.html" data-text="Espace Coach">Espace Coach</a></li>
-38|            <li><a href="coach.html" data-text="Mes Clients">Mes Clients</a></li>
-39|            <li><a href="#" data-text="Paramètres">Paramètres</a></li>
-40|          </ul>
-41|        </nav>
-42|      </div>
-43|
-44|      <div class="top-line__right">
-45|        <div class="mnu-button">
-46|          <button class="mnu-button__menu">
-47|            <span></span>
-48|            <span></span>
-49|          </button>
-50|        </div>
-51|        <div class="main-menu-background"></div>
-52|        <div class="main-menu">
-53|          <nav class="main-menu__inner">
-54|            <ul>
-55|              <li><a href="trainer.html" data-text="Espace Coach">Espace Coach<span></span></a></li>
-56|              <li><a href="coach.html" data-text="Mes Clients">Mes Clients<span></span></a></li>
-57|              <li><a href="#" data-text="Paramètres">Paramètres<span></span></a></li>
-58|            </ul>
-59|          </nav>
-60|        </div>
-61|      </div>
-62|    </div>
-63|  </header>
-64|
-65|  <div class="container">
-66|    <section class="page-content">
-67|      <div class="section-head">
-68|        <h2>Espace Coach</h2>
-69|        <div class="section-head__right">
-70|          <button class="btn-secondary">
-71|            <span data-text="Déconnexion">Déconnexion</span>
-72|          </button>
-73|        </div>
-74|      </div>
-75|
-76|      <!-- Section Client Profile -->
-77|      <div class="trainer-dashboard">
-78|        <div class="client-profile-card">
-79|          <div class="client-image">
-80|            <img src="../public/images/ready/client1.jpg" alt="Client Profile">
-81|          </div>
-82|          <div class="client-info">
-83|            <h3>Hedjouj Reziga</h3>
-84|            <p class="client-goal">Objectif : Summer body</p>
-85|            <p class="client-stats">80kg • 1m70 • 29 ans</p>
-86|            <p class="client-progress">Progrès : -5kg en 2 mois</p>
-87|          </div>
-88|        </div>
-89|
-90|        <!-- Planning Section -->
-91|        <div class="trainer-grid">
-92|          <!-- Exercices Planning -->
-93|          <div class="planning-card">
-94|            <h3>Planning Exercices</h3>
-95|            <div class="exercise-list">
-96|              <div class="exercise-item">
-97|                <span class="exercise-name">Squats</span>
-98|                <span class="exercise-details">3x15 répétitions</span>
-99|              </div>
-100|              <div class="exercise-item">
-101|                <span class="exercise-name">Pompes</span>
-102|                <span class="exercise-details">3x10 répétitions</span>
-103|              </div>
-104|              <div class="exercise-item">
-105|                <span class="exercise-name">Planche</span>
-106|                <span class="exercise-details">3x30 secondes</span>
-107|              </div>
-108|              <div class="exercise-item">
-109|                <span class="exercise-name">Cardio</span>
-110|                <span class="exercise-details">20 minutes</span>
-111|              </div>
-112|            </div>
-113|            <button class="btn-primary">Modifier le planning</button>
-114|          </div>
-115|
-116|          <!-- Nutrition Planning -->
-117|          <div class="planning-card">
-118|            <h3>Planning Nutrition</h3>
-119|            <div class="nutrition-list">
-120|              <div class="meal-item">
-121|                <span class="meal-time">Petit-déjeuner</span>
-122|                <span class="meal-details">Avoine + Fruits + Yaourt</span>
-123|              </div>
-124|              <div class="meal-item">
-125|                <span class="meal-time">Déjeuner</span>
-126|                <span class="meal-details">Salade de quinoa + Poulet</span>
-127|              </div>
-128|              <div class="meal-item">
-129|                <span class="meal-time">Collation</span>
-130|                <span class="meal-details">Amandes + Pomme</span>
-131|              </div>
-132|              <div class="meal-item">
-133|                <span class="meal-time">Dîner</span>
-134|                <span class="meal-details">Saumon + Légumes vapeur</span>
-135|              </div>
-136|            </div>
-137|            <button class="btn-primary">Modifier le régime</button>
-138|          </div>
-139|
-140|          <!-- Calendar -->
-141|          <div class="calendar-card">
-142|            <h3>Calendrier de la semaine</h3>
-143|            <div class="calendar-grid">
-144|              <div class="calendar-day">
-145|                <span class="day-name">Lun</span>
-146|                <span class="day-number">15</span>
-147|                <div class="day-exercises">
-148|                  <span>Haut du corps</span>
-149|                </div>
-150|              </div>
-151|              <div class="calendar-day active">
-152|                <span class="day-name">Mar</span>
-153|                <span class="day-number">16</span>
-154|                <div class="day-exercises">
-155|                  <span>Cardio</span>
-156|                </div>
-157|              </div>
-158|              <div class="calendar-day">
-159|                <span class="day-name">Mer</span>
-160|                <span class="day-number">17</span>
-161|                <div class="day-exercises">
-162|                  <span>Repos</span>
-163|                </div>
-164|              </div>
-165|              <div class="calendar-day">
-166|                <span class="day-name">Jeu</span>
-167|                <span class="day-number">18</span>
-168|                <div class="day-exercises">
-169|                  <span>Bas du corps</span>
-170|                </div>
-171|              </div>
-172|              <div class="calendar-day">
-173|                <span class="day-name">Ven</span>
-174|                <span class="day-number">19</span>
-175|                <div class="day-exercises">
-176|                  <span>Full body</span>
-177|                </div>
-178|              </div>
-179|              <div class="calendar-day">
-180|                <span class="day-name">Sam</span>
-181|                <span class="day-number">20</span>
-182|                <div class="day-exercises">
-183|                  <span>Yoga</span>
-184|                </div>
-185|              </div>
-186|              <div class="calendar-day">
-187|                <span class="day-name">Dim</span>
-188|                <span class="day-number">21</span>
-189|                <div class="day-exercises">
-190|                  <span>Repos</span>
-191|                </div>
-192|              </div>
-193|            </div>
-194|          </div>
-195|
-196|          <!-- Chat Section -->
-197|          <div class="chat-card">
-198|            <h3>Chat avec Hedjouj</h3>
-199|            <div class="chat-messages">
-200|              <div class="message client-message">
-201|                <span class="message-time">10:30</span>
-202|                <p>Salut coach ! J'ai terminé ma séance d'hier 💪</p>
-203|              </div>
-204|              <div class="message coach-message">
-205|                <span class="message-time">10:45</span>
-206|                <p>Parfait Hedjouj ! Comment t'es-tu sentie pendant les squats ?</p>
-207|              </div>
-208|              <div class="message client-message">
-209|                <span class="message-time">11:00</span>
-210|                <p>Ça va mieux qu'avant, je sens que je progresse !</p>
-211|              </div>
-212|            </div>
-213|            <div class="chat-input">
-214|              <input type="text" placeholder="Tapez votre message...">
-215|              <button class="btn-primary">Envoyer</button>
-216|            </div>
-217|          </div>
-218|        </div>
-219|      </div>
-220|    </section>
-221|  </div>
-222|</body>
-223|</html>
+      <div class="top-line__center">
+        <nav class="top-mnu">
+          <ul>
+            <li><a href="abonnement.html" data-text="Abonnement">Abonnement</a></li>
+            <li><a href="list-coach.html" data-text="Coachs">Coachs</a></li>
+            <li><a href="boutique.html" data-text="Boutique">Boutique</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="top-line__right">
+        <div class="mnu-button">
+          <button class="mnu-button__menu">
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+        <div class="main-menu-background"></div>
+        <div class="main-menu">
+          <nav class="main-menu__inner">
+            <ul>
+              <li><a href="abonnement.html" data-text="Abonnement">Abonnement<span></span></a></li>
+              <li><a href="list-coach.html" data-text="Coachs">Coachs<span></span></a></li>
+              <li><a href="boutique.html" data-text="Boutique">Boutique<span></span></a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="page-content">
+      <!-- Le contenu sera chargé dynamiquement par JavaScript -->
+      <div class="section-head">
+        <h2>Chargement...</h2>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
