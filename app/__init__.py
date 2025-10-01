@@ -5,6 +5,7 @@ from flask_jwt_extended import JWTManager
 from app.extensions import db
 from app.api.v1.user import api as user_ns
 from app.api.v1.review import api as review_ns
+from app.api.v1.message import api as message_ns
 from app.api.v1.nutrition_schedule import api as nutrition_ns
 from app.api.v1.auth import api as auth_ns
 from app.extension_bcrypt import bcrypt
@@ -39,6 +40,7 @@ def create_app(config_name='default'):
 
     api.add_namespace(user_ns, path='/api/v1/user')
     api.add_namespace(review_ns, path='/api/v1/review')
+    api.add_namespace(message_ns, path='/api/v1/message')
     api.add_namespace(nutrition_ns, path='/api/v1/nutrition')
     api.add_namespace(auth_ns, path='/api/v1/auth')
 

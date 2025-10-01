@@ -1,13 +1,15 @@
 from app.models.user import User
 from app.models.review import Review
+from app.models.message import Message
 from app.models.nutrition_schedule import Nutrition
-from app.persistence.repository import UserRepository, NutritionRepository, ReviewRepository
+from app.persistence.repository import UserRepository, MessageRepository, NutritionRepository, ReviewRepository
 
 class HBnBFacade:
     def __init__(self):
         self.user_repo = UserRepository()
         self.review_repo = ReviewRepository()
         self.nutrition_repo = NutritionRepository()
+        self.message_repo = MessageRepository()
 
     # Placeholder method for creating a user
     def create_user(self, user_data):
@@ -62,6 +64,55 @@ class HBnBFacade:
             raise ValueError("User not found")
         self.user_repo.delete(user_id)
         return {'message': 'User deleted successfully'}
+
+
+    # Message Facade
+    def create_message(self, message_data):
+        """Create a new message."""
+        user = self.get_user(message_data['user_id'])
+        if not user:
+            raise ValueError("User not found.")
+        coach = self.get_user(message_data['coach_id'])
+        if not coach:
+            raise ValueError("Coach not found.")
+        message = Message(message_data['text'], message_data['rating'], message_data['user_id'], message_data['coach_id'])
+        self.message_repo.add(message)
+        return message      
+
+
+    def get_message(self, message_id):
+        message = self.message_repo.get(message_id)
+        if not message:
+            raise ValueError("Message not found")
+        return message
+
+    def get_all_messages(self):
+        return self.message_repo.get_all()
+
+    def get_messages_by_coach(self, coach_id):
+        coach = self.place_repo.get(coach_id)
+        if not coach:
+            raise ValueError("Coach not found")
+        return [message for message in
+                self.message_repo.get_all() if message.coach_id == coach_id]
+
+    def update_message(self, message_id, message_update):
+        message = self.message_repo.get(message_id)
+        if not message:
+            raise ValueError("Message not found")
+        for key, value in message_update.items():
+            if hasattr(message, key):
+                setattr(message, key, value)
+        self.message_repo.update(message_id, message.__dict__)
+        return message
+
+    def delete_message(self, message_id):
+        message = self.message_repo.get(message_id)
+        if not message:
+            raise ValueError("Message not found")
+        self.message_repo.delete(message_id)
+        return {'message': 'Review deleted succesessfully'}
+
 
     # Review Facade
     def create_review(self, review_data):
