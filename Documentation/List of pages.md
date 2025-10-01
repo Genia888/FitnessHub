@@ -11,4 +11,4 @@
 | affecte workout to user | when a coach planify the workout of a user                   |
 | read a message from coach page | display of messages from coach side                   |
 | read a message from user page  | display of messages from user side                    |
-| diplay the side of user workout, message, diet | display of user todo from user side   |
+| diplay the side of user workout, message, nutrition | display of user todo from user side   |

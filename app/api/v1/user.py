@@ -12,7 +12,7 @@ user_model = api.model("User", {
     "password": fields.String(required=True, max_length=50),
     "is_admin" : fields.Boolean(required=True, default=False),
     "is_coach" : fields.Boolean(required=True, default=False),
-    "is_diet" : fields.Boolean(required=True, default=False),
+    "is_nutrition" : fields.Boolean(required=True, default=False),
     "adress1": fields.String(required=True, max_length=100),
     "adress2": fields.String(required=True, max_length=100),
     "postal_code": fields.String(required=True, max_length=20),
@@ -56,7 +56,7 @@ class UserList(Resource):
         return {'id': new_user.id, 'first_name': new_user.first_name, 'last_name': new_user.last_name, 
                 "password": new_user.password, 'email': new_user.email,
                 "is_admin": new_user.is_admin, "is_coach": new_user.is_coach,
-                "is_diet": new_user.is_diet, "password": new_user.password, 
+                "is_nutrition": new_user.is_nutrition, "password": new_user.password, 
                 "adress1": new_user.adress1, "adress2": new_user.adress2, 
                 "postal_code": new_user.postal_code, "city": new_user.city, 
                 "allergy_comment": new_user.allergy_comment, "physical_constraint": new_user.physical_constraint,
@@ -84,7 +84,7 @@ class UserResource(Resource):
             return {'error': 'User not found'}, 404
         return {'id': user.id, 'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email,
                 "is_admin": user.is_admin, "is_coach": user.is_coach,
-                "is_diet": user.is_diet, "is_subscribe": user.is_subscribe, "password": user.password, 
+                "is_nutrition": user.is_nutrition, "is_subscribe": user.is_subscribe, "password": user.password, 
                 "adresse1": user.adress1, "adresse2": user.adress2, 
                 "code_postal": user.postal_code, "ville": user.city, "allergy_comment": user.allergy_comment,
             "physical_constraint": user.physical_constraint,
@@ -151,12 +151,12 @@ class Coach(Resource):
         users = facade.get_all_coach()
         return [user.to_dict() for user in users], 200
     
-@api.route('/diet/')
-class Diet(Resource):
-    @api.response(200, 'List of diet retrieved successfully')
+@api.route('/nutrition/')
+class Nutrition(Resource):
+    @api.response(200, 'List of nutrition retrieved successfully')
     def get(self):
-        """Retrieve a list of all diet"""
-        users = facade.get_all_diet()
+        """Retrieve a list of all nutrition"""
+        users = facade.get_all_nutrition()
         return [user.to_dict() for user in users], 200
     
 @api.route('/admin/')

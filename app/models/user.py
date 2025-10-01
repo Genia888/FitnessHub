@@ -14,7 +14,7 @@ class User(BaseModel):
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
-    is_diet = db.Column(db.Boolean, default=False)
+    is_nutrition = db.Column(db.Boolean, default=False)
     is_coach = db.Column(db.Boolean, default=False)
     is_subscribe = db.Column(db.Boolean, default=False)
     adress1 = db.Column(db.String(100), nullable=False)
@@ -31,7 +31,7 @@ class User(BaseModel):
     picture = db.Column(db.String(1000), nullable=False)
     reviews = db.relationship('Review', backref='Author', lazy=True, foreign_keys='Review.coach_id')
 
-    def __init__(self, first_name: str, last_name: str, email: str, password: str, is_admin=False, is_coach=False, is_diet=False, is_subscribe=False, adress1="", adress2="", postal_code="", city="", allergy_comment="", physical_constraint="", coach_certif="", coach_experience="", coach_description="", size="", weight="", picture=""):
+    def __init__(self, first_name: str, last_name: str, email: str, password: str, is_admin=False, is_coach=False, is_nutrition=False, is_subscribe=False, adress1="", adress2="", postal_code="", city="", allergy_comment="", physical_constraint="", coach_certif="", coach_experience="", coach_description="", size="", weight="", picture=""):
         super().__init__()
         if not first_name or len(first_name) > 50:
             raise ValueError("First name is required and must be ≤ 50 characters.")
@@ -46,7 +46,7 @@ class User(BaseModel):
         self.email = email
         self.is_admin = is_admin
         self.is_coach = is_coach
-        self.is_diet = is_diet
+        self.is_nutrition = is_nutrition
         self.is_subscribe = is_subscribe
         self.adress1 = adress1
         self.adress2 = adress2
@@ -85,7 +85,7 @@ class User(BaseModel):
             "email": self.email,
             "is_admin": self.is_admin,
             "is_coach": self.is_coach,
-            "is_diet": self.is_diet,
+            "is_nutrition": self.is_nutrition,
             "is_subscribe": self.is_subscribe,
             "password": self.password, 
             "adress1": self.adress1,

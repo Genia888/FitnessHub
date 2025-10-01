@@ -1,11 +1,11 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, redirect
 from flask_restx import Api
 from config import config
 from flask_jwt_extended import JWTManager
 from app.extensions import db
-from app.api.v1.users import api as users_ns
-from app.api.v1.reviews import api as reviews_ns
-from app.api.v1.diets import api as diets_ns
+from app.api.v1.user import api as user_ns
+from app.api.v1.review import api as review_ns
+from app.api.v1.nutrition_schedule import api as nutrition_ns
 from app.api.v1.auth import api as auth_ns
 from app.extension_bcrypt import bcrypt
 from flask_cors import CORS
@@ -37,9 +37,9 @@ def create_app(config_name='default'):
     api = Api(app, version='1.0', title='Fitness HUB Backend', doc='/api/v1/', authorizations=authorizations,
               description='HBnB Application API')
 
-    api.add_namespace(users_ns, path='/api/v1/users')
-    api.add_namespace(reviews_ns, path='/api/v1/reviews')
-    api.add_namespace(diets_ns, path='/api/v1/diets')
+    api.add_namespace(user_ns, path='/api/v1/user')
+    api.add_namespace(review_ns, path='/api/v1/review')
+    api.add_namespace(nutrition_ns, path='/api/v1/nutrition')
     api.add_namespace(auth_ns, path='/api/v1/auth')
 
     return app

@@ -6,8 +6,8 @@ from sqlalchemy.orm import validates, relationship
 from app.models import user
 from app.models.base_model import BaseModel
 
-class Diet(BaseModel):
-    __tablename__ = 'Diet'  # Use plural for consistency
+class Nutrition(BaseModel):
+    __tablename__ = 'Nutrition_schedule'  # Use plural for consistency
 
     description = db.Column(db.String(10000), nullable=False)
     picture = db.Column(db.String(1000), nullable=False)

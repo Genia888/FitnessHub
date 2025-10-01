@@ -1,5 +1,5 @@
 -- Consider that User is split in subtable 
--- Coach/diet
+-- Coach/Nutrition
 -- Admin 
 -- Subscriber
 -- Simple user
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS "User" (
     "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     "is_coach" BOOLEAN DEFAULT FALSE, 
-    "is_diet" BOOLEAN DEFAULT FALSE, 
+    "is_nutrition" BOOLEAN DEFAULT FALSE, 
     "is_subscribe" BOOLEAN DEFAULT FALSE, 
     "adress1" VARCHAR(100), 
     "adress2" VARCHAR(100), 
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS "Subscription" (
     "id" CHAR(36) PRIMARY KEY,
     "begin_date" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "end_date" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    "option_diet" BOOLEAN DEFAULT FALSE, 
+    "option_nutrition" BOOLEAN DEFAULT FALSE, 
     "option_message" BOOLEAN DEFAULT FALSE, 
     "user_id" CHAR(36),
     "coach_id" CHAR(36),
@@ -89,12 +89,11 @@ CREATE TABLE IF NOT EXISTS "Product_shop" (
     "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "is_active" BOOLEAN DEFAULT FALSE, 
-    "is_in_stock" BOOLEAN DEFAULT FALSE,
-    PRIMARY KEY("id")
+    "is_in_stock" BOOLEAN DEFAULT FALSE
 );
 
 
--- Create diet
+-- Create nutrition schedule
 CREATE TABLE IF NOT EXISTS "Nutrition_schedule" (
     "id" CHAR(36) PRIMARY KEY,
     "description" TEXT NOT NULL,
@@ -125,6 +124,5 @@ CREATE TABLE IF NOT EXISTS "Workout_schedule" (
     "date_workout" DATE DEFAULT NULL, 
     "coach_id" CHAR(36),
     "user_id" CHAR(36),
-    FOREIGN KEY ("coach_id") REFERENCES User("id"),
-    PRIMARY KEY("id")
+    FOREIGN KEY ("coach_id") REFERENCES User("id")
 );

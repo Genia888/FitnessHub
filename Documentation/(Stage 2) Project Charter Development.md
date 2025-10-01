@@ -33,7 +33,7 @@ We created a mind map SMART [Mind Mapping](https://mm.tt/map/3808942400?t=xMeTVX
 |Web frontend                                   |Online subscription                        |
 |List of Coaches (prototypes + photos)          |Badges & rewards                           |
 |Nutrition section                              |Realtime chat                              |
-|List of workout                                |Online diet tracking                       |
+|List of workout                                |Online nutrition tracking                       |
 
 # 3. Identify Risks
 | **Risk**                                             |  **Mitigation Strategy**                                 |

@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from app.extensions import db
 from app.models.user import User
 from app.models.review import Review
-from app.models.diet import Diet
+from app.models.nutrition_schedule import Nutrition
 from sqlalchemy import and_ 
 from sqlalchemy.sql.expression import false
 
@@ -110,13 +110,13 @@ class UserRepository(BaseRepository):
         return self.model.query.filter_by(is_coach=True).all()
 
     def get_simple_user(self):
-        return self.model.query.filter_by(is_subscribe=False , is_admin=False , is_diet=False , is_coach=False).all()
+        return self.model.query.filter_by(is_subscribe=False , is_admin=False , is_nutrition=False , is_coach=False).all()
 
     def get_all_abonne(self):
         return self.model.query.filter_by(is_subscribe=True).all()
 
-    def get_all_diet(self):
-        return self.model.query.filter_by(is_diet=True).all()
+    def get_all_nutrition(self):
+        return self.model.query.filter_by(is_nutrition=True).all()
 
     def get_all_admin(self):
         return self.model.query.filter_by(is_admin=True).all()
@@ -128,6 +128,6 @@ class ReviewRepository(BaseRepository):
     def __init__(self):
         super().__init__(Review)
 
-class DietRepository(BaseRepository):
+class NutritionRepository(BaseRepository):
     def __init__(self):
-        super().__init__(Diet)
+        super().__init__(Nutrition)
