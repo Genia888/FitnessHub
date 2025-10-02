@@ -77,10 +77,10 @@ class MessageResource(Resource):
 
             return {
                 'id': message.id,
-                'begin_date': new_message.begin_date,
-                'end_date': new_message.end_date,
-                'option_nutrition': new_message.option_nutrition,
-                'option_message': new_message.option_message,
+                'begin_date': message.begin_date,
+                'end_date': message.end_date,
+                'option_nutrition': message.option_nutrition,
+                'option_message': message.option_message,
                 'user_id': message.user_id,
                 'coach_id': message.coach_id
             }, 200
@@ -106,9 +106,10 @@ class MessageResource(Resource):
             updated_message = facade.update_message(message_id, message_data)
             return {
                 'id': updated_message.id,
-                'text': updated_message.text,
-                'date_message': updated_message.date_message,
-                'is_read': updated_message.is_read,
+                'begin_date': updated_message.begin_date,
+                'end_date': updated_message.end_date,
+                'option_nutrition': updated_message.option_nutrition,
+                'option_message': updated_message.option_message,
                 'user_id': updated_message.user_id,
                 'coach_id': updated_message.coach_id
             }, 200
@@ -150,9 +151,10 @@ class PlaceReviewList(Resource):
             return [
                 {
                     'id': message.id,
-                    'text': message.text,
-                    'date_message': message.date_message,
-                    'is_read': message.is_read,
+                    'begin_date': message.begin_date,
+                    'end_date': message.end_date,
+                    'option_nutrition': message.option_nutrition,
+                    'option_message': message.option_message,
                 }
                 for message in coach_messages
             ], 200

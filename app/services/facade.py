@@ -1,9 +1,11 @@
 from app.models.user import User
 from app.models.review import Review
 from app.models.message import Message
+from app.models.subscription import Subscription
 from app.models.nutrition_schedule import Nutrition
 from app.models.workout_schedule import Workout
-from app.persistence.repository import UserRepository, MessageRepository, NutritionRepository, ReviewRepository, WorkoutRepository
+from app.models.product_shop import Product
+from app.persistence.repository import ProductRepository, SubscriptionRepository, UserRepository, MessageRepository, NutritionRepository, ReviewRepository, WorkoutRepository
 
 class HBnBFacade:
     def __init__(self):
@@ -12,6 +14,9 @@ class HBnBFacade:
         self.nutrition_repo = NutritionRepository()
         self.workout_repo = WorkoutRepository()
         self.message_repo = MessageRepository()
+        self.subscription_repo = SubscriptionRepository()
+        self.product_repo = ProductRepository()
+
 
     # Placeholder method for creating a user
     def create_user(self, user_data):
@@ -174,7 +179,7 @@ class HBnBFacade:
         coach = self.get_user(workout_data['coach_id'])
         if not coach:
             raise ValueError("Coach not found.")
-        workout = workout(workout_data['text'], workout_data['rating'], workout_data['user_id'], workout_data['coach_id'])
+        workout = Workout(workout_data['description'], workout_data['picture'], workout_data['category'], workout_data['date_workout'], workout_data['comment'], workout_data['user_id'], workout_data['coach_id'])
         self.workout_repo.add(workout)
         return workout      
 
@@ -214,7 +219,7 @@ class HBnBFacade:
         coach = self.get_user(nutrition_data['coach_id'])
         if not coach:
             raise ValueError("Coach not found.")
-        nutrition = nutrition(nutrition_data['text'], nutrition_data['rating'], nutrition_data['user_id'], nutrition_data['coach_id'])
+        nutrition = Nutrition(nutrition_data['description'], nutrition_data['picture'], nutrition_data['category'], nutrition_data['date_workout'], nutrition_data['comment'], nutrition_data['user_id'], nutrition_data['coach_id'])
         self.nutrition_repo.add(nutrition)
         return nutrition      
 
@@ -244,6 +249,89 @@ class HBnBFacade:
             raise ValueError("nutrition not found")
         self.nutrition_repo.delete(nutrition_id)
         return {'message': 'nutrition deleted succesessfully'}
+
+
+    # Message Facade
+    def create_subscription(self, subscription_data):
+        """Create a new subscription."""
+        user = self.get_user(subscription_data['user_id'])
+        if not user:
+            raise ValueError("User not found.")
+        coach = self.get_user(subscription_data['coach_id'])
+        if not coach:
+            raise ValueError("Coach not found.")
+        subscription = Subscription(subscription_data['text'], subscription_data['rating'], subscription_data['user_id'], subscription_data['coach_id'])
+        self.subscription_repo.add(subscription)
+        return subscription      
+
+
+    def get_subscription(self, subscription_id):
+        subscription = self.subscription_repo.get(subscription_id)
+        if not subscription:
+            raise ValueError("subscription not found")
+        return subscription
+
+    def get_all_subscriptions(self):
+        return self.subscription_repo.get_all()
+
+    def get_subscriptions_by_coach(self, coach_id):
+        coach = self.place_repo.get(coach_id)
+        if not coach:
+            raise ValueError("Coach not found")
+        return [subscription for subscription in
+                self.subscription_repo.get_all() if subscription.coach_id == coach_id]
+
+    def update_subscription(self, subscription_id, subscription_update):
+        subscription = self.subscription_repo.get(subscription_id)
+        if not subscription:
+            raise ValueError("subscription not found")
+        for key, value in subscription_update.items():
+            if hasattr(subscription, key):
+                setattr(subscription, key, value)
+        self.subscription_repo.update(subscription_id, subscription.__dict__)
+        return subscription
+
+    def delete_subscription(self, subscription_id):
+        subscription = self.subscription_repo.get(subscription_id)
+        if not subscription:
+            raise ValueError("subscription not found")
+        self.subscription_repo.delete(subscription_id)
+        return {'subscription': 'Review deleted succesessfully'}
+
+
+    # Placeholder method for creating a product
+    def create_product(self, product_data):
+        product = Product(**product_data)
+        self.product_repo.add(product)
+        return product
+
+    def get_product(self, product_id):
+        return self.product_repo.get_by_attribute('id', product_id)
+
+    
+    # list all of products
+    def get_all_products(self):
+        return self.product_repo.get_all()
+    
+
+
+    
+    def update_product(self, product_id, update_data):
+        """Update an product."""
+        product = self.get_product(product_id)
+        if not product:
+            raise ValueError("product not found")
+
+        product.update(update_data)
+        self.product_repo.save(product)
+        return product
+        
+    def delete_product(self, product_id):
+        product = self.product_repo.get(product_id)
+        if not product:
+            raise ValueError("product not found")
+        self.product_repo.delete(product_id)
+        return {'message': 'product deleted successfully'}
 
 # Instance globale
 facade = HBnBFacade()

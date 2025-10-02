@@ -3,6 +3,8 @@ from app.extensions import db
 from app.models.user import User
 from app.models.review import Review
 from app.models.message import Message
+from app.models.product_shop import Product
+from app.models.subscription import Subscription
 from app.models.nutrition_schedule import Nutrition
 from app.models.workout_schedule import Workout
 from sqlalchemy import and_ 
@@ -141,3 +143,11 @@ class NutritionRepository(BaseRepository):
 class WorkoutRepository(BaseRepository):
     def __init__(self):
         super().__init__(Workout)
+
+class SubscriptionRepository(BaseRepository):
+    def __init__(self):
+        super().__init__(Subscription)
+
+class ProductRepository(BaseRepository):
+    def __init__(self):
+        super().__init__(Product)
