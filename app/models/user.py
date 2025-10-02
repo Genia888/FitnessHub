@@ -90,16 +90,16 @@ class User(BaseModel):
             "password": self.password, 
             "adress1": self.adress1,
             "adress2": self.adress2, 
-            "code_postal": self.code_postal,
-            "ville": self.ville,
-            "texte_allergie": self.texte_allergie,
-            "limitation_exercice": self.limitation_exercice,
+            "postal_code": self.postal_code,
+            "city": self.city,
+            "allergy_comment": self.allergy_comment,
+            "physical_constraint": self.physical_constraint,
             "coach_certif": self.coach_certif,
             "coach_experience": self.coach_experience,
             "coach_description": self.coach_description,
-            "taille": self.taille,
-            "poids": self.poids,
-            "photo": self.photo,
+            "size": self.size,
+            "weight": self.weight,
+            "picture": self.picture,
             "reviews": [{'id': review.id, 'text': review.text, 'rating': review.rating}
                           for review in self.reviews]
         }

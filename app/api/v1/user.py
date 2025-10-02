@@ -86,7 +86,7 @@ class UserResource(Resource):
                 "is_admin": user.is_admin, "is_coach": user.is_coach,
                 "is_nutrition": user.is_nutrition, "is_subscribe": user.is_subscribe, "password": user.password, 
                 "adresse1": user.adress1, "adresse2": user.adress2, 
-                "code_postal": user.postal_code, "ville": user.city, "allergy_comment": user.allergy_comment,
+                "postal_code": user.postal_code, "ville": user.city, "allergy_comment": user.allergy_comment,
             "physical_constraint": user.physical_constraint,
             "coach_certif": user.coach_certif,
             "coach_experience": user.coach_experience,
