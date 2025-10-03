@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Compte Coach - FitnessHub</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/trainer.css">
+  <link rel="stylesheet" href="../styles/account.css">
+  <script src="../vendor/gsap/gsap.min.js" defer></script>
+  <script src="../vendor/gsap/ScrollTrigger.min.js" defer></script>
+  <script src="../vendor/lenis/lenis.min.js" defer></script>
+  <script src="../scripts/app.js" defer></script>
+</head>
+<body>
+  <div class="pattern"></div>
+  
+  <div class="gradient-bg">
+    <div class="gradients-container">
+      <div class="g1"></div>
+      <div class="g2"></div>
+      <div class="g3"></div>
+      <div class="interactive"></div>
+    </div>
+  </div>
+
+  <header class="header-top">
+    <div class="top-line">
+      <div class="top-line__left">
+        <a href="../index.html" class="logo">
+          <img src="../assets/images/FitnessHub.svg" alt="FitnessHub">
+        </a>
+      </div>
+
+      <div class="top-line__center">
+        <nav class="top-mnu">
+          <ul>
+            <li><a href="trainer.html" data-text="Espace Coach">Espace Coach</a></li>
+            <li><a href="account-coach.html" data-text="Mon Compte">Mon Compte</a></li>
+            <li><a href="list-coach.html" data-text="Clients">Clients</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="top-line__right">
+        <div class="mnu-button">
+          <button class="mnu-button__menu">
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+        <div class="main-menu-background"></div>
+        <div class="main-menu">
+          <nav class="main-menu__inner">
+            <ul>
+              <li><a href="trainer.html" data-text="Espace Coach">Espace Coach<span></span></a></li>
+              <li><a href="account-coach.html" data-text="Mon Compte">Mon Compte<span></span></a></li>
+              <li><a href="list-coach.html" data-text="Clients">Clients<span></span></a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="page-content">
+      <div class="section-head">
+        <h2>Mon Compte Coach</h2>
+        <div class="section-head__right">
+          <button class="btn-secondary">
+            <span data-text="Déconnexion">Déconnexion</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="account-container">
+        <!-- Profile Picture Section -->
+        <div class="account-profile-picture">
+          <div class="profile-picture-wrapper">
+            <div class="profile-picture">
+              <img src="../public/images/ready/coach1.jpg" alt="Photo de profil" id="profileImage">
+              <div class="profile-picture-overlay">
+                <span class="change-photo-icon">📷</span>
+              </div>
+            </div>
+            <div class="profile-picture-actions">
+              <button class="btn-primary btn-small">Changer la photo</button>
+              <button class="btn-secondary btn-small">
+                <span data-text="Supprimer">Supprimer</span>
+              </button>
+            </div>
+          </div>
+          <div class="profile-info-summary">
+            <h3>Elhadj Reziga</h3>
+            <p class="user-type">🏆 Coach Certifié</p>
+            <p class="user-status">Personal Trainer depuis 2019</p>
+            <div class="coach-stats">
+              <span class="stat-item">⭐ 4.9/5</span>
+              <span class="stat-item">👥 24 clients</span>
+              <span class="stat-item">📈 156 séances</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Personal Information Section -->
+        <div class="account-section">
+          <div class="section-header">
+            <h3>Informations Personnelles</h3>
+            <button class="btn-edit">✏️ Modifier</button>
+          </div>
+          <div class="account-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="firstName">Prénom</label>
+                <input type="text" id="firstName" value="Elhadj" disabled>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Nom</label>
+                <input type="text" id="lastName" value="Reziga" disabled>
+              </div>
+              <div class="form-group">
+                <label for="specialty">Spécialité</label>
+                <input type="text" id="specialty" value="Personal Trainer Certifié" disabled>
+              </div>
+              <div class="form-group">
+                <label for="experience">Expérience</label>
+                <input type="text" id="experience" value="5 ans" disabled>
+              </div>
+              <div class="form-group">
+                <label for="phone">Téléphone</label>
+                <input type="tel" id="phone" value="+33 6 98 76 54 32" disabled>
+              </div>
+              <div class="form-group">
+                <label for="location">Localisation</label>
+                <input type="text" id="location" value="Paris, France" disabled>
+              </div>
+              <div class="form-group full-width">
+                <label for="bio">Biographie</label>
+                <textarea id="bio" rows="4" disabled>Spécialisé dans la remise en forme et la perte de poids. J'aide mes clients à atteindre leurs objectifs avec des programmes personnalisés.</textarea>
+              </div>
+            </div>
+            <div class="form-actions" style="display: none;">
+              <button class="btn-primary">Enregistrer les modifications</button>
+              <button class="btn-cancel">Annuler</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Login Credentials Section -->
+        <div class="account-section">
+          <div class="section-header">
+            <h3>Identifiants de Connexion</h3>
+            <button class="btn-edit">✏️ Modifier</button>
+          </div>
+          <div class="account-form">
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label for="email">Email</label>
+                <input type="email" id="email" value="elhadj.reziga@fitnesshub.com" disabled>
+              </div>
+              <div class="form-group">
+                <label for="currentPassword">Mot de passe actuel</label>
+                <input type="password" id="currentPassword" value="********" disabled>
+              </div>
+              <div class="form-group">
+                <label for="newPassword">Nouveau mot de passe</label>
+                <input type="password" id="newPassword" placeholder="Laisser vide si inchangé" disabled>
+              </div>
+            </div>
+            <div class="form-actions" style="display: none;">
+              <button class="btn-primary">Mettre à jour les identifiants</button>
+              <button class="btn-cancel">Annuler</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certificates & Diplomas Section (FOR COACHES) -->
+        <div class="account-section coach-documents-section">
+          <div class="section-header">
+            <h3>🎓 Certificats et Diplômes</h3>
+            <button class="btn-primary btn-small">+ Ajouter un document</button>
+          </div>
+          <div class="documents-content">
+            <p class="documents-info">
+              Ajoutez vos certificats professionnels et diplômes pour renforcer votre crédibilité auprès de vos clients.
+            </p>
+
+            <!-- Liste des documents -->
+            <div class="documents-list">
+              <!-- Document 1 -->
+              <div class="document-item">
+                <div class="document-icon">🎓</div>
+                <div class="document-info">
+                  <h4>Diplôme d'État de Coach Sportif</h4>
+                  <p class="document-meta">Délivré par CREPS • Juin 2019</p>
+                  <p class="document-status verified">✓ Vérifié</p>
+                </div>
+                <div class="document-actions">
+                  <button class="btn-icon" title="Télécharger">⬇️</button>
+                  <button class="btn-icon" title="Voir">👁️</button>
+                  <button class="btn-icon" title="Modifier">✏️</button>
+                  <button class="btn-icon btn-danger" title="Supprimer">🗑️</button>
+                </div>
+              </div>
+
+              <!-- Document 2 -->
+              <div class="document-item">
+                <div class="document-icon">📜</div>
+                <div class="document-info">
+                  <h4>Certificat en Nutrition Sportive</h4>
+                  <p class="document-meta">ISSN • Janvier 2021</p>
+                  <p class="document-status verified">✓ Vérifié</p>
+                </div>
+                <div class="document-actions">
+                  <button class="btn-icon" title="Télécharger">⬇️</button>
+                  <button class="btn-icon" title="Voir">👁️</button>
+                  <button class="btn-icon" title="Modifier">✏️</button>
+                  <button class="btn-icon btn-danger" title="Supprimer">🗑️</button>
+                </div>
+              </div>
+
+              <!-- Document 3 -->
+              <div class="document-item">
+                <div class="document-icon">🏆</div>
+                <div class="document-info">
+                  <h4>Certification Personal Trainer</h4>
+                  <p class="document-meta">ACE Fitness • Mars 2020</p>
+                  <p class="document-status pending">⏳ En attente de vérification</p>
+                </div>
+                <div class="document-actions">
+                  <button class="btn-icon" title="Télécharger">⬇️</button>
+                  <button class="btn-icon" title="Voir">👁️</button>
+                  <button class="btn-icon" title="Modifier">✏️</button>
+                  <button class="btn-icon btn-danger" title="Supprimer">🗑️</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Zone d'upload pour nouveaux documents -->
+            <div class="upload-zone-inline">
+              <div class="upload-icon">📤</div>
+              <div class="upload-text-inline">
+                <p><strong>Glisser-déposer</strong> vos documents ici</p>
+                <p class="upload-hint">ou cliquez pour parcourir (PDF, JPG, PNG - Max 10MB)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preferences Section -->
+        <div class="account-section">
+          <div class="section-header">
+            <h3>Préférences</h3>
+          </div>
+          <div class="preferences-content">
+            <div class="preference-item">
+              <div class="preference-info">
+                <h4>Notifications par email</h4>
+                <p>Recevoir des emails pour les nouveaux messages et rendez-vous</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="preference-item">
+              <div class="preference-info">
+                <h4>Notifications push</h4>
+                <p>Recevoir des notifications sur votre appareil</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="preference-item">
+              <div class="preference-info">
+                <h4>Disponibilité publique</h4>
+                <p>Apparaître dans la liste des coachs disponibles</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="preference-item">
+              <div class="preference-info">
+                <h4>Accepter de nouveaux clients</h4>
+                <p>Permettre aux nouveaux utilisateurs de vous contacter</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Danger Zone -->
+        <div class="account-section danger-section">
+          <div class="section-header">
+            <h3>⚠️ Zone de danger</h3>
+          </div>
+          <div class="danger-content">
+            <div class="danger-action">
+              <div class="danger-info">
+                <h4>Désactiver mon compte</h4>
+                <p>Votre compte sera temporairement désactivé et pourra être réactivé ultérieurement</p>
+              </div>
+              <button class="btn-danger-outline">Désactiver</button>
+            </div>
+
+            <div class="danger-action">
+              <div class="danger-info">
+                <h4>Supprimer mon compte</h4>
+                <p>Cette action est irréversible. Toutes vos données seront définitivement supprimées.</p>
+              </div>
+              <button class="btn-danger">Supprimer définitivement</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
