@@ -11,6 +11,15 @@ values ( '83726b63-dcd3-4f7e-bc36-0f326ae59722','Elhadj','Reziga','seba15@lapost
 insert into User( id,first_name,last_name,email,password,is_admin,created_at,updated_at,is_coach,is_nutrition,is_subscribe,adress1,adress2,postal_code,city,allergy_comment,physical_constraint,coach_certif,coach_experience,coach_description,size,weight, picture )
 values ( '83726b63-dcd3-4f7e-bc36-0f326ae59723','Sarah','Reziga','sebastien.salgues@hotmail.com','$2b$12$9XQ4sIB26KdtyY7Aiq8jjeMqFuJ9fRgFWiaiBpi7xlvPklUZ5.GHG',1,'2025-09-15 17:05:36.374418','2025-09-15 17:05:36.374432',1,1,0,'23 Avenue Hippolyte de Barrau','','12000','Rodez','','','',"20 ans d'experience",'Expert en musculation',0.0,0.0,'http://localhost:5500/public/images/ready/coach3.jpg')
 
+insert into User( id,first_name,last_name,email,password,is_admin,created_at,updated_at,is_coach,is_nutrition,is_subscribe,adress1,adress2,postal_code,city,allergy_comment,physical_constraint,coach_certif,coach_experience,coach_description,size,weight, picture )
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59724','Hedjouj','Reziga','hedjouj@hotmail.com','$2b$12$9XQ4sIB26KdtyY7Aiq8jjeMqFuJ9fRgFWiaiBpi7xlvPklUZ5.GHG',1,'2025-09-15 17:05:36.374418','2025-09-15 17:05:36.374432',0,0,1,'23 Avenue Hippolyte de Barrau','','12000','Rodez','Régime sans pate !','Objectif ressembler a shwarzi','',"",'',0.0,0.0,'http://localhost:5500/public/images/ready/client1.jpg')
+
+insert into User( id,first_name,last_name,email,password,is_admin,created_at,updated_at,is_coach,is_nutrition,is_subscribe,adress1,adress2,postal_code,city,allergy_comment,physical_constraint,coach_certif,coach_experience,coach_description,size,weight, picture )
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59725','Yves','Dupond','Yves@hotmail.com','$2b$12$9XQ4sIB26KdtyY7Aiq8jjeMqFuJ9fRgFWiaiBpi7xlvPklUZ5.GHG',1,'2025-09-15 17:05:36.374418','2025-09-15 17:05:36.374432',0,0,1,'23 Avenue Hippolyte de Barrau','','12000','Rodez','Courrir un marathon','Aucun','',"",'',0.0,0.0,'http://localhost:5500/public/images/ready/client2.jpg')
+
+insert into User( id,first_name,last_name,email,password,is_admin,created_at,updated_at,is_coach,is_nutrition,is_subscribe,adress1,adress2,postal_code,city,allergy_comment,physical_constraint,coach_certif,coach_experience,coach_description,size,weight, picture )
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59726','Marc','Dupond','Marc@hotmail.com','$2b$12$9XQ4sIB26KdtyY7Aiq8jjeMqFuJ9fRgFWiaiBpi7xlvPklUZ5.GHG',1,'2025-09-15 17:05:36.374418','2025-09-15 17:05:36.374432',0,0,1,'23 Avenue Hippolyte de Barrau','','12000','Rodez','Se remuscler','Prendre 20 kg de muscle','',"",'',0.0,0.0,'http://localhost:5500/public/images/ready/client3.jpg')
+
 
 insert into "Product_shop" ("id", "name", "description", 
     "picture", "picture2", "picture3",
