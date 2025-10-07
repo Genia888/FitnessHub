@@ -37,10 +37,26 @@ class User(BaseModel):
             raise ValueError("First name is required and must be ≤ 50 characters.")
         if not last_name or len(last_name) > 50:
             raise ValueError("Last name is required and must be ≤ 50 characters.")
-        if not email or len(email) > 100:
+        if not email or len(email) > 120:
             raise ValueError("Email is required and must be ≤ 100 characters.")
         if '@' not in email:
             raise ValueError("Invalid email format.")
+        if adress1 and len(adress1) > 100:
+            raise ValueError("The adresse 1 must be ≤ 100 characters.")
+        if adress2 and len(adress2) > 100:
+            raise ValueError("The adresse 2 must be ≤ 100 characters.")
+        if postal_code and len(postal_code) > 20:
+            raise ValueError("The postal code must be ≤ 20 characters.")
+        if city and len(city) > 100:
+            raise ValueError("The city must be ≤ 100 characters.")
+        if allergy_comment and len(allergy_comment) > 10000:
+            raise ValueError("The allergy_comment must be ≤ 10000 characters.")
+        if physical_constraint and len(physical_constraint) > 10000:
+            raise ValueError("The physical_constraintty must be ≤ 10000 characters.")
+        if coach_experience and len(coach_experience) > 10000:
+            raise ValueError("The coach_experience must be ≤ 10000 characters.")
+        if coach_description and len(coach_description) > 10000:
+            raise ValueError("The coach_description must be ≤ 10000 characters.")
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
