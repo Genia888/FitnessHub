@@ -65,16 +65,15 @@ CREATE TABLE IF NOT EXISTS "Subscription" (
 -- Create subscription
 CREATE TABLE IF NOT EXISTS "Message" (
     "id" CHAR(36) PRIMARY KEY,
-    "date_message" DATETIME DEFAULT CURRENT_TIMESTAMP,
     "is_read" BOOLEAN DEFAULT FALSE, 
     "text" TEXT DEFAULT '', 
     "user_id" CHAR(36),
     "coach_id" CHAR(36),
+    "is_from_user" BOOLEAN DEFAULT FALSE, 
     "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY ("user_id") REFERENCES User("id"),
-    FOREIGN KEY ("coach_id") REFERENCES User("id"),
-    UNIQUE ("user_id", "coach_id")
+    FOREIGN KEY ("coach_id") REFERENCES User("id")
 );
 
 -- Create product shop

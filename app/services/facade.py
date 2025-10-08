@@ -82,7 +82,7 @@ class HBnBFacade:
         coach = self.get_user(message_data['coach_id'])
         if not coach:
             raise ValueError("Coach not found.")
-        message = Message(message_data['text'], message_data['rating'], message_data['user_id'], message_data['coach_id'])
+        message = Message(message_data['text'], message_data['is_read'], message_data['is_from_user'], message_data['user_id'], message_data['coach_id'])
         self.message_repo.add(message)
         return message      
 
