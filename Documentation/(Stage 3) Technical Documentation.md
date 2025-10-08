@@ -106,7 +106,7 @@ direction TB
 	    +bool is_in_stock
     }
 
-    class Personne {
+    class User {
       +String pseudo
       +String email
       +String password
@@ -128,7 +128,7 @@ direction TB
       +Float time
     }
 
-    class Diet {
+    class nutrition {
       +String description
       +String picture
       +String category<Protein,Carbs,Fats,...>
@@ -147,7 +147,7 @@ direction TB
       +addArticle()
     }
 
-    class User {
+    class Customer {
 	    +bool is_subscribe
       +String physical_constraint
       +String allergy_comment
@@ -164,13 +164,13 @@ direction TB
 	    +String description
 	    +String experience
 	    +bool is_coach
-	    +bool is_diet
+	    +bool is_nutrition
 	    +addTraining()
     }
 
     class Subscription {
 	    +Date date
-	    +Boolean OptionDiet
+	    +Boolean Optionnutrition
 	    +Boolean OptionMessage
     }
 
@@ -182,19 +182,19 @@ direction TB
 
     %% Relations
     Workouts <-- Workouts_schedule
-    User <-- Workouts_schedule
+    Customer <-- Workouts_schedule
     Coach <-- Workouts
-    Coach <-- Diet
-    User <-- Diet
-    Personne <|-- Admin
-    Personne <|-- User
-    Personne <|-- Coach
+    Coach <-- nutrition
+    Customer <-- nutrition
+    User <|-- Admin
+    User <|-- Customer
+    User <|-- Coach
     Coach <-- Reviews
-    User <-- Reviews
+    Customer <-- Reviews
     Coach <-- Subscription
-    User <-- Subscription
+    Customer <-- Subscription
     Coach <-- Message
-    User <-- Message
+    Customer <-- Message
 
 ```
 # 3. Create High-Level Sequence Diagrams
@@ -238,7 +238,7 @@ It defines the structure of requests (inputs) and responses (outputs) for each m
 
 | **Action**            | **Endpoint**               | **Method** | **Input**                                                                                                         | **Output**                                                                                                                                                                             |
 | --------------------- | -------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Get All Users**     | `/api/v1/users`            | GET        | *(none)*                                                                                                          | `json { "users": [ { "id": 1, "name": "Seb Salgue", "role": "coach", "email": "seb@example.com" }, { "id": 2, "name": "Elhadj", "role": "diet", "email": "elhadj@example.com" } ] } ` |
+| **Get All Users**     | `/api/v1/users`            | GET        | *(none)*                                                                                                          | `json { "users": [ { "id": 1, "name": "Seb Salgue", "role": "coach", "email": "seb@example.com" }, { "id": 2, "name": "Elhadj", "role": "nutrition", "email": "elhadj@example.com" } ] } ` |
 | **Get User by ID**    | `/api/v1/users/{user_id}`  | GET        | `user_id` (URL param)                                                                                             | `json { "id": 1, "name": "Seb Salgue", "role": "coach", "email": "seb@example.com" } `                                                                                                  |
 | **Get Users by Role** | `/api/v1/users?role=coach` | GET        | `role` (query param)                                                                                              | `json { "users": [ { "id": 1, "name": "Seb Salgue", "role": "coach" } ] } `                                                                                                              |
 | **Create User**       | `/api/v1/users`            | POST       | `json { "name": "Evgen", "email": "evgen@example.com", "password": "securePass123", "role": "simple_user" } ` | `json { "message": "User created successfully", "user": { "id": 3, "name": "Evgen", "role": "simple_user" } } `                                                                   |
@@ -247,7 +247,7 @@ It defines the structure of requests (inputs) and responses (outputs) for each m
 
 All users are in a table users but they have Boolean/TYPE to specify if there are
 -Admin
--Diet
+-nutrition
 -Coach
 -Subscriber
 -Simple user register

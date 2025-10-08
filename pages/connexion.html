@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in - FitnessHub</title>
+  
+  <!-- image favicon -->
+  <link rel="icon" type="image/x-icon" href="../assets/images/fitnesshub.jpg">
+  <link rel="icon" type="image/jpg" sizes="32x32" href="../assets/images/fitnesshub.jpg">
+  <link rel="icon" type="image/jpg" sizes="16x16" href="../assets/images/fitnesshub.jpg">
+  <link rel="apple-touch-icon" href="../assets/images/fitnesshub.jpg">
+  
+  <link rel="stylesheet" href="../styles/main.css">
+  <script src="../vendor/gsap/gsap.min.js" defer></script>
+  <script src="../vendor/gsap/ScrollTrigger.min.js" defer></script>
+  <script src="../vendor/lenis/lenis.min.js" defer></script>
+  <script src="../scripts/app.js" defer></script>
+</head>
+<body>
+  <div class="pattern"></div>
+  
+  <div class="gradient-bg">
+    <div class="gradients-container">
+      <div class="g1"></div>
+      <div class="g2"></div>
+      <div class="g3"></div>
+      <div class="interactive"></div>
+    </div>
+  </div>
+
+  <header class="header-top">
+    <div class="top-line">
+      <div class="top-line__left">
+        <a href="../index.html" class="logo">
+          <img src="../assets/images/FitnessHub.svg" alt="FitnessHub">
+        </a>
+      </div>
+
+      <div class="top-line__center">
+        <nav class="top-mnu">
+          <ul>
+            <li><a href="../pages/abonnement.html" data-text="Subscription">Subscription</a></li>
+            <li><a href="../pages/coach.html" data-text="Coach">Coach</a></li>
+            <li><a href="../pages/boutique.html" data-text="Shop">Shop</a></li>
+            <li><a href="../pages/connexion.html" data-text="Sign in">Sign in</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="top-line__right">
+        <div class="mnu-button">
+          <button class="mnu-button__menu">
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+        <div class="main-menu-background"></div>
+        <div class="main-menu">
+          <nav class="main-menu__inner">
+            <ul>
+              <li><a href="../pages/abonnement.html" data-text="Subscription">Subscription<span></span></a></li>
+              <li><a href="../pages/coach.html" data-text="Coach">Coach<span></span></a></li>
+              <li><a href="../pages/boutique.html" data-text="Shop">Shop<span></span></a></li>
+              <li><a href="../pages/connexion.html" data-text="Sign in">Sign in<span></span></a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="page-content">
+      <div class="section-head">
+        <h2>Sign in</h2>
+      </div>
+
+      <div class="accordion__col active" data-parallax-wrapper>
+        <div class="accordion__bg">
+          <img src="../public/images/ready/6.jpg" alt="Connexion" data-parallax-target>
+        </div>
+        <div class="accordion__start">Login to your account</div>
+        <div class="accordion__content">
+          <div class="accordion__header">
+            <h2>Login to your account</h2>
+          </div>
+          <div class="accordion__description" style="width: 100%; max-width: 500px;">
+            <form class="login-form" action="/api/v1/auth/login" method="post">
+              <div class="form-group">
+                <input type="email" name="email" placeholder="Email" required>
+              </div>
+              <div class="form-group">
+                <input type="password" name="password" placeholder="Mot de passe" required>
+              </div>
+              <button class="btn-primary" type="submit">Sign in</button>
+              <div class="login-links">
+                <a href="#" class="forgot-password">Forgotten password ?</a>
+                <a href="../pages/login.html" class="forgot-password">No account yet? Register</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

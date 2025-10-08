@@ -2,6 +2,11 @@ from abc import ABC, abstractmethod
 from app.extensions import db
 from app.models.user import User
 from app.models.review import Review
+from app.models.message import Message
+from app.models.product_shop import Product
+from app.models.subscription import Subscription
+from app.models.nutrition_schedule import Nutrition
+from app.models.workout_schedule import Workout
 from sqlalchemy import and_ 
 from sqlalchemy.sql.expression import false
 
@@ -109,13 +114,13 @@ class UserRepository(BaseRepository):
         return self.model.query.filter_by(is_coach=True).all()
 
     def get_simple_user(self):
-        return self.model.query.filter_by(is_subscribe=False , is_admin=False , is_diet=False , is_coach=False).all()
+        return self.model.query.filter_by(is_subscribe=False , is_admin=False , is_nutrition=False , is_coach=False).all()
 
     def get_all_abonne(self):
         return self.model.query.filter_by(is_subscribe=True).all()
 
-    def get_all_diet(self):
-        return self.model.query.filter_by(is_diet=True).all()
+    def get_all_nutrition(self):
+        return self.model.query.filter_by(is_nutrition=True).all()
 
     def get_all_admin(self):
         return self.model.query.filter_by(is_admin=True).all()
@@ -126,3 +131,23 @@ class UserRepository(BaseRepository):
 class ReviewRepository(BaseRepository):
     def __init__(self):
         super().__init__(Review)
+
+class MessageRepository(BaseRepository):
+    def __init__(self):
+        super().__init__(Message)
+
+class NutritionRepository(BaseRepository):
+    def __init__(self):
+        super().__init__(Nutrition)
+
+class WorkoutRepository(BaseRepository):
+    def __init__(self):
+        super().__init__(Workout)
+
+class SubscriptionRepository(BaseRepository):
+    def __init__(self):
+        super().__init__(Subscription)
+
+class ProductRepository(BaseRepository):
+    def __init__(self):
+        super().__init__(Product)

@@ -473,9 +473,9 @@ ul {
 }
 
 .accordion__header h2 {
-  font-weight: 300;
-  font-size: 100px;
-  line-height: 92%;
+  font-weight: 100;
+  font-size: 35px;
+  line-height: 100%;
   padding-bottom: 10px;
   margin-bottom: -10px;
   background: var(--gradient-3);
@@ -541,7 +541,7 @@ ul {
 
 .section-head h2 {
   font-weight: 300;
-  font-size: 80px;
+  font-size: 65px;
   line-height: 105%;
   background: var(--gradient-3);
   text-emphasis-color: transparent;
@@ -767,6 +767,10 @@ ul {
   border: 1px solid rgba(255, 255, 255, .1);
   text-align: center;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
 }
 
 .plan-card:hover {
@@ -780,7 +784,7 @@ ul {
 }
 
 .plan-card.featured::before {
-  content: 'POPULAIRE';
+  content: 'Best seller';
   position: absolute;
   top: -10px;
   left: 50%;
@@ -837,6 +841,363 @@ ul {
   margin-top: auto;
 }
 
+.trainer-dashboard {
+  margin-top: 30px;
+}
+
+.client-profile-card {
+  background: rgba(255, 255, 255, .05);
+  border-radius: 20px;
+  padding: 25px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, .1);
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.client-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.client-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.client-info h3 {
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  background: var(--gradient-3);
+  text-emphasis-color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.client-info p {
+  color: rgba(255, 255, 255, .7);
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.trainer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.planning-card, .calendar-card, .chat-card {
+  background: rgba(255, 255, 255, .05);
+  border-radius: 20px;
+  padding: 25px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, .1);
+}
+
+.planning-card h3, .calendar-card h3, .chat-card h3 {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  background: var(--gradient-3);
+  text-emphasis-color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.exercise-item, .meal-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+
+.exercise-name, .meal-time {
+  font-weight: 500;
+  color: rgba(255, 255, 255, .9);
+}
+
+.exercise-details, .meal-details {
+  color: rgba(255, 255, 255, .6);
+  font-size: 14px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.calendar-day {
+  text-align: center;
+  padding: 15px 5px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .02);
+  border: 1px solid rgba(255, 255, 255, .05);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.calendar-day:hover, .calendar-day.active {
+  background: rgba(255, 255, 255, .08);
+  border-color: rgba(255, 255, 255, .2);
+}
+
+.day-name {
+  display: block;
+  font-size: 12px;
+  color: rgba(255, 255, 255, .6);
+  margin-bottom: 5px;
+}
+
+.day-number {
+  display: block;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, .9);
+  margin-bottom: 8px;
+}
+
+.day-exercises span {
+  font-size: 10px;
+  background: var(--gradient-1);
+  padding: 2px 6px;
+  border-radius: 8px;
+  color: white;
+}
+
+.chat-messages {
+  height: 200px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+  padding-right: 10px;
+}
+
+.message {
+  margin-bottom: 15px;
+  padding: 10px 15px;
+  border-radius: 15px;
+  max-width: 80%;
+}
+
+.client-message {
+  background: rgba(255, 255, 255, .1);
+  margin-left: auto;
+}
+
+.coach-message {
+  background: var(--gradient-1);
+  margin-right: auto;
+}
+
+.message-time {
+  font-size: 11px;
+  color: rgba(255, 255, 255, .5);
+  display: block;
+  margin-bottom: 5px;
+}
+
+.message p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, .2);
+  background: rgba(255, 255, 255, .05);
+  color: white;
+  font-size: 14px;
+}
+
+.chat-input input::placeholder {
+  color: rgba(255, 255, 255, .5);
+}
+
+.chat-input .btn-primary {
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 14px;
+}
+
+.subscriber-readonly {
+  position: relative;
+}
+
+.readonly-notice {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  border-left: 3px solid var(--gradient-1);
+}
+
+.readonly-notice p {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+}
+
+.progress-stats {
+  margin-bottom: 20px;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .05);
+}
+
+.stat-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, .7);
+}
+
+.stat-value {
+  font-weight: 600;
+  color: rgba(255, 255, 255, .9);
+  font-size: 16px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, .1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--gradient-1);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  text-align: center;
+  font-size: 14px;
+  color: rgba(255, 255, 255, .8);
+  margin: 0;
+}
+
+.coach-profile {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.coach-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.coach-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.coach-details h4 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  background: var(--gradient-3);
+  text-emphasis-color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.coach-details p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, .7);
+  margin-bottom: 3px;
+}
+
+/* Styles spécifiques pour les formulaires dans l'accordion */
+.accordion__content .login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.accordion__content .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion__content .form-group input,
+.accordion__content .form-group textarea {
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, .2);
+  background: rgba(255, 255, 255, .05);
+  color: white;
+  font-size: 15px;
+  font-family: montserrat-s, sans-serif;
+  transition: var(--transition);
+  resize: vertical;
+}
+
+.accordion__content .form-group input:focus,
+.accordion__content .form-group textarea:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, .4);
+  background: rgba(255, 255, 255, .08);
+}
+
+.accordion__content .form-group input::placeholder,
+.accordion__content .form-group textarea::placeholder {
+  color: rgba(255, 255, 255, .5);
+}
+
+.accordion__content .btn-primary {
+  margin-top: 10px;
+  padding: 15px 24px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.accordion__content .login-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.accordion__content .login-links a {
+  color: rgba(255, 255, 255, .7);
+  font-size: 14px;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.accordion__content .login-links a:hover {
+  color: rgba(255, 255, 255, .9);
+  text-decoration: underline;
+}
+
 @media (max-width: 991.98px) {
   .top-line__center {
     display: none;
@@ -883,7 +1244,7 @@ ul {
     padding-bottom: 30px;
   }
   .section-head h2 {
-    font-size: 65px;
+    font-size: 50px;
   }
   .gallery__wrapper {
     grid-template-columns: repeat(2, minmax(0, 1fr));

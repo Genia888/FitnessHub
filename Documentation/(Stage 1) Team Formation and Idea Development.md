@@ -35,15 +35,15 @@ We created a mind map centered on the theme health and fitness solution.
 
 # 2. Idea Evaluation
 - Create a website/mobile to communicate between coach and users
-- The user can choose a coach from sport and diet
-- The user can see on his app the training menu and diet menu of the day
+- The user can choose a coach from sport and nutrition
+- The user can see on his app the training menu and nutrition menu of the day
 - Fitness Hub can sell goodies to user
 - The user pay an abonnement to get the training of the coach
  
 | **Idea**                        | **Feasibility** | **Impact** | **Technical Alignment** | **Scalability** |
 | ------------------------------- | --------------- | ---------- | ----------------------- | --------------- |
 | Personalized fitness programs   | 9/10            | 10/10      | 8/10                    | 9/10            |
-| Online diet tracking            | 8/10            | 9/10       | 8/10                    | 8/10            |
+| Online nutrition tracking            | 8/10            | 9/10       | 8/10                    | 8/10            |
 | Real-time chat                  | 6/10            | 7/10       | 6/10                    | 9/10            |
 | Integrated multilingual support | 7/10            | 7/10       | 8/10                    | 8/10            |
 | Online store                    | 6/10            | 8/10       | 8/10                    | 9/10            |
@@ -66,7 +66,7 @@ We created a mind map centered on the theme health and fitness solution.
 **FitnessHub – Platform connecting fitness coaches and clients**  
 
 ## Main Objective  
-Develop an intuitive web platform that connects fitness coaches, nutritionists, and dietitians with users seeking personalized guidance (fitness programs + nutrition) accessible from anywhere.  
+Develop an intuitive web platform that connects fitness coaches, nutritionists, and nutritionitians with users seeking personalized guidance (fitness programs + nutrition) accessible from anywhere.  
 
 ## MVP Description  
 For the MVP, we aim to build a simplified version of the platform that includes:  
@@ -88,7 +88,7 @@ For the MVP, we aim to build a simplified version of the platform that includes:
 
 **Coaches:**  
 - Certified fitness trainers.  
-- Nutritionists and dietitians.  
+- Nutritionists and nutritionitians.  
 - Specialized coaches (yoga, CrossFit, bodybuilding, etc.).  
 
 ## Key Features (MVP)  
