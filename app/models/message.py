@@ -6,24 +6,25 @@ from sqlalchemy.orm import validates
 class Message(BaseModel):
     __tablename__ = 'Message'
 
-    date_message = db.Column(db.DateTime, nullable=False)
-    text = db.Column(db.String(10000), nullable=False)
     is_read = db.Column(db.Boolean, nullable=False)
+    text = db.Column(db.String(10000), nullable=False)
+    
+    
     user_id = db.Column(db.String(36), db.ForeignKey('User.id'),
                         nullable=False)
     coach_id = db.Column(db.String(36), db.ForeignKey('User.id'),
                          nullable=False)
+    is_from_user = db.Column(db.Boolean, nullable=False)
 
-
-    def __init__(self, text, is_read, date_message, user, coach):
+    def __init__(self, text, is_read, is_from_user, user, coach):
         super().__init__()
         if not text:
             raise ValueError("Message text is required.")
         self.text = text
         self.is_read = is_read
+        self.is_from_user = is_from_user
         self.user_id = user
         self.coach_id = coach
-        self.date_message = date_message
 
     @validates('text')
     def validate_text(self, key, value):
@@ -48,7 +49,8 @@ class Message(BaseModel):
             'text': self._text,
             'user_id': self._user_id,
             'coach_id': self._coach_id,
+            'is_from_user': self._is_read,
             'is_read': self._is_read,
-            'date_message': self._date_message
+            'created_at': self.created_at.isoformat(),
         }
 

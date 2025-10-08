@@ -6,9 +6,9 @@ api = Namespace('message', description='Message operations')
 
 # Define the review model for input validation and documentation
 message_model = api.model('Message', {
-    'date_message': fields.DateTime(required=True, description='Date of the message'),
     'text': fields.String(required=True, description='Text of the coach'),
     'is_read': fields.Boolean(required=True, description='Message read T/F'),
+    'is_from_user': fields.Boolean(required=True, description='Message from user'),
     'user_id': fields.String(required=True, description='ID of the user'),
     'coach_id': fields.String(required=True, description='ID of the coach')
 })
@@ -27,7 +27,10 @@ class messageList(Resource):
         try:
 
             current_user = get_jwt_identity()
-            message_data['user_id'] = current_user['id']
+            if message_data['user_id'] == current_user['id']:
+                message_data['is_from_user'] = 1
+            else:
+                message_data['is_from_user'] = 0
 
             new_message = facade.create_message(
                 message_data
@@ -36,8 +39,8 @@ class messageList(Resource):
             return {
                 'id': new_message.id,
                 'text': new_message.text,
-                'date_message': new_message.date_message,
                 'is_read': new_message.is_read,
+                'is_from_user': new_message.is_from_user,
                 'user_id': new_message.user_id,
                 'coach_id': new_message.coach_id
             }, 201
@@ -52,10 +55,11 @@ class messageList(Resource):
             {
                 'id': message.id,
                 'text': message.text,
-                'date_message': message.date_message,
                 'is_read': message.is_read,
+                'is_from_user': message.is_from_user,
                 'user_id': message.user_id,
-                'coach_id': message.coach_id
+                'coach_id': message.coach_id,
+                'created_at': message.created_at.isoformat()
             }
             for message in messages
         ], 200
@@ -75,10 +79,11 @@ class MessageResource(Resource):
             return {
                 'id': message.id,
                 'text': message.text,
-                'date_message': message.date_message,
                 'is_read': message.is_read,
+                'is_from_user': message.is_from_user,
                 'user_id': message.user_id,
-                'coach_id': message.coach_id
+                'coach_id': message.coach_id,
+                'created_at': message.created_at.isoformat()
             }, 200
         except ValueError as e:
             return {'error': str(e)}, 400
@@ -103,8 +108,8 @@ class MessageResource(Resource):
             return {
                 'id': updated_message.id,
                 'text': updated_message.text,
-                'date_message': updated_message.date_message,
                 'is_read': updated_message.is_read,
+                'is_from_user': updated_message.is_from_user,
                 'user_id': updated_message.user_id,
                 'coach_id': updated_message.coach_id
             }, 200
@@ -147,8 +152,9 @@ class PlaceReviewList(Resource):
                 {
                     'id': message.id,
                     'text': message.text,
-                    'date_message': message.date_message,
+                    'created_at': message.created_at.isoformat(),
                     'is_read': message.is_read,
+                    'is_from_user': message.is_from_user,
                 }
                 for message in coach_messages
             ], 200

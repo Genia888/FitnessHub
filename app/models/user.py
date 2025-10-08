@@ -30,6 +30,8 @@ class User(BaseModel):
     weight = db.Column(db.Float, nullable=False)
     picture = db.Column(db.String(1000), nullable=False)
     reviews = db.relationship('Review', backref='Author', lazy=True, foreign_keys='Review.coach_id')
+    messagesFromUser = db.relationship('Message', backref='AuthorM', lazy=True, foreign_keys='Message.user_id')
+    messagesFromCoach = db.relationship('Message', backref='AuthorC', lazy=True, foreign_keys='Message.coach_id')
 
     def __init__(self, first_name: str, last_name: str, email: str, password: str, is_admin=False, is_coach=False, is_nutrition=False, is_subscribe=False, adress1="", adress2="", postal_code="", city="", allergy_comment="", physical_constraint="", coach_certif="", coach_experience="", coach_description="", size="", weight="", picture=""):
         super().__init__()
@@ -117,5 +119,9 @@ class User(BaseModel):
             "weight": self.weight,
             "picture": self.picture,
             "reviews": [{'id': review.id, 'text': review.text, 'rating': review.rating}
-                          for review in self.reviews]
+                          for review in self.reviews],
+            "messagesFromUser": [{'id': message.id, 'is_from_user' : message.is_from_user, 'text': message.text, 'created_at': message.created_at.isoformat()}
+                          for message in self.messagesFromUser],
+            "messagesFromCoach": [{'id': message.id, 'is_from_user' : message.is_from_user, 'text': message.text, 'created_at': message.created_at.isoformat()}
+                          for message in self.messagesFromCoach]
         }
