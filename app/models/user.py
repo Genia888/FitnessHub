@@ -120,8 +120,8 @@ class User(BaseModel):
             "picture": self.picture,
             "reviews": [{'id': review.id, 'text': review.text, 'rating': review.rating}
                           for review in self.reviews],
-            "messagesFromUser": [{'id': message.id, 'text': message.text, 'created_at': message.created_at.isoformat()}
+            "messagesFromUser": [{'id': message.id, 'is_from_user' : message.is_from_user, 'text': message.text, 'created_at': message.created_at.isoformat()}
                           for message in self.messagesFromUser],
-            "messagesFromCoach": [{'id': message.id, 'text': message.text, 'created_at': message.created_at.isoformat()}
+            "messagesFromCoach": [{'id': message.id, 'is_from_user' : message.is_from_user, 'text': message.text, 'created_at': message.created_at.isoformat()}
                           for message in self.messagesFromCoach]
         }
