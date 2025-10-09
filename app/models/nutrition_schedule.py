@@ -14,12 +14,14 @@ class Nutrition(BaseModel):
     category = db.Column(db.String(36), nullable=False)
     calories = db.Column(db.Float, default=0)
     quantity = db.Column(db.Float, default=0)
+    date_nutrition = db.Column(db.DateTime)
     user_id = db.Column(db.String(36), db.ForeignKey('User.id'),
                         nullable=False)
     coach_id = db.Column(db.String(36), db.ForeignKey('User.id'),
                          nullable=False)
     
-    def __init__(self, description: str, picture: str, category: str, calories: float, quantity: float, user, coach ):
+
+    def __init__(self, description: str, picture: str, category: str, calories: float, quantity: float, date_nutrition: datetime, user, coach ):
         super().__init__()
         if not description or len(description) > 10000:
             raise ValueError("Description is required and must be ≤ 10000 characters.")
@@ -30,10 +32,12 @@ class Nutrition(BaseModel):
         self.description = description
         self.picture = picture
         self.category = category
-        self.user_id = user
-        self.coach_id = coach
         self.calories = calories
         self.quantity = quantity
+        self.date_nutrition = date_nutrition
+        self.user_id = user
+        self.coach_id = coach
+
 
     def __str__(self):
         """
@@ -50,6 +54,7 @@ class Nutrition(BaseModel):
             'category': self.category,
             'calories': self.calories,
             'quantity': self.quantity,
+            'date_nutrition': self.date_nutrition.isoformat(),
             'user_id': self.user_id,
             'coach_id': self.coach_id
         }

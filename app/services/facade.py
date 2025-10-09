@@ -219,7 +219,11 @@ class HBnBFacade:
         coach = self.get_user(nutrition_data['coach_id'])
         if not coach:
             raise ValueError("Coach not found.")
-        nutrition = Nutrition(nutrition_data['description'], nutrition_data['picture'], nutrition_data['category'], nutrition_data['date_workout'], nutrition_data['comment'], nutrition_data['user_id'], nutrition_data['coach_id'])
+        print("affect nutrition date")
+        nutrition_data["date_nutrition"] = datetime.fromisoformat(nutrition_data["date_nutrition"].replace("Z", "+00:00"))
+        print("after nutrition date")
+        nutrition = Nutrition(nutrition_data['description'], nutrition_data['picture'], nutrition_data['category'], nutrition_data['calories'],nutrition_data['quantity'],nutrition_data['date_nutrition'],  nutrition_data['user_id'], nutrition_data['coach_id'])
+        print("suite nutrition date")
         self.nutrition_repo.add(nutrition)
         return nutrition      
 
@@ -252,15 +256,15 @@ class HBnBFacade:
 
 
     # Message Facade
-    def create_subscription(self, subscription_data):
+    def create_subscription(self, nutrition_data):
         """Create a new subscription."""
-        user = self.get_user(subscription_data['user_id'])
+        user = self.get_user(nutrition_data['user_id'])
         if not user:
             raise ValueError("User not found.")
-        coach = self.get_user(subscription_data['coach_id'])
+        coach = self.get_user(nutrition_data['coach_id'])
         if not coach:
             raise ValueError("Coach not found.")
-        subscription = Subscription(subscription_data['text'], subscription_data['rating'], subscription_data['user_id'], subscription_data['coach_id'])
+        subscription = Nutrition(nutrition_data['description'], nutrition_data['picture'], nutrition_data['category'], nutrition_data['quantity'], nutrition_data['date_nutrition'],  user, coach)
         self.subscription_repo.add(subscription)
         return subscription      
 

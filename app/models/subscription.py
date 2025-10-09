@@ -2,6 +2,14 @@
 from app.models.base_model import BaseModel
 from app import db
 from sqlalchemy.orm import validates
+import json
+import datetime
+
+# Define a custom function to serialize datetime objects
+def serialize_datetime(obj):
+    if isinstance(obj, datetime.date):
+        return obj.isoformat()
+    raise TypeError("Type not serializable")
 
 class Subscription(BaseModel):
     __tablename__ = 'Subscription'
@@ -14,8 +22,7 @@ class Subscription(BaseModel):
                         nullable=False)
     coach_id = db.Column(db.String(36), db.ForeignKey('User.id'),
                          nullable=False)
-
-
+    
     def __init__(self, begin_date, end_date, option_message, option_nutrition, user, coach):
         super().__init__()
         #if not text:
@@ -36,10 +43,12 @@ class Subscription(BaseModel):
 
     def to_dict(self):
         '''Convert the Message object to a dictionary'''
+        json_data = json.dumps(self._begin_date, default=serialize_datetime)
+        json_data2 = json.dumps(self._end_date, default=serialize_datetime)
         return {
             'id': self.id,
-            'begin_date': self._begin_date,
-            'end_date': self._end_date,
+            'begin_date': json_data,
+            'end_date': json_data2,
             'option_nutrition': self._option_nutrition,
             'option_message': self._option_message,
             'user_id': self._user_id,

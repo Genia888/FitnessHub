@@ -100,14 +100,13 @@ CREATE TABLE IF NOT EXISTS "Nutrition_schedule" (
     "category" VARCHAR(36) DEFAULT '',
     "calories" FLOAT DEFAULT 0,
     "quantity" FLOAT DEFAULT 0,
-    "date_nutrition" DATE DEFAULT NULL, 
+    "date_nutrition" DATETIME DEFAULT NULL, 
     "user_id" CHAR(36),
     "coach_id" CHAR(36),
     "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY ("user_id") REFERENCES User("id"),
-    FOREIGN KEY ("coach_id") REFERENCES User("id"),
-    UNIQUE ("user_id", "coach_id")
+    FOREIGN KEY ("coach_id") REFERENCES User("id")
 );
 
 -- Create Workouts time is in minutes
@@ -120,8 +119,9 @@ CREATE TABLE IF NOT EXISTS "Workout_schedule" (
     "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "comment" VARCHAR(2000) DEFAULT '', 
-    "date_workout" DATE DEFAULT NULL, 
+    "date_workout" TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     "coach_id" CHAR(36),
     "user_id" CHAR(36),
+    FOREIGN KEY ("user_id") REFERENCES User("id"),
     FOREIGN KEY ("coach_id") REFERENCES User("id")
 );

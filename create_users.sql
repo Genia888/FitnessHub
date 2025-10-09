@@ -85,4 +85,22 @@ values ('000000000000000000000000000000000009', 'Leggings FitnessHub', 'Leggings
 'http://localhost:5500/public/images/ready/product9.jpg','','',45,'2025-09-15 17:05:36.374418','2025-09-15 17:05:36.374432',true, true);
 
 insert into "Message"( id, is_read, text, user_id, coach_id, is_from_user, created_at, updated_at)
-values ( '83726b63-dcd3-4f7e-bc36-0f326ae59001', 1, "Coucou, ça c'est bien passé ta séance ", '83726b63-dcd3-4f7e-bc36-0f326ae59726', '83726b63-dcd3-4f7e-bc36-0f326ae59721', 0, NOW(), NOW())
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59001', 1, "Coucou, ça c'est bien passé ta séance ", '83726b63-dcd3-4f7e-bc36-0f326ae59726', '83726b63-dcd3-4f7e-bc36-0f326ae59721', 0, '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+insert into "Message"( id, is_read, text, user_id, coach_id, is_from_user, created_at, updated_at)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59002', 1, "Oui, ça va, j'ai mis moins de temps que d'habitude ", '83726b63-dcd3-4f7e-bc36-0f326ae59726', '83726b63-dcd3-4f7e-bc36-0f326ae59721', 1, '2025-09-15 17:05:37.374418', '2025-09-15 17:05:36.374418');
+
+insert into "Message"( id, is_read, text, user_id, coach_id, is_from_user, created_at, updated_at)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59003', 1, "Cool on change rien pour demain ", '83726b63-dcd3-4f7e-bc36-0f326ae59726', '83726b63-dcd3-4f7e-bc36-0f326ae59721', 0, '2025-09-15 17:05:38.374418', '2025-09-15 17:05:36.374418');
+
+insert into "Message"( id, is_read, text, user_id, coach_id, is_from_user, created_at, updated_at)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59004', 0, "Ok ", '83726b63-dcd3-4f7e-bc36-0f326ae59726', '83726b63-dcd3-4f7e-bc36-0f326ae59721', 0, '2025-09-15 17:05:39.374418', '2025-09-15 17:05:39.374418');
+
+insert into Subscription (id, begin_date, end_date, option_nutrition, option_message, user_id, coach_id, created_at, updated_at)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59001', '2025-01-01', '2025-12-31', 1 , 1, '83726b63-dcd3-4f7e-bc36-0f326ae59726', '83726b63-dcd3-4f7e-bc36-0f326ae59721', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+insert into Subscription (id, begin_date, end_date, option_nutrition, option_message, user_id, coach_id, created_at, updated_at)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59002', '2025-01-01', '2025-06-30', 1 , 1, '83726b63-dcd3-4f7e-bc36-0f326ae59725', '83726b63-dcd3-4f7e-bc36-0f326ae59721', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+insert into Subscription (id, begin_date, end_date, option_nutrition, option_message, user_id, coach_id, created_at, updated_at)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59003', '2025-01-01', '2025-12-31', 1 , 1, '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
