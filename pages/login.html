@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Espace Abonné - FitnessHub</title>
+  <title>Subscription - FitnessHub</title>
   
   <!-- image favicon -->
   <link rel="icon" type="image/x-icon" href="../assets/images/fitnesshub.jpg">
@@ -40,9 +40,10 @@
       <div class="top-line__center">
         <nav class="top-mnu">
           <ul>
-            <li><a href="../pages/abonnement.html" data-text="Abonnement">Abonnement</a></li>
-            <li><a href="../pages/list-coach.html" data-text="Coach">Coach</a></li>
-            <li><a href="../pages/boutique.html" data-text="Boutique">Boutique</a></li>
+            <li><a href="abonnement.html" data-text="Plans">Plans</a></li>
+            <li><a href="coach.html" data-text="Coach">Coach</a></li>
+            <li><a href="boutique.html" data-text="Shop">Shop</a></li>
+            <li><a href="connexion.html" data-text="Sign in">Sign in</a></li>
           </ul>
         </nav>
       </div>
@@ -58,9 +59,10 @@
         <div class="main-menu">
           <nav class="main-menu__inner">
             <ul>
-              <li><a href="../pages/abonnement.html" data-text="Abonnement">Abonnement<span></span></a></li>
-              <li><a href="../pages/coach.html" data-text="Coach">Coach<span></span></a></li>
-              <li><a href="../pages/boutique.html" data-text="Boutique">Boutique<span></span></a></li>
+              <li><a href="abonnement.html" data-text="Plans">Plans<span></span></a></li>
+              <li><a href="coach.html" data-text="Coaches">Coaches<span></span></a></li>
+              <li><a href="boutique.html" data-text="Shop">Shop<span></span></a></li>
+              <li><a href="connexion.html" data-text="Sign in">Sign in<span></span></a></li>
             </ul>
           </nav>
         </div>
@@ -74,10 +76,10 @@
         <div class="accordion__bg">
           <img src="../public/images/ready/2.jpg" alt="Coach" data-parallax-target>
         </div>
-        <div class="accordion__start">Devenir Coach</div>
+        <div class="accordion__start">Become Coach</div>
         <div class="accordion__content">
           <div class="accordion__header">
-            <h2>Créer un compte Coach</h2>
+            <h2>Become Coach</h2>
           </div>
           <div class="accordion__description" style="width: 100%; max-width: 500px;">
             <form class="login-form" action="/api/v1/users/" method="post">
@@ -103,9 +105,9 @@
                 <textarea name="coach_description" placeholder="Description / Présentation" rows="3" required></textarea>
               </div>
               <input type="hidden" name="is_coach" value="true">
-              <button class="btn-primary" type="submit">Créer mon compte Coach</button>
+              <button class="btn-primary" type="submit">Coach Sign Up</button>
               <div class="login-links">
-                <a href="#" class="forgot-password">Déjà un compte ? Se connecter</a>
+                <a href="../pages/connexion.html" class="forgot-password">Already have an account? Log in</a>
               </div>
             </form>
           </div>
@@ -116,10 +118,10 @@
         <div class="accordion__bg">
           <img src="../public/images/ready/1.jpg" alt="Client" data-parallax-target>
         </div>
-        <div class="accordion__start">Devenir Client</div>
+        <div class="accordion__start">Become Member</div>
         <div class="accordion__content">
           <div class="accordion__header">
-            <h2>Créer un compte Client</h2>
+            <h2>Become Member</h2>
           </div>
           <div class="accordion__description" style="width: 100%; max-width: 500px;">
             <form class="login-form" action="/api/v1/users/" method="post">
@@ -147,9 +149,9 @@
               <div class="form-group">
                 <textarea name="physical_constraint" placeholder="Contraintes physiques" rows="2"></textarea>
               </div>
-              <button class="btn-primary" type="submit">Créer mon compte Client</button>
+              <button class="btn-primary" type="submit">Client Sign Up</button>
               <div class="login-links">
-                <a href="#" class="forgot-password">Déjà un compte ? Se connecter</a>
+                <a href="../pages/connexion.html" class="forgot-password">Already have an account? Log in</a>
               </div>
             </form>
           </div>
