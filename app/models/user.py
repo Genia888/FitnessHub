@@ -32,6 +32,7 @@ class User(BaseModel):
     picture = db.Column(db.String(1000), nullable=False)
     reviews = db.relationship('Review', backref='Author', lazy=True, foreign_keys='Review.coach_id')
     messagesFromUser = db.relationship('Message', backref='AuthorM', lazy=True, foreign_keys='Message.user_id')
+    nutritionSchedule = db.relationship('Nutrition', backref='NutritionM', order_by='Nutrition.date_nutrition', lazy=True, foreign_keys='Nutrition.user_id')
     consumerUsers = db.relationship('Subscription', backref='ConsumerC', lazy=True, foreign_keys='Subscription.coach_id')
 
     def __init__(self, first_name: str, last_name: str, email: str, password: str, is_admin=False, is_coach=False, is_nutrition=False, is_subscribe=False, adress1="", adress2="", postal_code="", city="", allergy_comment="", physical_constraint="", coach_certif="", coach_experience="", coach_description="", size="", weight="", picture=""):
@@ -123,5 +124,7 @@ class User(BaseModel):
             "messagesFromUser": [{'id': message.id, 'is_from_user' : message.is_from_user, 'text': message.text, 'created_at': message.created_at.isoformat()}
                           for message in self.messagesFromUser],
             "consumerUsers": [{'id': subscription.id, 'user_id' : subscription.user_id}
-                          for subscription in self.consumerUsers]
+                          for subscription in self.consumerUsers],
+            "nutritionSchedule": [{'id': nutrition.id, 'date' : nutrition.date_nutrition.isoformat(), 'description' : nutrition.description}
+                          for nutrition in self.nutritionSchedule]
         }

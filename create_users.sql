@@ -104,3 +104,11 @@ values ( '83726b63-dcd3-4f7e-bc36-0f326ae59002', '2025-01-01', '2025-06-30', 1 ,
 
 insert into Subscription (id, begin_date, end_date, option_nutrition, option_message, user_id, coach_id, created_at, updated_at)
 values ( '83726b63-dcd3-4f7e-bc36-0f326ae59003', '2025-01-01', '2025-12-31', 1 , 1, '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+insert into "Nutrition_schedule" ("id", "description",
+    "picture", "category", "calories",
+    "quantity", "date_nutrition", 
+    "user_id", "coach_id", "created_at",
+    "updated_at"
+)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59003', "Menu mac do !", "http://localhost:5500/public/images/ready/client1.jpg", "Repas du midi", 10,10,'2025-09-15 17:05:36', '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');

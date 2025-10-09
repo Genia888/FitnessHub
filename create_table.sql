@@ -58,8 +58,7 @@ CREATE TABLE IF NOT EXISTS "Subscription" (
     "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY ("user_id") REFERENCES User("id"),
-    FOREIGN KEY ("coach_id") REFERENCES User("id"),
-    UNIQUE ("user_id", "coach_id")
+    FOREIGN KEY ("coach_id") REFERENCES User("id")
 );
 
 -- Create subscription
