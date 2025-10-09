@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Hub - FitnessHub</title>
+  <title>Coach Dashboard - FitnessHub</title>
   
   <!-- image favicon -->
   <link rel="icon" type="image/x-icon" href="../assets/images/fitnesshub.jpg">
@@ -40,9 +40,11 @@
       <div class="top-line__center">
         <nav class="top-mnu">
           <ul>
-            <li><a href="subscriber.html" data-text="Mon Espace">Mon Espace</a></li>
-            <li><a href="abonnement.html" data-text="Abonnement">Abonnement</a></li>
-            <li><a href="boutique.html" data-text="Boutique">Boutique</a></li>
+            <li><a href="abonnement.html" data-text="Plans">Plans</a></li>
+            <li><a href="coach.html" data-text="Coaches">Coaches</a></li>
+            <li><a href="boutique.html" data-text="Shop">Shop</a></li>
+            <li><a href="connexion.html" data-text="Sign in">Sign in<span></span></a></li>
+            <li><a href="connexion.html" data-text="Sign in">Log out<span></span></a></li>
           </ul>
         </nav>
       </div>
@@ -58,9 +60,11 @@
         <div class="main-menu">
           <nav class="main-menu__inner">
             <ul>
-              <li><a href="../subscriber.html" data-text="Mon Espace">Mon Espace<span></span></a></li>
-              <li><a href="../abonnement.html" data-text="Abonnement">Abonnement<span></span></a></li>
-              <li><a href="../boutique.html" data-text="Boutique">Boutique<span></span></a></li>
+              <li><a href="abonnement.html" data-text="Plans">Plans<span></span></a></li>
+              <li><a href="coach.html" data-text="Coaches">Coaches<span></span></a></li>
+              <li><a href="boutique.html" data-text="Shop">Shop<span></span></a></li>
+              <li><a href="connexion.html" data-text="Sign in">Sign in<span></span></a></li>
+              <li><a href="connexion.html" data-text="Log out">Log out<span></span></a></li>
             </ul>
           </nav>
         </div>
@@ -71,11 +75,8 @@
   <div class="container">
     <section class="page-content">
       <div class="section-head">
-        <h2>My Hub</h2>
+        <h2>Client Dashboard</h2>
         <div class="section-head__right">
-          <button class="btn-secondary">
-            <span data-text="Déconnexion">Déconnexion</span>
-          </button>
         </div>
       </div>
 
@@ -86,9 +87,9 @@
           </div>
           <div class="client-info">
             <h3>Hedjouj Reziga</h3>
-            <p class="client-goal">Objectif : Summer body</p>
-            <p class="client-stats">80kg • 1m70 • 29 ans</p>
-            <p class="client-progress">Progrès : -5kg en 2 mois</p>
+            <p class="client-goal">Goal : Summer body</p>
+            <p class="client-stats">80kg • 1m70 • 29 years old</p>
+            <p class="client-progress">Progress : -5kg in 2 mouths</p>
           </div>
         </div>
 
@@ -96,18 +97,18 @@
         <div class="trainer-grid">
           <!-- Exercices Planning -->
           <div class="planning-card subscriber-readonly">
-            <h3>Mon Planning Exercices</h3>
+            <h3>My Workout Schedule﻿</h3>
             <div class="exercise-list">
               <div class="exercise-item">
                 <span class="exercise-name">Squats</span>
-                <span class="exercise-details">3x15 répétitions</span>
+                <span class="exercise-details">3x15 repetitions</span>
               </div>
               <div class="exercise-item">
                 <span class="exercise-name">Pompes</span>
-                <span class="exercise-details">3x10 répétitions</span>
+                <span class="exercise-details">3x10 repetitions</span>
               </div>
               <div class="exercise-item">
-                <span class="exercise-name">Planche</span>
+                <span class="exercise-name">Pull over</span>
                 <span class="exercise-details">3x30 secondes</span>
               </div>
               <div class="exercise-item">
@@ -116,63 +117,63 @@
               </div>
             </div>
             <div class="readonly-notice">
-              <p>📋 Planning défini par votre coach</p>
+              <p>📋 Schedule Set by Your Coach</p>
             </div>
           </div>
 
           <!-- Nutrition Planning -->
           <div class="planning-card subscriber-readonly">
-            <h3>Mon Planning Nutrition</h3>
+            <h3>My Nutrition Schedule</h3>
             <div class="nutrition-list">
               <div class="meal-item">
-                <span class="meal-time">Petit-déjeuner</span>
-                <span class="meal-details">Avoine + Fruits + Yaourt</span>
+                <span class="meal-time">Breakfast</span>
+                <span class="meal-details">Oats + Fruits + Yogurt</span>
               </div>
               <div class="meal-item">
-                <span class="meal-time">Déjeuner</span>
-                <span class="meal-details">Salade de quinoa + Poulet</span>
+                <span class="meal-time">Lunch</span>
+                <span class="meal-details">Quinoa Salad + Chicken</span>
               </div>
               <div class="meal-item">
-                <span class="meal-time">Collation</span>
-                <span class="meal-details">Amandes + Pomme</span>
+                <span class="meal-time">Snack</span>
+                <span class="meal-details">Almonds + Apple</span>
               </div>
               <div class="meal-item">
-                <span class="meal-time">Dîner</span>
-                <span class="meal-details">Saumon + Légumes vapeur</span>
+                <span class="meal-time">Dinner</span>
+                <span class="meal-details">Salmon + Steamed Vegetables</span>
               </div>
             </div>
             <div class="readonly-notice">
-              <p>🥗 Régime personnalisé par votre coach</p>
+              <p>🥗 Personalized Nutrition Plan by Your Coach</p>
             </div>
           </div>
 
           <!-- Calendar -->
           <div class="calendar-card subscriber-readonly">
-            <h3>Mon Calendrier de la semaine</h3>
+            <h3>My Week Calendar</h3>
             <div class="calendar-grid">
               <div class="calendar-day">
-                <span class="day-name">Lun</span>
+                <span class="day-name">Mon</span>
                 <span class="day-number">15</span>
                 <div class="day-exercises">
-                  <span>Haut du corps</span>
+                  <span>Upper Body</span>
                 </div>
               </div>
               <div class="calendar-day active">
-                <span class="day-name">Mar</span>
+                <span class="day-name">Tue</span>
                 <span class="day-number">16</span>
                 <div class="day-exercises">
                   <span>Cardio</span>
                 </div>
               </div>
               <div class="calendar-day">
-                <span class="day-name">Mer</span>
+                <span class="day-name">Fri</span>
                 <span class="day-number">17</span>
                 <div class="day-exercises">
                   <span>Repos</span>
                 </div>
               </div>
               <div class="calendar-day">
-                <span class="day-name">Jeu</span>
+                <span class="day-name">Thur</span>
                 <span class="day-number">18</span>
                 <div class="day-exercises">
                   <span>Bas du corps</span>
