@@ -47,6 +47,17 @@ accordionCol.forEach(col => {
   })
 })
 
+// Highlights accordion functionality
+const highlightsAccordionCol = document.querySelectorAll('.highlights-accordion__col')
+highlightsAccordionCol.forEach(col => {
+  col.addEventListener('mouseenter', () => {
+    highlightsAccordionCol.forEach(c => {
+      c.classList.remove('active')
+      col.classList.add('active')
+    })
+  })
+})
+
 const lenis = new Lenis()
 function raf(time) {
   lenis.raf(time)

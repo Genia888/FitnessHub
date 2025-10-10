@@ -514,6 +514,120 @@ ul {
   transform: translate(0, 0);
 }
 
+/* Highlights Accordion */
+.highlights-accordion {
+  display: flex;
+  gap: 15px;
+  height: 40vh;
+}
+
+.highlights-accordion__col {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 15px;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  min-width: 150px;
+  cursor: pointer;
+  transition: all 1s;
+}
+
+.highlights-accordion__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transition: all 1s;
+}
+
+.highlights-accordion__bg img {
+  display: block;
+}
+
+.highlights-accordion__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #180224;
+  opacity: .4;
+}
+
+.highlights-accordion__col.active {
+  width: 100%;
+  flex: 3;
+}
+
+.highlights-accordion__start {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
+  font-size: 16px;
+  font-weight: 500;
+  transition: var(--transition);
+  transition-delay: .3s;
+}
+
+.highlights-accordion__col.active .highlights-accordion__start {
+  opacity: 0;
+  transition-delay: .1s;
+}
+
+.highlights-accordion__content {
+  padding: 0 40px;
+}
+
+.highlights-accordion__header {
+  overflow: hidden;
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+}
+
+.highlights-accordion__header h3 {
+  font-weight: 200;
+  font-size: 24px;
+  line-height: 100%;
+  padding-bottom: 8px;
+  margin-bottom: -8px;
+  background: var(--gradient-3);
+  text-emphasis-color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(0, 130%) rotate(10deg);
+  transition: var(--transition);
+  transition-duration: 1s;
+}
+
+.highlights-accordion__col.active .highlights-accordion__header h3 {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(0, 0) rotate(0);
+}
+
+.highlights-accordion__description {
+  width: 280px;
+  font-weight: 400;
+  color: #ffeffd;
+  font-size: 14px;
+  line-height: 130%;
+  opacity: 0;
+  transform: translate(0, 20%);
+  transition: var(--transition);
+  transition-duration: 1s;
+  font-kerning: none;
+}
+
+.highlights-accordion__col.active .highlights-accordion__description {
+  opacity: .8;
+  transform: translate(0, 0);
+}
+
 .gallery {
   margin-bottom: 20px;
   margin-top: 120px;
