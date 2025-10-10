@@ -111,4 +111,61 @@ insert into "Nutrition_schedule" ("id", "description",
     "user_id", "coach_id", "created_at",
     "updated_at"
 )
-values ( '83726b63-dcd3-4f7e-bc36-0f326ae59003', "Menu mac do !", "http://localhost:5500/public/images/ready/client1.jpg", "Repas du midi", 10,10,'2025-09-15 17:05:36', '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59003', "Oats + Fruits + Yogurt", "http://localhost:5500/public/images/ready/client1.jpg", "Breakfast", 10,10,'2025-09-15 17:05:36', '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+insert into "Nutrition_schedule" ("id", "description",
+    "picture", "category", "calories",
+    "quantity", "date_nutrition", 
+    "user_id", "coach_id", "created_at",
+    "updated_at"
+)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59004', "Quinoa Salad + Chicken", "http://localhost:5500/public/images/ready/client1.jpg", "Lunch", 10,10,'2025-09-15 17:05:36', '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+insert into "Nutrition_schedule" ("id", "description",
+    "picture", "category", "calories",
+    "quantity", "date_nutrition", 
+    "user_id", "coach_id", "created_at",
+    "updated_at"
+)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59005', "Almonds + Apple", "http://localhost:5500/public/images/ready/client1.jpg", "Snack", 10,10,'2025-09-15 17:05:36', '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+insert into "Nutrition_schedule" ("id", "description",
+    "picture", "category", "calories",
+    "quantity", "date_nutrition", 
+    "user_id", "coach_id", "created_at",
+    "updated_at"
+)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59006', "Salmon + Steamed Vegetables", "http://localhost:5500/public/images/ready/client1.jpg", "Dinner", 10,10,'2025-09-15 17:05:36', '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+
+insert into "Workout_schedule" ("id", "description",
+    "picture", "category", "time",
+    "comment", "date_workout", 
+    "user_id", "coach_id", "created_at",
+    "updated_at"
+)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59007', "3x15 repetitions", "http://localhost:5500/public/images/ready/client1.jpg", "Squats", 0,'Trop dur !','2025-09-15 17:05:36', '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+insert into "Workout_schedule" ("id", "description",
+    "picture", "category", "time",
+    "comment", "date_workout", 
+    "user_id", "coach_id", "created_at",
+    "updated_at"
+)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59008', "3x10 repetitions", "http://localhost:5500/public/images/ready/client1.jpg", "Push-ups", 0,'Trop dur !','2025-09-15 17:05:36', '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+insert into "Workout_schedule" ("id", "description",
+    "picture", "category", "time",
+    "comment", "date_workout", 
+    "user_id", "coach_id", "created_at",
+    "updated_at"
+)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59009', "3x30 secondes", "http://localhost:5500/public/images/ready/client1.jpg", "Pull over", 0,'Trop dur !','2025-09-15 17:05:36', '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+insert into "Workout_schedule" ("id", "description",
+    "picture", "category", "time",
+    "comment", "date_workout", 
+    "user_id", "coach_id", "created_at",
+    "updated_at"
+)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59006', "20 minutes", "http://localhost:5500/public/images/ready/client1.jpg", "Cardio", 20,'Trop dur !','2025-09-15 17:05:36', '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');

@@ -115,12 +115,12 @@ CREATE TABLE IF NOT EXISTS "Workout_schedule" (
     "picture" VARCHAR(2000) DEFAULT '', 
     "category" VARCHAR(200) DEFAULT '', 
     "time" Float Default 0,
-    "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "comment" VARCHAR(2000) DEFAULT '', 
-    "date_workout" TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    "date_workout" DATETIME DEFAULT NULL, 
     "coach_id" CHAR(36),
     "user_id" CHAR(36),
+    "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY ("user_id") REFERENCES User("id"),
     FOREIGN KEY ("coach_id") REFERENCES User("id")
 );

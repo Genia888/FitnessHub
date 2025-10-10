@@ -179,7 +179,7 @@ class HBnBFacade:
         coach = self.get_user(workout_data['coach_id'])
         if not coach:
             raise ValueError("Coach not found.")
-        workout = Workout(workout_data['description'], workout_data['picture'], workout_data['category'], workout_data['date_workout'], workout_data['comment'], workout_data['user_id'], workout_data['coach_id'])
+        workout = Workout(workout_data['description'], workout_data['picture'], workout_data['category'], workout_data['time'],workout_data['comment'],workout_data['date_workout'],  workout_data['user_id'], workout_data['coach_id'])
         self.workout_repo.add(workout)
         return workout      
 

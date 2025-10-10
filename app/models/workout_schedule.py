@@ -14,13 +14,13 @@ class Workout(BaseModel):
     category = db.Column(db.String(36), nullable=False)
     time = db.Column(db.Float, default=0)
     comment = db.Column(db.String(1000), default=0)
-    date_workout = db.Column(db.Date, default=0)
+    date_workout = db.Column(db.DateTime, default=0)
     user_id = db.Column(db.String(36), db.ForeignKey('User.id'),
                         nullable=False)
     coach_id = db.Column(db.String(36), db.ForeignKey('User.id'),
                          nullable=False)
     
-    def __init__(self, description: str, picture: str, category: str, date_workout, comment: str, user, coach ):
+    def __init__(self, description: str, picture: str, category: str, time: float, comment: str, date_workout,  user, coach ):
         super().__init__()
         if not description or len(description) > 10000:
             raise ValueError("Description is required and must be ≤ 10000 characters.")
@@ -31,6 +31,7 @@ class Workout(BaseModel):
         self.description = description
         self.picture = picture
         self.category = category
+        self.time = time
         self.user_id = user
         self.coach_id = coach
         self.comment = comment
@@ -51,7 +52,7 @@ class Workout(BaseModel):
             'category': self.category,
             'time': self.time,
             'comment': self.comment,
-            'date_workout': self.date_workout,
+            'date_workout': self.date_workout.isoformat(),
             'user_id': self.user_id,
             'coach_id': self.coach_id
         }

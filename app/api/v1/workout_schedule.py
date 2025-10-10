@@ -9,9 +9,9 @@ workout_model = api.model('workout', {
     'description': fields.String(required=True, description='Description of the workout'),
     'picture': fields.String(required=True, description='Picture of the workout'),
     'category': fields.String(required=True, description='Category of the workout'),
-    'calories': fields.Float(required=True, description='Calories'),
-    'quantity': fields.Float(required=True, description='Quantity'),
-    'date_workout': fields.Date(required=True, description='Date od workout'),
+    'comment': fields.String(required=True, description='Calories'),
+    'time': fields.Float(required=True, description='Quantity'),
+    'date_workout': fields.DateTime(required=True, description='Date od workout'),
     'user_id': fields.String(required=True, description='ID of the user'),
     'coach_id': fields.String(required=True, description='ID of the coach')
 })
@@ -30,7 +30,7 @@ class WorkoutList(Resource):
         try:
 
             current_user = get_jwt_identity()
-            workout_data['user_id'] = current_user['id']
+            #workout_data['user_id'] = current_user['id']
 
             new_workout = facade.create_workout(
                 workout_data
@@ -41,8 +41,8 @@ class WorkoutList(Resource):
                 'description': new_workout.description,
                 'picture': new_workout.picture,
                 'category': new_workout.category,
-                'calories': new_workout.calories,
-                'quantity': new_workout.quantity,
+                'time': new_workout.time,
+                'comment': new_workout.comment,
                 'date_workout': new_workout.date_workout,
                 'user_id': new_workout.user_id,
                 'coach_id': new_workout.coach_id
@@ -60,9 +60,9 @@ class WorkoutList(Resource):
                 'description': workout.description,
                 'picture': workout.picture,
                 'category': workout.category,
-                'calories': workout.calories,
-                'quantity': workout.quantity,
-                'date_workout': workout.date_workout,
+                'time': workout.time,
+                'comment': workout.comment,
+                'date_workout': workout.date_workout.isoformat(),
                 'user_id': workout.user_id,
                 'coach_id': workout.coach_id
             }
@@ -86,8 +86,8 @@ class WorkoutResource(Resource):
                 'description': workout.description,
                 'picture': workout.picture,
                 'category': workout.category,
-                'calories': workout.calories,
-                'quantity': workout.quantity,
+                'time': workout.time,
+                'comment': workout.comment,
                 'date_workout': workout.date_workout,
                 'user_id': workout.user_id,
                 'coach_id': workout.coach_id
@@ -117,8 +117,8 @@ class WorkoutResource(Resource):
                 'description': updated_workout.description,
                 'picture': updated_workout.picture,
                 'category': updated_workout.category,
-                'calories': updated_workout.calories,
-                'quantity': updated_workout.quantity,
+                'time': updated_workout.time,
+                'comment': updated_workout.comment,
                 'date_workout': workout.date_workout,
                 'user_id': updated_workout.user_id,
                 'coach_id': updated_workout.coach_id
@@ -139,7 +139,7 @@ class WorkoutResource(Resource):
 
             current_user = get_jwt_identity()
 
-            if current_user['id'] == workout_get.user_id:
+            if current_user['id'] != workout_get.coach_id:
                 return {'error': 'Unauthorized action'}, 403
 
             workout = facade.delete_workout(workout_get)

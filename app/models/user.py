@@ -34,6 +34,7 @@ class User(BaseModel):
     messagesFromUser = db.relationship('Message', backref='AuthorM', lazy=True, foreign_keys='Message.user_id')
     nutritionSchedule = db.relationship('Nutrition', backref='NutritionM', order_by='Nutrition.date_nutrition', lazy=True, foreign_keys='Nutrition.user_id')
     consumerUsers = db.relationship('Subscription', backref='ConsumerC', lazy=True, foreign_keys='Subscription.coach_id')
+    workoutSchedule = db.relationship('Workout', backref='WorkoutC', lazy=True, foreign_keys='Workout.user_id')
 
     def __init__(self, first_name: str, last_name: str, email: str, password: str, is_admin=False, is_coach=False, is_nutrition=False, is_subscribe=False, adress1="", adress2="", postal_code="", city="", allergy_comment="", physical_constraint="", coach_certif="", coach_experience="", coach_description="", size="", weight="", picture=""):
         super().__init__()
@@ -125,6 +126,8 @@ class User(BaseModel):
                           for message in self.messagesFromUser],
             "consumerUsers": [{'id': subscription.id, 'user_id' : subscription.user_id}
                           for subscription in self.consumerUsers],
-            "nutritionSchedule": [{'id': nutrition.id, 'date' : nutrition.date_nutrition.isoformat(), 'description' : nutrition.description}
-                          for nutrition in self.nutritionSchedule]
+            "nutritionSchedule": [{'id': nutrition.id, 'date' : nutrition.date_nutrition.isoformat(), 'calories' : nutrition.calories, 'quantity' : nutrition.quantity,  'category' : nutrition.category, 'description' : nutrition.description}
+                          for nutrition in self.nutritionSchedule],
+            "workoutSchedule": [{'id': workout.id, 'date' : workout.date_workout.isoformat(), 'category' : workout.category, 'description' : workout.description}
+                          for workout in self.workoutSchedule]
         }
