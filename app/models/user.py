@@ -3,8 +3,9 @@ import uuid
 from app.extension_bcrypt import bcrypt
 from app.extensions import db
 from sqlalchemy.orm import validates, relationship
-from app.models import user
 from app.models.base_model import BaseModel
+
+import json
 
 class User(BaseModel):
     __tablename__ = 'User'  # Use plural for consistency
@@ -31,7 +32,9 @@ class User(BaseModel):
     picture = db.Column(db.String(1000), nullable=False)
     reviews = db.relationship('Review', backref='Author', lazy=True, foreign_keys='Review.coach_id')
     messagesFromUser = db.relationship('Message', backref='AuthorM', lazy=True, foreign_keys='Message.user_id')
-    messagesFromCoach = db.relationship('Message', backref='AuthorC', lazy=True, foreign_keys='Message.coach_id')
+    nutritionSchedule = db.relationship('Nutrition', backref='NutritionM', order_by='Nutrition.date_nutrition', lazy=True, foreign_keys='Nutrition.user_id')
+    consumerUsers = db.relationship('Subscription', backref='ConsumerC', lazy=True, foreign_keys='Subscription.coach_id')
+    workoutSchedule = db.relationship('Workout', backref='WorkoutC', lazy=True, foreign_keys='Workout.user_id')
 
     def __init__(self, first_name: str, last_name: str, email: str, password: str, is_admin=False, is_coach=False, is_nutrition=False, is_subscribe=False, adress1="", adress2="", postal_code="", city="", allergy_comment="", physical_constraint="", coach_certif="", coach_experience="", coach_description="", size="", weight="", picture=""):
         super().__init__()
@@ -95,7 +98,6 @@ class User(BaseModel):
         return "{} {}".format(self.first_name, self.last_name)
     
     def to_dict(self):
-        """Convert the users object to a dictionary."""
         return {
             "id": self.id,
             "first_name": self.first_name,
@@ -122,6 +124,10 @@ class User(BaseModel):
                           for review in self.reviews],
             "messagesFromUser": [{'id': message.id, 'is_from_user' : message.is_from_user, 'text': message.text, 'created_at': message.created_at.isoformat()}
                           for message in self.messagesFromUser],
-            "messagesFromCoach": [{'id': message.id, 'is_from_user' : message.is_from_user, 'text': message.text, 'created_at': message.created_at.isoformat()}
-                          for message in self.messagesFromCoach]
+            "consumerUsers": [{'id': subscription.id, 'user_id' : subscription.user_id}
+                          for subscription in self.consumerUsers],
+            "nutritionSchedule": [{'id': nutrition.id, 'date' : nutrition.date_nutrition.isoformat(), 'calories' : nutrition.calories, 'quantity' : nutrition.quantity,  'category' : nutrition.category, 'description' : nutrition.description}
+                          for nutrition in self.nutritionSchedule],
+            "workoutSchedule": [{'id': workout.id, 'date' : workout.date_workout.isoformat(), 'category' : workout.category, 'description' : workout.description}
+                          for workout in self.workoutSchedule]
         }

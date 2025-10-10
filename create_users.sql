@@ -85,4 +85,95 @@ values ('000000000000000000000000000000000009', 'Leggings FitnessHub', 'Leggings
 'http://localhost:5500/public/images/ready/product9.jpg','','',45,'2025-09-15 17:05:36.374418','2025-09-15 17:05:36.374432',true, true);
 
 insert into "Message"( id, is_read, text, user_id, coach_id, is_from_user, created_at, updated_at)
-values ( '83726b63-dcd3-4f7e-bc36-0f326ae59001', 1, "Coucou, ça c'est bien passé ta séance ", '83726b63-dcd3-4f7e-bc36-0f326ae59726', '83726b63-dcd3-4f7e-bc36-0f326ae59721', 0, NOW(), NOW())
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59001', 1, "Coucou, ça c'est bien passé ta séance ", '83726b63-dcd3-4f7e-bc36-0f326ae59726', '83726b63-dcd3-4f7e-bc36-0f326ae59721', 0, '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+insert into "Message"( id, is_read, text, user_id, coach_id, is_from_user, created_at, updated_at)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59002', 1, "Oui, ça va, j'ai mis moins de temps que d'habitude ", '83726b63-dcd3-4f7e-bc36-0f326ae59726', '83726b63-dcd3-4f7e-bc36-0f326ae59721', 1, '2025-09-15 17:05:37.374418', '2025-09-15 17:05:36.374418');
+
+insert into "Message"( id, is_read, text, user_id, coach_id, is_from_user, created_at, updated_at)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59003', 1, "Cool on change rien pour demain ", '83726b63-dcd3-4f7e-bc36-0f326ae59726', '83726b63-dcd3-4f7e-bc36-0f326ae59721', 0, '2025-09-15 17:05:38.374418', '2025-09-15 17:05:36.374418');
+
+insert into "Message"( id, is_read, text, user_id, coach_id, is_from_user, created_at, updated_at)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59004', 0, "Ok ", '83726b63-dcd3-4f7e-bc36-0f326ae59726', '83726b63-dcd3-4f7e-bc36-0f326ae59721', 0, '2025-09-15 17:05:39.374418', '2025-09-15 17:05:39.374418');
+
+insert into Subscription (id, begin_date, end_date, option_nutrition, option_message, user_id, coach_id, created_at, updated_at)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59001', '2025-01-01', '2025-12-31', 1 , 1, '83726b63-dcd3-4f7e-bc36-0f326ae59726', '83726b63-dcd3-4f7e-bc36-0f326ae59721', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+insert into Subscription (id, begin_date, end_date, option_nutrition, option_message, user_id, coach_id, created_at, updated_at)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59002', '2025-01-01', '2025-06-30', 1 , 1, '83726b63-dcd3-4f7e-bc36-0f326ae59725', '83726b63-dcd3-4f7e-bc36-0f326ae59721', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+insert into Subscription (id, begin_date, end_date, option_nutrition, option_message, user_id, coach_id, created_at, updated_at)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59003', '2025-01-01', '2025-12-31', 1 , 1, '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+insert into "Nutrition_schedule" ("id", "description",
+    "picture", "category", "calories",
+    "quantity", "date_nutrition", 
+    "user_id", "coach_id", "created_at",
+    "updated_at"
+)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59003', "Oats + Fruits + Yogurt", "http://localhost:5500/public/images/ready/client1.jpg", "Breakfast", 10,10,'2025-09-15 17:05:36', '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+insert into "Nutrition_schedule" ("id", "description",
+    "picture", "category", "calories",
+    "quantity", "date_nutrition", 
+    "user_id", "coach_id", "created_at",
+    "updated_at"
+)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59004', "Quinoa Salad + Chicken", "http://localhost:5500/public/images/ready/client1.jpg", "Lunch", 10,10,'2025-09-15 17:05:36', '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+insert into "Nutrition_schedule" ("id", "description",
+    "picture", "category", "calories",
+    "quantity", "date_nutrition", 
+    "user_id", "coach_id", "created_at",
+    "updated_at"
+)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59005', "Almonds + Apple", "http://localhost:5500/public/images/ready/client1.jpg", "Snack", 10,10,'2025-09-15 17:05:36', '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+insert into "Nutrition_schedule" ("id", "description",
+    "picture", "category", "calories",
+    "quantity", "date_nutrition", 
+    "user_id", "coach_id", "created_at",
+    "updated_at"
+)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59006', "Salmon + Steamed Vegetables", "http://localhost:5500/public/images/ready/client1.jpg", "Dinner", 10,10,'2025-09-15 17:05:36', '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+
+insert into "Workout_schedule" ("id", "description",
+    "picture", "category", "time",
+    "comment", "date_workout", 
+    "user_id", "coach_id", "created_at",
+    "updated_at"
+)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59007', "3x15 repetitions", "http://localhost:5500/public/images/ready/client1.jpg", "Squats", 0,'Trop dur !','2025-09-15 17:05:36', '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+insert into "Workout_schedule" ("id", "description",
+    "picture", "category", "time",
+    "comment", "date_workout", 
+    "user_id", "coach_id", "created_at",
+    "updated_at"
+)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59008', "3x10 repetitions", "http://localhost:5500/public/images/ready/client1.jpg", "Push-ups", 0,'Trop dur !','2025-09-15 17:05:36', '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+insert into "Workout_schedule" ("id", "description",
+    "picture", "category", "time",
+    "comment", "date_workout", 
+    "user_id", "coach_id", "created_at",
+    "updated_at"
+)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59009', "3x30 secondes", "http://localhost:5500/public/images/ready/client1.jpg", "Pull over", 0,'Trop dur !','2025-09-15 17:05:36', '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+insert into "Workout_schedule" ("id", "description",
+    "picture", "category", "time",
+    "comment", "date_workout", 
+    "user_id", "coach_id", "created_at",
+    "updated_at"
+)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59006', "20 minutes", "http://localhost:5500/public/images/ready/client1.jpg", "Cardio", 20,'Trop dur !','2025-09-15 17:05:36', '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+
+-- Create Review
+insert into "Review" (
+    "id" , "text" , "rating" , "user_id" ,
+    "coach_id" , "created_at" , "updated_at" 
+)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59010', "Très bon coach", 5 , '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');

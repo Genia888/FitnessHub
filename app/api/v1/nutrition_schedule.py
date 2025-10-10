@@ -11,7 +11,7 @@ nutrition_model = api.model('nutrition', {
     'category': fields.String(required=True, description='Category of the nutrition'),
     'calories': fields.Float(required=True, description='Calories'),
     'quantity': fields.Float(required=True, description='Quantity'),
-    'date_nutrition': fields.Date(required=True, description='Date od nutrition'),
+    'date_nutrition': fields.DateTime(required=True, description='Date of nutrition'),
     'user_id': fields.String(required=True, description='ID of the user'),
     'coach_id': fields.String(required=True, description='ID of the coach')
 })
@@ -30,7 +30,7 @@ class nutritionList(Resource):
         try:
 
             current_user = get_jwt_identity()
-            nutrition_data['user_id'] = current_user['id']
+            # nutrition_data['user_id'] = current_user['id']
 
             new_nutrition = facade.create_nutrition(
                 nutrition_data
@@ -43,7 +43,7 @@ class nutritionList(Resource):
                 'category': new_nutrition.category,
                 'calories': new_nutrition.calories,
                 'quantity': new_nutrition.quantity,
-                'date_nutrition': new_nutrition.date_nutrition,
+                'date_nutrition': new_nutrition.date_nutrition.isoformat(),
                 'user_id': new_nutrition.user_id,
                 'coach_id': new_nutrition.coach_id
             }, 201
@@ -62,7 +62,7 @@ class nutritionList(Resource):
                 'category': nutrition.category,
                 'calories': nutrition.calories,
                 'quantity': nutrition.quantity,
-                'date_nutrition': nutrition.date_nutrition,
+                'date_nutrition': nutrition.date_nutrition.isoformat(),
                 'user_id': nutrition.user_id,
                 'coach_id': nutrition.coach_id
             }

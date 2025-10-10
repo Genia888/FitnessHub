@@ -53,8 +53,8 @@ class SubscriptionList(Resource):
         return [
             {
                 'id': subs.id,
-                'begin_date': subs.begin_date,
-                'end_date': subs.end_date,
+                'begin_date': subs.begin_date.isoformat(),
+                'end_date': subs.end_date.isoformat(),
                 'option_nutrition': subs.option_nutrition,
                 'option_message': subs.option_message,
                 'user_id': subs.user_id,
