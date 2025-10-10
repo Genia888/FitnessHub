@@ -34,9 +34,9 @@
       <div class="top-line__center">
         <nav class="top-mnu">
           <ul>
-            <li><a href="abonnement.html" data-text="Plans">Plans</a></li>
-            <li><a href="boutique.html" data-text="Shop">Shop</a></li>
-            <li><a href="login.html" data-text="Log out">Log out</a></li>
+            <li><a href="trainer.html" data-text="Dashboard">Dashboard</a></li>
+            <li><a href="clients_list.html" data-text="My Clients">My Clients</a></li>
+            <li><a href="account-coach.html" data-text="Account">Account</a></li>
           </ul>
         </nav>
       </div>
@@ -52,10 +52,9 @@
         <div class="main-menu">
           <nav class="main-menu__inner">
             <ul>
-            <li><a href="abonnement.html" data-text="Plans">Plans</a></li>
-            <li><a href="boutique.html" data-text="Shop">Shop</a></li>
-            <li><a href="login.html" data-text="Log out">Log out</a></li>
-          </ul>
+              <li><a href="trainer.html" data-text="Dashboard">Dashboard<span></span></a></li>
+              <li><a href="clients_list.html" data-text="My Clients">My Clients<span></span></a></li>
+              <li><a href="account-coach.html" data-text="Account">Account<span></span></a></li>
             </ul>
           </nav>
         </div>
@@ -77,14 +76,18 @@
         <div class="client-card" onclick="viewClient(1)">
           <div class="client-image">
             <img src="../public/images/ready/client1.jpg" alt="Marcus Johnson" onerror="this.style.display='none'">
-            <div class="client-status active">Active</div>
           </div>
           <div class="client-info">
-            <h3>Marcus Johnson</h3>
+            <div class="client-name-row">
+              <h3>Marcus Johnson</h3>
+              <span class="client-status active">Active</span>
+            </div>
             <p class="client-goal">Goal: Weight Loss</p>
             <p class="client-stats">80kg • 1m85 • 32 years</p>
             <p class="client-progress">Progress: -8kg in 3 months</p>
-            <button class="btn-primary">Manage Client</button>
+            <div class="client-button-container">
+              <button class="btn-primary">Manage Client</button>
+            </div>
           </div>
         </div>
 
@@ -94,12 +97,16 @@
             <img src="../public/images/ready/client2.jpg" alt="Emma Williams" onerror="this.style.display='none'">
           </div>
           <div class="client-info">
-            <h3>Evgeni Khalepo</h3>
-            <div class="client-status active">Active</div>
+            <div class="client-name-row">
+              <h3>Emma Williams</h3>
+              <span class="client-status active">Active</span>
+            </div>
             <p class="client-goal">Goal: Muscle Gain</p>
             <p class="client-stats">62kg • 1m68 • 28 years</p>
             <p class="client-progress">Progress: +5kg in 4 months</p>
-            <button class="btn-primary">Manage Client</button>
+            <div class="client-button-container">
+              <button class="btn-primary">Manage Client</button>
+            </div>
           </div>
         </div>
 
@@ -107,14 +114,18 @@
         <div class="client-card" onclick="viewClient(3)">
           <div class="client-image">
             <img src="../public/images/ready/client3.jpg" alt="David Chen" onerror="this.style.display='none'">
-            <div class="client-status active">Active</div>
           </div>
           <div class="client-info">
-            <h3>Sebastien Naraje</h3>
+            <div class="client-name-row">
+              <h3>David Chen</h3>
+              <span class="client-status active">Active</span>
+            </div>
             <p class="client-goal">Goal: Fitness Maintenance</p>
             <p class="client-stats">75kg • 1m78 • 35 years</p>
             <p class="client-progress">Progress: Maintaining well</p>
-            <button class="btn-primary">Manage Client</button>
+            <div class="client-button-container">
+              <button class="btn-primary">Manage Client</button>
+            </div>
           </div>
         </div>
 
@@ -122,14 +133,18 @@
         <div class="client-card" onclick="viewClient(4)">
           <div class="client-image">
             <img src="../public/images/ready/client4.jpg" alt="Sophie Martinez" onerror="this.style.display='none'">
-            <div class="client-status active">Active</div>
           </div>
           <div class="client-info">
-            <h3>Sophie Martinez</h3>
+            <div class="client-name-row">
+              <h3>Sophie Martinez</h3>
+              <span class="client-status active">Active</span>
+            </div>
             <p class="client-goal">Goal: Endurance Training</p>
             <p class="client-stats">58kg • 1m65 • 26 years</p>
             <p class="client-progress">Progress: Marathon ready</p>
-            <button class="btn-primary">Manage Client</button>
+            <div class="client-button-container">
+              <button class="btn-primary">Manage Client</button>
+            </div>
           </div>
         </div>
 
@@ -137,14 +152,18 @@
         <div class="client-card" onclick="viewClient(5)">
           <div class="client-image">
             <img src="../public/images/ready/client5.jpg" alt="James Anderson" onerror="this.style.display='none'">
-            <div class="client-status active">Active</div>
           </div>
           <div class="client-info">
-            <h3>James Anderson</h3>
+            <div class="client-name-row">
+              <h3>James Anderson</h3>
+              <span class="client-status active">Active</span>
+            </div>
             <p class="client-goal">Goal: Bodybuilding</p>
             <p class="client-stats">88kg • 1m80 • 30 years</p>
             <p class="client-progress">Progress: +12kg muscle</p>
-            <button class="btn-primary">Manage Client</button>
+            <div class="client-button-container">
+              <button class="btn-primary">Manage Client</button>
+            </div>
           </div>
         </div>
 
@@ -152,14 +171,18 @@
         <div class="client-card" onclick="viewClient(6)">
           <div class="client-image">
             <img src="../public/images/ready/client6.jpg" alt="Isabella Garcia" onerror="this.style.display='none'">
-            <div class="client-status active">Active</div>
           </div>
           <div class="client-info">
-            <h3>Isabella Garcia</h3>
+            <div class="client-name-row">
+              <h3>Isabella Garcia</h3>
+              <span class="client-status active">Active</span>
+            </div>
             <p class="client-goal">Goal: Weight Loss</p>
             <p class="client-stats">72kg • 1m70 • 29 years</p>
             <p class="client-progress">Progress: -6kg in 2 months</p>
-            <button class="btn-primary">Manage Client</button>
+            <div class="client-button-container">
+              <button class="btn-primary">Manage Client</button>
+            </div>
           </div>
         </div>
 
@@ -167,14 +190,18 @@
         <div class="client-card" onclick="viewClient(7)">
           <div class="client-image">
             <img src="../public/images/ready/client7.jpg" alt="Oliver Brown" onerror="this.style.display='none'">
-            <div class="client-status active">Active</div>
           </div>
           <div class="client-info">
-            <h3>Oliver Brown</h3>
+            <div class="client-name-row">
+              <h3>Oliver Brown</h3>
+              <span class="client-status active">Active</span>
+            </div>
             <p class="client-goal">Goal: Strength Training</p>
             <p class="client-stats">92kg • 1m88 • 34 years</p>
             <p class="client-progress">Progress: +15% strength</p>
-            <button class="btn-primary">Manage Client</button>
+            <div class="client-button-container">
+              <button class="btn-primary">Manage Client</button>
+            </div>
           </div>
         </div>
 
@@ -182,14 +209,18 @@
         <div class="client-card" onclick="viewClient(8)">
           <div class="client-image">
             <img src="../public/images/ready/client8.jpg" alt="Mia Rodriguez" onerror="this.style.display='none'">
-            <div class="client-status active">Active</div>
           </div>
           <div class="client-info">
-            <h3>Mia Rodriguez</h3>
+            <div class="client-name-row">
+              <h3>Mia Rodriguez</h3>
+              <span class="client-status active">Active</span>
+            </div>
             <p class="client-goal">Goal: Yoga & Flexibility</p>
             <p class="client-stats">60kg • 1m67 • 27 years</p>
             <p class="client-progress">Progress: Excellent flexibility</p>
-            <button class="btn-primary">Manage Client</button>
+            <div class="client-button-container">
+              <button class="btn-primary">Manage Client</button>
+            </div>
           </div>
         </div>
 
@@ -197,14 +228,18 @@
         <div class="client-card" onclick="viewClient(9)">
           <div class="client-image">
             <img src="../public/images/ready/client9.jpg" alt="Liam Thompson" onerror="this.style.display='none'">
-            <div class="client-status pending">Pending</div>
           </div>
           <div class="client-info">
-            <h3>Liam Thompson</h3>
+            <div class="client-name-row">
+              <h3>Liam Thompson</h3>
+              <span class="client-status pending">Pending</span>
+            </div>
             <p class="client-goal">Goal: Weight Loss</p>
             <p class="client-stats">95kg • 1m82 • 38 years</p>
             <p class="client-progress">Progress: Just started</p>
-            <button class="btn-primary">Manage Client</button>
+            <div class="client-button-container">
+              <button class="btn-primary">Manage Client</button>
+            </div>
           </div>
         </div>
 
@@ -212,14 +247,18 @@
         <div class="client-card" onclick="viewClient(10)">
           <div class="client-image">
             <img src="../public/images/ready/client10.jpg" alt="Ava Wilson" onerror="this.style.display='none'">
-            <div class="client-status active">Active</div>
           </div>
           <div class="client-info">
-            <h3>Ava Wilson</h3>
+            <div class="client-name-row">
+              <h3>Ava Wilson</h3>
+              <span class="client-status active">Active</span>
+            </div>
             <p class="client-goal">Goal: Postnatal Recovery</p>
             <p class="client-stats">68kg • 1m72 • 31 years</p>
             <p class="client-progress">Progress: Great recovery</p>
-            <button class="btn-primary">Manage Client</button>
+            <div class="client-button-container">
+              <button class="btn-primary">Manage Client</button>
+            </div>
           </div>
         </div>
 
@@ -227,14 +266,18 @@
         <div class="client-card" onclick="viewClient(11)">
           <div class="client-image">
             <img src="../public/images/ready/client11.jpg" alt="Noah Davis" onerror="this.style.display='none'">
-            <div class="client-status active">Active</div>
           </div>
           <div class="client-info">
-            <h3>Noah Davis</h3>
+            <div class="client-name-row">
+              <h3>Noah Davis</h3>
+              <span class="client-status active">Active</span>
+            </div>
             <p class="client-goal">Goal: CrossFit Training</p>
             <p class="client-stats">78kg • 1m76 • 25 years</p>
             <p class="client-progress">Progress: Competition ready</p>
-            <button class="btn-primary">Manage Client</button>
+            <div class="client-button-container">
+              <button class="btn-primary">Manage Client</button>
+            </div>
           </div>
         </div>
 
@@ -242,14 +285,18 @@
         <div class="client-card" onclick="viewClient(12)">
           <div class="client-image">
             <img src="../public/images/ready/client12.jpg" alt="Charlotte Lee" onerror="this.style.display='none'">
-            <div class="client-status active">Active</div>
           </div>
           <div class="client-info">
-            <h3>Charlotte Lee</h3>
+            <div class="client-name-row">
+              <h3>Charlotte Lee</h3>
+              <span class="client-status active">Active</span>
+            </div>
             <p class="client-goal">Goal: Weight Loss</p>
             <p class="client-stats">85kg • 1m69 • 33 years</p>
             <p class="client-progress">Progress: -10kg in 4 months</p>
-            <button class="btn-primary">Manage Client</button>
+            <div class="client-button-container">
+              <button class="btn-primary">Manage Client</button>
+            </div>
           </div>
         </div>
       </div>
@@ -260,13 +307,7 @@
     // Navigate to client management page
     function viewClient(clientId) {
       // In a real application, this would navigate to a detailed client management page
-      alert(`Opening management panel for client #${clientId}...
-
-This would navigate to a detailed page where you can:
-• Update nutrition plans
-• Modify training programs
-• Add notes and tracking
-• Review progress charts`);
+      alert(`Opening management panel for client #${clientId}...\n\nThis would navigate to a detailed page where you can:\n• Update nutrition plans\n• Modify training programs\n• Add notes and tracking\n• Review progress charts`);
       // window.location.href = `client_manage.html?id=${clientId}`;
     }
   </script>
