@@ -35,6 +35,13 @@ class Message(BaseModel):
             )
         return value
 
+    @validates('coach_id')
+    def validate_coach_id(self, key, value):
+        '''Validate the user_id attribute'''
+        if not value or not isinstance(value, str):
+            raise ValueError("User must be present and an instance of User.")
+        return value
+
     @validates('user_id')
     def validate_user_id(self, key, value):
         '''Validate the user_id attribute'''
