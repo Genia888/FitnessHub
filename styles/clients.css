@@ -23,7 +23,7 @@
   margin-top: 30px;
 }
 
-/* Client Card */
+/* Client Card - Using Flexbox for proper alignment */
 .client-card {
   background: rgba(255, 255, 255, .05);
   border-radius: 20px;
@@ -33,6 +33,9 @@
   transition: all .5s;
   cursor: pointer;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .client-card:hover {
@@ -41,16 +44,20 @@
   box-shadow: 0 15px 40px rgba(142, 48, 246, 0.3);
 }
 
-/* Client Image */
+/* Client Image - More square and responsive */
 .client-image {
   position: relative;
   width: 100%;
-  height: 280px;
+  padding-top: 75%;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
 }
 
 .client-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -61,52 +68,62 @@
   transform: scale(1.1);
 }
 
-/* Client Status Badge */
-.client-status {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, .2);
-}
-
-.client-status.active {
-  background: rgba(76, 175, 80, 0.2);
-  color: #4CAF50;
-  border-color: rgba(76, 175, 80, 0.4);
-}
-
-.client-status.pending {
-  background: rgba(255, 152, 0, 0.2);
-  color: #ff9800;
-  border-color: rgba(255, 152, 0, 0.4);
-}
-
-.client-status.inactive {
-  background: rgba(158, 158, 158, 0.2);
-  color: #9e9e9e;
-  border-color: rgba(158, 158, 158, 0.4);
-}
-
-/* Client Info */
+/* Client Info - Using Flexbox to push button to bottom */
 .client-info {
   padding: 25px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Client Name with Status Badge inline */
+.client-name-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
 }
 
 .client-info h3 {
   font-size: 22px;
   font-weight: 500;
-  margin-bottom: 12px;
+  margin: 0;
   background: var(--gradient-3);
   text-emphasis-color: transparent;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   line-height: 1.3;
+}
+
+/* Client Status Badge - Inline next to name */
+.client-status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, .2);
+  flex-shrink: 0;
+}
+
+.client-status.active {
+  background: rgba(76, 175, 80, 0.25);
+  color: #4CAF50;
+  border-color: rgba(76, 175, 80, 0.5);
+}
+
+.client-status.pending {
+  background: rgba(255, 152, 0, 0.25);
+  color: #ff9800;
+  border-color: rgba(255, 152, 0, 0.5);
+}
+
+.client-status.inactive {
+  background: rgba(158, 158, 158, 0.25);
+  color: #9e9e9e;
+  border-color: rgba(158, 158, 158, 0.5);
 }
 
 .client-goal {
@@ -126,17 +143,22 @@
   font-size: 14px;
   color: #4CAF50;
   font-weight: 500;
-  margin-bottom: 20px;
+  margin-bottom: auto;
   padding: 8px 12px;
   background: rgba(76, 175, 80, 0.1);
   border-radius: 8px;
   border: 1px solid rgba(76, 175, 80, 0.2);
   display: inline-block;
+  align-self: flex-start;
+}
+
+/* Button Container - Always at bottom */
+.client-button-container {
+  margin-top: 20px;
 }
 
 .client-info .btn-primary {
   width: 100%;
-  margin-top: 10px;
 }
 
 /* Empty State */
@@ -252,7 +274,7 @@
   }
 
   .client-image {
-    height: 220px;
+    padding-top: 85%;
   }
 
   .client-info {
@@ -283,11 +305,17 @@
   }
 
   .client-image {
-    height: 250px;
+    padding-top: 100%;
   }
 
   .client-info h3 {
     font-size: 18px;
+  }
+
+  .client-name-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
 
   .clients-count {
