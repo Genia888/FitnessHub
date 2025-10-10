@@ -169,3 +169,11 @@ insert into "Workout_schedule" ("id", "description",
     "updated_at"
 )
 values ( '83726b63-dcd3-4f7e-bc36-0f326ae59006', "20 minutes", "http://localhost:5500/public/images/ready/client1.jpg", "Cardio", 20,'Trop dur !','2025-09-15 17:05:36', '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
+
+
+-- Create Review
+insert into "Review" (
+    "id" , "text" , "rating" , "user_id" ,
+    "coach_id" , "created_at" , "updated_at" 
+)
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59010', "Très bon coach", 5 , '83726b63-dcd3-4f7e-bc36-0f326ae59724', '83726b63-dcd3-4f7e-bc36-0f326ae59722', '2025-09-15 17:05:36.374418', '2025-09-15 17:05:36.374418');
