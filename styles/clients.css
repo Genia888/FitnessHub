@@ -1,0 +1,337 @@
+/* Clients List Page Styles */
+
+.section-head__right {
+  display: flex;
+  align-items: center;
+}
+
+.clients-count {
+  font-size: 18px;
+  color: rgba(255, 255, 255, .7);
+  font-weight: 500;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, .05);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, .1);
+}
+
+/* Clients Grid */
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+/* Client Card - Using Flexbox for proper alignment */
+.client-card {
+  background: rgba(255, 255, 255, .05);
+  border-radius: 20px;
+  padding: 0;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, .1);
+  transition: all .5s;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.client-card:hover {
+  background: rgba(255, 255, 255, .08);
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(142, 48, 246, 0.3);
+}
+
+/* Client Image - More square and responsive */
+.client-image {
+  position: relative;
+  width: 100%;
+  padding-top: 75%;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.client-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all .5s;
+}
+
+.client-card:hover .client-image img {
+  transform: scale(1.1);
+}
+
+/* Client Info - Using Flexbox to push button to bottom */
+.client-info {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Client Name with Status Badge inline */
+.client-name-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.client-info h3 {
+  font-size: 22px;
+  font-weight: 500;
+  margin: 0;
+  background: var(--gradient-3);
+  text-emphasis-color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.3;
+}
+
+/* Client Status Badge - Inline next to name */
+.client-status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, .2);
+  flex-shrink: 0;
+}
+
+.client-status.active {
+  background: rgba(76, 175, 80, 0.25);
+  color: #4CAF50;
+  border-color: rgba(76, 175, 80, 0.5);
+}
+
+.client-status.pending {
+  background: rgba(255, 152, 0, 0.25);
+  color: #ff9800;
+  border-color: rgba(255, 152, 0, 0.5);
+}
+
+.client-status.inactive {
+  background: rgba(158, 158, 158, 0.25);
+  color: #9e9e9e;
+  border-color: rgba(158, 158, 158, 0.5);
+}
+
+.client-goal {
+  font-size: 15px;
+  color: rgba(255, 255, 255, .8);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.client-stats {
+  font-size: 14px;
+  color: rgba(255, 255, 255, .6);
+  margin-bottom: 10px;
+}
+
+.client-progress {
+  font-size: 14px;
+  color: #4CAF50;
+  font-weight: 500;
+  margin-bottom: auto;
+  padding: 8px 12px;
+  background: rgba(76, 175, 80, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(76, 175, 80, 0.2);
+  display: inline-block;
+  align-self: flex-start;
+}
+
+/* Button Container - Always at bottom */
+.client-button-container {
+  margin-top: 20px;
+}
+
+.client-info .btn-primary {
+  width: 100%;
+}
+
+/* Empty State */
+.clients-empty {
+  text-align: center;
+  padding: 80px 20px;
+  background: rgba(255, 255, 255, .05);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, .1);
+}
+
+.clients-empty-icon {
+  font-size: 80px;
+  margin-bottom: 20px;
+  opacity: 0.3;
+}
+
+.clients-empty h3 {
+  font-size: 28px;
+  color: rgba(255, 255, 255, .8);
+  margin-bottom: 15px;
+}
+
+.clients-empty p {
+  font-size: 16px;
+  color: rgba(255, 255, 255, .6);
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+/* Search and Filter Section */
+.clients-filter-section {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 250px;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 10px;
+  padding: 12px 20px;
+  color: #fff;
+  font-size: 15px;
+  font-family: inherit;
+  transition: all .5s;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, .4);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: rgba(142, 48, 246, 0.5);
+  background: rgba(255, 255, 255, .08);
+}
+
+.filter-btn {
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .1);
+  color: rgba(255, 255, 255, .8);
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all .5s;
+  white-space: nowrap;
+}
+
+.filter-btn:hover {
+  background: rgba(255, 255, 255, .1);
+  border-color: rgba(255, 255, 255, .2);
+}
+
+.filter-btn.active {
+  background: linear-gradient(270deg, #8E30F6 2%, #C138DA 70%);
+  border-color: transparent;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 991.98px) {
+  .clients-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+  }
+
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .section-head__right {
+    width: 100%;
+  }
+
+  .clients-count {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .clients-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .client-image {
+    padding-top: 85%;
+  }
+
+  .client-info {
+    padding: 20px;
+  }
+
+  .client-info h3 {
+    font-size: 20px;
+  }
+
+  .clients-filter-section {
+    flex-direction: column;
+  }
+
+  .search-input {
+    min-width: 100%;
+  }
+
+  .filter-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .clients-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .client-image {
+    padding-top: 100%;
+  }
+
+  .client-info h3 {
+    font-size: 18px;
+  }
+
+  .client-name-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .clients-count {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
+
+  .clients-empty {
+    padding: 60px 20px;
+  }
+
+  .clients-empty-icon {
+    font-size: 60px;
+  }
+
+  .clients-empty h3 {
+    font-size: 24px;
+  }
+}

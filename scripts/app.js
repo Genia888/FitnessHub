@@ -47,6 +47,17 @@ accordionCol.forEach(col => {
   })
 })
 
+// Highlights accordion functionality
+const highlightsAccordionCol = document.querySelectorAll('.highlights-accordion__col')
+highlightsAccordionCol.forEach(col => {
+  col.addEventListener('mouseenter', () => {
+    highlightsAccordionCol.forEach(c => {
+      c.classList.remove('active')
+      col.classList.add('active')
+    })
+  })
+})
+
 const lenis = new Lenis()
 function raf(time) {
   lenis.raf(time)
@@ -84,3 +95,29 @@ function globalGradient() {
   move()
 }
 globalGradient()
+
+document.addEventListener('DOMContentLoaded', function () {
+  const subscriptionAccordion = document.getElementById('subscription-accordion-link');
+  if (subscriptionAccordion) {
+    subscriptionAccordion.style.cursor = 'pointer';
+    subscriptionAccordion.addEventListener('click', function () {
+      window.location.href = 'pages/abonnement.html';
+    });
+  }
+
+  const coachAccordion = document.getElementById('coach-accordion-link');
+  if (coachAccordion) {
+    coachAccordion.style.cursor = 'pointer';
+    coachAccordion.addEventListener('click', function () {
+      window.location.href = 'pages/coach.html';
+    });
+  }
+
+  const shopAccordion = document.getElementById('shop-accordion-link');
+  if (shopAccordion) {
+    shopAccordion.style.cursor = 'pointer';
+    shopAccordion.addEventListener('click', function () {
+      window.location.href = 'pages/boutique.html';
+    });
+  }
+});
