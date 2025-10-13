@@ -56,7 +56,7 @@ class Message(BaseModel):
             'text': self._text,
             'user_id': self._user_id,
             'coach_id': self._coach_id,
-            'is_from_user': self._is_read,
+            'is_from_user': self._is_from_user,
             'is_read': self._is_read,
             'created_at': self.created_at.isoformat(),
         }
