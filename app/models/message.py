@@ -35,6 +35,13 @@ class Message(BaseModel):
             )
         return value
 
+    @validates('coach_id')
+    def validate_coach_id(self, key, value):
+        '''Validate the user_id attribute'''
+        if not value or not isinstance(value, str):
+            raise ValueError("User must be present and an instance of User.")
+        return value
+
     @validates('user_id')
     def validate_user_id(self, key, value):
         '''Validate the user_id attribute'''
@@ -49,7 +56,7 @@ class Message(BaseModel):
             'text': self._text,
             'user_id': self._user_id,
             'coach_id': self._coach_id,
-            'is_from_user': self._is_read,
+            'is_from_user': self._is_from_user,
             'is_read': self._is_read,
             'created_at': self.created_at.isoformat(),
         }
