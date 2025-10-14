@@ -135,7 +135,7 @@ class PlaceReviewList(Resource):
     @api.response(200, 'List of reviews for the coach retrieved successfully')
     @api.response(404, 'Place not found')
     def get(self, coach_id):
-        """Get all reviews for a specific place"""
+        """Get all reviews for a specific coach"""
         try:
             coach_reviews = facade.get_reviews_by_coach(coach_id)
             return [

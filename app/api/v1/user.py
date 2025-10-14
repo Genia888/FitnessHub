@@ -141,9 +141,9 @@ class Coach(Resource):
     
 @api.route('/nutrition/')
 class Nutrition(Resource):
-    @api.response(200, 'List of nutrition retrieved successfully')
+    @api.response(200, 'List of coach of nutrition retrieved successfully')
     def get(self):
-        """Retrieve a list of all nutrition"""
+        """Retrieve a list of all coach of nutrition"""
         users = facade.get_all_nutrition()
         return [user.to_dict() for user in users], 200
     
@@ -170,25 +170,6 @@ class Abonne(Resource):
         """Retrieve a list of all abonne"""
         users = facade.get_all_abonne()
         return [user.to_dict() for user in users], 200
-
-@api.route('/users/')
-class AdminUserCreate(Resource):
-    @jwt_required()
-    def post(self):
-        """Register a new user for admin"""
-        current_user = get_jwt_identity()
-        if not current_user.get('is_admin'):
-            return {'error': 'Admin privileges required'}, 403
-
-        user_data = request.json
-        email = user_data.get('email')
-
-        # Check if email is already in use
-        if facade.get_user_by_email(email):
-            return {'error': 'Email already registered'}, 400
-
-        # Logic to create a new user
-        pass
 
 class AdminUserModify(Resource):
     @api.expect(user_model, validate=True)

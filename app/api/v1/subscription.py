@@ -46,9 +46,9 @@ class SubscriptionList(Resource):
         except ValueError as e:
             return {'error': str(e)}, 400
 
-    @api.response(200, 'List of messages retrieved successfully')
+    @api.response(200, 'List of subscription retrieved successfully')
     def get(self):
-        """Retrieve a list of all messages"""
+        """Retrieve a list of all subscription"""
         subscriptions = facade.get_all_subscriptions()
         return [
             {
