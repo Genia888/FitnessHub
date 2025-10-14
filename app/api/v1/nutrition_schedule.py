@@ -1,6 +1,7 @@
 from flask_restx import Namespace, Resource, fields
 from app.services.facade import facade
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from datetime import datetime
 
 api = Namespace('nutrition_schedule', description='Nutrition schedule operations')
 
@@ -70,6 +71,7 @@ class nutritionList(Resource):
         ], 200
 
 
+
 @api.route('/<nutrition_id>')
 class nutritionResource(Resource):
     @api.response(200, 'nutrition details retrieved successfully')
@@ -119,7 +121,7 @@ class nutritionResource(Resource):
                 'category': updated_nutrition.category,
                 'calories': updated_nutrition.calories,
                 'quantity': updated_nutrition.quantity,
-                'date_nutrition': nutrition.date_nutrition,
+                'date_nutrition': updated_nutrition.date_nutrition,
                 'user_id': updated_nutrition.user_id,
                 'coach_id': updated_nutrition.coach_id
             }, 200
@@ -146,5 +148,31 @@ class nutritionResource(Resource):
             if nutrition:
                 return {'message': 'nutrition deleted.'}, 200
             return {'error': 'nutrition not found'}, 404
+        except ValueError as e:
+            return {'error': str(e)}, 400
+
+@api.route('/user/<user_id>/nutrition')
+class NutritionUserList(Resource):
+    @api.response(200, 'List of nutrition for a user')
+    @api.response(404, 'User not found')
+    def get(self, user_id):
+        """Get all nutrition for a specific user"""
+        try:
+            nutritions = facade.get_nutrition_by_user(user_id)
+            
+            return [
+                {
+                    'id': nutrition.id,
+                    'description': nutrition.description,
+                    'picture': nutrition.picture,
+                    'category': nutrition.category,
+                    'calories': nutrition.calories,
+                    'quantity': nutrition.quantity,
+                    'date_nutrition': nutrition.date_nutrition.isoformat(),
+                    'user_id': nutrition.user_id,
+                    'coach_id': nutrition.coach_id
+                }
+                for nutrition in nutritions
+            ], 200
         except ValueError as e:
             return {'error': str(e)}, 400

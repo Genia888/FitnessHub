@@ -6,6 +6,7 @@ from app.models.nutrition_schedule import Nutrition
 from app.models.workout_schedule import Workout
 from app.models.product_shop import Product
 from app.persistence.repository import ProductRepository, SubscriptionRepository, UserRepository, MessageRepository, NutritionRepository, ReviewRepository, WorkoutRepository
+from datetime import datetime 
 
 class HBnBFacade:
     def __init__(self):
@@ -151,6 +152,13 @@ class HBnBFacade:
 
     def get_all_reviews(self):
         return self.review_repo.get_all()
+
+    def get_nutrition_by_user(self, user_id):
+        user = self.user_repo.get(user_id)
+        if not user:
+            raise ValueError("User not found")
+        return [nutrition for nutrition in
+                self.nutrition_repo.get_all() if nutrition.user_id == user_id]
 
     def get_workout_by_user(self, user_id):
         user = self.user_repo.get(user_id)
