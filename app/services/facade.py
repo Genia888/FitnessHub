@@ -145,7 +145,7 @@ class HBnBFacade:
         return self.review_repo.get_all()
 
     def get_reviews_by_coach(self, coach_id):
-        coach = self.place_repo.get(coach_id)
+        coach = self.user_repo.get(coach_id)
         if not coach:
             raise ValueError("Coach not found")
         return [review for review in
