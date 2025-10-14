@@ -1,7 +1,7 @@
 from flask_restx import Namespace, Resource, fields
 from app.services.facade import facade
 from flask_jwt_extended import jwt_required, get_jwt_identity
-
+from datetime import datetime 
 api = Namespace('workout_schedule', description='Workout schedule operations')
 
 # Define the workout model for input validation and documentation
@@ -146,5 +146,32 @@ class WorkoutResource(Resource):
             if workout:
                 return {'message': 'workout deleted.'}, 200
             return {'error': 'workout not found'}, 404
+        except ValueError as e:
+            return {'error': str(e)}, 400
+
+
+@api.route('/user/<user_id>/workout')
+class WorkoutUserList(Resource):
+    @api.response(200, 'List of workout for a user')
+    @api.response(404, 'User not found')
+    def get(self, user_id):
+        """Get all workout for a specific user"""
+        try:
+            workouts = facade.get_workout_by_user(user_id)
+            
+            return [
+                {
+                    'id': workout.id,
+                    'description': workout.description,
+                    'picture': workout.picture,
+                    'category': workout.category,
+                    'time': workout.time,
+                    'comment': workout.comment,
+                    'date_workout': workout.date_workout.isoformat(),
+                    'user_id': workout.user_id,
+                    'coach_id': workout.coach_id
+                }
+                for workout in workouts
+            ], 200
         except ValueError as e:
             return {'error': str(e)}, 400
