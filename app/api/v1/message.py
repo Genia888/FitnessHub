@@ -145,7 +145,7 @@ class PlaceReviewList(Resource):
     @api.response(200, 'List of messages for the coach retrieved successfully')
     @api.response(404, 'Message not found')
     def get(self, coach_id):
-        """Get all messages for a specific place"""
+        """Get all messages for a specific coach"""
         try:
             coach_messages = facade.get_messages_by_coach(coach_id)
             return [
@@ -157,6 +157,27 @@ class PlaceReviewList(Resource):
                     'is_from_user': message.is_from_user,
                 }
                 for message in coach_messages
+            ], 200
+        except ValueError as e:
+            return {'error': str(e)}, 400
+
+@api.route('/user/<user_id>/messages')
+class PlaceReviewList(Resource):
+    @api.response(200, 'List of messages for the user retrieved successfully')
+    @api.response(404, 'Message not found')
+    def get(self, user_id):
+        """Get all messages for a specific user"""
+        try:
+            user_messages = facade.get_messages_by_user(user_id)
+            return [
+                {
+                    'id': message.id,
+                    'text': message.text,
+                    'created_at': message.created_at.isoformat(),
+                    'is_read': message.is_read,
+                    'is_from_user': message.is_from_user,
+                }
+                for message in user_messages
             ], 200
         except ValueError as e:
             return {'error': str(e)}, 400

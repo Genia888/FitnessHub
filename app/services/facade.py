@@ -97,11 +97,19 @@ class HBnBFacade:
         return self.message_repo.get_all()
 
     def get_messages_by_coach(self, coach_id):
-        coach = self.place_repo.get(coach_id)
+        coach = self.user_repo.get(coach_id)
         if not coach:
             raise ValueError("Coach not found")
         return [message for message in
                 self.message_repo.get_all() if message.coach_id == coach_id]
+
+
+    def get_messages_by_user(self, user_id):
+        user = self.user_repo.get(user_id)
+        if not user:
+            raise ValueError("User not found")
+        return [message for message in
+                self.message_repo.get_all() if message.user_id == user_id]
 
     def update_message(self, message_id, message_update):
         message = self.message_repo.get(message_id)
@@ -143,6 +151,13 @@ class HBnBFacade:
 
     def get_all_reviews(self):
         return self.review_repo.get_all()
+
+    def get_workout_by_user(self, user_id):
+        user = self.user_repo.get(user_id)
+        if not user:
+            raise ValueError("User not found")
+        return [workout for workout in
+                self.workout_repo.get_all() if workout.user_id == user_id]
 
     def get_reviews_by_coach(self, coach_id):
         coach = self.user_repo.get(coach_id)
