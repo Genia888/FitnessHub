@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
         <div class="product-info">
           <h3>${product.name}</h3>
-          <p class="description">${product.description || ''}</p>
           <p class="price">${product.price ? product.price + " €" : "Prix indisponible"}</p>
           <button class="btn-primary">Ajouter au panier</button>
         </div>
