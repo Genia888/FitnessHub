@@ -56,6 +56,15 @@ class HBnBFacade:
     def get_all_abonne(self):
         return self.user_repo.get_all_abonne()
     
+    # list all of abonne from a coach   
+    def get_all_abonne_from_coach(self, coach_id):
+        coach = self.user_repo.get(coach_id)
+        if not coach:
+            raise ValueError("Coach not found")
+        return [self.user_repo.get(consumer.user_id) for consumer in
+                coach.consumerUsers]
+        
+    
     def update_user(self, user_id, update_data):
         """Update an user."""
         user = self.get_user(user_id)
