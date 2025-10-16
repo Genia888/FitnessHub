@@ -1,3 +1,5 @@
+// script to display list of coach 
+
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("✅ coach.js chargé !");
 
