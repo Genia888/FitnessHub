@@ -1433,3 +1433,83 @@ ul {
     font-size: 30px;
   }
 }
+/* === SECTION BOUTIQUE === */
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.product-card {
+  background: rgba(255, 255, 255, 0.05); /* transparence douce, garde ton fond */
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+  padding: 1rem;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+/* === IMAGES PRODUITS PLUS GRANDES === */
+
+.product-image {
+  width: 100%;
+  height: 220px; /* avant : 150px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.product-image img {
+  width: 180px; /* avant : 90px */
+  height: 180px; /* avant : 90px */
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.08);
+}
+
+}
+
+.product-info h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--text-color, #fff); /* garde ton texte clair */
+}
+
+.product-info .description {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 0.6rem;
+}
+
+.product-info .price {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--accent-color, #fff); /* utilise ta couleur d’accent du thème */
+  margin-bottom: 0.8rem;
+}
+
+/* Le bouton reprend le style global de ton projet */
+.product-card .btn-primary {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.product-card .btn-primary:hover {
+  transform: scale(1.05);
+}
