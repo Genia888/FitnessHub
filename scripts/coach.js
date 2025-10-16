@@ -1,38 +1,51 @@
-// scripts/coach-list.js
-
 document.addEventListener("DOMContentLoaded", async () => {
-  const coachGrid = document.querySelector(".coaches-grid");
+  console.log("✅ coach.js chargé !");
 
-  // Si le conteneur n'existe pas, on arrête
-  if (!coachGrid) return;
+  const coachGrid = document.querySelector(".coaches-grid");
+  if (!coachGrid) {
+    console.error("⚠️ Aucun conteneur '.coaches-grid' trouvé dans la page !");
+    return;
+  }
 
   try {
-    // 1️⃣ On récupère les données du back-end
+    console.log("➡️ Récupération des données depuis le back...");
     const response = await fetch("http://127.0.0.1:5000/api/v1/user/coach");
+
     if (!response.ok) {
-      throw new Error("Erreur lors de la récupération des coaches");
+      throw new Error("Erreur HTTP : " + response.status);
     }
 
     const coaches = await response.json();
+    console.log("📦 Données reçues :", coaches);
 
-    // 2️⃣ On vide le contenu statique actuel
     coachGrid.innerHTML = "";
 
-    // 3️⃣ On parcourt les coaches et on crée les cartes dynamiquement
+    // ✅ On parcourt chaque coach
     coaches.forEach(coach => {
+      // Calcul du nom complet
+      const fullName = `${coach.first_name || ""} ${coach.last_name || ""}`.trim();
+
+      // Moyenne des notes si disponibles
+      let averageRating = "N/A";
+      if (coach.reviews && coach.reviews.length > 0) {
+        const total = coach.reviews.reduce((sum, review) => sum + review.rating, 0);
+        averageRating = (total / coach.reviews.length).toFixed(1);
+      }
+
+      // Création de la carte HTML
       const card = document.createElement("div");
       card.classList.add("coach-card");
 
       card.innerHTML = `
         <div class="coach-image">
-          <img src="../public/images/ready/${coach.image || 'default.jpg'}" alt="Coach ${coach.name}">
+          <img src="${coach.picture || '../public/images/ready/default.jpg'}" alt="Coach ${fullName}">
         </div>
         <div class="coach-info">
-          <h3>${coach.name}</h3>
-          <p class="specialty">${coach.specialty || 'No specialty'}</p>
-          <p class="experience">${coach.experience || ''}</p>
-          <div class="rating">⭐ ${coach.rating || 'N/A'}/5</div>
-          <button class="btn-primary">Choose this coach</button>
+          <h3>${fullName}</h3>
+          <p class="specialty">${coach.coach_description || 'Spécialité non renseignée'}</p>
+          <p class="experience">${coach.coach_experience || ''}</p>
+          <div class="rating">⭐ ${averageRating}/5</div>
+          <button class="btn-primary">Choisir ce coach</button>
         </div>
       `;
 
@@ -40,7 +53,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
   } catch (error) {
-    console.error("Erreur :", error);
+    console.error("❌ Erreur :", error);
     coachGrid.innerHTML = `<p style="color:red;">Impossible de charger la liste des coaches 😢</p>`;
   }
 });
