@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     console.log("➡️ Récupération des produits depuis le back...");
-    const response = await fetch("http://127.0.0.1:5000/api/v1/shop/products"); 
+    const response = await fetch("http://127.0.0.1:5000/api/v1/product_shop"); 
     // ⚠️ Remplace l’URL par celle de ton endpoint réel s’il est différent
 
     if (!response.ok) {
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       card.innerHTML = `
         <div class="product-image">
-          <img src="${product.picture || '../public/images/ready/default-product.jpg'}" alt="${product.name}">
+          <img src="${product.picture}" alt="${product.name}">
         </div>
         <div class="product-info">
           <h3>${product.name}</h3>
