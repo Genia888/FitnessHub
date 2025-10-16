@@ -4,6 +4,7 @@ from app.extension_bcrypt import bcrypt
 from app.extensions import db
 from sqlalchemy.orm import validates, relationship
 from app.models.base_model import BaseModel
+from datetime import datetime 
 
 import json
 
@@ -12,6 +13,7 @@ class User(BaseModel):
 
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
+    birthday = db.Column(db.Date, nullable=False)
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
@@ -36,7 +38,7 @@ class User(BaseModel):
     consumerUsers = db.relationship('Subscription', backref='ConsumerC', lazy=True, foreign_keys='Subscription.coach_id')
     workoutSchedule = db.relationship('Workout', backref='WorkoutC', lazy=True, foreign_keys='Workout.user_id')
 
-    def __init__(self, first_name: str, last_name: str, email: str, password: str, is_admin=False, is_coach=False, is_nutrition=False, is_subscribe=False, adress1="", adress2="", postal_code="", city="", allergy_comment="", physical_constraint="", coach_certif="", coach_experience="", coach_description="", size="", weight="", picture=""):
+    def __init__(self, first_name: str, last_name: str, birthday: datetime, email: str, password: str, is_admin=False, is_coach=False, is_nutrition=False, is_subscribe=False, adress1="", adress2="", postal_code="", city="", allergy_comment="", physical_constraint="", coach_certif="", coach_experience="", coach_description="", size="", weight="", picture=""):
         super().__init__()
         if not first_name or len(first_name) > 50:
             raise ValueError("First name is required and must be ≤ 50 characters.")
@@ -64,6 +66,7 @@ class User(BaseModel):
             raise ValueError("The coach_description must be ≤ 10000 characters.")
         self.first_name = first_name
         self.last_name = last_name
+        self.birthday = birthday
         self.email = email
         self.is_admin = is_admin
         self.is_coach = is_coach
@@ -102,6 +105,7 @@ class User(BaseModel):
             "id": self.id,
             "first_name": self.first_name,
             "last_name": self.last_name,
+            "birthday": self.birthday.isoformat(),
             "email": self.email,
             "is_admin": self.is_admin,
             "is_coach": self.is_coach,

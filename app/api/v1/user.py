@@ -9,6 +9,7 @@ api = Namespace("users", description="User operations")
 user_model = api.model("User", {
     "first_name": fields.String(required=True, max_length=50),
     "last_name": fields.String(required=True, max_length=50),
+    "birthday": fields.Date(required=True, max_length=50),
     "password": fields.String(required=True, max_length=50),
     "is_admin" : fields.Boolean(required=True, default=False),
     "is_coach" : fields.Boolean(required=True, default=False),
@@ -53,7 +54,7 @@ class UserList(Resource):
 
         
         new_user = facade.create_user(user_data)
-        return {'id': new_user.id, 'first_name': new_user.first_name, 'last_name': new_user.last_name, 
+        return {'id': new_user.id, 'first_name': new_user.first_name, 'last_name': new_user.last_name, 'birthday': new_user.birthday.isoformat(), 
                 "password": new_user.password, 'email': new_user.email,
                 "is_admin": new_user.is_admin, "is_coach": new_user.is_coach,
                 "is_nutrition": new_user.is_nutrition, "password": new_user.password, 

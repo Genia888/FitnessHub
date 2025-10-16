@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS "User" (
     "id" VARCHAR(36), 
     "first_name" VARCHAR(50) NOT NULL, 
     "last_name" VARCHAR(50) NOT NULL, 
+    "birthday" DATE DEFAULT NULL,
     "email" VARCHAR(120) NOT NULL UNIQUE,
     "password" VARCHAR(128) NOT NULL, 
     "is_admin" BOOLEAN DEFAULT FALSE, 
