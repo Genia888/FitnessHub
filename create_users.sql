@@ -12,7 +12,7 @@ values ( '83726b63-dcd3-4f7e-bc36-0f326ae59722','Elhadj','Reziga','1980-01-01','
 
 -- coach sans nutrition
 insert into User( id,first_name,last_name,birthday, email,password,is_admin,created_at,updated_at,is_coach,is_nutrition,is_subscribe,adress1,adress2,postal_code,city,allergy_comment,physical_constraint,coach_certif,coach_experience,coach_description,size,weight, picture )
-values ( '83726b63-dcd3-4f7e-bc36-0f326ae59723','Sarah','Reziga','1981-01-01','sebastien.salgues@hotmail2.com','$2b$12$IP8V6xpG6apEbpoi4ACze.ucWwOx8wqx1CUFuBD27AvJOXGp7QJFi',0,'2025-09-15 17:05:36.374418','2025-09-15 17:05:36.374432',1,0,0,'23 Avenue Hippolyte de Barrau','','12000','Rodez','','','',"20 ans d'experience",'Expert en musculation',0.0,0.0,'http://localhost:5500/public/images/ready/coach3.jpg');
+values ( '83726b63-dcd3-4f7e-bc36-0f326ae59723','Sarah','Reziga','1981-01-01','sebastien.salgues@hotmail2.com','$2b$12$IP8V6xpG6apEbpoi4ACze.ucWwOx8wqx1CUFuBD27AvJOXGp7QJFi',0,'2025-09-15 17:05:36.374418','2025-09-15 17:05:36.374432',1,0,0,'23 Avenue Hippolyte de Barrau','','12000','Rodez','','','',"20 ans d'experience",'Expert en musculation',0.0,0.0,'http://localhost:5500/public/images/ready/coach6.jpg');
 
 -- User
 insert into User( id,first_name,last_name,birthday, email,password,is_admin,created_at,updated_at,is_coach,is_nutrition,is_subscribe,adress1,adress2,postal_code,city,allergy_comment,physical_constraint,coach_certif,coach_experience,coach_description,size,weight, picture )
