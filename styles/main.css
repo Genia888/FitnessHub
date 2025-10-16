@@ -1469,8 +1469,8 @@ ul {
 }
 
 .product-image img {
-  width: 180px; /* avant : 90px */
-  height: 180px; /* avant : 90px */
+  width: 280px; /* avant : 180px */
+  height: 280px; /* avant : 180px */
   object-fit: contain;
   transition: transform 0.3s ease;
 }
