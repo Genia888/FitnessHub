@@ -171,6 +171,19 @@ class Abonne(Resource):
         users = facade.get_all_abonne()
         return [user.to_dict() for user in users], 200
 
+@api.route('/coach/<coach_id>/users')
+class PlaceReviewList(Resource):
+    @api.response(200, 'List of users from coach')
+    @api.response(404, 'coach not found')
+    def get(self, coach_id):
+        """Get all users for a specific coach"""
+        try:
+            coach_users = facade.get_all_abonne_from_coach(coach_id)
+            return [user.to_dict() for user in coach_users], 200
+        except ValueError as e:
+            return {'error': str(e)}, 400
+
+
 class AdminUserModify(Resource):
     @api.expect(user_model, validate=True)
     @api.response(200, 'User updated successfully')
