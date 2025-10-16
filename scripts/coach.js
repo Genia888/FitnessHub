@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       card.innerHTML = `
         <div class="coach-image">
-          <img src="${coach.picture || '../public/images/ready/default.jpg'}" alt="Coach ${fullName}">
+          <img src="${coach.picture}" alt="Coach ${fullName}">
         </div>
         <div class="coach-info">
           <h3>${fullName}</h3>
