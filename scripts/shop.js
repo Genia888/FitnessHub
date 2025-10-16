@@ -1,4 +1,4 @@
-// scripts for the shop
+// scripts for the shop page
 
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("✅ shop.js chargé !");
@@ -11,8 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     console.log("➡️ Récupération des produits depuis le back...");
-    const response = await fetch("http://127.0.0.1:5000/api/v1/product_shop"); 
-    // ⚠️ Remplace l’URL par celle de ton endpoint réel s’il est différent
+    const response = await fetch("http://127.0.0.1:5000/api/v1/product_shop");
 
     if (!response.ok) {
       throw new Error("Erreur HTTP : " + response.status);
