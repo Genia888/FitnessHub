@@ -71,7 +71,7 @@ insert into "Product_shop" ("id", "name", "description",
     "price", "created_at", "updated_at",
     "is_active", "is_in_stock")
 values ('000000000000000000000000000000000006', 'Gourde FitnessHub', 'Gourde FitnessHub',
-'http://localhost:5500/public/images/ready/product6.jpg','','',20,'2025-09-15 17:05:36.374418','2025-09-15 17:05:36.374432',true, true);
+'http://localhost:5500/public/images/ready/product2.jpg','','',20,'2025-09-15 17:05:36.374418','2025-09-15 17:05:36.374432',true, true);
 
 insert into "Product_shop" ("id", "name", "description", 
     "picture", "picture2", "picture3",
