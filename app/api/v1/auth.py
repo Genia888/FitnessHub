@@ -13,6 +13,27 @@ login_model = api.model('Login', {
     'password': fields.String(required=True, description='User password')
 })
 
+register_model = api.model('Register', {
+    'first_name': fields.String(required=True, description='First name', max_length=50),
+    'last_name': fields.String(required=True, description='Last name', max_length=50),
+    'email': fields.String(required=True, description='Email address'),
+    'password': fields.String(required=True, description='Password'),
+    'is_coach': fields.Boolean(required=False, default=False, description='Is user a coach'),
+    'is_nutrition': fields.Boolean(required=False, default=False, description='Is user a nutritionist'),
+    'adress1': fields.String(required=False, default='', description='Address line 1', max_length=100),
+    'adress2': fields.String(required=False, default='', description='Address line 2', max_length=100),
+    'postal_code': fields.String(required=False, default='', description='Postal code', max_length=20),
+    'city': fields.String(required=False, default='', description='City', max_length=100),
+    'allergy_comment': fields.String(required=False, default='', description='Allergy comments', max_length=10000),
+    'physical_constraint': fields.String(required=False, default='', description='Physical constraints', max_length=10000),
+    'coach_certif': fields.String(required=False, default='', description='Coach certifications', max_length=1000),
+    'coach_experience': fields.String(required=False, default='', description='Coach experience', max_length=10000),
+    'coach_description': fields.String(required=False, default='', description='Coach description', max_length=10000),
+    'size': fields.Float(required=False, default=0.0, description='Height in cm'),
+    'weight': fields.Float(required=False, default=0.0, description='Weight in kg'),
+    'picture': fields.String(required=False, default='', description='Profile picture URL', max_length=1000),
+})
+
 @api.route('/login')
 class Login(Resource):
     @api.expect(login_model)
@@ -42,3 +63,7 @@ class ProtectedResource(Resource):
         current_user = get_jwt_identity()
         return {'message': f'Hello, user {current_user["id"]}'}, 200
     
+@api.route('/register')
+class Register(Resource):
+    def post(self):
+        # votre logique
