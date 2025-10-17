@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Subscription - FitnessHub</title>
+  <title>Sign Up - FitnessHub</title>
   
   <!-- image favicon -->
   <link rel="icon" type="image/x-icon" href="../assets/images/fitnesshub.jpg">
@@ -82,7 +82,7 @@
             <h2>Become Coach</h2>
           </div>
           <div class="accordion__description" style="width: 100%; max-width: 500px;">
-            <form class="login-form" action="/api/v1/users/" method="post">
+            <form id="coach-register-form" class="login-form">
               <div class="form-group">
                 <input type="text" name="first_name" placeholder="Prénom" required>
               </div>
@@ -104,7 +104,6 @@
               <div class="form-group">
                 <textarea name="coach_description" placeholder="Description / Présentation" rows="3" required></textarea>
               </div>
-              <input type="hidden" name="is_coach" value="true">
               <button class="btn-primary" type="submit">Coach Sign Up</button>
               <div class="login-links">
                 <a href="../pages/connexion.html" class="forgot-password">Already have an account? Log in</a>
@@ -124,7 +123,7 @@
             <h2>Become Member</h2>
           </div>
           <div class="accordion__description" style="width: 100%; max-width: 500px;">
-            <form class="login-form" action="/api/v1/users/" method="post">
+            <form id="member-register-form" class="login-form">
               <div class="form-group">
                 <input type="text" name="first_name" placeholder="Prénom" required>
               </div>
@@ -159,5 +158,9 @@
       </div>
     </section>
   </div>
+
+  <!-- === AJOUT SEULEMENT LES SCRIPTS POUR LE COOKIE ET L’ENVOI DES DONNÉES === -->
+  <script src="../scripts/cookie.js" defer></script>
+  <script src="../scripts/login.js" defer></script>
 </body>
 </html>

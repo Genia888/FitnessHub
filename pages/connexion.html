@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in - FitnessHub</title>
+  <title>Sign in - FitnessHub</title>
   
   <!-- image favicon -->
   <link rel="icon" type="image/x-icon" href="../assets/images/fitnesshub.jpg">
@@ -86,12 +86,12 @@
             <h2>Login to your account</h2>
           </div>
           <div class="accordion__description" style="width: 100%; max-width: 500px;">
-            <form class="login-form" action="/api/v1/auth/login" method="post">
+            <form id="login-form" class="login-form">
               <div class="form-group">
-                <input type="email" name="email" placeholder="Email" required>
+                <input type="email" id="email" name="email" placeholder="Email" required>
               </div>
               <div class="form-group">
-                <input type="password" name="password" placeholder="Mot de passe" required>
+                <input type="password" id="password" name="password" placeholder="Mot de passe" required>
               </div>
               <button class="btn-primary" type="submit">Sign in</button>
               <div class="login-links">
@@ -104,5 +104,9 @@
       </div>
     </section>
   </div>
+
+  <!-- scripts -->
+  <script src="../scripts/cookie.js" defer></script>
+  <script src="../scripts/connexion.js" defer></script>
 </body>
 </html>
