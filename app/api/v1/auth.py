@@ -1,18 +1,18 @@
 from flask import request
 from flask_restx import Namespace, Resource, fields
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, get_jwt
 from app.services.facade import facade
-from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 
 
 api = Namespace('auth', description='Authentication operations')
 
-# Model for input validation
+# Model for login validation
 login_model = api.model('Login', {
     'email': fields.String(required=True, description='User email'),
     'password': fields.String(required=True, description='User password')
 })
 
+# Model for registration validation
 register_model = api.model('Register', {
     'first_name': fields.String(required=True, description='First name', max_length=50),
     'last_name': fields.String(required=True, description='Last name', max_length=50),
@@ -34,19 +34,45 @@ register_model = api.model('Register', {
     'picture': fields.String(required=False, default='', description='Profile picture URL', max_length=1000),
 })
 
+
 @api.route('/register')
 class Register(Resource):
-    @api.expect(register_model, validate=True)
+    @api.expect(register_model)
     @api.response(201, 'User successfully registered')
     @api.response(400, 'Email already registered or invalid input')
     def post(self):
         """Register a new user"""
         user_data = api.payload
         
+        # Validation des champs requis
+        if not user_data.get('email') or not user_data.get('password'):
+            return {'error': 'Email and password are required'}, 400
+        
+        if not user_data.get('first_name') or not user_data.get('last_name'):
+            return {'error': 'First name and last name are required'}, 400
+        
         # Check if email already exists
         existing_user = facade.get_user_by_email(user_data['email'])
         if existing_user:
             return {'error': 'Email already registered'}, 400
+        
+        # Valeurs par défaut pour les champs optionnels
+        user_data.setdefault('is_coach', False)
+        user_data.setdefault('is_nutrition', False)
+        user_data.setdefault('is_admin', False)
+        user_data.setdefault('is_subscribe', False)
+        user_data.setdefault('adress1', '')
+        user_data.setdefault('adress2', '')
+        user_data.setdefault('postal_code', '')
+        user_data.setdefault('city', '')
+        user_data.setdefault('allergy_comment', '')
+        user_data.setdefault('physical_constraint', '')
+        user_data.setdefault('coach_certif', '')
+        user_data.setdefault('coach_experience', '')
+        user_data.setdefault('coach_description', '')
+        user_data.setdefault('size', 0.0)
+        user_data.setdefault('weight', 0.0)
+        user_data.setdefault('picture', '')
         
         try:
             # Create the new user
@@ -74,7 +100,9 @@ class Register(Resource):
         except ValueError as e:
             return {'error': str(e)}, 400
         except Exception as e:
+            print(f"Error during registration: {str(e)}")  # Log pour debug
             return {'error': 'An error occurred during registration'}, 500
+
 
 @api.route('/login')
 class Login(Resource):
@@ -83,20 +111,38 @@ class Login(Resource):
     @api.response(401, 'Invalid credentials')
     def post(self):
         """Authenticate user and return a JWT token"""
-        credentials = api.payload  # Get the email and password from the request payload
+        credentials = api.payload
         
-        # Step 1: Retrieve the user based on the provided email
+        # Validation
+        if not credentials.get('email') or not credentials.get('password'):
+            return {'error': 'Email and password are required'}, 400
+        
+        # Retrieve the user based on the provided email
         user = facade.get_user_by_email(credentials['email'])
 
-        # Step 2: Check if the user exists and the password is correct
+        # Check if the user exists and the password is correct
         if not user or not user.verify_password(credentials['password']):
             return {'error': 'Invalid credentials'}, 401
 
-        # Step 3: Create a JWT token with the user's id and is_admin flag
-        access_token = create_access_token(identity={'id': str(user.id), 'is_admin': user.is_admin})
+        # Create a JWT token with the user's id and is_admin flag
+        access_token = create_access_token(
+            identity={'id': str(user.id), 'is_admin': user.is_admin}
+        )
         
-        # Step 4: Return the JWT token to the client
-        return {'access_token': access_token}, 200
+        # ✅ IMPORTANT : Retourner les infos user en plus du token
+        return {
+            'access_token': access_token,
+            'user': {
+                'id': user.id,
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'email': user.email,
+                'is_coach': user.is_coach,
+                'is_nutrition': user.is_nutrition,
+                'is_admin': user.is_admin
+            }
+        }, 200
+
     
 @api.route('/protected')
 class ProtectedResource(Resource):
@@ -106,4 +152,3 @@ class ProtectedResource(Resource):
         """A protected endpoint that requires a valid JWT token"""
         current_user = get_jwt_identity()
         return {'message': f'Hello, user {current_user["id"]}'}, 200
-    
