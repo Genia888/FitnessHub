@@ -19,23 +19,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const formData = new FormData(form);
     const payload = Object.fromEntries(formData.entries());
 
-    // Détermine l'URL d'API à utiliser :
-    // - si action du form est une URL absolue, on l'utilise,
-    // - sinon on préfixe par http://127.0.0.1:5000 (ton backend local).
-    let action = form.getAttribute("action") || "/api/v1/auth/login";
-    let url = action;
-    if (!/^https?:\/\//i.test(action)) {
-      // si action commence par '/', laisse tel quel ; sinon ajoute '/'
-      if (!action.startsWith("/")) action = "/" + action;
-      url = "http://127.0.0.1:5000" + action;
-    }
+    // URL de l'API de connexion
+    const url = "http://127.0.0.1:5000/api/v1/auth/login";
 
     console.log("➡️ Envoi POST vers :", url);
     console.log("📤 Payload :", payload);
-
-    // Optionnel : afficher un petit feedback utilisateur (si tu veux)
-    // const submitBtn = form.querySelector('button[type="submit"]');
-    // if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Connexion...'; }
 
     try {
       const response = await fetch(url, {
@@ -46,28 +34,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Réponse non OK
       if (!response.ok) {
-        // essaie de lire le message d'erreur renvoyé par le serveur
         let errText = `Erreur HTTP ${response.status}`;
         try {
           const errJson = await response.json();
-          if (errJson && errJson.message) errText = errJson.message;
-          else if (typeof errJson === "string") errText = errJson;
+          if (errJson && errJson.error) {
+            errText = errJson.error;
+          } else if (errJson && errJson.message) {
+            errText = errJson.message;
+          }
         } catch (_) { /* ignore */ }
         throw new Error(errText);
       }
 
-      // Normalement JSON { token, user } ou { access_token, user } ou user directement
+      // ✅ L'API retourne { access_token, user }
       const data = await response.json();
       console.log("📥 Réponse serveur :", data);
 
-      // Normalisation : chercher token et user dans différentes formes possibles
-      const token = data.token || data.access_token || (data.data && data.data.token) || null;
-      const user = data.user || data.data || (data && typeof data === "object" && data.id ? data : null);
+      const token = data.access_token;
+      const user = data.user;
 
       if (!token || !user) {
-        console.warn("⚠️ Réponse du serveur ne contient pas token et user comme attendu.", data);
+        console.warn("⚠️ Réponse du serveur ne contient pas access_token et user.", data);
         alert("Connexion réussie, mais serveur n'a pas retourné d'informations de session attendues.");
-        // On peut néanmoins tenter de sauvegarder user si présent
         if (user) {
           UserSession.saveUser(user);
         }
@@ -88,10 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     } catch (error) {
       console.error("❌ Erreur lors de la connexion :", error);
-      // Message simple pour l'utilisateur
       alert(error.message || "Erreur lors de la connexion. Vérifiez vos identifiants.");
-    } finally {
-      // if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Sign in'; }
     }
   });
 });
