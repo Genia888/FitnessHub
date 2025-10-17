@@ -34,6 +34,48 @@ register_model = api.model('Register', {
     'picture': fields.String(required=False, default='', description='Profile picture URL', max_length=1000),
 })
 
+@api.route('/register')
+class Register(Resource):
+    @api.expect(register_model, validate=True)
+    @api.response(201, 'User successfully registered')
+    @api.response(400, 'Email already registered or invalid input')
+    def post(self):
+        """Register a new user"""
+        user_data = api.payload
+        
+        # Check if email already exists
+        existing_user = facade.get_user_by_email(user_data['email'])
+        if existing_user:
+            return {'error': 'Email already registered'}, 400
+        
+        try:
+            # Create the new user
+            new_user = facade.create_user(user_data)
+            
+            # Create JWT token for automatic login after registration
+            access_token = create_access_token(
+                identity={'id': str(new_user.id), 'is_admin': new_user.is_admin}
+            )
+            
+            return {
+                'message': 'User successfully registered',
+                'access_token': access_token,
+                'user': {
+                    'id': new_user.id,
+                    'first_name': new_user.first_name,
+                    'last_name': new_user.last_name,
+                    'email': new_user.email,
+                    'is_coach': new_user.is_coach,
+                    'is_nutrition': new_user.is_nutrition,
+                    'is_admin': new_user.is_admin
+                }
+            }, 201
+            
+        except ValueError as e:
+            return {'error': str(e)}, 400
+        except Exception as e:
+            return {'error': 'An error occurred during registration'}, 500
+
 @api.route('/login')
 class Login(Resource):
     @api.expect(login_model)
@@ -63,7 +105,3 @@ class ProtectedResource(Resource):
         current_user = get_jwt_identity()
         return {'message': f'Hello, user {current_user["id"]}'}, 200
     
-@api.route('/register')
-class Register(Resource):
-    def post(self):
-        # votre logique
