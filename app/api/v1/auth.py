@@ -56,6 +56,15 @@ class Register(Resource):
         if existing_user:
             return {'error': 'Email already registered'}, 400
         
+        # Convertir birthday en objet date si présent
+        if 'birthday' in user_data and user_data['birthday']:
+            from datetime import datetime
+            try:
+                # Convertir la chaîne '1996-02-23' en objet date
+                user_data['birthday'] = datetime.strptime(user_data['birthday'], '%Y-%m-%d').date()
+            except (ValueError, TypeError):
+                return {'error': 'Invalid date format for birthday. Use YYYY-MM-DD'}, 400
+        
         # Valeurs par défaut pour les champs optionnels
         user_data.setdefault('is_coach', False)
         user_data.setdefault('is_nutrition', False)
