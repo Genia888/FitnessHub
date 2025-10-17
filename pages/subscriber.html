@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coach Dashboard - FitnessHub</title>
+  <title>Client Dashboard - FitnessHub</title>
   
   <!-- image favicon -->
   <link rel="icon" type="image/x-icon" href="../assets/images/fitnesshub.jpg">
@@ -16,6 +16,11 @@
   <script src="../vendor/gsap/ScrollTrigger.min.js" defer></script>
   <script src="../vendor/lenis/lenis.min.js" defer></script>
   <script src="../scripts/app.js" defer></script>
+  
+  <!-- Scripts pour la gestion de session et cookies -->
+  <script src="../scripts/cookie.js" defer></script>
+  <!-- Script pour le tableau de bord subscriber -->
+  <script src="../scripts/subscriber.js" defer></script>
 </head>
 <body>
   <div class="pattern"></div>
@@ -43,8 +48,8 @@
             <li><a href="abonnement.html" data-text="Plans">Plans</a></li>
             <li><a href="coach.html" data-text="Coaches">Coaches</a></li>
             <li><a href="boutique.html" data-text="Shop">Shop</a></li>
-            <li><a href="connexion.html" data-text="Log out">Log out<span></span></a></li>
-            <li><a href="connexion.html" data-text="Account">Account<span></span></a></li>
+            <li><a href="#" data-text="Log out" onclick="logout()">Log out<span></span></a></li>
+            <li><a href="subscriber.html" data-text="Account">Account<span></span></a></li>
           </ul>
         </nav>
       </div>
@@ -63,8 +68,8 @@
               <li><a href="abonnement.html" data-text="Plans">Plans<span></span></a></li>
               <li><a href="coach.html" data-text="Coaches">Coaches<span></span></a></li>
               <li><a href="boutique.html" data-text="Shop">Shop<span></span></a></li>
-              <li><a href="connexion.html" data-text="Log out">Log out<span></span></a></li>
-              <li><a href="connexion.html" data-text="Account">Account<span></span></a></li>
+              <li><a href="#" data-text="Log out" onclick="logout()">Log out<span></span></a></li>
+              <li><a href="subscriber.html" data-text="Account">Account<span></span></a></li>
             </ul>
           </nav>
         </div>
@@ -83,13 +88,13 @@
       <div class="trainer-dashboard">
         <div class="client-profile-card">
           <div class="client-image">
-            <img src="../public/images/ready/client1.jpg" alt="Mon Profil">
+            <img src="" alt="Mon Profil" id="client-profile-image">
           </div>
           <div class="client-info">
-            <h3>Hedjouj Reziga</h3>
-            <p class="client-goal">Goal : Summer body</p>
-            <p class="client-stats">80kg • 1m70 • 29 years old</p>
-            <p class="client-progress">Progress : -5kg in 2 mouths</p>
+            <h3></h3>
+            <p class="client-goal"></p>
+            <p class="client-stats"></p>
+            <p class="client-progress"></p>
           </div>
         </div>
 
@@ -97,24 +102,9 @@
         <div class="trainer-grid">
           <!-- Exercices Planning -->
           <div class="planning-card subscriber-readonly">
-            <h3>My Workout Schedule﻿</h3>
+            <h3>My Workout Schedule</h3>
             <div class="exercise-list">
-              <div class="exercise-item">
-                <span class="exercise-name">Squats</span>
-                <span class="exercise-details">3x15 repetitions</span>
-              </div>
-              <div class="exercise-item">
-                <span class="exercise-name">Pompes</span>
-                <span class="exercise-details">3x10 repetitions</span>
-              </div>
-              <div class="exercise-item">
-                <span class="exercise-name">Pull over</span>
-                <span class="exercise-details">3x30 secondes</span>
-              </div>
-              <div class="exercise-item">
-                <span class="exercise-name">Cardio</span>
-                <span class="exercise-details">20 minutes</span>
-              </div>
+              <!-- Les exercices seront chargés dynamiquement par JavaScript -->
             </div>
             <div class="readonly-notice">
               <p>📋 Schedule Set by Your Coach</p>
@@ -125,22 +115,7 @@
           <div class="planning-card subscriber-readonly">
             <h3>My Nutrition Schedule</h3>
             <div class="nutrition-list">
-              <div class="meal-item">
-                <span class="meal-time">Breakfast</span>
-                <span class="meal-details">Oats + Fruits + Yogurt</span>
-              </div>
-              <div class="meal-item">
-                <span class="meal-time">Lunch</span>
-                <span class="meal-details">Quinoa Salad + Chicken</span>
-              </div>
-              <div class="meal-item">
-                <span class="meal-time">Snack</span>
-                <span class="meal-details">Almonds + Apple</span>
-              </div>
-              <div class="meal-item">
-                <span class="meal-time">Dinner</span>
-                <span class="meal-details">Salmon + Steamed Vegetables</span>
-              </div>
+              <!-- Les repas seront chargés dynamiquement par JavaScript -->
             </div>
             <div class="readonly-notice">
               <p>🥗 Personalized Nutrition Plan by Your Coach</p>
@@ -151,55 +126,7 @@
           <div class="calendar-card subscriber-readonly">
             <h3>My Week Calendar</h3>
             <div class="calendar-grid">
-              <div class="calendar-day">
-                <span class="day-name">Mon</span>
-                <span class="day-number">15</span>
-                <div class="day-exercises">
-                  <span>Upper Body</span>
-                </div>
-              </div>
-              <div class="calendar-day active">
-                <span class="day-name">Tue</span>
-                <span class="day-number">16</span>
-                <div class="day-exercises">
-                  <span>Cardio</span>
-                </div>
-              </div>
-              <div class="calendar-day">
-                <span class="day-name">Fri</span>
-                <span class="day-number">17</span>
-                <div class="day-exercises">
-                  <span>Repos</span>
-                </div>
-              </div>
-              <div class="calendar-day">
-                <span class="day-name">Thur</span>
-                <span class="day-number">18</span>
-                <div class="day-exercises">
-                  <span>Bas du corps</span>
-                </div>
-              </div>
-              <div class="calendar-day">
-                <span class="day-name">Fri</span>
-                <span class="day-number">19</span>
-                <div class="day-exercises">
-                  <span>Full body</span>
-                </div>
-              </div>
-              <div class="calendar-day">
-                <span class="day-name">Sat</span>
-                <span class="day-number">20</span>
-                <div class="day-exercises">
-                  <span>Yoga</span>
-                </div>
-              </div>
-              <div class="calendar-day">
-                <span class="day-name">Sun</span>
-                <span class="day-number">21</span>
-                <div class="day-exercises">
-                  <span>Rest</span>
-                </div>
-              </div>
+              <!-- Le calendrier sera chargé dynamiquement par JavaScript -->
             </div>
           </div>
 
@@ -207,22 +134,7 @@
           <div class="chat-card">
             <h3>Conversation with My Coach</h3>
             <div class="chat-messages">
-              <div class="message coach-message">
-                <span class="message-time">10:30</span>
-                <p>Hi Hedjouj! How did your workout go yesterday? 💪</p>
-              </div>
-              <div class="message client-message">
-                <span class="message-time">10:45</span>
-                <p>Hi Coach! I finished my workout yesterday, it was intense!</p>
-              </div>
-              <div class="message coach-message">
-                <span class="message-time">11:00</span>
-                <p>How did you feel during the squats?</p>
-              </div>
-              <div class="message client-message">
-                <span class="message-time">11:15</span>
-                <p>I'm feeling better than before, I can feel that I'm making progress!</p>
-              </div>
+              <!-- Les messages seront chargés dynamiquement par JavaScript -->
             </div>
             <div class="chat-input">
               <input type="text" placeholder="Tapez votre message...">
@@ -234,27 +146,12 @@
           <div class="planning-card">
             <h3>My Progress</h3>
             <div class="progress-stats">
-              <div class="stat-item">
-                <span class="stat-label">Starting Weight</span>
-                <span class="stat-value">85kg</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-label">Current Weight</span>
-                <span class="stat-value">80kg</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-label">Goal</span>
-                <span class="stat-value">75kg</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-label">Completed Sessions</span>
-                <span class="stat-value">24/30</span>
-              </div>
+              <!-- Les stats seront chargées dynamiquement par JavaScript -->
             </div>
             <div class="progress-bar">
-              <div class="progress-fill" style="width: 80%;"></div>
+              <div class="progress-fill" style="width: 0%;"></div>
             </div>
-            <p class="progress-text">80% of your goal achieved!</p>
+            <p class="progress-text"></p>
           </div>
 
           <!-- Coach Info -->
@@ -262,13 +159,13 @@
             <h3>My Coach</h3>
             <div class="coach-profile">
               <div class="coach-avatar">
-                <img src="../public/images/ready/coach1.jpg" alt="Coach">
+                <img src="" alt="Coach" id="coach-profile-image">
               </div>
               <div class="coach-details">
-                <h4>Elhadj Reziga</h4>
-                <p>Fitness & Nutrition Specialist</p>
-                <p>⭐⭐⭐⭐⭐ 4.9/5 (127 review)</p>
-                <p>5 years of experience</p>
+                <h4></h4>
+                <p></p>
+                <p class="coach-rating"></p>
+                <p class="coach-experience"></p>
               </div>
             </div>
           </div>
@@ -276,6 +173,14 @@
       </div>
     </section>
   </div>
-  <script src="../scripts/cookie.js" defer></script>
+
+  <script>
+    // Fonction de déconnexion
+    function logout() {
+      CookieManager.delete("token");
+      UserSession.clear();
+      window.location.href = "../pages/connexion.html";
+    }
+  </script>
 </body>
 </html>
