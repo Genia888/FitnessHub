@@ -289,31 +289,42 @@ class HBnBFacade:
 
     # Message Facade
     # Subscription Facade
-    def create_subscription(self, subscription_data):
-        """Create a new subscription."""
-        user = self.get_user(subscription_data['user_id'])
-        if not user:
-            raise ValueError("User not found.")
-        coach = self.get_user(subscription_data['coach_id'])
-        if not coach:
-            raise ValueError("Coach not found.")
-        
-        # Vérifier que c'est bien un coach
-        if not coach.is_coach:
-            raise ValueError("The specified user is not a coach.")
-        
-        # Créer un objet Subscription, PAS Nutrition !
-        subscription = Subscription(
-            subscription_data['begin_date'],
-            subscription_data['end_date'],
-            subscription_data['option_nutrition'],
-            subscription_data['option_message'],
-            subscription_data['user_id'],
-            subscription_data['coach_id']
-        )
-        
-        self.subscription_repo.add(subscription)
-        return subscription     
+def create_subscription(self, subscription_data):
+    """Create a new subscription."""
+    from datetime import datetime
+    
+    user = self.get_user(subscription_data['user_id'])
+    if not user:
+        raise ValueError("User not found.")
+    coach = self.get_user(subscription_data['coach_id'])
+    if not coach:
+        raise ValueError("Coach not found.")
+    
+    # Vérifier que c'est bien un coach
+    if not coach.is_coach:
+        raise ValueError("The specified user is not a coach.")
+    
+    # Convertir les strings de date en objets date Python
+    begin_date = subscription_data['begin_date']
+    if isinstance(begin_date, str):
+        begin_date = datetime.strptime(begin_date, '%Y-%m-%d').date()
+    
+    end_date = subscription_data['end_date']
+    if isinstance(end_date, str):
+        end_date = datetime.strptime(end_date, '%Y-%m-%d').date()
+    
+    # Créer un objet Subscription
+    subscription = Subscription(
+        begin_date,
+        end_date,
+        subscription_data['option_nutrition'],
+        subscription_data['option_message'],
+        subscription_data['user_id'],
+        subscription_data['coach_id']
+    )
+    
+    self.subscription_repo.add(subscription)
+    return subscription     
 
 
     def get_subscription(self, subscription_id):
