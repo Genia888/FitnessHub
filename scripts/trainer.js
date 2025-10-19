@@ -3,7 +3,7 @@
 // Gestion du tableau de bord coach (trainer)
 // ==========================================================
 
-const API_BASE_URL = "http://localhost:5000/api/v1";
+const API_BASE_URL = "http://127.0.0.1:5000/api/v1";
 
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("✅ trainer.js chargé");
@@ -57,7 +57,8 @@ async function getFirstClientId(coachId, token) {
   try {
     const response = await fetch(`${API_BASE_URL}/user/coach/${coachId}/users`, {
       headers: {
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
       }
     });
 
@@ -78,7 +79,8 @@ async function loadCoachClients(coachId, token) {
   try {
     const response = await fetch(`${API_BASE_URL}/user/coach/${coachId}/users`, {
       headers: {
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
       }
     });
 
@@ -89,9 +91,6 @@ async function loadCoachClients(coachId, token) {
 
     const clients = await response.json();
     console.log("✅ Clients chargés:", clients);
-
-    // Vous pouvez créer un sélecteur de clients ici si nécessaire
-    // Pour l'instant, on affiche le premier client par défaut
     
   } catch (error) {
     console.error("❌ Erreur loadCoachClients:", error);
@@ -106,7 +105,8 @@ async function loadClientData(clientId, token) {
     // Charger le profil du client
     const response = await fetch(`${API_BASE_URL}/user/${clientId}`, {
       headers: {
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
       }
     });
 
@@ -115,21 +115,27 @@ async function loadClientData(clientId, token) {
     const clientData = await response.json();
 
     // Mettre à jour le profil dans le HTML
-    document.querySelector(".client-info h3").textContent = 
-      `${clientData.first_name} ${clientData.last_name}`;
+    const nameElement = document.querySelector(".client-info h3");
+    if (nameElement) {
+      nameElement.textContent = `${clientData.first_name} ${clientData.last_name}`;
+    }
     
-    document.querySelector(".client-stats").textContent = 
-      `${clientData.weight}kg • ${clientData.size}m • 29 years old`;
+    const statsElement = document.querySelector(".client-stats");
+    if (statsElement && clientData.weight && clientData.size) {
+      statsElement.textContent = `${clientData.weight}kg • ${clientData.size}m`;
+    }
 
     // Mettre à jour l'image si disponible
-    if (clientData.picture) {
-      document.querySelector(".client-image img").src = clientData.picture;
+    const imageElement = document.querySelector(".client-image img");
+    if (imageElement && clientData.picture) {
+      imageElement.src = clientData.picture;
+      imageElement.alt = `${clientData.first_name} ${clientData.last_name}`;
     }
 
     // Afficher les objectifs si présents
-    if (clientData.physical_constraint) {
-      document.querySelector(".client-goal").textContent = 
-        `Goal: ${clientData.physical_constraint}`;
+    const goalElement = document.querySelector(".client-goal");
+    if (goalElement && clientData.physical_constraint) {
+      goalElement.textContent = `Goal: ${clientData.physical_constraint}`;
     }
 
     console.log("✅ Profil client chargé:", clientData);
@@ -153,9 +159,10 @@ async function loadClientData(clientId, token) {
 // ============================================
 async function loadClientWorkout(clientId, token) {
   try {
-    const response = await fetch(`${API_BASE_URL}/workout?user_id=${clientId}`, {
+    const response = await fetch(`${API_BASE_URL}/workout/user/${clientId}/workout`, {
       headers: {
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
       }
     });
 
@@ -168,19 +175,21 @@ async function loadClientWorkout(clientId, token) {
 
     if (workouts && workouts.length > 0) {
       const exerciseList = document.querySelector(".exercise-list");
-      exerciseList.innerHTML = ""; // Vider la liste
+      if (exerciseList) {
+        exerciseList.innerHTML = ""; // Vider la liste
 
-      workouts.forEach(workout => {
-        const exerciseItem = document.createElement("div");
-        exerciseItem.className = "exercise-item";
-        exerciseItem.innerHTML = `
-          <span class="exercise-name">${workout.category || "Exercise"}</span>
-          <span class="exercise-details">${workout.description || "No description"}</span>
-        `;
-        exerciseList.appendChild(exerciseItem);
-      });
+        workouts.forEach(workout => {
+          const exerciseItem = document.createElement("div");
+          exerciseItem.className = "exercise-item";
+          exerciseItem.innerHTML = `
+            <span class="exercise-name">${workout.category || "Exercise"}</span>
+            <span class="exercise-details">${workout.description || "No description"}</span>
+          `;
+          exerciseList.appendChild(exerciseItem);
+        });
 
-      console.log("✅ Planning d'exercices du client chargé:", workouts);
+        console.log("✅ Planning d'exercices du client chargé:", workouts);
+      }
     }
   } catch (error) {
     console.error("❌ Erreur loadClientWorkout:", error);
@@ -192,9 +201,10 @@ async function loadClientWorkout(clientId, token) {
 // ============================================
 async function loadClientNutrition(clientId, token) {
   try {
-    const response = await fetch(`${API_BASE_URL}/nutrition?user_id=${clientId}`, {
+    const response = await fetch(`${API_BASE_URL}/nutrition/user/${clientId}/nutrition`, {
       headers: {
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
       }
     });
 
@@ -207,19 +217,21 @@ async function loadClientNutrition(clientId, token) {
 
     if (nutrition && nutrition.length > 0) {
       const nutritionList = document.querySelector(".nutrition-list");
-      nutritionList.innerHTML = ""; // Vider la liste
+      if (nutritionList) {
+        nutritionList.innerHTML = ""; // Vider la liste
 
-      nutrition.forEach(meal => {
-        const mealItem = document.createElement("div");
-        mealItem.className = "meal-item";
-        mealItem.innerHTML = `
-          <span class="meal-time">${meal.category || "Meal"}</span>
-          <span class="meal-details">${meal.description || "No description"} (${meal.calories || 0} cal)</span>
-        `;
-        nutritionList.appendChild(mealItem);
-      });
+        nutrition.forEach(meal => {
+          const mealItem = document.createElement("div");
+          mealItem.className = "meal-item";
+          mealItem.innerHTML = `
+            <span class="meal-time">${meal.category || "Meal"}</span>
+            <span class="meal-details">${meal.description || "No description"} (${meal.calories || 0} cal)</span>
+          `;
+          nutritionList.appendChild(mealItem);
+        });
 
-      console.log("✅ Planning nutritionnel du client chargé:", nutrition);
+        console.log("✅ Planning nutritionnel du client chargé:", nutrition);
+      }
     }
   } catch (error) {
     console.error("❌ Erreur loadClientNutrition:", error);
@@ -231,9 +243,10 @@ async function loadClientNutrition(clientId, token) {
 // ============================================
 async function loadMessages(clientId, token) {
   try {
-    const response = await fetch(`${API_BASE_URL}/message?user_id=${clientId}`, {
+    const response = await fetch(`${API_BASE_URL}/message/user/${clientId}/messages`, {
       headers: {
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
       }
     });
 
@@ -246,26 +259,28 @@ async function loadMessages(clientId, token) {
 
     if (messages && messages.length > 0) {
       const chatMessages = document.querySelector(".chat-messages");
-      chatMessages.innerHTML = ""; // Vider les messages
+      if (chatMessages) {
+        chatMessages.innerHTML = ""; // Vider les messages
 
-      messages.forEach(msg => {
-        const messageDiv = document.createElement("div");
-        messageDiv.className = msg.is_from_user ? "message client-message" : "message coach-message";
-        
-        const date = new Date(msg.created_at);
-        const time = `${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
-        
-        messageDiv.innerHTML = `
-          <span class="message-time">${time}</span>
-          <p>${msg.text}</p>
-        `;
-        chatMessages.appendChild(messageDiv);
-      });
+        messages.forEach(msg => {
+          const messageDiv = document.createElement("div");
+          messageDiv.className = msg.is_from_user ? "message client-message" : "message coach-message";
+          
+          const date = new Date(msg.created_at);
+          const time = `${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
+          
+          messageDiv.innerHTML = `
+            <span class="message-time">${time}</span>
+            <p>${msg.text}</p>
+          `;
+          chatMessages.appendChild(messageDiv);
+        });
 
-      // Scroll vers le bas
-      chatMessages.scrollTop = chatMessages.scrollHeight;
+        // Scroll vers le bas
+        chatMessages.scrollTop = chatMessages.scrollHeight;
 
-      console.log("✅ Messages chargés:", messages);
+        console.log("✅ Messages chargés:", messages);
+      }
     }
   } catch (error) {
     console.error("❌ Erreur loadMessages:", error);
@@ -279,6 +294,8 @@ function initializeChat(coachId, clientId, token) {
   const chatInput = document.querySelector(".chat-input input");
   const sendButton = document.querySelector(".chat-input button");
 
+  if (!chatInput || !sendButton) return;
+
   sendButton.addEventListener("click", async () => {
     const messageText = chatInput.value.trim();
     
@@ -289,14 +306,15 @@ function initializeChat(coachId, clientId, token) {
       const response = await fetch(`${API_BASE_URL}/message`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
           text: messageText,
           user_id: clientId,
           coach_id: coachId,
-          is_from_user: false // Le message vient du coach
+          is_from_user: false, // Le message vient du coach
+          is_read: false
         })
       });
 
@@ -347,9 +365,7 @@ function initializeActionButtons(clientId, token) {
   const changeScheduleBtn = document.querySelector(".planning-card:first-child .btn-primary");
   if (changeScheduleBtn) {
     changeScheduleBtn.addEventListener("click", () => {
-      // Rediriger vers une page de modification ou ouvrir un modal
       alert("Fonctionnalité de modification du planning à implémenter");
-      // Vous pouvez créer une modal ou rediriger vers une page dédiée
     });
   }
 
