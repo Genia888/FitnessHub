@@ -288,17 +288,32 @@ class HBnBFacade:
 
 
     # Message Facade
-    def create_subscription(self, nutrition_data):
+    # Subscription Facade
+    def create_subscription(self, subscription_data):
         """Create a new subscription."""
-        user = self.get_user(nutrition_data['user_id'])
+        user = self.get_user(subscription_data['user_id'])
         if not user:
             raise ValueError("User not found.")
-        coach = self.get_user(nutrition_data['coach_id'])
+        coach = self.get_user(subscription_data['coach_id'])
         if not coach:
             raise ValueError("Coach not found.")
-        subscription = Nutrition(nutrition_data['description'], nutrition_data['picture'], nutrition_data['category'], nutrition_data['quantity'], nutrition_data['date_nutrition'],  user, coach)
+        
+        # Vérifier que c'est bien un coach
+        if not coach.is_coach:
+            raise ValueError("The specified user is not a coach.")
+        
+        # Créer un objet Subscription, PAS Nutrition !
+        subscription = Subscription(
+            subscription_data['begin_date'],
+            subscription_data['end_date'],
+            subscription_data['option_nutrition'],
+            subscription_data['option_message'],
+            subscription_data['user_id'],
+            subscription_data['coach_id']
+        )
+        
         self.subscription_repo.add(subscription)
-        return subscription      
+        return subscription     
 
 
     def get_subscription(self, subscription_id):
