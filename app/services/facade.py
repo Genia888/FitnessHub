@@ -242,7 +242,7 @@ class HBnBFacade:
         self.workout_repo.delete(workout_id)
         return {'message': 'workout deleted succesessfully'}
 
-    # workout Facade
+    # Nutrition Facade
     def create_nutrition(self, nutrition_data):
         """Create a new nutrition."""
         user = self.get_user(nutrition_data['user_id'])
@@ -287,44 +287,41 @@ class HBnBFacade:
         return {'message': 'nutrition deleted succesessfully'}
 
 
-    # Message Facade
     # Subscription Facade
-def create_subscription(self, subscription_data):
-    """Create a new subscription."""
-    from datetime import datetime
-    
-    user = self.get_user(subscription_data['user_id'])
-    if not user:
-        raise ValueError("User not found.")
-    coach = self.get_user(subscription_data['coach_id'])
-    if not coach:
-        raise ValueError("Coach not found.")
-    
-    # Vérifier que c'est bien un coach
-    if not coach.is_coach:
-        raise ValueError("The specified user is not a coach.")
-    
-    # Convertir les strings de date en objets date Python
-    begin_date = subscription_data['begin_date']
-    if isinstance(begin_date, str):
-        begin_date = datetime.strptime(begin_date, '%Y-%m-%d').date()
-    
-    end_date = subscription_data['end_date']
-    if isinstance(end_date, str):
-        end_date = datetime.strptime(end_date, '%Y-%m-%d').date()
-    
-    # Créer un objet Subscription
-    subscription = Subscription(
-        begin_date,
-        end_date,
-        subscription_data['option_nutrition'],
-        subscription_data['option_message'],
-        subscription_data['user_id'],
-        subscription_data['coach_id']
-    )
-    
-    self.subscription_repo.add(subscription)
-    return subscription     
+    def create_subscription(self, subscription_data):
+        """Create a new subscription."""
+        user = self.get_user(subscription_data['user_id'])
+        if not user:
+            raise ValueError("User not found.")
+        coach = self.get_user(subscription_data['coach_id'])
+        if not coach:
+            raise ValueError("Coach not found.")
+        
+        # Vérifier que c'est bien un coach
+        if not coach.is_coach:
+            raise ValueError("The specified user is not a coach.")
+        
+        # Convertir les strings de date en objets date Python
+        begin_date = subscription_data['begin_date']
+        if isinstance(begin_date, str):
+            begin_date = datetime.strptime(begin_date, '%Y-%m-%d').date()
+        
+        end_date = subscription_data['end_date']
+        if isinstance(end_date, str):
+            end_date = datetime.strptime(end_date, '%Y-%m-%d').date()
+        
+        # Créer un objet Subscription
+        subscription = Subscription(
+            begin_date,
+            end_date,
+            subscription_data['option_nutrition'],
+            subscription_data['option_message'],
+            subscription_data['user_id'],
+            subscription_data['coach_id']
+        )
+        
+        self.subscription_repo.add(subscription)
+        return subscription
 
 
     def get_subscription(self, subscription_id):
@@ -337,7 +334,7 @@ def create_subscription(self, subscription_data):
         return self.subscription_repo.get_all()
 
     def get_subscriptions_by_coach(self, coach_id):
-        coach = self.place_repo.get(coach_id)
+        coach = self.user_repo.get(coach_id)
         if not coach:
             raise ValueError("Coach not found")
         return [subscription for subscription in
@@ -361,7 +358,7 @@ def create_subscription(self, subscription_data):
         return {'subscription': 'Review deleted succesessfully'}
 
 
-    # Placeholder method for creating a product
+    # Product Facade
     def create_product(self, product_data):
         product = Product(**product_data)
         self.product_repo.add(product)
@@ -374,9 +371,6 @@ def create_subscription(self, subscription_data):
     # list all of products
     def get_all_products(self):
         return self.product_repo.get_all()
-    
-
-
     
     def update_product(self, product_id, update_data):
         """Update an product."""
