@@ -18,6 +18,7 @@ jwt = JWTManager()
 
 def create_app(config_name='default'):
     app = Flask(__name__)
+    CORS(app, origins="*", allow_headers="*", methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
 
     @app.route("/")
     def home():
@@ -28,11 +29,7 @@ def create_app(config_name='default'):
     db.init_app(app)
     bcrypt.init_app(app)
 
-    CORS(app, 
-         resources={r"/api/*": {"origins": "*"}},
-         allow_headers=["Content-Type", "Authorization"],
-         methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-         supports_credentials=True)
+    CORS(app)
 
     authorizations = {
         'token': {
