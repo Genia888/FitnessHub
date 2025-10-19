@@ -3,7 +3,7 @@
 // Gestion du tableau de bord client (subscriber)
 // ==========================================================
 
-const API_BASE_URL = "http://localhost:5000/api/v1";
+const API_BASE_URL = "http://127.0.0.1:5000/api/v1";
 
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("✅ subscriber.js chargé");
@@ -57,7 +57,8 @@ async function loadUserProfile(userId, token) {
   try {
     const response = await fetch(`${API_BASE_URL}/user/${userId}`, {
       headers: {
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
       }
     });
 
@@ -66,21 +67,27 @@ async function loadUserProfile(userId, token) {
     const userData = await response.json();
 
     // Mettre à jour le profil dans le HTML
-    document.querySelector(".client-info h3").textContent = 
-      `${userData.first_name} ${userData.last_name}`;
+    const nameElement = document.querySelector(".client-info h3");
+    if (nameElement) {
+      nameElement.textContent = `${userData.first_name} ${userData.last_name}`;
+    }
     
-    document.querySelector(".client-stats").textContent = 
-      `${userData.weight}kg • ${userData.size}m • 29 years old`;
+    const statsElement = document.querySelector(".client-stats");
+    if (statsElement && userData.weight && userData.size) {
+      statsElement.textContent = `${userData.weight}kg • ${userData.size}m`;
+    }
 
     // Mettre à jour l'image si disponible
-    if (userData.picture) {
-      document.querySelector(".client-image img").src = userData.picture;
+    const imageElement = document.querySelector("#client-profile-image");
+    if (imageElement && userData.picture) {
+      imageElement.src = userData.picture;
+      imageElement.alt = `${userData.first_name} ${userData.last_name}`;
     }
 
     // Afficher les contraintes physiques si présentes
-    if (userData.physical_constraint) {
-      const constraintElement = document.querySelector(".client-goal");
-      constraintElement.textContent = `Goal: ${userData.physical_constraint}`;
+    const goalElement = document.querySelector(".client-goal");
+    if (goalElement && userData.physical_constraint) {
+      goalElement.textContent = `Goal: ${userData.physical_constraint}`;
     }
 
     console.log("✅ Profil utilisateur chargé:", userData);
@@ -94,9 +101,10 @@ async function loadUserProfile(userId, token) {
 // ============================================
 async function loadWorkoutSchedule(userId, token) {
   try {
-    const response = await fetch(`${API_BASE_URL}/workout?user_id=${userId}`, {
+    const response = await fetch(`${API_BASE_URL}/workout/user/${userId}/workout`, {
       headers: {
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
       }
     });
 
@@ -109,19 +117,21 @@ async function loadWorkoutSchedule(userId, token) {
 
     if (workouts && workouts.length > 0) {
       const exerciseList = document.querySelector(".exercise-list");
-      exerciseList.innerHTML = ""; // Vider la liste
+      if (exerciseList) {
+        exerciseList.innerHTML = ""; // Vider la liste
 
-      workouts.forEach(workout => {
-        const exerciseItem = document.createElement("div");
-        exerciseItem.className = "exercise-item";
-        exerciseItem.innerHTML = `
-          <span class="exercise-name">${workout.category || "Exercise"}</span>
-          <span class="exercise-details">${workout.description || "No description"}</span>
-        `;
-        exerciseList.appendChild(exerciseItem);
-      });
+        workouts.forEach(workout => {
+          const exerciseItem = document.createElement("div");
+          exerciseItem.className = "exercise-item";
+          exerciseItem.innerHTML = `
+            <span class="exercise-name">${workout.category || "Exercise"}</span>
+            <span class="exercise-details">${workout.description || "No description"}</span>
+          `;
+          exerciseList.appendChild(exerciseItem);
+        });
 
-      console.log("✅ Planning d'exercices chargé:", workouts);
+        console.log("✅ Planning d'exercices chargé:", workouts);
+      }
     }
   } catch (error) {
     console.error("❌ Erreur loadWorkoutSchedule:", error);
@@ -133,9 +143,10 @@ async function loadWorkoutSchedule(userId, token) {
 // ============================================
 async function loadNutritionSchedule(userId, token) {
   try {
-    const response = await fetch(`${API_BASE_URL}/nutrition?user_id=${userId}`, {
+    const response = await fetch(`${API_BASE_URL}/nutrition/user/${userId}/nutrition`, {
       headers: {
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
       }
     });
 
@@ -148,19 +159,21 @@ async function loadNutritionSchedule(userId, token) {
 
     if (nutrition && nutrition.length > 0) {
       const nutritionList = document.querySelector(".nutrition-list");
-      nutritionList.innerHTML = ""; // Vider la liste
+      if (nutritionList) {
+        nutritionList.innerHTML = ""; // Vider la liste
 
-      nutrition.forEach(meal => {
-        const mealItem = document.createElement("div");
-        mealItem.className = "meal-item";
-        mealItem.innerHTML = `
-          <span class="meal-time">${meal.category || "Meal"}</span>
-          <span class="meal-details">${meal.description || "No description"} (${meal.calories || 0} cal)</span>
-        `;
-        nutritionList.appendChild(mealItem);
-      });
+        nutrition.forEach(meal => {
+          const mealItem = document.createElement("div");
+          mealItem.className = "meal-item";
+          mealItem.innerHTML = `
+            <span class="meal-time">${meal.category || "Meal"}</span>
+            <span class="meal-details">${meal.description || "No description"} (${meal.calories || 0} cal)</span>
+          `;
+          nutritionList.appendChild(mealItem);
+        });
 
-      console.log("✅ Planning nutritionnel chargé:", nutrition);
+        console.log("✅ Planning nutritionnel chargé:", nutrition);
+      }
     }
   } catch (error) {
     console.error("❌ Erreur loadNutritionSchedule:", error);
@@ -172,9 +185,10 @@ async function loadNutritionSchedule(userId, token) {
 // ============================================
 async function loadMessages(userId, token) {
   try {
-    const response = await fetch(`${API_BASE_URL}/message?user_id=${userId}`, {
+    const response = await fetch(`${API_BASE_URL}/message/user/${userId}/messages`, {
       headers: {
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
       }
     });
 
@@ -187,26 +201,28 @@ async function loadMessages(userId, token) {
 
     if (messages && messages.length > 0) {
       const chatMessages = document.querySelector(".chat-messages");
-      chatMessages.innerHTML = ""; // Vider les messages
+      if (chatMessages) {
+        chatMessages.innerHTML = ""; // Vider les messages
 
-      messages.forEach(msg => {
-        const messageDiv = document.createElement("div");
-        messageDiv.className = msg.is_from_user ? "message client-message" : "message coach-message";
-        
-        const date = new Date(msg.created_at);
-        const time = `${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
-        
-        messageDiv.innerHTML = `
-          <span class="message-time">${time}</span>
-          <p>${msg.text}</p>
-        `;
-        chatMessages.appendChild(messageDiv);
-      });
+        messages.forEach(msg => {
+          const messageDiv = document.createElement("div");
+          messageDiv.className = msg.is_from_user ? "message client-message" : "message coach-message";
+          
+          const date = new Date(msg.created_at);
+          const time = `${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
+          
+          messageDiv.innerHTML = `
+            <span class="message-time">${time}</span>
+            <p>${msg.text}</p>
+          `;
+          chatMessages.appendChild(messageDiv);
+        });
 
-      // Scroll vers le bas
-      chatMessages.scrollTop = chatMessages.scrollHeight;
+        // Scroll vers le bas
+        chatMessages.scrollTop = chatMessages.scrollHeight;
 
-      console.log("✅ Messages chargés:", messages);
+        console.log("✅ Messages chargés:", messages);
+      }
     }
   } catch (error) {
     console.error("❌ Erreur loadMessages:", error);
@@ -219,9 +235,10 @@ async function loadMessages(userId, token) {
 async function loadCoachInfo(userId, token) {
   try {
     // Récupérer l'abonnement pour trouver le coach
-    const subResponse = await fetch(`${API_BASE_URL}/subscription?user_id=${userId}`, {
+    const subResponse = await fetch(`${API_BASE_URL}/subscription`, {
       headers: {
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
       }
     });
 
@@ -232,13 +249,17 @@ async function loadCoachInfo(userId, token) {
 
     const subscriptions = await subResponse.json();
     
-    if (subscriptions && subscriptions.length > 0) {
-      const coachId = subscriptions[0].coach_id;
+    // Trouver l'abonnement de l'utilisateur
+    const userSubscription = subscriptions.find(sub => sub.user_id === userId);
+    
+    if (userSubscription && userSubscription.coach_id) {
+      const coachId = userSubscription.coach_id;
       
       // Récupérer les infos du coach
       const coachResponse = await fetch(`${API_BASE_URL}/user/${coachId}`, {
         headers: {
-          "Authorization": `Bearer ${token}`
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
         }
       });
 
@@ -246,14 +267,20 @@ async function loadCoachInfo(userId, token) {
         const coach = await coachResponse.json();
         
         // Mettre à jour les infos du coach
-        document.querySelector(".coach-details h4").textContent = 
-          `${coach.first_name} ${coach.last_name}`;
+        const coachNameElement = document.querySelector(".coach-details h4");
+        if (coachNameElement) {
+          coachNameElement.textContent = `${coach.first_name} ${coach.last_name}`;
+        }
         
-        document.querySelector(".coach-details p:nth-child(2)").textContent = 
-          coach.coach_description || "Fitness & Nutrition Specialist";
+        const coachDescElement = document.querySelector(".coach-details p:nth-child(2)");
+        if (coachDescElement) {
+          coachDescElement.textContent = coach.coach_description || "Fitness & Nutrition Specialist";
+        }
         
-        if (coach.picture) {
-          document.querySelector(".coach-avatar img").src = coach.picture;
+        const coachImageElement = document.querySelector("#coach-profile-image");
+        if (coachImageElement && coach.picture) {
+          coachImageElement.src = coach.picture;
+          coachImageElement.alt = `${coach.first_name} ${coach.last_name}`;
         }
 
         console.log("✅ Informations du coach chargées:", coach);
@@ -271,6 +298,8 @@ function initializeChat(userId, token) {
   const chatInput = document.querySelector(".chat-input input");
   const sendButton = document.querySelector(".chat-input button");
 
+  if (!chatInput || !sendButton) return;
+
   sendButton.addEventListener("click", async () => {
     const messageText = chatInput.value.trim();
     
@@ -278,8 +307,11 @@ function initializeChat(userId, token) {
 
     try {
       // Récupérer l'ID du coach depuis l'abonnement
-      const subResponse = await fetch(`${API_BASE_URL}/subscription?user_id=${userId}`, {
-        headers: { "Authorization": `Bearer ${token}` }
+      const subResponse = await fetch(`${API_BASE_URL}/subscription`, {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
       });
 
       if (!subResponse.ok) {
@@ -288,7 +320,8 @@ function initializeChat(userId, token) {
       }
 
       const subscriptions = await subResponse.json();
-      const coachId = subscriptions[0]?.coach_id;
+      const userSubscription = subscriptions.find(sub => sub.user_id === userId);
+      const coachId = userSubscription?.coach_id;
 
       if (!coachId) {
         alert("Coach non trouvé.");
@@ -299,14 +332,15 @@ function initializeChat(userId, token) {
       const response = await fetch(`${API_BASE_URL}/message`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
           text: messageText,
           user_id: userId,
           coach_id: coachId,
-          is_from_user: true
+          is_from_user: true,
+          is_read: false
         })
       });
 
