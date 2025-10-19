@@ -28,7 +28,11 @@ def create_app(config_name='default'):
     db.init_app(app)
     bcrypt.init_app(app)
 
-    CORS(app)
+    CORS(app, 
+         resources={r"/api/*": {"origins": "*"}},
+         allow_headers=["Content-Type", "Authorization"],
+         methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+         supports_credentials=True)
 
     authorizations = {
         'token': {
