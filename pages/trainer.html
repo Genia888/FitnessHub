@@ -84,15 +84,28 @@
 
       <!-- Section Client Profile -->
       <div class="trainer-dashboard">
+        <!-- NOUVELLE SECTION: Liste des clients -->
+        <div class="clients-list-card">
+          <h3>My Clients</h3>
+          <div class="clients-search">
+            <input type="text" id="clientSearch" placeholder="Search client..." />
+          </div>
+          <div class="clients-container" id="clientsList">
+            <!-- Les clients seront chargés dynamiquement ici -->
+            <div class="loading-message">Loading clients...</div>
+          </div>
+        </div>
+
+        <!-- Section Profil Client -->
         <div class="client-profile-card">
           <div class="client-image">
             <img src="../public/images/ready/client1.jpg" alt="Client Profile">
           </div>
           <div class="client-info">
-            <h3>Hedjouj Reziga</h3>
-            <p class="client-goal">Goal : Summer body</p>
-            <p class="client-stats">80kg • 1m70 • 29 years old</p>
-            <p class="client-progress">Progress : -5kg in 2 months</p>
+            <h3>Select a client</h3>
+            <p class="client-goal">Goal: -</p>
+            <p class="client-stats">- • - • -</p>
+            <p class="client-progress">Progress: -</p>
           </div>
         </div>
 
@@ -102,22 +115,7 @@
           <div class="planning-card">
             <h3>Exercise Planning</h3>
             <div class="exercise-list">
-              <div class="exercise-item">
-                <span class="exercise-name">Squats</span>
-                <span class="exercise-details">3x15 repetitions</span>
-              </div>
-              <div class="exercise-item">
-                <span class="exercise-name">Push-ups</span>
-                <span class="exercise-details">3x10 repetitions</span>
-              </div>
-              <div class="exercise-item">
-                <span class="exercise-name">Pull over</span>
-                <span class="exercise-details">3x30 secondes</span>
-              </div>
-              <div class="exercise-item">
-                <span class="exercise-name">Cardio</span>
-                <span class="exercise-details">20 minutes</span>
-              </div>
+              <div class="empty-message">Select a client to view their exercise plan</div>
             </div>
             <button class="btn-primary">Change Schedule</button>
           </div>
@@ -126,22 +124,7 @@
           <div class="planning-card">
             <h3>Nutrition Planning</h3>
             <div class="nutrition-list">
-              <div class="meal-item">
-                <span class="meal-time">Breakfast</span>
-                <span class="meal-details">Oats + Fruits + Yogurt</span>
-              </div>
-              <div class="meal-item">
-                <span class="meal-time">Lunch</span>
-                <span class="meal-details">Quinoa Salad + Chicken</span>
-              </div>
-              <div class="meal-item">
-                <span class="meal-time">Snack</span>
-                <span class="meal-details">Almonds + Apple</span>
-              </div>
-              <div class="meal-item">
-                <span class="meal-time">Dinner</span>
-                <span class="meal-details">Salmon + Steamed Vegetables</span>
-              </div>
+              <div class="empty-message">Select a client to view their nutrition plan</div>
             </div>
             <button class="btn-primary">Change Diet</button>
           </div>
@@ -165,21 +148,21 @@
                 </div>
               </div>
               <div class="calendar-day">
-                <span class="day-name">Fri</span>
+                <span class="day-name">Wed</span>
                 <span class="day-number">17</span>
                 <div class="day-exercises">
                   <span>Rest</span>
                 </div>
               </div>
               <div class="calendar-day">
-                <span class="day-name">Jeu</span>
+                <span class="day-name">Thu</span>
                 <span class="day-number">18</span>
                 <div class="day-exercises">
                   <span>Lower Body</span>
                 </div>
               </div>
               <div class="calendar-day">
-                <span class="day-name">Ven</span>
+                <span class="day-name">Fri</span>
                 <span class="day-number">19</span>
                 <div class="day-exercises">
                   <span>Full Body</span>
@@ -204,24 +187,13 @@
 
           <!-- Chat Section -->
           <div class="chat-card">
-            <h3>Chat with Hedjouj</h3>
+            <h3>Chat with <span id="chatClientName">Client</span></h3>
             <div class="chat-messages">
-              <div class="message client-message">
-                <span class="message-time">10:30</span>
-                <p>Hello coach! I finished my session yesterday 💪</p>
-              </div>
-              <div class="message coach-message">
-                <span class="message-time">10:45</span>
-                <p>Great job Hedjouj! How did you feel during the squats?</p>
-              </div>
-              <div class="message client-message">
-                <span class="message-time">11:00</span>
-                <p>I'm feeling better than before, I feel like I'm making progress!</p>
-              </div>
+              <div class="empty-message">Select a client to start chatting</div>
             </div>
             <div class="chat-input">
-              <input type="text" placeholder="Type your message...">
-              <button class="btn-primary">Send</button>
+              <input type="text" placeholder="Type your message..." disabled>
+              <button class="btn-primary" disabled>Send</button>
             </div>
           </div>
         </div>
