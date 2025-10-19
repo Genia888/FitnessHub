@@ -5,6 +5,11 @@
 
 const API_BASE_URL = "http://127.0.0.1:5000/api/v1";
 
+// Variable globale pour stocker le client actuellement sélectionné
+let currentClientId = null;
+let currentCoachId = null;
+let currentToken = null;
+
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("✅ trainer.js chargé");
 
@@ -25,24 +30,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
+  // Stocker les variables globales
+  currentCoachId = user.id;
+  currentToken = token;
+
   try {
-    // Charger la liste des clients
+    // Charger la liste des clients dans la sidebar
     await loadCoachClients(user.id, token);
     
-    // Par défaut, charger le premier client (si disponible)
-    const firstClientId = await getFirstClientId(user.id, token);
-    
-    if (firstClientId) {
-      await loadClientData(firstClientId, token);
-      
-      // Initialiser le chat
-      initializeChat(user.id, firstClientId, token);
-      
-      // Initialiser les boutons d'action
-      initializeActionButtons(firstClientId, token);
-    } else {
-      console.log("Aucun client trouvé pour ce coach");
-    }
+    // Initialiser la recherche de clients
+    initializeClientSearch();
     
   } catch (error) {
     console.error("❌ Erreur lors du chargement des données:", error);
@@ -51,31 +48,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 // ============================================
-// Récupérer le premier client du coach
-// ============================================
-async function getFirstClientId(coachId, token) {
-  try {
-    const response = await fetch(`${API_BASE_URL}/user/coach/${coachId}/users`, {
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json"
-      }
-    });
-
-    if (!response.ok) return null;
-
-    const clients = await response.json();
-    return clients.length > 0 ? clients[0].id : null;
-  } catch (error) {
-    console.error("❌ Erreur getFirstClientId:", error);
-    return null;
-  }
-}
-
-// ============================================
 // Charger les clients du coach
 // ============================================
 async function loadCoachClients(coachId, token) {
+  const clientsList = document.getElementById("clientsList");
+  
   try {
     const response = await fetch(`${API_BASE_URL}/user/coach/${coachId}/users`, {
       headers: {
@@ -85,15 +62,95 @@ async function loadCoachClients(coachId, token) {
     });
 
     if (!response.ok) {
-      console.log("Aucun client trouvé");
+      clientsList.innerHTML = '<div class="empty-message">No clients found</div>';
       return;
     }
 
     const clients = await response.json();
     console.log("✅ Clients chargés:", clients);
     
+    if (clients.length === 0) {
+      clientsList.innerHTML = '<div class="empty-message">No clients yet</div>';
+      return;
+    }
+
+    // Afficher la liste des clients
+    clientsList.innerHTML = "";
+    
+    clients.forEach((client, index) => {
+      const clientCard = createClientCard(client);
+      clientsList.appendChild(clientCard);
+      
+      // Charger automatiquement le premier client
+      if (index === 0) {
+        selectClient(client.id, token);
+        clientCard.classList.add("active");
+      }
+    });
+    
   } catch (error) {
     console.error("❌ Erreur loadCoachClients:", error);
+    clientsList.innerHTML = '<div class="error-message">Error loading clients</div>';
+  }
+}
+
+// ============================================
+// Créer une carte client
+// ============================================
+function createClientCard(client) {
+  const clientCard = document.createElement("div");
+  clientCard.className = "client-card";
+  clientCard.dataset.clientId = client.id;
+  clientCard.dataset.clientName = `${client.first_name} ${client.last_name}`.toLowerCase();
+  
+  const profileImage = client.picture || "../public/images/ready/client1.jpg";
+  
+  clientCard.innerHTML = `
+    <div class="client-card-image">
+      <img src="${profileImage}" alt="${client.first_name} ${client.last_name}">
+    </div>
+    <div class="client-card-info">
+      <h4>${client.first_name} ${client.last_name}</h4>
+      <p class="client-card-email">${client.email}</p>
+      ${client.weight ? `<p class="client-card-stats">${client.weight}kg${client.size ? ` • ${client.size}m` : ''}</p>` : ''}
+    </div>
+  `;
+  
+  // Ajouter l'événement de clic
+  clientCard.addEventListener("click", () => {
+    // Retirer la classe active de tous les clients
+    document.querySelectorAll(".client-card").forEach(card => {
+      card.classList.remove("active");
+    });
+    
+    // Ajouter la classe active au client sélectionné
+    clientCard.classList.add("active");
+    
+    // Charger les données du client
+    selectClient(client.id, currentToken);
+  });
+  
+  return clientCard;
+}
+
+// ============================================
+// Sélectionner un client
+// ============================================
+async function selectClient(clientId, token) {
+  currentClientId = clientId;
+  
+  try {
+    // Charger toutes les données du client
+    await loadClientData(clientId, token);
+    
+    // Réactiver le chat
+    enableChat();
+    
+    // Réinitialiser le chat pour ce client
+    initializeChat(currentCoachId, clientId, token);
+    
+  } catch (error) {
+    console.error("❌ Erreur lors de la sélection du client:", error);
   }
 }
 
@@ -121,21 +178,34 @@ async function loadClientData(clientId, token) {
     }
     
     const statsElement = document.querySelector(".client-stats");
-    if (statsElement && clientData.weight && clientData.size) {
-      statsElement.textContent = `${clientData.weight}kg • ${clientData.size}m`;
+    if (statsElement) {
+      if (clientData.weight && clientData.size) {
+        const age = clientData.birthdate ? calculateAge(clientData.birthdate) : null;
+        statsElement.textContent = `${clientData.weight}kg • ${clientData.size}m${age ? ` • ${age} years old` : ''}`;
+      } else {
+        statsElement.textContent = "No stats available";
+      }
     }
 
     // Mettre à jour l'image si disponible
     const imageElement = document.querySelector(".client-image img");
-    if (imageElement && clientData.picture) {
-      imageElement.src = clientData.picture;
+    if (imageElement) {
+      imageElement.src = clientData.picture || "../public/images/ready/client1.jpg";
       imageElement.alt = `${clientData.first_name} ${clientData.last_name}`;
     }
 
     // Afficher les objectifs si présents
     const goalElement = document.querySelector(".client-goal");
-    if (goalElement && clientData.physical_constraint) {
-      goalElement.textContent = `Goal: ${clientData.physical_constraint}`;
+    if (goalElement) {
+      goalElement.textContent = clientData.physical_constraint 
+        ? `Goal: ${clientData.physical_constraint}` 
+        : "Goal: Not specified";
+    }
+
+    // Mettre à jour le progrès si disponible
+    const progressElement = document.querySelector(".client-progress");
+    if (progressElement) {
+      progressElement.textContent = "Progress: Track in progress";
     }
 
     console.log("✅ Profil client chargé:", clientData);
@@ -148,6 +218,12 @@ async function loadClientData(clientId, token) {
     
     // Charger les messages avec le client
     await loadMessages(clientId, token);
+    
+    // Mettre à jour le nom dans le chat
+    const chatClientName = document.getElementById("chatClientName");
+    if (chatClientName) {
+      chatClientName.textContent = `${clientData.first_name}`;
+    }
 
   } catch (error) {
     console.error("❌ Erreur loadClientData:", error);
@@ -155,9 +231,27 @@ async function loadClientData(clientId, token) {
 }
 
 // ============================================
+// Calculer l'âge depuis la date de naissance
+// ============================================
+function calculateAge(birthdate) {
+  const birth = new Date(birthdate);
+  const today = new Date();
+  let age = today.getFullYear() - birth.getFullYear();
+  const monthDiff = today.getMonth() - birth.getMonth();
+  
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+    age--;
+  }
+  
+  return age;
+}
+
+// ============================================
 // Charger le planning d'exercices du client
 // ============================================
 async function loadClientWorkout(clientId, token) {
+  const exerciseList = document.querySelector(".exercise-list");
+  
   try {
     const response = await fetch(`${API_BASE_URL}/workout/user/${clientId}/workout`, {
       headers: {
@@ -167,32 +261,32 @@ async function loadClientWorkout(clientId, token) {
     });
 
     if (!response.ok) {
-      console.log("Aucun planning d'exercices trouvé");
+      exerciseList.innerHTML = '<div class="empty-message">No exercise plan yet</div>';
       return;
     }
 
     const workouts = await response.json();
 
     if (workouts && workouts.length > 0) {
-      const exerciseList = document.querySelector(".exercise-list");
-      if (exerciseList) {
-        exerciseList.innerHTML = ""; // Vider la liste
+      exerciseList.innerHTML = "";
 
-        workouts.forEach(workout => {
-          const exerciseItem = document.createElement("div");
-          exerciseItem.className = "exercise-item";
-          exerciseItem.innerHTML = `
-            <span class="exercise-name">${workout.category || "Exercise"}</span>
-            <span class="exercise-details">${workout.description || "No description"}</span>
-          `;
-          exerciseList.appendChild(exerciseItem);
-        });
+      workouts.forEach(workout => {
+        const exerciseItem = document.createElement("div");
+        exerciseItem.className = "exercise-item";
+        exerciseItem.innerHTML = `
+          <span class="exercise-name">${workout.category || "Exercise"}</span>
+          <span class="exercise-details">${workout.description || "No description"}</span>
+        `;
+        exerciseList.appendChild(exerciseItem);
+      });
 
-        console.log("✅ Planning d'exercices du client chargé:", workouts);
-      }
+      console.log("✅ Planning d'exercices du client chargé:", workouts);
+    } else {
+      exerciseList.innerHTML = '<div class="empty-message">No exercise plan yet</div>';
     }
   } catch (error) {
     console.error("❌ Erreur loadClientWorkout:", error);
+    exerciseList.innerHTML = '<div class="error-message">Error loading exercises</div>';
   }
 }
 
@@ -200,6 +294,8 @@ async function loadClientWorkout(clientId, token) {
 // Charger le planning nutritionnel du client
 // ============================================
 async function loadClientNutrition(clientId, token) {
+  const nutritionList = document.querySelector(".nutrition-list");
+  
   try {
     const response = await fetch(`${API_BASE_URL}/nutrition/user/${clientId}/nutrition`, {
       headers: {
@@ -209,32 +305,32 @@ async function loadClientNutrition(clientId, token) {
     });
 
     if (!response.ok) {
-      console.log("Aucun planning nutritionnel trouvé");
+      nutritionList.innerHTML = '<div class="empty-message">No nutrition plan yet</div>';
       return;
     }
 
     const nutrition = await response.json();
 
     if (nutrition && nutrition.length > 0) {
-      const nutritionList = document.querySelector(".nutrition-list");
-      if (nutritionList) {
-        nutritionList.innerHTML = ""; // Vider la liste
+      nutritionList.innerHTML = "";
 
-        nutrition.forEach(meal => {
-          const mealItem = document.createElement("div");
-          mealItem.className = "meal-item";
-          mealItem.innerHTML = `
-            <span class="meal-time">${meal.category || "Meal"}</span>
-            <span class="meal-details">${meal.description || "No description"} (${meal.calories || 0} cal)</span>
-          `;
-          nutritionList.appendChild(mealItem);
-        });
+      nutrition.forEach(meal => {
+        const mealItem = document.createElement("div");
+        mealItem.className = "meal-item";
+        mealItem.innerHTML = `
+          <span class="meal-time">${meal.category || "Meal"}</span>
+          <span class="meal-details">${meal.description || "No description"}${meal.calories ? ` (${meal.calories} cal)` : ''}</span>
+        `;
+        nutritionList.appendChild(mealItem);
+      });
 
-        console.log("✅ Planning nutritionnel du client chargé:", nutrition);
-      }
+      console.log("✅ Planning nutritionnel du client chargé:", nutrition);
+    } else {
+      nutritionList.innerHTML = '<div class="empty-message">No nutrition plan yet</div>';
     }
   } catch (error) {
     console.error("❌ Erreur loadClientNutrition:", error);
+    nutritionList.innerHTML = '<div class="error-message">Error loading nutrition</div>';
   }
 }
 
@@ -242,6 +338,8 @@ async function loadClientNutrition(clientId, token) {
 // Charger les messages avec le client
 // ============================================
 async function loadMessages(clientId, token) {
+  const chatMessages = document.querySelector(".chat-messages");
+  
   try {
     const response = await fetch(`${API_BASE_URL}/message/user/${clientId}/messages`, {
       headers: {
@@ -251,40 +349,51 @@ async function loadMessages(clientId, token) {
     });
 
     if (!response.ok) {
-      console.log("Aucun message trouvé");
+      chatMessages.innerHTML = '<div class="empty-message">No messages yet. Start the conversation!</div>';
       return;
     }
 
     const messages = await response.json();
 
     if (messages && messages.length > 0) {
-      const chatMessages = document.querySelector(".chat-messages");
-      if (chatMessages) {
-        chatMessages.innerHTML = ""; // Vider les messages
+      chatMessages.innerHTML = "";
 
-        messages.forEach(msg => {
-          const messageDiv = document.createElement("div");
-          messageDiv.className = msg.is_from_user ? "message client-message" : "message coach-message";
-          
-          const date = new Date(msg.created_at);
-          const time = `${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
-          
-          messageDiv.innerHTML = `
-            <span class="message-time">${time}</span>
-            <p>${msg.text}</p>
-          `;
-          chatMessages.appendChild(messageDiv);
-        });
+      messages.forEach(msg => {
+        const messageDiv = document.createElement("div");
+        messageDiv.className = msg.is_from_user ? "message client-message" : "message coach-message";
+        
+        const date = new Date(msg.created_at);
+        const time = `${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
+        
+        messageDiv.innerHTML = `
+          <span class="message-time">${time}</span>
+          <p>${msg.text}</p>
+        `;
+        chatMessages.appendChild(messageDiv);
+      });
 
-        // Scroll vers le bas
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+      // Scroll vers le bas
+      chatMessages.scrollTop = chatMessages.scrollHeight;
 
-        console.log("✅ Messages chargés:", messages);
-      }
+      console.log("✅ Messages chargés:", messages);
+    } else {
+      chatMessages.innerHTML = '<div class="empty-message">No messages yet. Start the conversation!</div>';
     }
   } catch (error) {
     console.error("❌ Erreur loadMessages:", error);
+    chatMessages.innerHTML = '<div class="error-message">Error loading messages</div>';
   }
+}
+
+// ============================================
+// Activer le chat
+// ============================================
+function enableChat() {
+  const chatInput = document.querySelector(".chat-input input");
+  const sendButton = document.querySelector(".chat-input button");
+  
+  if (chatInput) chatInput.disabled = false;
+  if (sendButton) sendButton.disabled = false;
 }
 
 // ============================================
@@ -296,64 +405,110 @@ function initializeChat(coachId, clientId, token) {
 
   if (!chatInput || !sendButton) return;
 
-  sendButton.addEventListener("click", async () => {
-    const messageText = chatInput.value.trim();
-    
-    if (!messageText) return;
+  // Retirer les anciens événements
+  const newSendButton = sendButton.cloneNode(true);
+  sendButton.parentNode.replaceChild(newSendButton, sendButton);
 
-    try {
-      // Envoyer le message
-      const response = await fetch(`${API_BASE_URL}/message`, {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          text: messageText,
-          user_id: clientId,
-          coach_id: coachId,
-          is_from_user: false, // Le message vient du coach
-          is_read: false
-        })
-      });
-
-      if (response.ok) {
-        // Ajouter le message dans le chat
-        const chatMessages = document.querySelector(".chat-messages");
-        const messageDiv = document.createElement("div");
-        messageDiv.className = "message coach-message";
-        
-        const now = new Date();
-        const time = `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}`;
-        
-        messageDiv.innerHTML = `
-          <span class="message-time">${time}</span>
-          <p>${messageText}</p>
-        `;
-        chatMessages.appendChild(messageDiv);
-        
-        // Vider l'input
-        chatInput.value = "";
-        
-        // Scroll vers le bas
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-
-        console.log("✅ Message envoyé");
-      } else {
-        throw new Error("Erreur lors de l'envoi du message");
-      }
-    } catch (error) {
-      console.error("❌ Erreur lors de l'envoi du message:", error);
-      alert("Impossible d'envoyer le message.");
-    }
+  newSendButton.addEventListener("click", async () => {
+    await sendMessage(coachId, clientId, token);
   });
 
-  // Envoyer avec la touche Entrée
-  chatInput.addEventListener("keypress", (e) => {
+  // Retirer l'ancien événement keypress
+  const newChatInput = chatInput.cloneNode(true);
+  chatInput.parentNode.replaceChild(newChatInput, chatInput);
+
+  newChatInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
-      sendButton.click();
+      newSendButton.click();
     }
+  });
+}
+
+// ============================================
+// Envoyer un message
+// ============================================
+async function sendMessage(coachId, clientId, token) {
+  const chatInput = document.querySelector(".chat-input input");
+  const messageText = chatInput.value.trim();
+  
+  if (!messageText) return;
+
+  try {
+    // Envoyer le message
+    const response = await fetch(`${API_BASE_URL}/message`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        text: messageText,
+        user_id: clientId,
+        coach_id: coachId,
+        is_from_user: false,
+        is_read: false
+      })
+    });
+
+    if (response.ok) {
+      // Ajouter le message dans le chat
+      const chatMessages = document.querySelector(".chat-messages");
+      
+      // Supprimer le message vide si présent
+      const emptyMessage = chatMessages.querySelector(".empty-message");
+      if (emptyMessage) {
+        emptyMessage.remove();
+      }
+      
+      const messageDiv = document.createElement("div");
+      messageDiv.className = "message coach-message";
+      
+      const now = new Date();
+      const time = `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}`;
+      
+      messageDiv.innerHTML = `
+        <span class="message-time">${time}</span>
+        <p>${messageText}</p>
+      `;
+      chatMessages.appendChild(messageDiv);
+      
+      // Vider l'input
+      chatInput.value = "";
+      
+      // Scroll vers le bas
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      console.log("✅ Message envoyé");
+    } else {
+      throw new Error("Erreur lors de l'envoi du message");
+    }
+  } catch (error) {
+    console.error("❌ Erreur lors de l'envoi du message:", error);
+    alert("Impossible d'envoyer le message.");
+  }
+}
+
+// ============================================
+// Initialiser la recherche de clients
+// ============================================
+function initializeClientSearch() {
+  const searchInput = document.getElementById("clientSearch");
+  
+  if (!searchInput) return;
+  
+  searchInput.addEventListener("input", (e) => {
+    const searchTerm = e.target.value.toLowerCase().trim();
+    const clientCards = document.querySelectorAll(".client-card");
+    
+    clientCards.forEach(card => {
+      const clientName = card.dataset.clientName;
+      
+      if (clientName.includes(searchTerm)) {
+        card.style.display = "flex";
+      } else {
+        card.style.display = "none";
+      }
+    });
   });
 }
 
