@@ -208,7 +208,7 @@ def create_workouts(client_id, token):
             "coach_id": coach_id,
             "category": "Upper Body",
             "description": "Push-ups: 3 sets of 15 reps, Pull-ups: 3 sets of 10 reps",
-            "picture": "",
+            "picture": "https://example.com/upper-body.jpg",
             "time": 30,
             "comment": "Focus on form and breathing",
             "date_workout": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
@@ -218,7 +218,7 @@ def create_workouts(client_id, token):
             "coach_id": coach_id,
             "category": "Cardio",
             "description": "Running: 5km at moderate pace",
-            "picture": "",
+            "picture": "https://example.com/cardio.jpg",
             "time": 45,
             "comment": "Maintain steady heart rate",
             "date_workout": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
@@ -228,7 +228,7 @@ def create_workouts(client_id, token):
             "coach_id": coach_id,
             "category": "Lower Body",
             "description": "Squats: 4 sets of 12 reps, Lunges: 3 sets of 10 reps per leg",
-            "picture": "",
+            "picture": "https://example.com/lower-body.jpg",
             "time": 40,
             "comment": "Keep your back straight",
             "date_workout": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
@@ -238,7 +238,7 @@ def create_workouts(client_id, token):
             "coach_id": coach_id,
             "category": "Full Body",
             "description": "Burpees: 3 sets of 15, Mountain climbers: 3 sets of 20",
-            "picture": "",
+            "picture": "https://example.com/full-body.jpg",
             "time": 35,
             "comment": "High intensity workout",
             "date_workout": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
@@ -248,7 +248,7 @@ def create_workouts(client_id, token):
             "coach_id": coach_id,
             "category": "Yoga",
             "description": "Flexibility and balance exercises",
-            "picture": "",
+            "picture": "https://example.com/yoga.jpg",
             "time": 60,
             "comment": "Focus on breathing and relaxation",
             "date_workout": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
@@ -277,54 +277,72 @@ def create_workouts(client_id, token):
 def create_nutrition(client_id, token):
     print_info("Création du plan nutritionnel...")
     
+    # D'abord, récupérer le coach_id depuis la subscription
+    headers = {"Authorization": f"Bearer {token}"}
+    try:
+        sub_response = requests.get(f"{BASE_URL}/subscription?user_id={client_id}", headers=headers)
+        if sub_response.status_code == 200:
+            subscriptions = sub_response.json()
+            if subscriptions and len(subscriptions) > 0:
+                coach_id = subscriptions[0]['coach_id']
+            else:
+                print_error("Aucun coach trouvé dans la subscription")
+                return False
+        else:
+            print_error("Impossible de récupérer la subscription")
+            return False
+    except Exception as e:
+        print_error(f"Erreur lors de la récupération du coach: {e}")
+        return False
+    
     meals = [
         {
             "user_id": client_id,
-            "coach_id": client_id,  # Ajout du coach_id
+            "coach_id": coach_id,
             "category": "Breakfast",
             "description": "Oatmeal with fruits, nuts and honey",
             "picture": "",
-            "calories": 400,
+            "calories": 400.0,
             "quantity": 1.0,
             "date_nutrition": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         },
         {
             "user_id": client_id,
-            "coach_id": client_id,
+            "coach_id": coach_id,
             "category": "Morning Snack",
             "description": "Greek yogurt with berries",
             "picture": "",
-            "calories": 150,
+            "calories": 150.0,
             "quantity": 1.0,
             "date_nutrition": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         },
         {
             "user_id": client_id,
-            "coach_id": client_id,
+            "coach_id": coach_id,
             "category": "Lunch",
             "description": "Grilled chicken with quinoa and vegetables",
             "picture": "",
-            "calories": 600,
+            "calories": 600.0,
             "quantity": 1.0,
             "date_nutrition": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         },
         {
             "user_id": client_id,
-            "coach_id": client_id,
+            "coach_id": coach_id,
             "category": "Afternoon Snack",
             "description": "Almonds and an apple",
             "picture": "",
-            "calories": 200,
+            "calories": 200.0,
             "quantity": 1.0,
             "date_nutrition": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         },
         {
             "user_id": client_id,
-            "coach_id": client_id,
+            "coach_id": coach_id,
             "category": "Dinner",
             "description": "Grilled salmon with sweet potato and broccoli",
             "picture": "",
-            "calories": 550,
+            "calories": 550.0,
             "quantity": 1.0,
             "date_nutrition": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         }
@@ -352,29 +370,52 @@ def create_nutrition(client_id, token):
 def create_messages(client_id, token):
     print_info("Création des messages...")
     
+    # D'abord, récupérer le coach_id depuis la subscription
+    headers = {"Authorization": f"Bearer {token}"}
+    try:
+        sub_response = requests.get(f"{BASE_URL}/subscription?user_id={client_id}", headers=headers)
+        if sub_response.status_code == 200:
+            subscriptions = sub_response.json()
+            if subscriptions and len(subscriptions) > 0:
+                coach_id = subscriptions[0]['coach_id']
+            else:
+                print_error("Aucun coach trouvé dans la subscription")
+                return False
+        else:
+            print_error("Impossible de récupérer la subscription")
+            return False
+    except Exception as e:
+        print_error(f"Erreur lors de la récupération du coach: {e}")
+        return False
+    
     messages = [
         {
             "user_id": client_id,
+            "coach_id": coach_id,
             "text": "Hello coach! I'm excited to start my fitness journey!",
             "is_from_user": True
         },
         {
             "user_id": client_id,
+            "coach_id": coach_id,
             "text": "Hi John! Great to have you here. Let's work together to achieve your goals!",
             "is_from_user": False
         },
         {
             "user_id": client_id,
+            "coach_id": coach_id,
             "text": "I finished today's upper body workout. It was challenging but I feel great!",
             "is_from_user": True
         },
         {
             "user_id": client_id,
+            "coach_id": coach_id,
             "text": "Excellent work! Remember to stretch and stay hydrated. How's your nutrition going?",
             "is_from_user": False
         },
         {
             "user_id": client_id,
+            "coach_id": coach_id,
             "text": "I'm following the meal plan perfectly. The breakfast is delicious!",
             "is_from_user": True
         }
