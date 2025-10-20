@@ -149,7 +149,7 @@ async function loadWorkoutSchedule(userId, token) {
 // ============================================
 async function loadNutritionSchedule(userId, token) {
   try {
-    const response = await fetch(`${API_BASE_URL}/nutrition?user_id=${userId}`, {
+    const response = await fetch(`${API_BASE_URL}/nutrition/?user_id=${userId}`, {
       headers: {
         "Authorization": `Bearer ${token}`
       }
@@ -197,7 +197,7 @@ async function loadNutritionSchedule(userId, token) {
 // ============================================
 async function loadMessages(userId, token) {
   try {
-    const response = await fetch(`${API_BASE_URL}/message?user_id=${userId}`, {
+    const response = await fetch(`${API_BASE_URL}/message/?user_id=${userId}`, {
       headers: {
         "Authorization": `Bearer ${token}`
       }
@@ -248,7 +248,7 @@ async function loadMessages(userId, token) {
 async function loadCoachInfo(userId, token) {
   try {
     // D'abord récupérer l'abonnement de l'utilisateur pour obtenir l'ID du coach
-    const subResponse = await fetch(`${API_BASE_URL}/subscription?user_id=${userId}`, {
+    const subResponse = await fetch(`${API_BASE_URL}/subscription/?user_id=${userId}`, {
       headers: {
         "Authorization": `Bearer ${token}`
       }
@@ -327,7 +327,7 @@ function initializeChat(userId, token) {
 
       try {
         // Envoyer le message au backend
-        const response = await fetch(`${API_BASE_URL}/message`, {
+        const response = await fetch(`${API_BASE_URL}/message/`, {
           method: "POST",
           headers: {
             "Authorization": `Bearer ${token}`,
