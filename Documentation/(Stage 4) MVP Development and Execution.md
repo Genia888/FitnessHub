@@ -13,6 +13,8 @@
     => backend/front : work to link backend and frontend
     => create documentation of stage 4
 # 1. Execute Development Tasks
+- We have a main branch on git hub and one branch for each member
+- When a task seems good we merge on the main and call other member to pull the modification
 # 2. Monitor Progress and Adjust
 # 3. Conduct Sprint Reviews and Retrospectives
 - We used Discord to check for Progress time
