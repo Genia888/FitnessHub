@@ -184,50 +184,73 @@ def create_subscription(client_id, coach_id, token):
 def create_workouts(client_id, token):
     print_info("Création des exercices...")
     
+    # D'abord, récupérer le coach_id depuis la subscription
+    headers = {"Authorization": f"Bearer {token}"}
+    try:
+        sub_response = requests.get(f"{BASE_URL}/subscription?user_id={client_id}", headers=headers)
+        if sub_response.status_code == 200:
+            subscriptions = sub_response.json()
+            if subscriptions and len(subscriptions) > 0:
+                coach_id = subscriptions[0]['coach_id']
+            else:
+                print_error("Aucun coach trouvé dans la subscription")
+                return False
+        else:
+            print_error("Impossible de récupérer la subscription")
+            return False
+    except Exception as e:
+        print_error(f"Erreur lors de la récupération du coach: {e}")
+        return False
+    
     workouts = [
         {
             "user_id": client_id,
-            "coach_id": client_id,  # Ajout du coach_id
+            "coach_id": coach_id,
             "category": "Upper Body",
             "description": "Push-ups: 3 sets of 15 reps, Pull-ups: 3 sets of 10 reps",
             "picture": "",
             "time": 30,
+            "comment": "Focus on form and breathing",
             "date_workout": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         },
         {
             "user_id": client_id,
-            "coach_id": client_id,
+            "coach_id": coach_id,
             "category": "Cardio",
             "description": "Running: 5km at moderate pace",
             "picture": "",
             "time": 45,
+            "comment": "Maintain steady heart rate",
             "date_workout": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         },
         {
             "user_id": client_id,
-            "coach_id": client_id,
+            "coach_id": coach_id,
             "category": "Lower Body",
             "description": "Squats: 4 sets of 12 reps, Lunges: 3 sets of 10 reps per leg",
             "picture": "",
             "time": 40,
+            "comment": "Keep your back straight",
             "date_workout": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         },
         {
             "user_id": client_id,
-            "coach_id": client_id,
+            "coach_id": coach_id,
             "category": "Full Body",
             "description": "Burpees: 3 sets of 15, Mountain climbers: 3 sets of 20",
             "picture": "",
             "time": 35,
+            "comment": "High intensity workout",
             "date_workout": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         },
         {
             "user_id": client_id,
-            "coach_id": client_id,
+            "coach_id": coach_id,
             "category": "Yoga",
             "description": "Flexibility and balance exercises",
             "picture": "",
             "time": 60,
+            "comment": "Focus on breathing and relaxation",
             "date_workout": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         }
     ]
