@@ -101,7 +101,7 @@ async function loadUserProfile(userId, token) {
 // ============================================
 async function loadWorkoutSchedule(userId, token) {
   try {
-    const response = await fetch(`${API_BASE_URL}/workout?user_id=${userId}`, {
+    const response = await fetch(`${API_BASE_URL}/workout/?user_id=${userId}`, {
       headers: {
         "Authorization": `Bearer ${token}`
       }
