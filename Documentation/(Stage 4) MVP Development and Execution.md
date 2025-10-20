@@ -16,6 +16,8 @@
 - We have a main branch on git hub and one branch for each member
 - When a task seems good we merge on the main and call other member to pull the modification
 # 2. Monitor Progress and Adjust
+- We used the methode agile to check the progress of the project
+- two call by week
 # 3. Conduct Sprint Reviews and Retrospectives
 - We used Discord to check for Progress time
 - we check two time by week where we are in the project
