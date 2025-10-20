@@ -15,5 +15,7 @@
 # 1. Execute Development Tasks
 # 2. Monitor Progress and Adjust
 # 3. Conduct Sprint Reviews and Retrospectives
+- We used Discord to check for Progress time
+- we check two time by week where we are in the project
 # 4. Final Integration and QA Testing
 # 5. Deliverables
