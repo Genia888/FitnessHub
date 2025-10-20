@@ -301,7 +301,7 @@ def create_nutrition(client_id, token):
             "coach_id": coach_id,
             "category": "Breakfast",
             "description": "Oatmeal with fruits, nuts and honey",
-            "picture": "",
+            "picture": "https://example.com/breakfast.jpg",
             "calories": 400.0,
             "quantity": 1.0,
             "date_nutrition": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
@@ -311,7 +311,7 @@ def create_nutrition(client_id, token):
             "coach_id": coach_id,
             "category": "Morning Snack",
             "description": "Greek yogurt with berries",
-            "picture": "",
+            "picture": "https://example.com/snack.jpg",
             "calories": 150.0,
             "quantity": 1.0,
             "date_nutrition": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
@@ -321,7 +321,7 @@ def create_nutrition(client_id, token):
             "coach_id": coach_id,
             "category": "Lunch",
             "description": "Grilled chicken with quinoa and vegetables",
-            "picture": "",
+            "picture": "https://example.com/lunch.jpg",
             "calories": 600.0,
             "quantity": 1.0,
             "date_nutrition": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
@@ -331,7 +331,7 @@ def create_nutrition(client_id, token):
             "coach_id": coach_id,
             "category": "Afternoon Snack",
             "description": "Almonds and an apple",
-            "picture": "",
+            "picture": "https://example.com/snack2.jpg",
             "calories": 200.0,
             "quantity": 1.0,
             "date_nutrition": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
@@ -341,7 +341,7 @@ def create_nutrition(client_id, token):
             "coach_id": coach_id,
             "category": "Dinner",
             "description": "Grilled salmon with sweet potato and broccoli",
-            "picture": "",
+            "picture": "https://example.com/dinner.jpg",
             "calories": 550.0,
             "quantity": 1.0,
             "date_nutrition": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
