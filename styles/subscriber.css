@@ -1,0 +1,186 @@
+/* ============================================
+   SUBSCRIBER.CSS
+   CSS spécifique pour le tableau de bord client
+   ============================================ */
+
+/* Ce fichier complète trainer.css avec des ajustements spécifiques au subscriber */
+
+/* Fix du calendrier pour qu'il rentre dans sa carte */
+.subscriber-readonly .calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px; /* Réduit pour que les 7 jours rentrent */
+  width: 100%;
+}
+
+.subscriber-readonly .calendar-day {
+  background: rgba(255, 255, 255, .03);
+  border-radius: 8px;
+  padding: 10px 5px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, .05);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.subscriber-readonly .calendar-day:hover {
+  background: rgba(255, 255, 255, .08);
+  border-color: rgba(255, 255, 255, .15);
+}
+
+.subscriber-readonly .calendar-day.active {
+  background: rgba(142, 48, 246, 0.2);
+  border-color: rgba(142, 48, 246, 0.5);
+}
+
+.subscriber-readonly .day-name {
+  display: block;
+  font-size: 11px;
+  color: rgba(255, 255, 255, .6);
+  margin-bottom: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.subscriber-readonly .day-number {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, .9);
+  margin-bottom: 4px;
+}
+
+.subscriber-readonly .day-exercises {
+  margin-top: 4px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.subscriber-readonly .day-exercises span {
+  display: block;
+  font-size: 10px;
+  color: rgba(255, 255, 255, .5);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Notice en lecture seule */
+.readonly-notice {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: rgba(142, 48, 246, 0.1);
+  border: 1px solid rgba(142, 48, 246, 0.3);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.readonly-notice p {
+  font-size: 13px;
+  color: rgba(255, 255, 255, .7);
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+  .subscriber-readonly .calendar-grid {
+    gap: 5px;
+  }
+  
+  .subscriber-readonly .calendar-day {
+    padding: 8px 4px;
+  }
+  
+  .subscriber-readonly .day-name {
+    font-size: 10px;
+  }
+  
+  .subscriber-readonly .day-number {
+    font-size: 15px;
+  }
+  
+  .subscriber-readonly .day-exercises span {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .subscriber-readonly .calendar-grid {
+    gap: 4px;
+  }
+  
+  .subscriber-readonly .calendar-day {
+    padding: 6px 3px;
+  }
+  
+  .subscriber-readonly .day-name {
+    font-size: 9px;
+  }
+  
+  .subscriber-readonly .day-number {
+    font-size: 14px;
+  }
+  
+  .subscriber-readonly .day-exercises span {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .subscriber-readonly .calendar-grid {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+  }
+  
+  .subscriber-readonly .calendar-day {
+    padding: 6px 2px;
+    border-radius: 6px;
+  }
+  
+  .subscriber-readonly .day-name {
+    font-size: 8px;
+    margin-bottom: 2px;
+  }
+  
+  .subscriber-readonly .day-number {
+    font-size: 12px;
+    margin-bottom: 3px;
+  }
+  
+  .subscriber-readonly .day-exercises span {
+    font-size: 7px;
+  }
+}
+
+/* Alternative sur très petits écrans : 4 colonnes */
+@media (max-width: 480px) {
+  .subscriber-readonly .calendar-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  
+  .subscriber-readonly .calendar-day {
+    padding: 10px 6px;
+  }
+  
+  .subscriber-readonly .day-name {
+    font-size: 10px;
+    margin-bottom: 3px;
+  }
+  
+  .subscriber-readonly .day-number {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  
+  .subscriber-readonly .day-exercises span {
+    font-size: 9px;
+  }
+}
