@@ -42,10 +42,22 @@ def create_client():
         "password": "password123",
         "first_name": "John",
         "last_name": "Doe",
+        "birthday": "1990-05-15",  # Date de naissance obligatoire
         "weight": 75.5,
         "size": 1.80,
         "is_coach": False,
-        "physical_constraint": "Lose 5kg and build muscle"
+        "is_nutrition": False,
+        "is_admin": False,
+        "adress1": "123 Main Street",
+        "adress2": "",
+        "postal_code": "75001",
+        "city": "Paris",
+        "allergy_comment": "No known allergies",
+        "physical_constraint": "Lose 5kg and build muscle",
+        "coach_certif": "",
+        "coach_experience": "",
+        "coach_description": "",
+        "picture": ""
     }
     
     try:
@@ -87,10 +99,22 @@ def create_coach():
         "password": "password123",
         "first_name": "Jane",
         "last_name": "Smith",
+        "birthday": "1985-08-20",  # Date de naissance obligatoire
         "is_coach": True,
+        "is_nutrition": True,
+        "is_admin": False,
         "coach_experience": "5 years of professional training",
         "coach_description": "Certified fitness trainer specializing in weight loss and muscle building",
-        "coach_certif": "NASM Certified Personal Trainer"
+        "coach_certif": "NASM Certified Personal Trainer",
+        "adress1": "456 Fitness Avenue",
+        "adress2": "",
+        "postal_code": "75002",
+        "city": "Paris",
+        "allergy_comment": "",
+        "physical_constraint": "",
+        "size": 1.75,
+        "weight": 65.0,
+        "picture": ""
     }
     
     try:
@@ -163,33 +187,48 @@ def create_workouts(client_id, token):
     workouts = [
         {
             "user_id": client_id,
+            "coach_id": client_id,  # Ajout du coach_id
             "category": "Upper Body",
             "description": "Push-ups: 3 sets of 15 reps, Pull-ups: 3 sets of 10 reps",
-            "time": 30
+            "picture": "",
+            "time": 30,
+            "date_workout": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         },
         {
             "user_id": client_id,
+            "coach_id": client_id,
             "category": "Cardio",
             "description": "Running: 5km at moderate pace",
-            "time": 45
+            "picture": "",
+            "time": 45,
+            "date_workout": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         },
         {
             "user_id": client_id,
+            "coach_id": client_id,
             "category": "Lower Body",
             "description": "Squats: 4 sets of 12 reps, Lunges: 3 sets of 10 reps per leg",
-            "time": 40
+            "picture": "",
+            "time": 40,
+            "date_workout": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         },
         {
             "user_id": client_id,
+            "coach_id": client_id,
             "category": "Full Body",
             "description": "Burpees: 3 sets of 15, Mountain climbers: 3 sets of 20",
-            "time": 35
+            "picture": "",
+            "time": 35,
+            "date_workout": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         },
         {
             "user_id": client_id,
+            "coach_id": client_id,
             "category": "Yoga",
             "description": "Flexibility and balance exercises",
-            "time": 60
+            "picture": "",
+            "time": 60,
+            "date_workout": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         }
     ]
     
@@ -218,33 +257,53 @@ def create_nutrition(client_id, token):
     meals = [
         {
             "user_id": client_id,
+            "coach_id": client_id,  # Ajout du coach_id
             "category": "Breakfast",
             "description": "Oatmeal with fruits, nuts and honey",
-            "calories": 400
+            "picture": "",
+            "calories": 400,
+            "quantity": 1.0,
+            "date_nutrition": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         },
         {
             "user_id": client_id,
+            "coach_id": client_id,
             "category": "Morning Snack",
             "description": "Greek yogurt with berries",
-            "calories": 150
+            "picture": "",
+            "calories": 150,
+            "quantity": 1.0,
+            "date_nutrition": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         },
         {
             "user_id": client_id,
+            "coach_id": client_id,
             "category": "Lunch",
             "description": "Grilled chicken with quinoa and vegetables",
-            "calories": 600
+            "picture": "",
+            "calories": 600,
+            "quantity": 1.0,
+            "date_nutrition": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         },
         {
             "user_id": client_id,
+            "coach_id": client_id,
             "category": "Afternoon Snack",
             "description": "Almonds and an apple",
-            "calories": 200
+            "picture": "",
+            "calories": 200,
+            "quantity": 1.0,
+            "date_nutrition": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         },
         {
             "user_id": client_id,
+            "coach_id": client_id,
             "category": "Dinner",
             "description": "Grilled salmon with sweet potato and broccoli",
-            "calories": 550
+            "picture": "",
+            "calories": 550,
+            "quantity": 1.0,
+            "date_nutrition": datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
         }
     ]
     
