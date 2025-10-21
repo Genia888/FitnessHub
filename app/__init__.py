@@ -19,6 +19,9 @@ jwt = JWTManager()
 def create_app(config_name='default'):
     app = Flask(__name__, static_folder='..', static_url_path='')
 
+    app.url_map.strict_slashes = False
+
+
     @app.route("/")
     def home():
         return redirect("/api/v1/")
