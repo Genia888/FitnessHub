@@ -1,4 +1,4 @@
-from flask import Flask, redirect
+from flask import Flask, redirect, send_from_directory
 from flask_restx import Api
 from config import config
 from flask_jwt_extended import JWTManager
@@ -17,8 +17,7 @@ from flask_cors import CORS
 jwt = JWTManager()
 
 def create_app(config_name='default'):
-    app = Flask(__name__)
-    CORS(app, origins="*", allow_headers="*", methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
+    app = Flask(__name__, static_folder='..', static_url_path='')
 
     @app.route("/")
     def home():
@@ -29,6 +28,7 @@ def create_app(config_name='default'):
     db.init_app(app)
     bcrypt.init_app(app)
 
+    # Configuration CORS améliorée
     CORS(app, 
          resources={r"/api/*": {
              "origins": ["http://127.0.0.1:5500", "http://localhost:5500", 
@@ -58,5 +58,26 @@ def create_app(config_name='default'):
     api.add_namespace(workout_ns, path='/api/v1/workout')
     api.add_namespace(product_ns, path='/api/v1/product_shop')
     api.add_namespace(auth_ns, path='/api/v1/auth')
+
+    # AJOUTEZ CES ROUTES POUR SERVIR LES FICHIERS STATIQUES
+    @app.route('/pages/<path:filename>')
+    def serve_pages(filename):
+        return send_from_directory('../pages', filename)
+
+    @app.route('/scripts/<path:filename>')
+    def serve_scripts(filename):
+        return send_from_directory('../scripts', filename)
+
+    @app.route('/styles/<path:filename>')
+    def serve_styles(filename):
+        return send_from_directory('../styles', filename)
+
+    @app.route('/assets/<path:subpath>/<path:filename>')
+    def serve_assets(subpath, filename):
+        return send_from_directory(f'../assets/{subpath}', filename)
+
+    @app.route('/vendor/<path:subpath>/<path:filename>')
+    def serve_vendor(subpath, filename):
+        return send_from_directory(f'../vendor/{subpath}', filename)
 
     return app
