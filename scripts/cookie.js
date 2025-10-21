@@ -109,3 +109,16 @@ function getInfo(user)
   if (user.picture)
     profileImage.src = user.picture;
 }
+
+function getInfo() {
+  const user = UserSession.getUser();
+  if (!user) return;
+
+  const element = document.getElementById('votre-element-id'); // Remplacez par le bon ID
+  if (!element) {
+    console.warn("⚠️ Élément non trouvé, ignoré");
+    return; // ✅ Ne fait rien si l'élément n'existe pas
+  }
+  
+  element.value = user.something;
+}
