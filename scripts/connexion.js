@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (user.is_coach) {
         window.location.href = "../pages/coach_account.html";
       } else {
-        window.location.href = "../pages/user_account.html";
+        window.location.href = "../pages/subscriber.html";
       }
 
     } catch (error) {
