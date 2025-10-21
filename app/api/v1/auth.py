@@ -142,13 +142,17 @@ class Login(Resource):
         return {
             'access_token': access_token,
             'user': {
-                'id': user.id,
-                'first_name': user.first_name,
-                'last_name': user.last_name,
-                'email': user.email,
-                'is_coach': user.is_coach,
-                'is_nutrition': user.is_nutrition,
-                'is_admin': user.is_admin
+                'id': user.id, 'first_name': user.first_name, 'last_name': user.last_name, 'birthday': user.birthday.isoformat(), 
+                "password": user.password, 'email': user.email,
+                "is_admin": user.is_admin, "is_coach": user.is_coach,
+                "is_nutrition": user.is_nutrition, "password": user.password, 
+                "adress1": user.adress1, "adress2": user.adress2, 
+                "postal_code": user.postal_code, "city": user.city, 
+                "allergy_comment": user.allergy_comment, "physical_constraint": user.physical_constraint,
+                "coach_certif" : user.coach_certif, "coach_experience" : user.coach_experience,
+                  "coach_description": user.coach_description,
+                    "size" : user.size, "weight" : user.weight,
+                  "picture": user.picture
             }
         }, 200
 

@@ -26,6 +26,7 @@ const CookieManager = {
 // --- GESTION UTILISATEUR ---
 const UserSession = {
   saveUser: (userData) => {
+    console.log(userData.first_name);
     localStorage.setItem("fitnesshub_user", JSON.stringify(userData));
     CookieManager.set("user_id", userData.id);
     CookieManager.set("user_role", userData.is_coach ? "coach" : "client");
@@ -86,7 +87,25 @@ document.addEventListener("DOMContentLoaded", () => {
   if (UserSession.isLoggedIn()) {
     const user = UserSession.getUser();
     console.log(`👋 Bonjour ${user.first_name || 'utilisateur'} !`);
+    getInfo(user);
   } else {
     console.log("👤 Aucun utilisateur connecté.");
   }
 });
+
+/* 
+  get the information from the backend dynamicly 
+  first step : first name, last name, title and user image
+*/
+function getInfo(user)
+{
+  const firstname = document.getElementById("firstName");
+  firstname.value = user.first_name;
+  const lastname = document.getElementById("lastName");
+  lastname.value = user.last_name;
+  const titlename = document.getElementById("titlename");
+  titlename.innerHTML = user.first_name + ' ' + user.last_name;
+  const profileImage = document.getElementById("profileImage");
+  if (user.picture)
+    profileImage.src = user.picture;
+}
