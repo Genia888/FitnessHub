@@ -182,6 +182,12 @@ class HBnBFacade:
             raise ValueError("Coach not found")
         return [review for review in
                 self.review_repo.get_all() if review.coach_id == coach_id]
+    
+    def get_reviews_by_user(self, user_id):
+        """Get all reviews for a specific user"""
+        from app.models.review import Review
+        reviews = Review.query.filter_by(user_id=user_id).all()
+        return reviews
 
     def update_review(self, review_id, review_update):
         review = self.review_repo.get(review_id)
