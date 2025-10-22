@@ -293,42 +293,40 @@ class HBnBFacade:
         return {'message': 'nutrition deleted succesessfully'}
 
 
-# Subscription Facade
-def create_subscription(self, subscription_data):
-    # Conversion des dates string en objets date
-    if 'begin_date' in subscription_data and isinstance(subscription_data['begin_date'], str):
-        subscription_data['begin_date'] = datetime.strptime(subscription_data['begin_date'], '%Y-%m-%d').date()
-    if 'end_date' in subscription_data and isinstance(subscription_data['end_date'], str):
-        subscription_data['end_date'] = datetime.strptime(subscription_data['end_date'], '%Y-%m-%d').date()
+    # Subscription Facade
+    def create_subscription(self, subscription_data):
+        # Conversion des dates string en objets date
+        if 'begin_date' in subscription_data and isinstance(subscription_data['begin_date'], str):
+            subscription_data['begin_date'] = datetime.strptime(subscription_data['begin_date'], '%Y-%m-%d').date()
+        if 'end_date' in subscription_data and isinstance(subscription_data['end_date'], str):
+            subscription_data['end_date'] = datetime.strptime(subscription_data['end_date'], '%Y-%m-%d').date()
 
-    # Vérifier l'utilisateur
-    user = self.get_user(subscription_data['user_id'])
-    if not user:
-        raise ValueError("User not found")
+        # Vérifier l'utilisateur
+        user = self.get_user(subscription_data['user_id'])
+        if not user:
+            raise ValueError("User not found")
 
-    # Rendre coach_id optionnel
-    coach_id = subscription_data.get('coach_id')
-    coach = None
-    if coach_id:
-        coach = self.get_user(coach_id)
-        if not coach:
-            raise ValueError("Coach not found")
-        if not getattr(coach, "is_coach", False):
-            raise ValueError("Selected user is not a coach")
+        # Rendre coach_id optionnel
+        coach_id = subscription_data.get('coach_id')
+        coach = None
+        if coach_id:
+            coach = self.get_user(coach_id)
+            if not coach:
+                raise ValueError("Coach not found")
+            if not getattr(coach, "is_coach", False):
+                raise ValueError("Selected user is not a coach")
 
-    # ✅ CORRECTION : Respecter l'ordre des paramètres du constructeur
-    # Ordre attendu : begin_date, end_date, option_message, option_nutrition, user, coach
-    new_subscription = Subscription(
-        subscription_data['begin_date'],                        # begin_date
-        subscription_data['end_date'],                          # end_date
-        subscription_data.get('option_message', False),         # option_message (3ème position!)
-        subscription_data.get('option_nutrition', False),       # option_nutrition (4ème position!)
-        subscription_data['user_id'],                           # user (pas user_id)
-        coach_id                                                # coach (pas coach_id)
-    )
+        new_subscription = Subscription(
+            begin_date=subscription_data['begin_date'],
+            end_date=subscription_data['end_date'],
+            option_message=subscription_data.get('option_message', False),
+            option_nutrition=subscription_data.get('option_nutrition', False),
+            user_id=subscription_data['user_id'],
+            coach_id=coach_id
+        )
 
-    self.subscription_repo.add(new_subscription)
-    return new_subscription
+        self.subscription_repo.add(new_subscription)
+        return new_subscription
 
     def get_subscription(self, subscription_id):
         subscription = self.subscription_repo.get(subscription_id)
@@ -361,7 +359,7 @@ def create_subscription(self, subscription_data):
         if not subscription:
             raise ValueError("subscription not found")
         self.subscription_repo.delete(subscription_id)
-        return {'subscription': 'Review deleted succesessfully'}
+        return {'message': 'subscription deleted succesessfully'}
 
 
     # Product Facade
