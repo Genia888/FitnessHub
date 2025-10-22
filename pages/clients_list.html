@@ -44,7 +44,7 @@
             <li><a href="abonnement.html" data-text="Plans">Plans</a></li>
             <li><a href="trainer.html" data-text="Dashboard">Dashboard</a></li>
             <li><a href="boutique.html" data-text="Shop">Shop</a></li>
-            <li><a href="account-coach.html" data-text="Account">Account</a></li>
+            <li><a href="coach_account.html" data-text="Account">Account</a></li>
             <li><a href="connexion.html" data-text="Log out">Log out</a></li>
           </ul>
         </nav>
@@ -64,7 +64,7 @@
             <li><a href="abonnement.html" data-text="Plans">Plans</a></li>
             <li><a href="trainer.html" data-text="Dashboard">Dashboard</a></li>
             <li><a href="boutique.html" data-text="Shop">Shop</a></li>
-            <li><a href="account-coach.html" data-text="Account">Account</a></li>
+            <li><a href="coach_account.html" data-text="Account">Account</a></li>
             <li><a href="connexion.html" data-text="Log out">Log out</a></li>
             </ul>
           </nav>
@@ -314,14 +314,59 @@
     </section>
   </div>
 
+  <script src="../scripts/cookie.js" defer></script>
+  <script src="../scripts/auth-manager.js" defer></script>
+  <script src="../scripts/api-service.js" defer></script>
   <script>
-    // Navigate to client management page
-    function viewClient(clientId) {
-      // In a real application, this would navigate to a detailed client management page
-      alert(`Opening management panel for client #${clientId}...\n\nThis would navigate to a detailed page where you can:\n• Update nutrition plans\n• Modify training programs\n• Add notes and tracking\n• Review progress charts`);
-      // window.location.href = `client_manage.html?id=${clientId}`;
+    // ✅ CORRECTION : Fonction pour naviguer vers la page de gestion du client
+    async function viewClient(clientId) {
+      console.log(`🔄 Redirection vers la gestion du client #${clientId}`);
+      
+      // Vérifier que l'utilisateur est connecté et est un coach
+      const token = CookieManager.get("token");
+      const user = UserSession.getUser();
+      
+      if (!token || !user || !user.is_coach) {
+        alert("Vous devez être connecté en tant que coach pour gérer les clients.");
+        window.location.href = "../pages/connexion.html";
+        return;
+      }
+      
+      try {
+        // Récupérer la liste des vrais clients du coach depuis le backend
+        const response = await fetch(`http://127.0.0.1:5000/api/v1/user/coach/${user.id}/users`, {
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error("Erreur lors du chargement des clients");
+        }
+        
+        const clients = await response.json();
+        
+        // Vérifier que le client existe dans la liste
+        if (clients && clients.length > 0) {
+          // Prendre le client correspondant (index - 1 car clientId commence à 1)
+          const actualClient = clients[clientId - 1];
+          
+          if (actualClient) {
+            // Rediriger vers trainer.html avec l'ID réel du client
+            window.location.href = `trainer.html?client=${actualClient.id}`;
+          } else {
+            alert("Client non trouvé dans votre liste.");
+          }
+        } else {
+          alert("Vous n'avez pas encore de clients.");
+        }
+        
+      } catch (error) {
+        console.error("❌ Erreur lors de la récupération des clients:", error);
+        alert("Impossible de charger les informations du client.");
+      }
     }
   </script>
-  <script src="../scripts/cookie.js" defer></script>
 </body>
 </html>
