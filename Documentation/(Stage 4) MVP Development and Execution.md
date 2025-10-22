@@ -23,3 +23,9 @@
 - we check two time by week where we are in the project
 # 4. Final Integration and QA Testing
 # 5. Deliverables
+- presentation of the article of shop ( without buying )
+- presentation of the subscription ( easy, medium, elite )
+- display message between coach and user with workout and diet
+- a coach can choose a user and add diet and workout program
+- list of coach
+- register a coach or user
