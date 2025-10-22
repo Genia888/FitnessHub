@@ -295,39 +295,38 @@ class HBnBFacade:
 
     # Subscription Facade
     def create_subscription(self, subscription_data):
-        """Create a new subscription."""
+        # Conversion des dates string en objets date
+        if 'begin_date' in subscription_data and isinstance(subscription_data['begin_date'], str):
+            subscription_data['begin_date'] = datetime.strptime(subscription_data['begin_date'], '%Y-%m-%d').date()
+        if 'end_date' in subscription_data and isinstance(subscription_data['end_date'], str):
+            subscription_data['end_date'] = datetime.strptime(subscription_data['end_date'], '%Y-%m-%d').date()
+
+        # Vérifier l'utilisateur
         user = self.get_user(subscription_data['user_id'])
         if not user:
-            raise ValueError("User not found.")
-        coach = self.get_user(subscription_data['coach_id'])
-        if not coach:
-            raise ValueError("Coach not found.")
-        
-        # Vérifier que c'est bien un coach
-        if not coach.is_coach:
-            raise ValueError("The specified user is not a coach.")
-        
-        # Convertir les strings de date en objets date Python
-        begin_date = subscription_data['begin_date']
-        if isinstance(begin_date, str):
-            begin_date = datetime.strptime(begin_date, '%Y-%m-%d').date()
-        
-        end_date = subscription_data['end_date']
-        if isinstance(end_date, str):
-            end_date = datetime.strptime(end_date, '%Y-%m-%d').date()
-        
-        # Créer un objet Subscription
-        subscription = Subscription(
-            begin_date,
-            end_date,
-            subscription_data['option_nutrition'],
-            subscription_data['option_message'],
-            subscription_data['user_id'],
-            subscription_data['coach_id']
+            raise ValueError("User not found")
+
+        # Rendre coach_id optionnel
+        coach_id = subscription_data.get('coach_id')
+        coach = None
+        if coach_id:
+            coach = self.get_user(coach_id)
+            if not coach:
+                raise ValueError("Coach not found")
+            if not getattr(coach, "is_coach", False):
+                raise ValueError("Selected user is not a coach")
+
+        new_subscription = Subscription(
+            begin_date=subscription_data['begin_date'],
+            end_date=subscription_data['end_date'],
+            option_nutrition=subscription_data.get('option_nutrition', False),
+            option_message=subscription_data.get('option_message', False),
+            user_id=subscription_data['user_id'],
+            coach_id=coach_id
         )
-        
-        self.subscription_repo.add(subscription)
-        return subscription
+
+        self.subscription_repo.add(new_subscription)
+        return new_subscription
 
 
     def get_subscription(self, subscription_id):
