@@ -41,6 +41,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Initialiser la recherche de clients
     initializeClientSearch();
     
+    // ✅ NOUVEAU : Vérifier si un client spécifique est demandé dans l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const clientIdFromUrl = urlParams.get('client');
+    
+    if (clientIdFromUrl) {
+      console.log(`🎯 Client spécifique demandé depuis l'URL: ${clientIdFromUrl}`);
+      // Attendre un peu que la liste des clients soit chargée
+      setTimeout(() => {
+        selectClientById(clientIdFromUrl, token);
+      }, 500);
+    }
+    
   } catch (error) {
     console.error("❌ Erreur lors du chargement des données:", error);
     alert("Erreur lors du chargement de vos données.");
@@ -81,8 +93,11 @@ async function loadCoachClients(coachId, token) {
       const clientCard = createClientCard(client);
       clientsList.appendChild(clientCard);
       
-      // Charger automatiquement le premier client
-      if (index === 0) {
+      // Charger automatiquement le premier client seulement si aucun client n'est spécifié dans l'URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const clientIdFromUrl = urlParams.get('client');
+      
+      if (!clientIdFromUrl && index === 0) {
         selectClient(client.id, token);
         clientCard.classList.add("active");
       }
@@ -134,6 +149,40 @@ function createClientCard(client) {
 }
 
 // ============================================
+// ✅ NOUVELLE FONCTION : Sélectionner un client par son ID
+// ============================================
+function selectClientById(clientId, token) {
+  console.log(`🔍 Recherche du client avec ID: ${clientId}`);
+  
+  // Trouver la carte du client correspondant
+  const clientCards = document.querySelectorAll(".client-card");
+  let foundClient = false;
+  
+  clientCards.forEach(card => {
+    if (card.dataset.clientId === clientId) {
+      // Retirer la classe active de tous les clients
+      clientCards.forEach(c => c.classList.remove("active"));
+      
+      // Ajouter la classe active au client trouvé
+      card.classList.add("active");
+      
+      // Charger les données du client
+      selectClient(clientId, token);
+      
+      // Scroller vers le client dans la liste
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      
+      foundClient = true;
+      console.log(`✅ Client trouvé et sélectionné: ${clientId}`);
+    }
+  });
+  
+  if (!foundClient) {
+    console.warn(`⚠️ Client avec ID ${clientId} non trouvé dans la liste`);
+  }
+}
+
+// ============================================
 // Sélectionner un client
 // ============================================
 async function selectClient(clientId, token) {
@@ -180,7 +229,7 @@ async function loadClientData(clientId, token) {
     const statsElement = document.querySelector(".client-stats");
     if (statsElement) {
       if (clientData.weight && clientData.size) {
-        const age = clientData.birthdate ? calculateAge(clientData.birthdate) : null;
+        const age = clientData.birthday ? calculateAge(clientData.birthday) : null;
         statsElement.textContent = `${clientData.weight}kg • ${clientData.size}m${age ? ` • ${age} years old` : ''}`;
       } else {
         statsElement.textContent = "No stats available";
