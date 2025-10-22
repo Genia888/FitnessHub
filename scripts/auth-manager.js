@@ -53,8 +53,8 @@ const AuthManager = {
    * Déconnecte l'utilisateur
    */
   logout() {
-    CookieManager.delete("token");
-    UserSession.clearUser();
+    CookieManager.remove("token");
+    UserSession.logout();
     window.location.href = "../pages/connexion.html";
   },
 
