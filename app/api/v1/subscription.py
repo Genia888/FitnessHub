@@ -11,7 +11,7 @@ subscription_model = api.model('Subscription', {
     'option_nutrition': fields.Boolean(required=True, description='Nutrition T/F'),
     'option_message': fields.Boolean(required=True, description='Message T/F'),
     'user_id': fields.String(required=True, description='ID of the user'),
-    'coach_id': fields.String(required=True, description='ID of the coach')
+    'coach_id': fields.String(required=False, description='ID of the coach (optional)')  # Changé en required=False
 })
 
 
