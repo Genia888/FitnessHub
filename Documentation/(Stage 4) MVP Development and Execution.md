@@ -16,6 +16,8 @@
 
 
 # 1. Execute Development Tasks
+- We create a back end with a swagger using flask
+- the swagger can create, update, delete, search information for the tables : user, diet, workout, subscription, message, review, shop use after in the front end
 - We have a main branch on git hub and one branch for each member
 - When a task seems good we merge on the main and call other member to pull the modification
 
