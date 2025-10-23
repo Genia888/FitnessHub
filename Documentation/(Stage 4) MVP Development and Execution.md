@@ -131,11 +131,13 @@ Validated correct JSON output, correct status codes, error handling.
 
 Debugged mismatches with front-end: aligning JSON keys with front-end usage.
 
+
+- We have a main branch on git hub and one branch for each member
+- When a task seems good we merge on the main and call other member to pull the modification
+
 # 2. Monitor Progress and Adjust
 - We used the methode agile to check the progress of the project
 - two call by week
-- We have a main branch on git hub and one branch for each member
-- When a task seems good we merge on the main and call other member to pull the modification
 
 
 # 3. Conduct Sprint Reviews and Retrospectives
