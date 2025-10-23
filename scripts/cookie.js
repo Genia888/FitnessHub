@@ -38,6 +38,7 @@ const UserSession = {
   isLoggedIn: () => !!localStorage.getItem("fitnesshub_user"),
   logout: () => {
     localStorage.removeItem("fitnesshub_user");
+    CookieManager.remove("token");      // ✅ AJOUTÉ : Supprimer le token lors de la déconnexion
     CookieManager.remove("user_id");
     CookieManager.remove("user_role");
   }
@@ -97,15 +98,18 @@ document.addEventListener("DOMContentLoaded", () => {
   get the information from the backend dynamicly 
   first step : first name, last name, title and user image
 */
-function getInfo(user)
-{
+function getInfo(user) {
+  if (!user) return;
+
   const firstname = document.getElementById("firstName");
-  firstname.value = user.first_name;
+  if (firstname) firstname.value = user.first_name;
+  
   const lastname = document.getElementById("lastName");
-  lastname.value = user.last_name;
+  if (lastname) lastname.value = user.last_name;
+  
   const titlename = document.getElementById("titlename");
-  titlename.innerHTML = user.first_name + ' ' + user.last_name;
+  if (titlename) titlename.innerHTML = user.first_name + ' ' + user.last_name;
+  
   const profileImage = document.getElementById("profileImage");
-  if (user.picture)
-    profileImage.src = user.picture;
+  if (profileImage && user.picture) profileImage.src = user.picture;
 }

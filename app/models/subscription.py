@@ -23,14 +23,14 @@ class Subscription(BaseModel):
     coach_id = db.Column(db.String(36), db.ForeignKey('User.id'),
                          nullable=False)
     
-    def __init__(self, begin_date, end_date, option_message, option_nutrition, user, coach):
+    def __init__(self, begin_date, end_date, option_message, option_nutrition, user_id, coach_id):
         super().__init__()
         #if not text:
         #    raise ValueError("Message text is required.")
         self.begin_date = begin_date
         self.end_date = end_date
-        self.user_id = user
-        self.coach_id = coach
+        self.user_id = user_id
+        self.coach_id = coach_id
         self.option_nutrition = option_nutrition
         self.option_message = option_message
 

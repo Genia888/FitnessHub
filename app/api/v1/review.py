@@ -148,3 +148,12 @@ class PlaceReviewList(Resource):
             ], 200
         except ValueError as e:
             return {'error': str(e)}, 400
+        
+@api.route('/user/<user_id>')
+class UserReviews(Resource):
+    def get(self, user_id):
+        """Get all reviews for a specific user (coach)"""
+        reviews = facade.get_reviews_by_user(user_id)
+        if not reviews:
+            return [], 200  # ✅ Retourne une liste vide au lieu de 404
+        return [review.to_dict() for review in reviews], 200

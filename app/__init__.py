@@ -19,6 +19,9 @@ jwt = JWTManager()
 def create_app(config_name='default'):
     app = Flask(__name__, static_folder='..', static_url_path='')
 
+    app.url_map.strict_slashes = False
+
+
     @app.route("/")
     def home():
         return redirect("/api/v1/")
@@ -28,14 +31,13 @@ def create_app(config_name='default'):
     db.init_app(app)
     bcrypt.init_app(app)
 
-    # Configuration CORS améliorée
+    # Configuration CORS corrigée - ACCEPTE TOUTES LES ORIGINES
     CORS(app, 
          resources={r"/api/*": {
-             "origins": ["http://127.0.0.1:5500", "http://localhost:5500", 
-                        "http://127.0.0.1:5000", "http://localhost:5000"],
+             "origins": "*",  # ✅ Accepte toutes les origines
              "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
              "allow_headers": ["Content-Type", "Authorization"],
-             "supports_credentials": True,
+             "supports_credentials": False,  # ✅ Changé à False car origins="*"
              "expose_headers": ["Content-Type", "Authorization"]
          }})
 
@@ -59,7 +61,7 @@ def create_app(config_name='default'):
     api.add_namespace(product_ns, path='/api/v1/product_shop')
     api.add_namespace(auth_ns, path='/api/v1/auth')
 
-    # AJOUTEZ CES ROUTES POUR SERVIR LES FICHIERS STATIQUES
+    # Routes pour servir les fichiers statiques
     @app.route('/pages/<path:filename>')
     def serve_pages(filename):
         return send_from_directory('../pages', filename)
