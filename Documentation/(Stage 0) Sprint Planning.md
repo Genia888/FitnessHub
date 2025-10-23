@@ -6,6 +6,7 @@
 ---
 
 ## Table of Contents
+
 1. [Overview](#overview)
 2. [Sprint Planning Instructions](#sprint-planning-instructions)
 3. [MoSCoW Prioritization Framework](#moscow-prioritization-framework)
@@ -21,6 +22,7 @@
 This document outlines the sprint planning strategy for the FitnessHub MVP development. The project is divided into multiple sprints, each lasting 1-2 weeks, with clearly defined goals, deliverables, and responsibilities.
 
 **Project Context:**
+
 - **Application Type:** Fitness management platform with user, trainer, and admin roles
 - **Tech Stack:** Flask (Backend), Vanilla JS (Frontend), SQLite (Database)
 - **Team Size:** 3 developers (Sebastien, Evgeni, Elhadj)
@@ -31,30 +33,35 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
 ## Sprint Planning Instructions
 
 ### 1. Break Down User Stories
+
 - Decompose each user story into smaller, actionable tasks
 - Each task should be completable within 1-3 days
 - Tasks must have clear acceptance criteria
 - Link tasks to specific files/modules in the codebase
 
 ### 2. Prioritize Using MoSCoW
+
 - **Must Have:** Critical features required for MVP launch
 - **Should Have:** Important features that add significant value
 - **Could Have:** Nice-to-have features if time permits
 - **Won't Have:** Features explicitly out of scope for MVP
 
 ### 3. Identify Dependencies
+
 - Map technical dependencies between tasks
 - Identify blockers that could delay progress
 - Ensure backend API endpoints are ready before frontend integration
 - Database schema must be finalized before CRUD operations
 
 ### 4. Define Sprint Duration
+
 - **Recommendation:** 2-week sprints
 - **Sprint 0:** 1 week (setup and planning)
 - **Regular Sprints:** 2 weeks each
 - **Buffer:** Include time for testing, bug fixes, and documentation
 
 ### 5. Assign Responsibilities
+
 - Distribute tasks based on team expertise
 - Balance workload across team members
 - Ensure knowledge sharing and no single point of failure
@@ -65,6 +72,7 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
 ## MoSCoW Prioritization Framework
 
 ### Must Have (Critical for MVP)
+
 - ✅ User authentication and registration
 - ✅ User profile management (CRUD operations)
 - ✅ Role-based access control (User, Trainer, Admin)
@@ -76,6 +84,7 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
 - ✅ Responsive UI for main pages
 
 ### Should Have (High Value)
+
 - ⚡ Product shop/boutique functionality
 - ⚡ Shopping cart and checkout
 - ⚡ Review and rating system
@@ -85,6 +94,7 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
 - ⚡ Test data generation scripts
 
 ### Could Have (Nice to Have)
+
 - 💡 Real-time notifications
 - 💡 Advanced analytics dashboard
 - 💡 Email notifications
@@ -93,6 +103,7 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
 - 💡 Dark mode
 
 ### Won't Have (Out of Scope for MVP)
+
 - ❌ Video calling between trainer and user
 - ❌ Smartwatch/fitness tracker integration
 - ❌ Payment gateway integration (real payments)
@@ -105,11 +116,14 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
 ## Sprint Breakdown
 
 ### Sprint 0: Setup and Foundation (Week 1)
+
 **Duration:** 1 week  
 **Goal:** Set up development environment and project infrastructure
 
-#### Tasks:
+#### Tasks
+
 1. **Repository Setup** (Sebastien)
+
    - Initialize Git repository
    - Create `.gitignore` for Python, Node, and IDE files
    - Set up branch protection rules
@@ -141,7 +155,8 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
    - Document API endpoints (initial draft)
    - **Files:** `Documentation/`
 
-#### Deliverables:
+#### Sprint 0 Deliverables
+
 - ✅ Working development environment for all team members
 - ✅ Database schema created and tested
 - ✅ Project structure documented
@@ -150,10 +165,12 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
 ---
 
 ### Sprint 1: Authentication & Core Pages (Weeks 2-3)
+
 **Duration:** 2 weeks  
 **Goal:** Implement user authentication and main static pages
 
-#### Backend Tasks (Sebastien):
+#### Backend Tasks (Sebastien)
+
 1. **Authentication API** (Must Have)
    - POST `/api/v1/auth/register` - User registration
    - POST `/api/v1/auth/login` - User login with JWT
@@ -177,7 +194,8 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
    - Include users with different roles (user, trainer, admin)
    - **Files:** `create_test_data.py`, `show_test_users.py`
 
-#### Frontend Tasks (Evgeni):
+#### Frontend Tasks (Evgeni)
+
 1. **Landing Page** (Must Have)
    - Hero section with CTA
    - Features showcase
@@ -200,7 +218,8 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
    - Error handling and user feedback
    - **Files:** `scripts/api-service.js`, `scripts/auth-manager.js`
 
-#### Integration Tasks (Evgeni + Sebastien):
+#### Integration Tasks (Evgeni + Sebastien)
+
 1. **Connect Frontend to Auth API**
    - Integrate login form with `/api/v1/auth/login`
    - Integrate registration form with `/api/v1/auth/register`
@@ -208,7 +227,8 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
    - Implement auth state management
    - **Files:** `scripts/cookie.js`, `scripts/auth-manager.js`
 
-#### Deliverables:
+#### Sprint 1 Deliverables
+
 - ✅ Fully functional authentication system (backend + frontend)
 - ✅ Working login and registration pages
 - ✅ Landing page with navigation
@@ -218,10 +238,12 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
 ---
 
 ### Sprint 2: User Dashboard & Profiles (Weeks 4-5)
+
 **Duration:** 2 weeks  
 **Goal:** Implement user profile management and basic dashboards
 
-#### Backend Tasks (Sebastien):
+#### Backend Tasks - User Management (Sebastien)
+
 1. **User Profile API** (Must Have)
    - GET `/api/v1/user/:id` - Get user profile
    - PUT `/api/v1/user/:id` - Update user profile
@@ -242,7 +264,8 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
    - GET `/api/v1/nutrition-schedule/:userId` - Get user's nutrition plan
    - **Files:** `app/api/v1/workout_schedule.py`, `app/api/v1/nutrition_schedule.py`
 
-#### Frontend Tasks (Evgeni):
+#### Frontend Tasks - User Interface (Evgeni)
+
 1. **User Account Page** (Must Have)
    - Display user profile information
    - Edit profile form
@@ -263,14 +286,16 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
    - Subscribe button with API integration
    - **Files:** `pages/abonnement.html`, `scripts/abonnement.js`
 
-#### Testing Tasks (Sebastien):
+#### Testing Tasks (Sebastien)
+
 1. **Create Test Data Scripts** (Should Have)
    - Generate realistic workout schedules
    - Generate nutrition plans
    - Assign schedules to test users
    - **Files:** `create_test_data.py`
 
-#### Deliverables:
+#### Sprint 2 Deliverables
+
 - ✅ User profile view and edit functionality
 - ✅ Subscriber dashboard with workout/nutrition display
 - ✅ Subscription listing and enrollment
@@ -280,10 +305,12 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
 ---
 
 ### Sprint 3: Trainer Dashboard & Management (Weeks 6-7)
+
 **Duration:** 2 weeks  
 **Goal:** Build trainer-specific features and client management
 
-#### Backend Tasks (Sebastien):
+#### Backend Tasks - Trainer Features (Sebastien)
+
 1. **Trainer-Client Relationship** (Must Have)
    - GET `/api/v1/user/trainer/:trainerId/clients` - Get trainer's clients
    - POST `/api/v1/user/assign-trainer` - Assign trainer to user
@@ -302,7 +329,8 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
    - GET `/api/v1/message/:userId` - Get messages for user
    - **Files:** `app/api/v1/message.py`, `app/models/message.py`
 
-#### Frontend Tasks (Elhadj + Evgeni):
+#### Frontend Tasks - Trainer Interface (Elhadj + Evgeni)
+
 1. **Trainer Dashboard** (Must Have)
    - List of assigned clients
    - Client search and filter
@@ -328,13 +356,15 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
    - Quick actions sidebar
    - **Files:** `scripts/coach-navigation.js`
 
-#### Integration Tasks (All):
+#### Integration Tasks (All)
+
 1. **End-to-End Testing**
    - Test trainer-client workflow
    - Test schedule creation and assignment
    - Verify authorization rules
 
-#### Deliverables:
+#### Sprint 3 Deliverables
+
 - ✅ Trainer dashboard with client management
 - ✅ Schedule creation and assignment functionality
 - ✅ Messaging system (basic)
@@ -344,10 +374,12 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
 ---
 
 ### Sprint 4: Shop & Final Features (Weeks 8-9)
+
 **Duration:** 2 weeks  
 **Goal:** Implement e-commerce features and finalize MVP
 
-#### Backend Tasks (Sebastien):
+#### Backend Tasks - E-commerce (Sebastien)
+
 1. **Product Shop API** (Should Have)
    - GET `/api/v1/products` - List all products
    - GET `/api/v1/products/:id` - Get product details
@@ -366,7 +398,8 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
    - GET `/api/v1/order/:userId` - Get user orders
    - **Files:** `app/api/v1/order.py` (if created)
 
-#### Frontend Tasks (Evgeni):
+#### Frontend Tasks - E-commerce (Evgeni)
+
 1. **Boutique/Shop Page** (Should Have)
    - Product grid layout
    - Product search and filters
@@ -388,7 +421,8 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
    - Add review form
    - **Files:** `scripts/shop.js`
 
-#### UI/UX Improvements (All):
+#### UI/UX Improvements (All)
+
 1. **Responsive Design** (Must Have)
    - Mobile-friendly layouts
    - Tablet breakpoints
@@ -407,7 +441,8 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
    - Focus indicators
    - Screen reader support
 
-#### Bug Fixes & Polish (All):
+#### Bug Fixes & Polish (All)
+
 1. **Critical Bugs** (Must Have)
    - Fix authentication issues
    - Resolve data persistence bugs
@@ -423,7 +458,8 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
    - Clean up commented code
    - Refactor duplicated code
 
-#### Deliverables:
+#### Sprint 4 Deliverables
+
 - ✅ Fully functional product shop
 - ✅ Shopping cart with checkout flow
 - ✅ Review and rating system
@@ -433,10 +469,12 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
 ---
 
 ### Sprint 5: Testing & Documentation (Weeks 10)
+
 **Duration:** 1 week  
 **Goal:** Final testing, bug fixes, and documentation
 
-#### Testing Tasks (All):
+#### Testing Tasks (All)
+
 1. **Integration Testing**
    - Test all user workflows end-to-end
    - Test different user roles
@@ -452,7 +490,8 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
    - Frontend performance audit
    - Database query optimization
 
-#### Documentation Tasks (All):
+#### Documentation Tasks (All)
+
 1. **Technical Documentation** (Must Have)
    - API documentation (endpoints, parameters, responses)
    - Database schema documentation
@@ -469,7 +508,8 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
    - Add JSDoc comments to JavaScript
    - Update README.md
 
-#### Deliverables:
+#### Sprint 5 Deliverables
+
 - ✅ Fully tested MVP
 - ✅ Complete technical documentation
 - ✅ Deployment-ready application
@@ -494,19 +534,21 @@ Dashboard Pages (Sprint 2)
 Trainer-Client Relationship (Sprint 3)
     ↓
 Schedule Management (Sprint 3)
-```
 
 ### Parallel Tracks
 
-**Track 1: Authentication Flow**
+#### Track 1: Authentication Flow
+
 - Backend: Auth API → User Model → JWT Implementation
 - Frontend: Login Page → Registration Page → Auth State Management
 
-**Track 2: Dashboard Development**
+#### Track 2: Dashboard Development
+
 - Backend: Profile API → Schedule API → Subscription API
 - Frontend: User Dashboard → Trainer Dashboard → Schedule Display
 
-**Track 3: E-commerce**
+#### Track 3: E-commerce
+
 - Backend: Product API → Review API → Order API
 - Frontend: Shop Page → Cart → Checkout
 
@@ -527,7 +569,9 @@ Schedule Management (Sprint 3)
 ## Team Assignments
 
 ### Sebastien (Backend Developer)
+
 **Primary Responsibilities:**
+
 - Backend API development (Flask)
 - Database schema and migrations
 - Authentication and authorization
@@ -536,6 +580,7 @@ Schedule Management (Sprint 3)
 - API documentation
 
 **Sprints:**
+
 - Sprint 0: Database setup, Flask configuration
 - Sprint 1: Authentication API, User model
 - Sprint 2: Profile API, Subscription API, Schedule API
@@ -544,6 +589,7 @@ Schedule Management (Sprint 3)
 - Sprint 5: Testing, documentation
 
 **Key Files:**
+
 - `app/api/v1/*.py`
 - `app/models/*.py`
 - `app/persistence/repository.py`
@@ -553,7 +599,9 @@ Schedule Management (Sprint 3)
 ---
 
 ### Evgeni (Frontend Developer)
+
 **Primary Responsibilities:**
+
 - Frontend pages development
 - JavaScript functionality
 - API integration (frontend)
@@ -562,23 +610,27 @@ Schedule Management (Sprint 3)
 - Shop/E-commerce features
 
 **Sprints:**
+
 - Sprint 0: Frontend structure, CSS architecture
 - Sprint 1: Landing page, Login/Registration pages
 - Sprint 2: User dashboard, Subscriber page, Subscription page
 - Sprint 3: Client list UI (support Elhadj)
 - Sprint 4: Shop, Cart, Product pages
 - Sprint 5: UI polish, accessibility
-
 **Key Files:**
+
 - `pages/*.html`
 - `scripts/*.js`
 - `styles/*.css`
+- `landing_page/`
 - `landing_page/`
 
 ---
 
 ### Elhadj (Frontend Developer)
+
 **Primary Responsibilities:**
+
 - Trainer-specific pages
 - Coach dashboard
 - Client management UI
@@ -587,15 +639,17 @@ Schedule Management (Sprint 3)
 - UI components
 
 **Sprints:**
+
 - Sprint 0: UI components, base styles
 - Sprint 1: Support login/registration pages
 - Sprint 2: Support user pages, forms
 - Sprint 3: Trainer dashboard, Coach pages, Client list
 - Sprint 4: UI improvements, animations
-- Sprint 5: Testing, bug fixes
-
 **Key Files:**
+
 - `pages/trainer.html`, `pages/coach_account.html`, `pages/clients_list.html`
+- `scripts/trainer.js`, `scripts/coach-dashboard.js`, `scripts/coach-navigation.js`
+- `styles/coach-dashboard.css`
 - `scripts/trainer.js`, `scripts/coach-dashboard.js`, `scripts/coach-navigation.js`
 - `styles/coach-dashboard.css`
 
@@ -606,6 +660,7 @@ Schedule Management (Sprint 3)
 ### Complete Sprint Plan Summary
 
 #### Sprint 0 (1 week): Foundation
+
 - **Owner:** All team members
 - **Deadline:** End of Week 1
 - **Deliverables:**
@@ -615,6 +670,7 @@ Schedule Management (Sprint 3)
   - ✅ Prioritized backlog (MoSCoW)
 
 #### Sprint 1 (2 weeks): Authentication & Core Pages
+
 - **Owners:** Sebastien (Backend), Evgeni (Frontend)
 - **Deadline:** End of Week 3
 - **Deliverables:**
@@ -625,6 +681,7 @@ Schedule Management (Sprint 3)
   - ✅ Frontend-backend integration working
 
 #### Sprint 2 (2 weeks): User Dashboard & Profiles
+
 - **Owners:** Sebastien (Backend), Evgeni (Frontend)
 - **Deadline:** End of Week 5
 - **Deliverables:**
@@ -635,6 +692,7 @@ Schedule Management (Sprint 3)
   - ✅ Responsive user pages
 
 #### Sprint 3 (2 weeks): Trainer Dashboard
+
 - **Owners:** Sebastien (Backend), Elhadj + Evgeni (Frontend)
 - **Deadline:** End of Week 7
 - **Deliverables:**
@@ -645,6 +703,7 @@ Schedule Management (Sprint 3)
   - ✅ Trainer-client workflows tested
 
 #### Sprint 4 (2 weeks): Shop & Final Features
+
 - **Owners:** Sebastien (Backend), Evgeni (Frontend), All (Polish)
 - **Deadline:** End of Week 9
 - **Deliverables:**
@@ -656,6 +715,7 @@ Schedule Management (Sprint 3)
   - ✅ MVP feature-complete
 
 #### Sprint 5 (1 week): Testing & Documentation
+
 - **Owners:** All team members
 - **Deadline:** End of Week 10
 - **Deliverables:**
@@ -670,6 +730,7 @@ Schedule Management (Sprint 3)
 ### Acceptance Criteria (Overall MVP)
 
 #### Functional Requirements
+
 - ✅ Users can register and log in
 - ✅ Users can view and edit their profiles
 - ✅ Users can subscribe to services
@@ -681,6 +742,7 @@ Schedule Management (Sprint 3)
 - ✅ Role-based access control works correctly
 
 #### Technical Requirements
+
 - ✅ All API endpoints documented
 - ✅ Database schema normalized and optimized
 - ✅ Frontend works on desktop and mobile
@@ -689,6 +751,7 @@ Schedule Management (Sprint 3)
 - ✅ Test coverage for critical paths
 
 #### Quality Requirements
+
 - ✅ Page load time < 3 seconds
 - ✅ No console errors in production
 - ✅ Accessible (WCAG AA standards)
@@ -715,6 +778,7 @@ Schedule Management (Sprint 3)
 ### Success Metrics
 
 #### Sprint Success Criteria
+
 - All "Must Have" tasks completed
 - No critical bugs open
 - Sprint demo successful
@@ -722,6 +786,7 @@ Schedule Management (Sprint 3)
 - Code reviewed and merged
 
 #### Overall Project Success
+
 - MVP launched on time (Week 10)
 - All core features functional
 - Positive stakeholder feedback
@@ -733,6 +798,7 @@ Schedule Management (Sprint 3)
 ## References
 
 ### Key Project Files
+
 - **Backend API Routes:** `app/api/v1/`
 - **Data Models:** `app/models/`
 - **Frontend Pages:** `pages/`
@@ -741,4 +807,3 @@ Schedule Management (Sprint 3)
 - **Database Scripts:** `create_table.sql`, `create_users.sql`
 - **Test Data:** `create_test_data.py`, `show_test_users.py`
 - **Configuration:** `config.py`, `run.py`
-

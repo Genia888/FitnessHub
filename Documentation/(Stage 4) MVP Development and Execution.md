@@ -1,40 +1,48 @@
 # Stage 4: MVP Development and Execution
+
 ## 0. Plan and Define Sprints
+
 ### 4-Week Sprint Plan
 
-**Week 1: Foundation**
+#### Week 1: Foundation
+
 - Backend: Database schema, models, API structure
 - Frontend: HTML mockups (login, register, coach, shop)
 - Files: `create_table.sql`, `app/models/*.py`, `pages/*.html`
 
-**Week 2: Data & UI**
+#### Week 2: Data & UI
+
 - Backend: Test data scripts, sample users
 - Frontend: CSS styling, JavaScript interactivity
 - Files: `create_test_data.py`, `scripts/*.js`, `styles/*.css`
 
-**Week 3: Integration Phase 1**
+#### Week 3: Integration Phase 1
+
 - Backend: Complete API endpoints, authentication
 - Frontend: API service layer, auth flow
 - Integration: Connect frontend to backend
 
-**Week 4: Integration Phase 2 & Polish**
+#### Week 4: Integration Phase 2 & Polish
+
 - Backend: Bug fixes, optimization
 - Frontend: Complete all pages
 - Testing & Documentation
 
 ---
 
-
-# 1. Execute Development Tasks
+## 1. Execute Development Tasks
 
 **Backend (Sebastien):**
+
 - PEP 8 style, RESTful APIs, JWT auth, bcrypt passwords
 - Files: `app/api/v1/*.py`, `app/models/*.py`
 
 **Frontend (Evgeni, Elhadj):**
+
 - Semantic HTML5, modular CSS, ES6+ JavaScript
-- Files: `pages/*.html`, `scripts/*.js`, `styles/*.css 
-### Code Review
+- Files: `pages/*.html`, `scripts/*.js`, `styles/*.css
+
+## Code Review
 
 1. Push to branch
 2. Team review on Discord
@@ -42,7 +50,8 @@
 4. QA testing
 
 ---
-# Phase 1 – Front-End Structure & Static Pages
+
+## Phase 1 – Front-End Structure & Static Pages
 
 Created main HTML pages
 
@@ -53,11 +62,11 @@ Added global styles through main.css and organized assets (images, icons).
 Structured the project folder properly:
 pages/, scripts/, styles/, and public/images/ready.
 
-# Phase 2 – API Integration & Dynamic Rendering
+## Phase 2 – API Integration & Dynamic Rendering
 
 Connected the Front-End with the Back-End API using fetch() calls.
 
-Created shop.js → fetches products from http://127.0.0.1:5000/api/v1/product_shop and displays them dynamically.
+Created shop.js → fetches products from <http://127.0.0.1:5000/api/v1/product_shop> and displays them dynamically.
 
 Created coach.js → fetches coaches from the backend (/api/v1/user/coach) and renders coach cards.
 
@@ -65,7 +74,7 @@ Replaced static HTML with dynamic generation using JavaScript.
 
 Added debugging logs in the console to verify data flow.
 
-# Phase 3 – Cookie, Token & Session Management
+## Phase 3 – Cookie, Token & Session Management
 
 Built a dedicated cookie.js file with modules:
 
@@ -84,7 +93,7 @@ receives { token, user }, stores both, and redirects based on role (coach or use
 
 Updated login.js → same pattern, but for user/coach registration with token storage.
 
-# Phase 4 – UI & Visual Adjustments
+## Phase 4 – UI & Visual Adjustments
 
 Refined the look of dynamically loaded content: product and coach cards.
 
@@ -98,7 +107,7 @@ Verified responsive design and maintained previous style after connecting the ba
 
 Ensured UI stayed modern and cohesive even after adding dynamic rendering.
 
-# Phase 5 – Authentication Flow Testing & Backend Validation
+## Phase 5 – Authentication Flow Testing & Backend Validation
 
 Linked login.html and connexion.html with backend endpoints.
 
@@ -110,15 +119,15 @@ Tested integration with Swagger to confirm new users/coaches are saved in the ba
 
 Began debugging and verifying role-based redirections (user_account.html, coach_account.html).
 
-# FitnessHub Backend Work by Sebastien
+## FitnessHub Backend Work by Sebastien
 
-# Phase A – API & Database Design
+## Phase A – API & Database Design
 
 Defined the data models (User, Coach, Product, Subscription) with appropriate fields: first_name, last_name, picture, coach_experience, etc.
 
 Created database schema / migrations (tables, relations) pour gérer coaches, users, produits, abonnements.
 
-# Phase B – API Endpoints Implementation
+## Phase B – API Endpoints Implementation
 
 Built register endpoint (POST /api/v1/register) to create users or coaches.
 
@@ -130,7 +139,7 @@ Built coach endpoints: e.g. GET /api/v1/user/coach to retrieve coach data.
 
 Possibly endpoints to manage subscriptions, user profile, etc.
 
-# Phase C – Security & Token Handling
+## Phase C – Security & Token Handling
 
 Integrated JWT (token-based authentication) or token mechanism for secure access.
 
@@ -138,13 +147,13 @@ Middleware / guards to ensure protected routes require valid token.
 
 Hashing passwords (ex: bcrypt) and storing securely in database.
 
-# Phase D – Swagger / API Documentation
+## Phase D – Swagger / API Documentation
 
 Set up Swagger (OpenAPI) documentation, exposing the API schema, endpoints, models, and responses.
 
 Ensured endpoints, request bodies, response payloads match front-end expectations (fields, naming).
 
-# Phase E – Testing & Integration
+## Phase E – Testing & Integration
 
 Tested endpoints via Postman / Swagger to ensure data operations work (CRUD).
 
@@ -152,12 +161,12 @@ Validated correct JSON output, correct status codes, error handling.
 
 Debugged mismatches with front-end: aligning JSON keys with front-end usage.
 
-
 - We have a main branch on git hub and one branch for each member
 - When a task seems good we merge on the main and call other member to pull the modification
 
-# 2. Monitor Progress and Adjust
-# Daily Stand-Ups
+## 2. Monitor Progress and Adjust
+
+## Daily Stand-Ups
 
 Every day, we hold a short 5–15 minute meeting on Discord to review our progress.
 Each team member explains:
@@ -175,7 +184,7 @@ Evgeni (Front-End) shares updates about connecting pages like coach.html or shop
 
 Sébastien (Back-End) explains the API progress or fixes issues with authentication routes or database connections.
 
-# Project Management Tools
+## Project Management Tools
 
 We use Trello and a shared whiteboard to organize our tasks and follow the Agile method.
 Each card in Trello represents a task, with three columns:
@@ -195,7 +204,7 @@ Percentage of tasks completed vs. planned
 
 Number of bugs or integration issues fixed each week
 
-# Adjust When Needed
+## Adjust When Needed
 
 We frequently adjust sprint goals and task ownership depending on progress:
 
@@ -206,7 +215,7 @@ If the backend was delayed, the front-end team worked on static mock pages and p
 
 Tasks were reassigned when necessary to balance workload and maintain steady progress.
 
-# Metrics and Tracking
+## Metrics and Tracking
 
 During each sprint, we monitored a few key indicators:
 
@@ -214,8 +223,7 @@ Sprint velocity: average number of tasks completed per week
 
 Task completion rate: proportion of completed tasks vs. planned ones
 
-
-# 3. Conduct Sprint Reviews and Retrospectives
+## 3. Conduct Sprint Reviews and Retrospectives
 
 We worked with four weeks of sprints. At the end of each sprint, our team of three met to talk about the progress and test the new features.
 We didn’t do real sprint reviews, but we tested all the new pages and backend features directly on our own branches before pushing to the main branch. This helped us make sure everything was working correctly before integration.
@@ -225,8 +233,7 @@ We noticed that our communication improved a lot during the project. We also got
 
 For the next sprints, we planned to keep this same workflow, but with better time management and clearer task organization.
 
-
-# 4. Final Integration and QA Testing
+## 4. Final Integration and QA Testing
 
 At the end of the development, we started the final integration and QA testing to make sure every part of the project worked together.
 We tested all the main features like login, registration, the shop, and the coach list. We are still testing now because we continue to find some bugs.
@@ -234,22 +241,25 @@ We tested all the main features like login, registration, the shop, and the coac
 We did only manual testing. We added data directly in Swagger and checked if it appeared correctly on the website. We also used a small Python script to automate the creation of data such as clients, coaches, nutrition plans, and workout plans, to see if they were displayed properly on the front-end.
 
 During this phase, we found and fixed an important bug where the plan chosen by a user was not added to the cart. We also corrected some display issues. Everyone in the team worked on the major bugs, and the smaller ones were fixed by the person who discovered them, after sharing them with the team to improve communication.
+
 ### Test Scenarios
 
 1. Authentication: Register → Login → Dashboard
 2. User Profile: View → Edit → Update
 3. Trainer: View clients → Assign schedule
 4. Shop: Browse → Cart → Checkout
-   
+
 ### QA Checklist
 
 **Frontend:**
+
 - Form validation, navigation, responsive design
 
 **Backend:**
+
 - API endpoints, auth/authorization, database ops
 - Security: hashed passwords, SQL injection prevention
- 
+
 ## 5. Deliverables
 
 ### 5.1 Sprint Planning
@@ -261,15 +271,16 @@ During this phase, we found and fixed an important bug where the plan chosen by 
 🔗 **GitHub:** [Genia888/FitnessHub](https://github.com/Genia888/FitnessHub)
 
 **Key Files:**
+
 - Backend: `app/api/v1/*.py`, `app/models/*.py`
 - Frontend: `pages/*.html`, `scripts/*.js`
 - Database: `create_table.sql`
 
 ### 5.3 Bug Tracking
 
-- Critical: 0 
-- High: 0 
-- Medium: 0 
+- Critical: 0
+- High: 0
+- Medium: 0
 - Low: 0
 
 ### 5.4 Testing
@@ -301,6 +312,7 @@ python run.py  # http://127.0.0.1:5000
 - Responsive design, landing page
 
 ### 5.7 Documentation
+
 1. [Stage 0: Sprint Planning](./\(Stage%200\)%20Sprint%20Planning.md)
 2. [Stage 1: Team Formation](./\(Stage%201\)%20Team%20Formation%20and%20Idea%20Development.md)
 3. [Stage 2: Project Charter](./\(Stage%202\)%20Project%20Charter%20Development.md)
@@ -313,11 +325,12 @@ python run.py  # http://127.0.0.1:5000
 ## Project Summary
 
 **Team:** Sebastien (Backend), Evgeni (Frontend), Elhadj (Frontend)  
-**Duration:** 4 weeks 
+**Duration:** 4 weeks
 
 **Tech Stack:** Python, Flask, SQLAlchemy, HTML5, CSS3, JavaScript, SQLite
 
 **Delivered:**
+
 - Shop (without payment)
 - Subscriptions (Easy, Medium, Elite)
 - Coach-user messaging with workout/nutrition plans
