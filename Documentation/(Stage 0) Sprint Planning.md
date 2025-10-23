@@ -481,7 +481,6 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
 
 ### Critical Path Dependencies
 
-```
 Database Schema (Sprint 0)
     ↓
 User Model & Auth API (Sprint 1)
