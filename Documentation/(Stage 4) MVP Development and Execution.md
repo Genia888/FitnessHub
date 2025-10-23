@@ -17,7 +17,7 @@
 
 # 1. Execute Development Tasks
 
-## Evegni & Elhadj
+## Evgeni & Elhadj
 
 
 Has a part of the "frontend" specialist member, our focus was on the visual aspect firstly, then we worked on the backend (linked back and front together mostly) when all the pages was finish.
