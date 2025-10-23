@@ -1,18 +1,28 @@
-# 0. Plan and Define Sprints
-  - Week 1
-    => Sebastien - backend : create structure of table and model/api
-    => Evgeni - Elhadj - frontend : create all pages of the project in HTML and CSS
-  - Week 2
-    => Sebastien - backend : create structure of table and model/api
-    => Sebastien - backend : create data to be display by default when the user display pages data for shop, default account admin and coach sample.
-    => Evgeni - Elhadj front end : improve pages/styles
-  - Week 3
-    => Sebastien backend : create structure of table and model/api
-    => Evgeni - Elhadj backend/front : work to link backend and frontend together to display data dynamiclly
-  - Week 4
-    => Evgeni - Sebastien - Elhadj backend/front : work to link backend and frontend + debug
-    => Evgeni - made the Landing page of the project 
-    => create documentation of stage 4
+# Stage 4: MVP Development and Execution
+## 0. Plan and Define Sprints
+### 4-Week Sprint Plan
+
+**Week 1: Foundation**
+- Backend: Database schema, models, API structure
+- Frontend: HTML mockups (login, register, coach, shop)
+- Files: `create_table.sql`, `app/models/*.py`, `pages/*.html`
+
+**Week 2: Data & UI**
+- Backend: Test data scripts, sample users
+- Frontend: CSS styling, JavaScript interactivity
+- Files: `create_test_data.py`, `scripts/*.js`, `styles/*.css`
+
+**Week 3: Integration Phase 1**
+- Backend: Complete API endpoints, authentication
+- Frontend: API service layer, auth flow
+- Integration: Connect frontend to backend
+
+**Week 4: Integration Phase 2 & Polish**
+- Backend: Bug fixes, optimization
+- Frontend: Complete all pages
+- Testing & Documentation
+
+---
 
 
 # 1. Execute Development Tasks
