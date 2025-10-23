@@ -16,6 +16,81 @@
 
 
 # 1. Execute Development Tasks
+
+## Elhadj
+Has a part of the "frontend" specialist member, my focus was on the visual aspect firstly, then I worked on the backend (linked back and front together mostly) when all the pages was finish.
+Here is my contribution in details: 
+
+# Phase 1 – Front-End Structure & Static Pages
+
+Created main HTML pages
+
+Built the base layout with header, navigation menu, and containers for each section.
+
+Added global styles through main.css and organized assets (images, icons).
+
+Structured the project folder properly:
+pages/, scripts/, styles/, and public/images/ready.
+
+# Phase 2 – API Integration & Dynamic Rendering
+
+Connected the Front-End with the Back-End API using fetch() calls.
+
+Created shop.js → fetches products from http://127.0.0.1:5000/api/v1/product_shop and displays them dynamically.
+
+Created coach.js → fetches coaches from the backend (/api/v1/user/coach) and renders coach cards.
+
+Replaced static HTML with dynamic generation using JavaScript.
+
+Added debugging logs in the console (e.g., “✅ shop.js loaded”, “📦 Products received”, etc.) to verify data flow.
+
+# Phase 3 – Cookie, Token & Session Management
+
+Built a dedicated cookie.js file with modules:
+
+CookieManager → handles saving, retrieving, and deleting tokens.
+
+UserSession → stores and retrieves user profile data.
+
+CartManager & SubscriptionManager → for cart and subscription state.
+
+Linked cookie.js to key pages (shop, coaches, subscriptions, etc.).
+
+Implemented persistent session logic using cookies and localStorage.
+
+Created connexion.js → manages login form submission, sends POST request to the backend,
+receives { token, user }, stores both, and redirects based on role (coach or user).
+
+Updated login.js → same pattern, but for user/coach registration with token storage.
+
+# Phase 4 – UI & Visual Adjustments
+
+Refined the look of dynamically loaded content: product and coach cards.
+
+Improved grid layout consistency, padding, and spacing.
+
+Adjusted image sizes (larger visuals for products).
+
+Re-aligned button colors to match FitnessHub’s visual identity.
+
+Verified responsive design and maintained previous style after connecting the backend.
+
+Ensured UI stayed modern and cohesive even after adding dynamic rendering.
+
+# Phase 5 – Authentication Flow Testing & Backend Validation
+
+Linked login.html and connexion.html with backend endpoints.
+
+Confirmed that user and coach registration/connection correctly POST requests to the API.
+
+Verified token creation and cookie storage in the browser.
+
+Tested integration with Swagger to confirm new users/coaches are saved in the backend.
+
+Began debugging and verifying role-based redirections (user_account.html, coach_account.html).
+
+
+
 - We have a main branch on git hub and one branch for each member
 - When a task seems good we merge on the main and call other member to pull the modification
 
