@@ -89,7 +89,47 @@ Tested integration with Swagger to confirm new users/coaches are saved in the ba
 
 Began debugging and verifying role-based redirections (user_account.html, coach_account.html).
 
+# FitnessHub Backend Work by Sebastien
 
+# Phase A – API & Database Design
+
+Defined the data models (User, Coach, Product, Subscription) with appropriate fields: first_name, last_name, picture, coach_experience, etc.
+
+Created database schema / migrations (tables, relations) pour gérer coaches, users, produits, abonnements.
+
+# Phase B – API Endpoints Implementation
+
+Built register endpoint (POST /api/v1/register) to create users or coaches.
+
+Built login/authentication endpoint to validate credentials, generate tokens, return user data.
+
+Built product endpoints: e.g. GET /api/v1/product_shop to retrieve product list.
+
+Built coach endpoints: e.g. GET /api/v1/user/coach to retrieve coach data.
+
+Possibly endpoints to manage subscriptions, user profile, etc.
+
+# Phase C – Security & Token Handling
+
+Integrated JWT (token-based authentication) or token mechanism for secure access.
+
+Middleware / guards to ensure protected routes require valid token.
+
+Hashing passwords (ex: bcrypt) and storing securely in database.
+
+# Phase D – Swagger / API Documentation
+
+Set up Swagger (OpenAPI) documentation, exposing the API schema, endpoints, models, and responses.
+
+Ensured endpoints, request bodies, response payloads match front-end expectations (fields, naming).
+
+# Phase E – Testing & Integration
+
+Tested endpoints via Postman / Swagger to ensure data operations work (CRUD).
+
+Validated correct JSON output, correct status codes, error handling.
+
+Debugged mismatches with front-end: aligning JSON keys with front-end usage.
 
 # 2. Monitor Progress and Adjust
 - We used the methode agile to check the progress of the project
