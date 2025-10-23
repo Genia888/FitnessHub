@@ -43,11 +43,11 @@ async function selectPlan(planName, planPrice) {
 
   // Extraire le prix (enlever le €/month)
   const price = parseFloat(planPrice.replace('€/month', '').replace('€', '').trim());
-
   try {
     // Créer l'abonnement
     const subscription = await ApiService.createSubscription({
       user_id: user.id,
+      coach_id: '83726b63-dcd3-4f7e-bc36-0f326ae59721',
       plan_name: planName,
       price: price,
       status: 'active',
