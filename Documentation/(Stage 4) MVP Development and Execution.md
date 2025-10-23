@@ -42,7 +42,7 @@ Created coach.js → fetches coaches from the backend (/api/v1/user/coach) and r
 
 Replaced static HTML with dynamic generation using JavaScript.
 
-Added debugging logs in the console (e.g., “✅ shop.js loaded”, “📦 Products received”, etc.) to verify data flow.
+Added debugging logs in the console to verify data flow.
 
 # Phase 3 – Cookie, Token & Session Management
 
