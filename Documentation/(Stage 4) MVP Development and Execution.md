@@ -195,8 +195,14 @@ Task completion rate: proportion of completed tasks vs. planned ones
 
 
 # 3. Conduct Sprint Reviews and Retrospectives
-- We used Discord to check for Progress time
-- we check two time by week where we are in the project
+
+We worked with four weeks of sprints. At the end of each sprint, our team of three met to talk about the progress and test the new features.
+We didn’t do real sprint reviews, but we tested all the new pages and backend features directly on our own branches before pushing to the main branch. This helped us make sure everything was working correctly before integration.
+
+During our retrospectives, we talked about what went well and what we could do better.
+We noticed that our communication improved a lot during the project. We also got better with the backend, especially with connecting the API to the frontend. Finally, we improved our debugging skills — we learned how to find and fix bugs faster.
+
+For the next sprints, we planned to keep this same workflow, but with better time management and clearer task organization.
 
 
 # 4. Final Integration and QA Testing
