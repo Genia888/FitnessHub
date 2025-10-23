@@ -240,7 +240,17 @@ During this phase, we found and fixed an important bug where the plan chosen by 
 2. User Profile: View → Edit → Update
 3. Trainer: View clients → Assign schedule
 4. Shop: Browse → Cart → Checkout
+   
+### QA Checklist
 
+**Frontend:**
+- Form validation, navigation, responsive design
+- Cross-browser (Chrome, Firefox, Safari, Edge)
+
+**Backend:**
+- API endpoints, auth/authorization, database ops
+- Security: hashed passwords, SQL injection prevention
+ 
 # 5. Deliverables
 - presentation of the article of shop ( without buying )
 - presentation of the subscription ( easy, medium, elite )
