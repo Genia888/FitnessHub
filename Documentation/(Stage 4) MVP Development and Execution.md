@@ -206,6 +206,14 @@ For the next sprints, we planned to keep this same workflow, but with better tim
 
 
 # 4. Final Integration and QA Testing
+
+At the end of the development, we started the final integration and QA testing to make sure every part of the project worked together.
+We tested all the main features like login, registration, the shop, and the coach list. We are still testing now because we continue to find some bugs.
+
+We did only manual testing. We added data directly in Swagger and checked if it appeared correctly on the website. We also used a small Python script to automate the creation of data such as clients, coaches, nutrition plans, and workout plans, to see if they were displayed properly on the front-end.
+
+During this phase, we found and fixed an important bug where the plan chosen by a user was not added to the cart. We also corrected some display issues. Everyone in the team worked on the major bugs, and the smaller ones were fixed by the person who discovered them, after sharing them with the team to improve communication.
+
 # 5. Deliverables
 - presentation of the article of shop ( without buying )
 - presentation of the subscription ( easy, medium, elite )
