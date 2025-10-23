@@ -14,7 +14,7 @@ product_model = api.model("Product", {
     "picture3": fields.String(required=True, max_length=2000),
     "is_active" : fields.Boolean(required=True, default=False),
     "is_in_stock" : fields.Boolean(required=True, default=False),
-    "price": fields.Float(Require=True, default=0)
+    "price": fields.Float(Required=True, default=0)
 })
 
 
