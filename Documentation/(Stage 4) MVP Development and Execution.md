@@ -245,7 +245,6 @@ During this phase, we found and fixed an important bug where the plan chosen by 
 
 **Frontend:**
 - Form validation, navigation, responsive design
-- Cross-browser (Chrome, Firefox, Safari, Edge)
 
 **Backend:**
 - API endpoints, auth/authorization, database ops
