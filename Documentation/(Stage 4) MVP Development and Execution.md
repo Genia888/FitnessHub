@@ -34,7 +34,14 @@
 **Frontend (Evgeni, Elhadj):**
 - Semantic HTML5, modular CSS, ES6+ JavaScript
 - Files: `pages/*.html`, `scripts/*.js`, `styles/*.css 
+### Code Review
 
+1. Push to branch
+2. Team review on Discord
+3. Approval → Merge
+4. QA testing
+
+---
 # Phase 1 – Front-End Structure & Static Pages
 
 Created main HTML pages
