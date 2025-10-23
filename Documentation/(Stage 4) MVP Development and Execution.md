@@ -136,8 +136,62 @@ Debugged mismatches with front-end: aligning JSON keys with front-end usage.
 - When a task seems good we merge on the main and call other member to pull the modification
 
 # 2. Monitor Progress and Adjust
-- We used the methode agile to check the progress of the project
-- two call by week
+# Daily Stand-Ups
+
+Every day, we hold a short 5–15 minute meeting on Discord to review our progress.
+Each team member explains:
+
+What they did yesterday
+
+What they plan to do today
+
+If they are facing any blockers
+
+This allows us to identify problems early and help each other when something is stuck.
+For example:
+
+Evgeni (Front-End) shares updates about connecting pages like coach.html or shop.html with the backend.
+
+Sébastien (Back-End) explains the API progress or fixes issues with authentication routes or database connections.
+
+# Project Management Tools
+
+We use Trello and a shared whiteboard to organize our tasks and follow the Agile method.
+Each card in Trello represents a task, with three columns:
+
+To Do – tasks planned for the current sprint
+
+In Progress – what’s currently being developed
+
+Done – completed tasks
+
+We regularly update task statuses to visualize overall progress.
+This method helps us track:
+
+Sprint velocity (tasks completed per sprint)
+
+Percentage of tasks completed vs. planned
+
+Number of bugs or integration issues fixed each week
+
+# Adjust When Needed
+
+We frequently adjust sprint goals and task ownership depending on progress:
+
+If one member finishes early, they anticipate the next task or help another teammate.
+For example, when one front-end developer finished building static pages, he started connecting them to the backend API.
+
+If the backend was delayed, the front-end team worked on static mock pages and prepared API integrations in advance.
+
+Tasks were reassigned when necessary to balance workload and maintain steady progress.
+
+# Metrics and Tracking
+
+During each sprint, we monitored a few key indicators:
+
+Sprint velocity: average number of tasks completed per week
+
+Task completion rate: proportion of completed tasks vs. planned ones
 
 
 # 3. Conduct Sprint Reviews and Retrospectives
