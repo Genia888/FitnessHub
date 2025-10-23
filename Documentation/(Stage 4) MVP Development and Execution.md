@@ -301,7 +301,7 @@ python run.py  # http://127.0.0.1:5000
 - Responsive design, landing page
 
 ### 5.7 Documentation
-
+1. [Stage 0: Sprint Planning](./\(Stage%200\)%20Sprint%20Planning.md)
 2. [Stage 1: Team Formation](./\(Stage%201\)%20Team%20Formation%20and%20Idea%20Development.md)
 3. [Stage 2: Project Charter](./\(Stage%202\)%20Project%20Charter%20Development.md)
 4. [Stage 3: Technical Documentation](./\(Stage%203\)%20Technical%20Documentation.md)
