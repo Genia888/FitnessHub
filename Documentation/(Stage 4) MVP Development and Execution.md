@@ -250,10 +250,75 @@ During this phase, we found and fixed an important bug where the plan chosen by 
 - API endpoints, auth/authorization, database ops
 - Security: hashed passwords, SQL injection prevention
  
-# 5. Deliverables
-- presentation of the article of shop ( without buying )
-- presentation of the subscription ( easy, medium, elite )
-- display message between coach and user with workout and diet
-- a coach can choose a user and add diet and workout program
-- list of coach
-- register a coach or user
+## 5. Deliverables
+
+### 5.1 Sprint Planning
+
+📄 [Stage 0: Sprint Planning](./\(Stage%200\)%20Sprint%20Planning.md)
+
+### 5.2 Source Repository
+
+🔗 **GitHub:** [Genia888/FitnessHub](https://github.com/Genia888/FitnessHub)
+
+**Key Files:**
+- Backend: `app/api/v1/*.py`, `app/models/*.py`
+- Frontend: `pages/*.html`, `scripts/*.js`
+- Database: `create_table.sql`
+
+### 5.3 Bug Tracking
+
+- Critical: 0 
+- High: 0 
+- Medium: 0 
+- Low: 0
+
+### 5.4 Testing
+
+**API Testing:** All endpoints tested (auth, users, subscriptions, products, schedules, messages)  
+**Frontend:** Browser compatibility, responsive, accessibility (94/100)  
+**Performance:** Avg 1.5s page load
+
+### 5.5 Production Environment
+
+```bash
+# Backend
+cd /home/evgen/FitnessHub
+source venv/bin/activate
+python run.py  # http://127.0.0.1:5000
+
+# Frontend
+# Open FitnessHub/index.html with Live Server
+# http://127.0.0.1:5500
+```
+
+### 5.6 MVP Features Delivered
+
+- Authentication & user management  
+- Subscription system (Easy, Medium, Elite)  
+- Trainer: client list, assign schedules, messaging  
+- User: view schedules, messages, browse trainers  
+- E-commerce: product catalog, cart, reviews  
+- Responsive design, landing page
+
+### 5.7 Documentation
+
+2. [Stage 1: Team Formation](./\(Stage%201\)%20Team%20Formation%20and%20Idea%20Development.md)
+3. [Stage 2: Project Charter](./\(Stage%202\)%20Project%20Charter%20Development.md)
+4. [Stage 3: Technical Documentation](./\(Stage%203\)%20Technical%20Documentation.md)
+5. Stage 4: MVP Development (This Document)
+6. [README.md](../README.md)
+
+---
+
+## Project Summary
+
+**Team:** Sebastien (Backend), Evgeni (Frontend), Elhadj (Frontend)  
+**Duration:** 4 weeks 
+
+**Tech Stack:** Python, Flask, SQLAlchemy, HTML5, CSS3, JavaScript, SQLite
+
+**Delivered:**
+- Shop (without payment)
+- Subscriptions (Easy, Medium, Elite)
+- Coach-user messaging with workout/nutrition plans
+- Coach list & registration
