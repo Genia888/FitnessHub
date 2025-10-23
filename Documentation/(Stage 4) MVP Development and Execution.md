@@ -234,6 +234,12 @@ We tested all the main features like login, registration, the shop, and the coac
 We did only manual testing. We added data directly in Swagger and checked if it appeared correctly on the website. We also used a small Python script to automate the creation of data such as clients, coaches, nutrition plans, and workout plans, to see if they were displayed properly on the front-end.
 
 During this phase, we found and fixed an important bug where the plan chosen by a user was not added to the cart. We also corrected some display issues. Everyone in the team worked on the major bugs, and the smaller ones were fixed by the person who discovered them, after sharing them with the team to improve communication.
+### Test Scenarios
+
+1. Authentication: Register → Login → Dashboard
+2. User Profile: View → Edit → Update
+3. Trainer: View clients → Assign schedule
+4. Shop: Browse → Cart → Checkout
 
 # 5. Deliverables
 - presentation of the article of shop ( without buying )
