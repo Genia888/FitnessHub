@@ -743,16 +743,3 @@ Schedule Management (Sprint 3)
 - **Test Data:** `create_test_data.py`, `show_test_users.py`
 - **Configuration:** `config.py`, `run.py`
 
-### Documentation
-- [Stage 1: Team Formation and Idea Development](Documentation/(Stage%201)%20Team%20Formation%20and%20Idea%20Development.md)
-- [Stage 2: Project Charter Development](Documentation/(Stage%202)%20Project%20Charter%20Development.md)
-- [Stage 3: Technical Documentation](Documentation/(Stage%203)%20Technical%20Documentation.md)
-- [Stage 4: MVP Development and Execution](Documentation/(Stage%204)%20MVP%20Development%20and%20Execution.md)
-- [README.md](README.md)
-
----
-
-**Document Version:** 1.0  
-**Last Updated:** October 23, 2025  
-**Authors:** Sebastien, Evgeni, Elhadj  
-**Status:** Active Sprint Planning Document
