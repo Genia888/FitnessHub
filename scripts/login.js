@@ -18,18 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
       data.is_nutrition = false; // ajout pour cohérence avec le backend
 
       try {
-        const response = await fetch("http://127.0.0.1:5000/api/v1/auth/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || "Erreur d'inscription coach");
-        }
-
-        const result = await response.json();
+        // ✅ Utiliser le service centralisé
+        const result = await ApiService.register(data);
         console.log("🆕 Coach inscrit :", result);
 
         // ⚠️ ATTENTION : l'API retourne "access_token" pas "token"
@@ -38,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
           CookieManager.set("token", result.access_token);
           UserSession.saveUser(result.user);
           alert("Compte coach créé avec succès ✅");
-          window.location.href = "../pages/coach_account.html";
+          AuthManager.redirectToAccount();
         } else {
           alert("Erreur : données utilisateur manquantes.");
         }
@@ -61,18 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
       data.is_nutrition = false; // ajout pour cohérence avec le backend
 
       try {
-        const response = await fetch("http://127.0.0.1:5000/api/v1/auth/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || "Erreur d'inscription utilisateur");
-        }
-
-        const result = await response.json();
+        // ✅ Utiliser le service centralisé
+        const result = await ApiService.register(data);
         console.log("🆕 Utilisateur inscrit :", result);
 
         // ⚠️ ATTENTION : l'API retourne "access_token" pas "token"
@@ -81,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
           CookieManager.set("token", result.access_token);
           UserSession.saveUser(result.user);
           alert("Compte utilisateur créé avec succès ✅");
-          window.location.href = "../pages/user_account.html";
+          AuthManager.redirectToAccount();
         } else {
           alert("Erreur : données utilisateur manquantes.");
         }

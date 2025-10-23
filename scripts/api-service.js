@@ -97,13 +97,28 @@ const ApiService = {
   },
 
   // ==================== PRODUCTS ====================
-
   async getAllProducts() {
-    return this.request('/product_shop');
+    return this.request('/product_shop', { method: 'GET' });
   },
-
-  async getProductById(productId) {
-    return this.request(`/product_shop/${productId}`);
+  async getProductById(id) {
+    return this.request(`/product_shop/${id}`, { method: 'GET' });
+  },
+  async createProduct(data) {
+    return this.request('/product_shop', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+  },
+  async updateProduct(id, data) {
+    return this.request(`/product_shop/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+  },
+  async deleteProduct(id) {
+    return this.request(`/product_shop/${id}`, { method: 'DELETE' });
   },
 
   // ==================== WORKOUT SCHEDULE ====================

@@ -30,21 +30,25 @@ class SubscriptionList(Resource):
             # Transformer les données du frontend en format backend
             transformed_data = {
                 'user_id': sub_data['user_id'],
-                'coach_id': sub_data.get('coach_id'),  # Optionnel
                 'status': sub_data.get('status', 'active'),
                 'plan_name': sub_data.get('plan_name', 'Basic'),
                 'price': sub_data.get('price', 0)
             }
-            
+            # coach_id est optionnel et ne doit être ajouté que s'il existe et n'est pas vide
+            coach_id = sub_data.get('coach_id')
+            if coach_id:
+                transformed_data['coach_id'] = coach_id
+
             # Gérer la date de début
             if 'start_date' in sub_data and sub_data['start_date']:
-                # Convertir la date ISO en date Python
-                start_date_obj = datetime.fromisoformat(sub_data['start_date'].replace('Z', '+00:00'))
-                transformed_data['begin_date'] = start_date_obj.date()
+                try:
+                    start_date_obj = datetime.fromisoformat(sub_data['start_date'].replace('Z', '+00:00'))
+                    transformed_data['begin_date'] = start_date_obj.date()
+                except Exception:
+                    transformed_data['begin_date'] = datetime.now().date()
             else:
-                # Par défaut : aujourd'hui
                 transformed_data['begin_date'] = datetime.now().date()
-            
+
             # Calculer end_date selon le plan
             duration_days = {
                 'Basic': 30,
@@ -54,7 +58,7 @@ class SubscriptionList(Resource):
             plan = sub_data.get('plan_name', 'Basic')
             days = duration_days.get(plan, 30)
             transformed_data['end_date'] = transformed_data['begin_date'] + timedelta(days=days)
-            
+
             # Définir les options selon le plan
             if plan == 'Basic':
                 transformed_data['option_nutrition'] = False
@@ -68,14 +72,14 @@ class SubscriptionList(Resource):
             else:
                 transformed_data['option_nutrition'] = False
                 transformed_data['option_message'] = False
-            
+
             # Créer la subscription
             new_subscription = facade.create_subscription(transformed_data)
-            
+
             return {
                 'id': new_subscription.id,
                 'user_id': new_subscription.user_id,
-                'coach_id': new_subscription.coach_id,
+                'coach_id': getattr(new_subscription, 'coach_id', None),
                 'begin_date': str(new_subscription.begin_date),
                 'end_date': str(new_subscription.end_date),
                 'option_nutrition': new_subscription.option_nutrition,
@@ -84,7 +88,7 @@ class SubscriptionList(Resource):
                 'plan_name': transformed_data['plan_name'],
                 'price': transformed_data['price']
             }, 201
-            
+
         except ValueError as e:
             return {'error': str(e)}, 400
         except Exception as e:

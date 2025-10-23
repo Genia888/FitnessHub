@@ -41,13 +41,20 @@ async function selectPlan(planName, planPrice) {
     return;
   }
 
-  // Extraire le prix (enlever le €/month)
-  const price = parseFloat(planPrice.replace('€/month', '').replace('€', '').trim());
+  // Extraire le prix (enlever tout sauf les chiffres)
+  const price = parseFloat(planPrice.replace(/[^\d.]/g, ''));
+  let coach_id = null;
+  // Si l'utilisateur a un coach assigné, le récupérer (exemple: user.assigned_coach_id)
+  if (user.assigned_coach_id) {
+    coach_id = user.assigned_coach_id;
+  } else if (user.role === 'subscriber' && user.coach_id) {
+    coach_id = user.coach_id;
+  }
   try {
     // Créer l'abonnement
     const subscription = await ApiService.createSubscription({
       user_id: user.id,
-      coach_id: '83726b63-dcd3-4f7e-bc36-0f326ae59721',
+      ...(coach_id && { coach_id }),
       plan_name: planName,
       price: price,
       status: 'active',
@@ -57,12 +64,14 @@ async function selectPlan(planName, planPrice) {
 
     console.log("✅ Abonnement créé:", subscription);
     alert(`Abonnement ${planName} activé avec succès !`);
-    
     // Rediriger vers le dashboard
     window.location.href = '../pages/subscriber.html';
-
   } catch (error) {
+    let msg = "Erreur lors de la souscription. Veuillez réessayer.";
+    if (error && error.message) {
+      msg += `\n${error.message}`;
+    }
     console.error("❌ Erreur lors de la création de l'abonnement:", error);
-    alert("Erreur lors de la souscription. Veuillez réessayer.");
+    alert(msg);
   }
 }

@@ -19,35 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const formData = new FormData(form);
     const payload = Object.fromEntries(formData.entries());
 
-    // URL de l'API de connexion
-    const url = "http://127.0.0.1:5000/api/v1/auth/login";
-
-    console.log("➡️ Envoi POST vers :", url);
+    console.log("➡️ Connexion via ApiService.login");
     console.log("📤 Payload :", payload);
 
     try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      // Réponse non OK
-      if (!response.ok) {
-        let errText = `Erreur HTTP ${response.status}`;
-        try {
-          const errJson = await response.json();
-          if (errJson && errJson.error) {
-            errText = errJson.error;
-          } else if (errJson && errJson.message) {
-            errText = errJson.message;
-          }
-        } catch (_) { /* ignore */ }
-        throw new Error(errText);
-      }
-
-      // ✅ L'API retourne { access_token, user }
-      const data = await response.json();
+      // ✅ Utiliser le service centralisé
+      const data = await ApiService.login(payload.email, payload.password);
       console.log("📥 Réponse serveur :", data);
 
       const token = data.access_token;
@@ -68,11 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("🔐 Token et user stockés en local.");
 
       // Redirection selon le rôle
-      if (user.is_coach) {
-        window.location.href = "../pages/coach_account.html";
-      } else {
-        window.location.href = "../pages/subscriber.html";
-      }
+      AuthManager.redirectToAccount();
 
     } catch (error) {
       console.error("❌ Erreur lors de la connexion :", error);
