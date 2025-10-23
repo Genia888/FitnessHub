@@ -27,11 +27,13 @@
 
 # 1. Execute Development Tasks
 
-## Evgeni & Elhadj
+**Backend (Sebastien):**
+- PEP 8 style, RESTful APIs, JWT auth, bcrypt passwords
+- Files: `app/api/v1/*.py`, `app/models/*.py`
 
-
-Has a part of the "frontend" specialist member, our focus was on the visual aspect firstly, then we worked on the backend (linked back and front together mostly) when all the pages was finish.
-Here is my contribution in details: 
+**Frontend (Evgeni, Elhadj):**
+- Semantic HTML5, modular CSS, ES6+ JavaScript
+- Files: `pages/*.html`, `scripts/*.js`, `styles/*.css 
 
 # Phase 1 – Front-End Structure & Static Pages
 
