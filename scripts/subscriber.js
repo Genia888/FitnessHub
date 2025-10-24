@@ -325,7 +325,28 @@ function initializeChat(userId, token) {
       }
 
       try {
-        // Envoyer le message au backend
+        // ✅ CORRECTION : Récupérer le coach_id depuis l'abonnement
+        const subResponse = await fetch(`${API_BASE_URL}/subscription/?user_id=${userId}`, {
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        });
+
+        if (!subResponse.ok) {
+          alert("Impossible de trouver votre coach. Veuillez vérifier votre abonnement.");
+          return;
+        }
+
+        const subscriptions = await subResponse.json();
+        
+        if (!subscriptions || subscriptions.length === 0 || !subscriptions[0].coach_id) {
+          alert("Vous n'avez pas encore de coach assigné.");
+          return;
+        }
+
+        const coachId = subscriptions[0].coach_id;
+
+        // Envoyer le message au backend avec le coach_id
         const response = await fetch(`${API_BASE_URL}/message/`, {
           method: "POST",
           headers: {
@@ -334,8 +355,10 @@ function initializeChat(userId, token) {
           },
           body: JSON.stringify({
             user_id: userId,
+            coach_id: coachId,  // ✅ AJOUTÉ
             text: messageText,
-            is_from_user: true
+            is_from_user: true,
+            is_read: false
           })
         });
 
