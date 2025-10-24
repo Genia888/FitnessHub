@@ -2,7 +2,7 @@ from flask import request
 from flask_restx import Namespace, Resource, fields
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, get_jwt
 from app.services.facade import facade
-
+from datetime import datetime
 
 api = Namespace('auth', description='Authentication operations')
 
@@ -149,7 +149,7 @@ class Login(Resource):
                 "adress1": user.adress1, "adress2": user.adress2, 
                 "postal_code": user.postal_code, "city": user.city, 
                 "allergy_comment": user.allergy_comment, "physical_constraint": user.physical_constraint,
-                "coach_certif" : user.coach_certif, "coach_experience" : user.coach_experience,
+                "coach_certif" : user.coach_certif, "created_at" : user.created_at.isoformat(), "coach_experience" : user.coach_experience,
                   "coach_description": user.coach_description,
                     "size" : user.size, "weight" : user.weight,
                   "picture": user.picture
