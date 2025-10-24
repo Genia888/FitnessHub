@@ -46,7 +46,6 @@ function fillUserForm(userData) {
     'address2': userData.adress2,
     'postal-code': userData.postal_code,
     'city': userData.city,
-    'coach-certif': userData.coach_certif,
     'created-at': userData.created_at,
     'allergy-comment': userData.allergy_comment,
     'physical-constraint': userData.physical_constraint
@@ -68,6 +67,10 @@ function fillUserForm(userData) {
   const profileImage = document.getElementById('profileImage');
   if (profileImage && userData.picture) {
     profileImage.src = userData.picture;
+  }
+  const certifImage = document.getElementById('certifImage');
+  if (certifImage && userData.coach_certif) {
+    certifImage.src = userData.coach_certif;
   }
 
   const userNameElements = document.querySelectorAll('.user-name, .account-name');
