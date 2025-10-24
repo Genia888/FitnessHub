@@ -114,6 +114,7 @@ class UserResource(Resource):
                 "allergy_comment": user.allergy_comment, "physical_constraint": user.physical_constraint,
                 "coach_certif" : user.coach_certif, "coach_experience" : user.coach_experience,
                   "coach_description": user.coach_description,
+                   "created_at" : user.created_at.isoformat(), 
                     "size" : user.size, "weight" : user.weight,
                   "picture": user.picture }, 200              
     
