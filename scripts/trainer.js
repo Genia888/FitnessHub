@@ -3,7 +3,7 @@
 // Gestion du tableau de bord coach (trainer)
 // ==========================================================
 
-const API_BASE_URL = "http://127.0.0.1:5000/api/v1";
+
 
 // Variable globale pour stocker le client actuellement sélectionné
 let currentClientId = null;

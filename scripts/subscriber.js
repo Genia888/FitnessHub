@@ -3,7 +3,6 @@
 // Gestion du tableau de bord client (subscriber)
 // ==========================================================
 
-const API_BASE_URL = "http://127.0.0.1:5000/api/v1";
 
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("✅ subscriber.js chargé");
