@@ -129,3 +129,22 @@ class SubscriptionResource(Resource):
         
         facade.delete_subscription(subscription_id)
         return {'message': 'Subscription deleted successfully'}, 200
+    
+@api.route('/user/<user_id>')
+class UserSubscriptions(Resource):
+    @jwt_required()
+    def get(self, user_id):
+        """Get all subscriptions for a specific user"""
+        try:
+            # Récupérer toutes les subscriptions
+            all_subscriptions = facade.get_all_subscriptions()
+            
+            # Filtrer par user_id
+            user_subscriptions = [
+                sub for sub in all_subscriptions 
+                if sub.user_id == user_id
+            ]
+            
+            return [sub.to_dict() for sub in user_subscriptions], 200
+        except Exception as e:
+            return {'error': str(e)}, 400
