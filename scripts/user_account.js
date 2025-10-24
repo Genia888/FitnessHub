@@ -46,20 +46,31 @@ function fillUserForm(userData) {
     'address2': userData.adress2,
     'postal-code': userData.postal_code,
     'city': userData.city,
+    'created-at': userData.created_at,
     'allergy-comment': userData.allergy_comment,
     'physical-constraint': userData.physical_constraint
   };
 
   Object.keys(fields).forEach(fieldId => {
     const element = document.getElementById(fieldId);
-    if (element && fields[fieldId]) {
+    if (element && fields[fieldId] && fieldId != 'created-at') {
       element.value = fields[fieldId];
+    }
+    else if (element && fields[fieldId] )
+    {
+      const options = { year: 'numeric', month: 'long' }; // mois en format long (ex: octobre), année en format numérique
+      element.innerHTML = 'Subscriber from ' + new Date(fields[fieldId]).toLocaleDateString('fr-FR', options);
+
     }
   });
 
   const profileImage = document.getElementById('profileImage');
   if (profileImage && userData.picture) {
     profileImage.src = userData.picture;
+  }
+  const certifImage = document.getElementById('certifImage');
+  if (certifImage && userData.coach_certif) {
+    certifImage.src = userData.coach_certif;
   }
 
   const userNameElements = document.querySelectorAll('.user-name, .account-name');
