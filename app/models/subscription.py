@@ -1,4 +1,4 @@
-# app/models/message.py
+# app/models/subscription.py
 from app.models.base_model import BaseModel
 from app import db
 from sqlalchemy.orm import validates
@@ -25,8 +25,6 @@ class Subscription(BaseModel):
     
     def __init__(self, begin_date, end_date, option_message, option_nutrition, user_id, coach_id):
         super().__init__()
-        #if not text:
-        #    raise ValueError("Message text is required.")
         self.begin_date = begin_date
         self.end_date = end_date
         self.user_id = user_id
@@ -42,16 +40,15 @@ class Subscription(BaseModel):
         return value
 
     def to_dict(self):
-        '''Convert the Message object to a dictionary'''
-        json_data = json.dumps(self._begin_date, default=serialize_datetime)
-        json_data2 = json.dumps(self._end_date, default=serialize_datetime)
+        '''Convert the Subscription object to a dictionary'''
         return {
             'id': self.id,
-            'begin_date': json_data,
-            'end_date': json_data2,
-            'option_nutrition': self._option_nutrition,
-            'option_message': self._option_message,
-            'user_id': self._user_id,
-            'coach_id': self._coach_id
+            'begin_date': self.begin_date.isoformat() if self.begin_date else None,
+            'end_date': self.end_date.isoformat() if self.end_date else None,
+            'option_nutrition': self.option_nutrition,
+            'option_message': self.option_message,
+            'user_id': self.user_id,
+            'coach_id': self.coach_id,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'updated_at': self.updated_at.isoformat() if self.updated_at else None
         }
-
