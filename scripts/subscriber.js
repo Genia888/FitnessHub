@@ -397,12 +397,3 @@ function initializeChat(userId, token) {
     });
   }
 }
-
-// ============================================
-// Fonction de déconnexion (déjà dans le HTML)
-// ============================================
-function logout() {
-  CookieManager.delete("token");
-  UserSession.clear();
-  window.location.href = "../pages/connexion.html";
-}
