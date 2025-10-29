@@ -29,11 +29,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
         <div class="product-info">
           <h3>${product.name}</h3>
-          <p class="product-description">${product.description || 'Pas de description'}</p>
+          <p class="product-description">${product.description || 'No description'}</p>
           <div class="product-footer">
             <span class="product-price">${product.price}€</span>
             <button class="btn-primary add-to-cart" data-product-id="${product.id}">
-              Ajouter au panier
+              Add to cart
             </button>
           </div>
         </div>

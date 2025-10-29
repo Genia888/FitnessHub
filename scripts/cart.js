@@ -20,7 +20,6 @@ function loadCart() {
   }
 
   if (cart.length === 0) {
-    // Afficher l'état vide
     cartItemsContainer.style.display = 'none';
     if (emptyCartState) emptyCartState.style.display = 'block';
     if (itemCount) itemCount.textContent = '0';
@@ -28,7 +27,6 @@ function loadCart() {
     return;
   }
 
-  // Masquer l'état vide et afficher les produits
   cartItemsContainer.style.display = 'block';
   if (emptyCartState) emptyCartState.style.display = 'none';
   if (itemCount) itemCount.textContent = cart.length;
@@ -55,8 +53,8 @@ function loadCart() {
             <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
           </div>
           <div class="item-price-section">
-            <span class="item-unit-price">$${item.price.toFixed(2)} each</span>
-            <span class="item-total-price" id="price-${item.id}">$${(item.price * item.quantity).toFixed(2)}</span>
+            <span class="item-unit-price">€${item.price.toFixed(2)} each</span>
+            <span class="item-total-price" id="price-${item.id}">€${(item.price * item.quantity).toFixed(2)}</span>
           </div>
           <button class="remove-item-btn" onclick="removeFromCart(${index})" title="Remove item">×</button>
         </div>
@@ -64,13 +62,15 @@ function loadCart() {
     </div>
   `).join('');
 
-  // Calculer et afficher le résumé
+  // Calcul avec remise éventuelle
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const shipping = subtotal > 0 ? 9.99 : 0;
-  const tax = subtotal * 0.10;
-  const total = subtotal + shipping + tax;
+  const discountRate = parseFloat(localStorage.getItem('promo_discount') || '0');
+  const discountedSubtotal = Math.max(0, subtotal * (1 - discountRate));
+  const shipping = discountedSubtotal > 0 ? 9.99 : 0;
+  const tax = discountedSubtotal * 0.10; // aligne le label si tu veux 20%
+  const total = discountedSubtotal + shipping + tax;
 
-  updateSummary(subtotal, shipping, tax, total);
+  updateSummary(discountedSubtotal, shipping, tax, total);
 }
 
 function updateSummary(subtotal, shipping, tax, total) {
@@ -79,10 +79,10 @@ function updateSummary(subtotal, shipping, tax, total) {
   const taxAmount = document.getElementById('taxAmount');
   const totalAmount = document.getElementById('totalAmount');
 
-  if (subtotalAmount) subtotalAmount.textContent = `$${subtotal.toFixed(2)}`;
-  if (shippingAmount) shippingAmount.textContent = `$${shipping.toFixed(2)}`;
-  if (taxAmount) taxAmount.textContent = `$${tax.toFixed(2)}`;
-  if (totalAmount) totalAmount.textContent = `$${total.toFixed(2)}`;
+  if (subtotalAmount) subtotalAmount.textContent = `€${subtotal.toFixed(2)}`;
+  if (shippingAmount) shippingAmount.textContent = `€${shipping.toFixed(2)}`;
+  if (taxAmount) taxAmount.textContent = `€${tax.toFixed(2)}`;
+  if (totalAmount) totalAmount.textContent = `€${total.toFixed(2)}`;
 }
 
 function updateQuantity(index, change) {
@@ -110,6 +110,8 @@ function removeFromCart(index) {
 function clearCart() {
   if (confirm('Are you sure you want to clear your cart?')) {
     localStorage.removeItem('cart');
+    localStorage.removeItem('promo_code');       // ✅ reset promo
+    localStorage.removeItem('promo_discount');   // ✅ reset promo
     loadCart();
   }
 }
@@ -123,18 +125,14 @@ function applyPromoCode() {
     return;
   }
 
-  // Exemple de codes promo
-  const validCodes = {
-    'SAVE10': 0.10,
-    'SAVE20': 0.20,
-    'WELCOME': 0.15
-  };
+  const validCodes = { 'SAVE10': 0.50, 'SAVE20': 0.20, 'HOLBERTON': 0.50 };
 
   if (validCodes[promoCode]) {
     const discount = validCodes[promoCode];
+    localStorage.setItem('promo_code', promoCode);
+    localStorage.setItem('promo_discount', String(discount));
     alert(`Promo code applied! You saved ${(discount * 100)}%`);
-    console.log(`✅ Promo code ${promoCode} applied with ${discount * 100}% discount`);
-    // TODO: Appliquer la réduction dans le calcul du total
+    loadCart(); // ✅ déclenche le recalcul et la mise à jour UI
   } else {
     alert('Invalid promo code');
   }
@@ -142,34 +140,31 @@ function applyPromoCode() {
 
 async function proceedToCheckout() {
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  
-  if (cart.length === 0) {
-    alert('Your cart is empty');
-    return;
-  }
-
-  if (!AuthManager.isAuthenticated()) {
-    alert('You must be logged in to checkout');
-    window.location.href = '../pages/connexion.html';
-    return;
-  }
+  if (cart.length === 0) { alert('Your cart is empty'); return; }
+  if (!AuthManager.isAuthenticated()) { alert('You must be logged in to checkout'); window.location.href = '../pages/connexion.html'; return; }
 
   const user = AuthManager.getCurrentUser();
-  
-  // Préparer la commande
+  const discountRate = parseFloat(localStorage.getItem('promo_discount') || '0');
+
+  const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const discountedSubtotal = Math.max(0, subtotal * (1 - discountRate));
+  const shipping = discountedSubtotal > 0 ? 9.99 : 0;
+  const tax = discountedSubtotal * 0.10;
+  const total = discountedSubtotal + shipping + tax;
+
   const orderData = {
     user_id: user.id,
-    items: cart.map(item => ({
-      product_id: item.id,
-      quantity: item.quantity,
-      price: item.price
-    })),
-    total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) * 1.1 + 9.99,
+    items: cart.map(item => ({ product_id: item.id, quantity: item.quantity, price: item.price })),
+    promo_code: localStorage.getItem('promo_code') || null,
+    promo_discount: discountRate,
+    subtotal: discountedSubtotal,
+    shipping,
+    tax,
+    total,
     status: 'pending'
   };
 
   console.log("📋 Order data:", orderData);
-
   try {
     // TODO: Créer l'endpoint API pour les commandes
     // const order = await ApiService.createOrder(orderData);
