@@ -100,9 +100,11 @@ const ApiService = {
   async getAllProducts() {
     return this.request('/product_shop', { method: 'GET' });
   },
+
   async getProductById(id) {
     return this.request(`/product_shop/${id}`, { method: 'GET' });
   },
+
   async createProduct(data) {
     return this.request('/product_shop', {
       method: 'POST',
@@ -110,6 +112,7 @@ const ApiService = {
       body: JSON.stringify(data)
     });
   },
+
   async updateProduct(id, data) {
     return this.request(`/product_shop/${id}`, {
       method: 'PUT',
@@ -117,6 +120,7 @@ const ApiService = {
       body: JSON.stringify(data)
     });
   },
+
   async deleteProduct(id) {
     return this.request(`/product_shop/${id}`, { method: 'DELETE' });
   },
