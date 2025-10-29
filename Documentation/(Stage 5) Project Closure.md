@@ -1,11 +1,10 @@
 # Write a results summary:
 - Highlight the MVP’s core functionalities.
-- 1 User inscription => OK 
-- 2 Coach Inscription => OK 
-- 3 Shop boutique without payment => OK 
-- 4 Workout shedule and diet schedul for User 
-- 5 Add review on coach => Ok 
-- 6 Add message between coach and User 
+
+- Build a webbase platform where user can connect with certified coach for fitness and nutrition guidance => OK 
+- Allow user to set goals and receive customize fitness and nutrition program
+- Add real-time chat (OK), shop (Ok), Gamification feature to increase motivation  
+
 - Compare the outcomes to the initial objectives defined in the Project Charter.
 - Include key metrics or performance indicators, if applicable.
 
