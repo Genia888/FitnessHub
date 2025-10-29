@@ -3,6 +3,8 @@
 // Gestion du panier d'achat
 // ==========================================================
 
+const TAX_RATE = 0.20; // 20% tax
+
 document.addEventListener("DOMContentLoaded", () => {
   console.log("✅ cart.js chargé");
   loadCart();
@@ -67,7 +69,7 @@ function loadCart() {
   const discountRate = parseFloat(localStorage.getItem('promo_discount') || '0');
   const discountedSubtotal = Math.max(0, subtotal * (1 - discountRate));
   const shipping = discountedSubtotal > 0 ? 9.99 : 0;
-  const tax = discountedSubtotal * 0.10; // aligne le label si tu veux 20%
+  const tax = discountedSubtotal * TAX_RATE;
   const total = discountedSubtotal + shipping + tax;
 
   updateSummary(discountedSubtotal, shipping, tax, total);
@@ -125,7 +127,7 @@ function applyPromoCode() {
     return;
   }
 
-  const validCodes = { 'SAVE10': 0.50, 'SAVE20': 0.20, 'HOLBERTON': 0.50 };
+  const validCodes = { 'SAVE10': 0.10, 'SAVE20': 0.20, 'HEDJOUJ': 0.50 };
 
   if (validCodes[promoCode]) {
     const discount = validCodes[promoCode];
@@ -149,7 +151,7 @@ async function proceedToCheckout() {
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const discountedSubtotal = Math.max(0, subtotal * (1 - discountRate));
   const shipping = discountedSubtotal > 0 ? 9.99 : 0;
-  const tax = discountedSubtotal * 0.10;
+  const tax = discountedSubtotal * TAX_RATE;
   const total = discountedSubtotal + shipping + tax;
 
   const orderData = {
