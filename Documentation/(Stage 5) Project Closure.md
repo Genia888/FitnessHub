@@ -21,5 +21,8 @@
 
 # Write a lessons learned section:
 - Reflect on what went well and why.
+  The have learn how to make a website with login acces
 - Identify challenges and how they were addressed.
+  we work to dynamise and synchronise back end and front end
 - Discuss how the team can improve for future projects.
+  he can improve to skill in javascript 
