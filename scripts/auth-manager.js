@@ -111,6 +111,7 @@ const AuthManager = {
     const isBoutiquePage = window.location.pathname.includes('boutique.html');
     const isCoachPage = window.location.pathname.includes('coach.html');
     const isAbonnementPage = window.location.pathname.includes('abonnement.html');
+    const isLoginPage = window.location.pathname.includes('login.html');
     
     const isRoot = !window.location.pathname.includes('/pages/');
     const navContainers = document.querySelectorAll('.top-mnu ul, .main-menu__inner ul');
@@ -122,6 +123,9 @@ const AuthManager = {
     
     // ✅ AJOUTÉ : Gérer l'affichage du lien My Cart
     ensureCartLink();
+    
+    // ✅ NOUVEAU : Gérer l'affichage du lien Subscriber pour les non-connectés
+    ensureSubscriberLink();
 
     navContainers.forEach((ul) => {
       if (!isAuth) {
@@ -434,11 +438,59 @@ function ensureCartLink() {
         cartLink.href = targetHref;
       }
       
-      // ✅ Cacher le lien sur la page cart.html
       if (isCartPage && cartLi) {
         cartLi.style.display = 'none';
       } else if (cartLi) {
         cartLi.style.display = '';
+      }
+    });
+  });
+}
+
+// ✅ NOUVEAU : Fonction pour gérer le lien Subscriber pour les non-connectés
+function ensureSubscriberLink() {
+  const isAuth = AuthManager.isAuthenticated();
+  const isLoginPage = window.location.pathname.includes('login.html');
+  const shouldDisplay = !isAuth && !isLoginPage;
+  const isRoot = !window.location.pathname.includes('/pages/');
+  const targetHref = isRoot ? 'pages/login.html' : 'login.html';
+  
+  const navSelectors = ['.top-mnu ul', '.main-menu__inner ul'];
+  
+  navSelectors.forEach((selector) => {
+    document.querySelectorAll(selector).forEach((ul) => {
+      let subscriberLink = ul.querySelector('a[data-text="Subscriber"]');
+      let subscriberLi = subscriberLink ? subscriberLink.closest('li') : null;
+      
+      if (shouldDisplay) {
+        if (!subscriberLink) {
+          // Créer le lien s'il n'existe pas
+          subscriberLi = document.createElement('li');
+          subscriberLink = document.createElement('a');
+          subscriberLink.textContent = 'Subscriber';
+          subscriberLink.setAttribute('data-text', 'Subscriber');
+          subscriberLink.href = targetHref;
+          subscriberLi.appendChild(subscriberLink);
+          
+          // Insérer avant "Sign in"
+          const signInLink = ul.querySelector('a[data-text="Sign in"]');
+          const signInLi = signInLink ? signInLink.closest('li') : null;
+          
+          if (signInLi) {
+            ul.insertBefore(subscriberLi, signInLi);
+          } else {
+            ul.appendChild(subscriberLi);
+          }
+        } else {
+          // Mettre à jour le href et afficher
+          subscriberLink.href = targetHref;
+          subscriberLi.style.display = '';
+        }
+      } else {
+        // Cacher ou supprimer le lien si connecté ou sur login.html
+        if (subscriberLi) {
+          subscriberLi.style.display = 'none';
+        }
       }
     });
   });
