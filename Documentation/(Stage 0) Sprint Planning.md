@@ -349,7 +349,7 @@ This document outlines the sprint planning strategy for the FitnessHub MVP devel
    - Assign/edit workout schedules
    - Assign/edit nutrition plans
    - Client progress view
-   - **Files:** `pages/clients_list.html`, `scripts/coach-dashboard.js`
+   - **Files:** `scripts/coach-dashboard.js`
 
 4. **Coach Navigation** (Must Have)
    - Role-based menu
@@ -647,7 +647,7 @@ Schedule Management (Sprint 3)
 - Sprint 4: UI improvements, animations
 **Key Files:**
 
-- `pages/trainer.html`, `pages/coach_account.html`, `pages/clients_list.html`
+- `pages/trainer.html`, `pages/coach_account.html`
 - `scripts/trainer.js`, `scripts/coach-dashboard.js`, `scripts/coach-navigation.js`
 - `styles/coach-dashboard.css`
 - `scripts/trainer.js`, `scripts/coach-dashboard.js`, `scripts/coach-navigation.js`

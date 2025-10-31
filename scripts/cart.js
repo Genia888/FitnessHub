@@ -127,7 +127,7 @@ function applyPromoCode() {
     return;
   }
 
-  const validCodes = { 'SAVE10': 0.10, 'SAVE20': 0.20, 'HEDJOUJ': 0.50 };
+  const validCodes = { 'SAVE10': 0.10, 'SAVE20': 0.20, 'HOLBERTON': 0.50 };
 
   if (validCodes[promoCode]) {
     const discount = validCodes[promoCode];

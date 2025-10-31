@@ -318,6 +318,12 @@
   <script src="../scripts/auth-manager.js" defer></script>
   <script src="../scripts/api-service.js" defer></script>
   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!AuthManager.protectPage('coach')) {
+        return;
+      }
+    });
+
     // ✅ CORRECTION : Fonction pour naviguer vers la page de gestion du client
     async function viewClient(clientId) {
       console.log(`🔄 Redirection vers la gestion du client #${clientId}`);

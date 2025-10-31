@@ -101,10 +101,27 @@ const AuthManager = {
    */
   updateNavigation() {
     const isAuth = this.isAuthenticated();
+    const isCoach = this.isCoach();
+
     const isSubscriberPage = window.location.pathname.includes('subscriber.html');
+    const isTrainerPage = window.location.pathname.includes('trainer.html');
+    const isCoachAccountPage = window.location.pathname.includes('coach_account.html');
+    const isUserAccountPage = window.location.pathname.includes('user_account.html');
+    const isCartPage = window.location.pathname.includes('cart.html');
+    const isBoutiquePage = window.location.pathname.includes('boutique.html');
+    const isCoachPage = window.location.pathname.includes('coach.html');
+    const isAbonnementPage = window.location.pathname.includes('abonnement.html');
+    
+    const isRoot = !window.location.pathname.includes('/pages/');
     const navContainers = document.querySelectorAll('.top-mnu ul, .main-menu__inner ul');
     const dashboardLinks = [];
     const accountLinks = [];
+
+    // ✅ AJOUTÉ : Gérer l'affichage du lien Coaches pour les coachs
+    ensureCoachesLinkForCoach();
+    
+    // ✅ AJOUTÉ : Gérer l'affichage du lien My Cart
+    ensureCartLink();
 
     navContainers.forEach((ul) => {
       if (!isAuth) {
@@ -113,18 +130,18 @@ const AuthManager = {
         return;
       }
 
-      if (isSubscriberPage) {
+      if (isSubscriberPage || isTrainerPage) {
         removeDashboardLink(ul);
       } else {
         const dashLink = ensureDashboardLink(ul);
         if (dashLink) dashboardLinks.push(dashLink);
       }
 
-      if (!this.isCoach()) {
+      if (isCoachAccountPage || isUserAccountPage) {
+        removeAccountLink(ul);
+      } else {
         const accountLink = ensureAccountLink(ul);
         if (accountLink) accountLinks.push(accountLink);
-      } else {
-        removeAccountLink(ul);
       }
     });
 
@@ -137,7 +154,7 @@ const AuthManager = {
         return;
       }
       if (item) item.style.display = '';
-      link.href = '/pages/subscriber.html';
+      link.href = isCoach ? '/pages/trainer.html' : '/pages/subscriber.html';
       link.onclick = null;
     });
 
@@ -150,7 +167,7 @@ const AuthManager = {
         return;
       }
       if (item) item.style.display = '';
-      link.href = '/pages/user_account.html';
+      link.href = isCoach ? '/pages/coach_account.html' : '/pages/user_account.html';
       link.onclick = null;
     });
 
@@ -164,7 +181,6 @@ const AuthManager = {
       const setSignIn = () => {
         link.setAttribute('data-text', 'Sign in');
         link.textContent = 'Sign in';
-        const isRoot = !window.location.pathname.includes('/pages/');
         link.href = isRoot ? 'pages/connexion.html' : 'connexion.html';
         link.onclick = null;
         if (li) li.style.display = '';
@@ -179,7 +195,7 @@ const AuthManager = {
       };
 
       if (!isAuth) {
-        if (/Dashboard|My Dashboard|My Account|Account|Clients|Log out/i.test(dataText || text)) {
+        if (/Dashboard|My Dashboard|My Account|Account|Log out/i.test(dataText || text)) {
           if (li) li.style.display = 'none';
         }
         if (/sign in|connexion|login/i.test(dataText || text || href)) {
@@ -190,50 +206,43 @@ const AuthManager = {
           setLogOut();
         }
 
-        if (this.isCoach()) {
-          if (/My Dashboard|My Account/i.test(dataText || text)) {
-            if (li) li.style.display = 'none';
-          }
-        } else {
-          const label = (dataText || text || '').trim();
-          if (['Dashboard', 'Clients'].includes(label)) {
-            if (li) li.style.display = 'none';
-          }
-          if (label === 'My Dashboard') {
-            link.href = '/pages/subscriber.html';
-            link.onclick = null;
-            if (li) li.style.display = '';
-          }
-          if (/My Account/i.test(label)) {
-            link.href = '/pages/user_account.html';
-            link.onclick = null;
-            if (li) li.style.display = '';
-          }
+        // ✅ Cacher les boutons selon la page actuelle
+        if (isCartPage && /My Cart|Cart/i.test(dataText || text)) {
+          if (li) li.style.display = 'none';
+        }
+        
+        if (isBoutiquePage && /Shop/i.test(dataText || text)) {
+          if (li) li.style.display = 'none';
+        }
+        
+        if (isCoachPage && /Coach|Coaches/i.test(dataText || text)) {
+          if (li) li.style.display = 'none';
+        }
+        
+        if (isAbonnementPage && /Plans|Subscription/i.test(dataText || text)) {
+          if (li) li.style.display = 'none';
         }
       }
     });
-  }
+  },
 };
 
 // Initialiser la navigation au chargement de chaque page
 document.addEventListener('DOMContentLoaded', () => {
-  // Première tentative immédiate
   AuthManager.updateNavigation();
-  
-  // Deuxième tentative après un court délai pour s'assurer que tous les éléments sont chargés
   setTimeout(() => {
     AuthManager.updateNavigation();
   }, 100);
 });
 
-// Aussi mettre à jour la navigation quand la page devient visible (changement d'onglet)
+// Mettre à jour la navigation quand la page devient visible
 document.addEventListener('visibilitychange', () => {
   if (!document.hidden) {
     AuthManager.updateNavigation();
   }
 });
 
-// Fonction globale de déconnexion (appelée depuis le HTML)
+// Fonction globale de déconnexion
 function logout() {
   AuthManager.logout();
 }
@@ -254,11 +263,35 @@ function ensureDashboardLink(ul) {
     link.dataset.nav = 'my-dashboard';
     link.href = '#';
     li.appendChild(link);
-    ul.appendChild(li);
+    
+    const accountAnchor = ul.querySelector('a[data-nav="my-account"]');
+    const accountLi = accountAnchor ? accountAnchor.closest('li') : null;
+    const logoutAnchor = ul.querySelector('a[data-text="Log out"]');
+    const logoutLi = logoutAnchor ? logoutAnchor.closest('li') : null;
+    
+    if (accountLi) {
+      ul.insertBefore(li, accountLi);
+    } else if (logoutLi) {
+      ul.insertBefore(li, logoutLi);
+    } else {
+      ul.appendChild(li);
+    }
   } else {
     link.dataset.nav = 'my-dashboard';
     link.textContent = 'My Dashboard';
     link.setAttribute('data-text', 'My Dashboard');
+    
+    const accountAnchor = ul.querySelector('a[data-nav="my-account"]');
+    const accountLi = accountAnchor ? accountAnchor.closest('li') : null;
+    const logoutAnchor = ul.querySelector('a[data-text="Log out"]');
+    const logoutLi = logoutAnchor ? logoutAnchor.closest('li') : null;
+    const dashboardLi = link.closest('li');
+    
+    if (accountLi && dashboardLi && dashboardLi !== accountLi.previousElementSibling) {
+      ul.insertBefore(dashboardLi, accountLi);
+    } else if (logoutLi && dashboardLi && dashboardLi !== logoutLi.previousElementSibling) {
+      ul.insertBefore(dashboardLi, logoutLi);
+    }
   }
 
   return link;
@@ -282,18 +315,40 @@ function ensureAccountLink(ul) {
 
   let link = ul.querySelector('a[data-nav="my-account"]');
   if (!link) {
+    link = ul.querySelector('a[data-text="My Account"], a[data-text="Account"]');
+  }
+
+  if (!link) {
     const li = document.createElement('li');
     link = document.createElement('a');
-    link.dataset.nav = 'my-account';
     link.textContent = 'My Account';
     link.setAttribute('data-text', 'My Account');
+    link.dataset.nav = 'my-account';
+    link.href = '#';
     li.appendChild(link);
-    ul.appendChild(li);
+    
+    const logoutAnchor = ul.querySelector('a[data-text="Log out"]');
+    const logoutLi = logoutAnchor ? logoutAnchor.closest('li') : null;
+    
+    if (logoutLi) {
+      ul.insertBefore(li, logoutLi);
+    } else {
+      ul.appendChild(li);
+    }
   } else {
     link.dataset.nav = 'my-account';
     link.textContent = 'My Account';
     link.setAttribute('data-text', 'My Account');
+    
+    const logoutAnchor = ul.querySelector('a[data-text="Log out"]');
+    const logoutLi = logoutAnchor ? logoutAnchor.closest('li') : null;
+    const accountLi = link.closest('li');
+    
+    if (logoutLi && accountLi && accountLi !== logoutLi.previousElementSibling) {
+      ul.insertBefore(accountLi, logoutLi);
+    }
   }
+
   return link;
 }
 
@@ -305,4 +360,86 @@ function removeAccountLink(ul) {
     if (li) li.remove();
     else existing.remove();
   }
+}
+
+function removeMyClientsLink(ul) {
+  if (!ul) return;
+  const existing = ul.querySelector('li.nav-my-clients');
+  if (existing) {
+    existing.remove();
+  }
+}
+
+function ensureCoachesLinkForCoach() {
+  const isCoach = AuthManager.isCoach();
+  const isCoachPage = window.location.pathname.includes('coach.html');
+  const shouldDisplay = isCoach && !isCoachPage;
+  const isRoot = !window.location.pathname.includes('/pages/');
+  const targetHref = isRoot ? 'pages/coach.html' : 'coach.html';
+  
+  const navSelectors = ['.top-mnu ul', '.main-menu__inner ul'];
+  
+  navSelectors.forEach((selector) => {
+    document.querySelectorAll(selector).forEach((ul) => {
+      let coachLink = ul.querySelector('a[data-text="Coaches"]');
+      let coachLi = coachLink ? coachLink.closest('li') : null;
+      
+      if (shouldDisplay) {
+        if (coachLi) {
+          coachLi.style.display = '';
+          coachLink.href = targetHref;
+        }
+      } else if (isCoach && isCoachPage) {
+        if (coachLi) {
+          coachLi.style.display = 'none';
+        }
+      }
+    });
+  });
+}
+
+function ensureCartLink() {
+  const isCartPage = window.location.pathname.includes('cart.html');
+  const isRoot = !window.location.pathname.includes('/pages/');
+  const targetHref = isRoot ? 'pages/cart.html' : 'cart.html';
+  
+  const navSelectors = ['.top-mnu ul', '.main-menu__inner ul'];
+  
+  navSelectors.forEach((selector) => {
+    document.querySelectorAll(selector).forEach((ul) => {
+      let cartLink = ul.querySelector('a[data-text="My Cart"]');
+      let cartLi = cartLink ? cartLink.closest('li') : null;
+      
+      if (!cartLink) {
+        cartLi = document.createElement('li');
+        cartLink = document.createElement('a');
+        cartLink.textContent = 'My Cart';
+        cartLink.setAttribute('data-text', 'My Cart');
+        cartLink.href = targetHref;
+        cartLi.appendChild(cartLink);
+        
+        const shopLink = ul.querySelector('a[data-text="Shop"]');
+        const shopLi = shopLink ? shopLink.closest('li') : null;
+        const dashboardLink = ul.querySelector('a[data-text="My Dashboard"]');
+        const dashboardLi = dashboardLink ? dashboardLink.closest('li') : null;
+        
+        if (shopLi && shopLi.nextElementSibling) {
+          ul.insertBefore(cartLi, shopLi.nextElementSibling);
+        } else if (dashboardLi) {
+          ul.insertBefore(cartLi, dashboardLi);
+        } else {
+          ul.appendChild(cartLi);
+        }
+      } else {
+        cartLink.href = targetHref;
+      }
+      
+      // ✅ Cacher le lien sur la page cart.html
+      if (isCartPage && cartLi) {
+        cartLi.style.display = 'none';
+      } else if (cartLi) {
+        cartLi.style.display = '';
+      }
+    });
+  });
 }

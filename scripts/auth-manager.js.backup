@@ -1,0 +1,1318 @@
+// scripts/auth-manager.js
+// ==========================================================
+// Gestion centralisée de l'authentification et des redirections
+// ==========================================================
+
+const AuthManager = {
+  /**
+   * Vérifie si l'utilisateur est connecté
+   * @returns {boolean}
+   */
+  isAuthenticated() {
+    const token = CookieManager.get("token");
+    const user = UserSession.getUser();
+    return !!(token && user);
+  },
+
+  /**
+   * Vérifie si l'utilisateur est un coach
+   * @returns {boolean}
+   */
+  isCoach() {
+    const user = UserSession.getUser();
+    return user && user.is_coach === true;
+  },
+
+  /**
+   * Protège une page (redirige vers connexion si non authentifié)
+   * @param {string} requiredRole - 'coach', 'user', ou null pour tous
+   */
+  protectPage(requiredRole = null) {
+    if (!this.isAuthenticated()) {
+      alert("Vous devez être connecté pour accéder à cette page.");
+      window.location.href = "../pages/connexion.html";
+      return false;
+    }
+
+    if (requiredRole === 'coach' && !this.isCoach()) {
+      alert("Cette page est réservée aux coachs.");
+      window.location.href = "../pages/subscriber.html";
+      return false;
+    }
+
+    if (requiredRole === 'user' && this.isCoach()) {
+      alert("Cette page est réservée aux utilisateurs.");
+      window.location.href = "../pages/trainer.html";
+      return false;
+    }
+
+    return true;
+  },
+
+  /**
+   * Déconnecte l'utilisateur
+   */
+  logout() {
+    CookieManager.remove("token");
+    UserSession.logout();
+    window.location.href = "../pages/connexion.html";
+  },
+
+  /**
+   * Récupère le token pour les requêtes API
+   * @returns {string|null}
+   */
+  getToken() {
+    return CookieManager.get("token");
+  },
+
+  /**
+   * Récupère l'utilisateur courant
+   * @returns {object|null}
+   */
+  getCurrentUser() {
+    return UserSession.getUser();
+  },
+
+  /**
+   * Redirige vers le dashboard approprié selon le rôle
+   */
+  redirectToDashboard() {
+    if (this.isCoach()) {
+      window.location.href = "../pages/trainer.html";
+    } else {
+      window.location.href = "../pages/subscriber.html";
+    }
+  },
+
+  /**
+   * Redirige vers la page de profil appropriée selon le rôle
+   */
+  redirectToAccount() {
+    if (this.isCoach()) {
+      window.location.href = "../pages/coach_account.html";
+    } else {
+      window.location.href = "../pages/user_account.html";
+    }
+  },
+
+  /**
+   * Met à jour la navigation selon l'état de connexion
+   */
+  updateNavigation() {
+    const isAuth = this.isAuthenticated();
+    const isCoach = this.isCoach();
+
+    // ❌ SUPPRIMÉ : this.ensureMyClientsLink(isAuth && isCoach);
+
+    const isSubscriberPage = window.location.pathname.includes('subscriber.html');
+    const isRoot = !window.location.pathname.includes('/pages/');
+    const navContainers = document.querySelectorAll('.top-mnu ul, .main-menu__inner ul');
+    const dashboardLinks = [];
+    const accountLinks = [];
+
+    navContainers.forEach((ul) => {
+      if (!isAuth) {
+        removeDashboardLink(ul);
+        removeAccountLink(ul);
+        // ✅ AJOUTÉ : Retirer My Clients si présent
+        removeMyClientsLink(ul);
+        return;
+      }
+
+      if (isSubscriberPage) {
+        removeDashboardLink(ul);
+      } else {
+        const dashLink = ensureDashboardLink(ul);
+        if (dashLink) dashboardLinks.push(dashLink);
+      }
+
+      // Créer les liens My Account pour tous les utilisateurs authentifiés
+      const accountLink = ensureAccountLink(ul);
+      if (accountLink) accountLinks.push(accountLink);
+      
+      // ✅ AJOUTÉ : Toujours retirer My Clients
+      removeMyClientsLink(ul);
+    });
+
+    dashboardLinks.forEach((link) => {
+      const item = link.closest('li') || link;
+      if (!isAuth) {
+        if (item) item.style.display = 'none';
+        link.removeAttribute('href');
+        link.onclick = null;
+        return;
+      }
+      if (item) item.style.display = '';
+      // Rediriger vers trainer.html pour les coachs, subscriber.html pour les users
+      link.href = isCoach ? '/pages/trainer.html' : '/pages/subscriber.html';
+      link.onclick = null;
+    });
+
+    accountLinks.forEach((link) => {
+      const item = link.closest('li') || link;
+      if (!isAuth) {
+        if (item) item.style.display = 'none';
+        link.removeAttribute('href');
+        link.onclick = null;
+        return;
+      }
+      if (item) item.style.display = '';
+      // Rediriger vers coach_account.html pour les coachs, user_account.html pour les users
+      link.href = isCoach ? '/pages/coach_account.html' : '/pages/user_account.html';
+      link.onclick = null;
+    });
+
+    const navLinks = document.querySelectorAll('.top-mnu a, .main-menu__inner a');
+    navLinks.forEach(link => {
+      const dataText = (link.getAttribute('data-text') || '').trim();
+      const text = (link.textContent || '').trim();
+      const href = link.getAttribute('href') || '';
+      const li = link.closest('li');
+
+      const setSignIn = () => {
+        link.setAttribute('data-text', 'Sign in');
+        link.textContent = 'Sign in';
+        link.href = isRoot ? 'pages/connexion.html' : 'connexion.html';
+        link.onclick = null;
+        if (li) li.style.display = '';
+      };
+
+      const setLogOut = () => {
+        link.setAttribute('data-text', 'Log out');
+        link.textContent = 'Log out';
+        link.href = '#';
+        link.onclick = (e) => { e.preventDefault(); logout(); };
+        if (li) li.style.display = '';
+      };
+
+      if (!isAuth) {
+        if (/Dashboard|My Dashboard|My Account|Account|Clients|Log out/i.test(dataText || text)) {
+          if (li) li.style.display = 'none';
+        }
+        if (/sign in|connexion|login/i.test(dataText || text || href)) {
+          setSignIn();
+        }
+      } else {
+        if (/sign in|connexion|login/i.test(dataText || text || href)) {
+          setLogOut();
+        }
+
+        if (this.isCoach()) {
+          // Masquer le lien "Coaches" pour les coachs connectés
+          if (/Coaches?/i.test(dataText || text)) {
+            if (li) li.style.display = 'none';
+          }
+          // Configurer My Dashboard pour rediriger vers trainer.html
+          if (/My Dashboard/i.test(dataText || text)) {
+            link.href = isRoot ? 'pages/trainer.html' : 'trainer.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+          // Configurer My Account pour rediriger vers coach_account.html
+          if (/My Account/i.test(dataText || text)) {
+            link.href = isRoot ? 'pages/coach_account.html' : 'coach_account.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+        } else {
+          const label = (dataText || text || '').trim();
+          if (['Dashboard', 'Clients'].includes(label)) {
+            if (li) li.style.display = 'none';
+          }
+          if (label === 'My Dashboard') {
+            link.href = '/pages/subscriber.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+          if (/My Account/i.test(label)) {
+            link.href = '/pages/user_account.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+        }
+      }
+    });
+  },
+
+  /**
+   * Déconnecte l'utilisateur
+   */
+  logout() {
+    CookieManager.remove("token");
+    UserSession.logout();
+    window.location.href = "../pages/connexion.html";
+  },
+
+  /**
+   * Récupère le token pour les requêtes API
+   * @returns {string|null}
+   */
+  getToken() {
+    return CookieManager.get("token");
+  },
+
+  /**
+   * Récupère l'utilisateur courant
+   * @returns {object|null}
+   */
+  getCurrentUser() {
+    return UserSession.getUser();
+  },
+
+  /**
+   * Redirige vers le dashboard approprié selon le rôle
+   */
+  redirectToDashboard() {
+    if (this.isCoach()) {
+      window.location.href = "../pages/trainer.html";
+    } else {
+      window.location.href = "../pages/subscriber.html";
+    }
+  },
+
+  /**
+   * Redirige vers la page de profil appropriée selon le rôle
+   */
+  redirectToAccount() {
+    if (this.isCoach()) {
+      window.location.href = "../pages/coach_account.html";
+    } else {
+      window.location.href = "../pages/user_account.html";
+    }
+  },
+
+  /**
+   * Met à jour la navigation selon l'état de connexion
+   */
+  updateNavigation() {
+    const isAuth = this.isAuthenticated();
+    const isCoach = this.isCoach();
+
+    // ❌ SUPPRIMÉ : this.ensureMyClientsLink(isAuth && isCoach);
+
+    const isSubscriberPage = window.location.pathname.includes('subscriber.html');
+    const isRoot = !window.location.pathname.includes('/pages/');
+    const navContainers = document.querySelectorAll('.top-mnu ul, .main-menu__inner ul');
+    const dashboardLinks = [];
+    const accountLinks = [];
+
+    navContainers.forEach((ul) => {
+      if (!isAuth) {
+        removeDashboardLink(ul);
+        removeAccountLink(ul);
+        // ✅ AJOUTÉ : Retirer My Clients si présent
+        removeMyClientsLink(ul);
+        return;
+      }
+
+      if (isSubscriberPage) {
+        removeDashboardLink(ul);
+      } else {
+        const dashLink = ensureDashboardLink(ul);
+        if (dashLink) dashboardLinks.push(dashLink);
+      }
+
+      // Créer les liens My Account pour tous les utilisateurs authentifiés
+      const accountLink = ensureAccountLink(ul);
+      if (accountLink) accountLinks.push(accountLink);
+      
+      // ✅ AJOUTÉ : Toujours retirer My Clients
+      removeMyClientsLink(ul);
+    });
+
+    dashboardLinks.forEach((link) => {
+      const item = link.closest('li') || link;
+      if (!isAuth) {
+        if (item) item.style.display = 'none';
+        link.removeAttribute('href');
+        link.onclick = null;
+        return;
+      }
+      if (item) item.style.display = '';
+      // Rediriger vers trainer.html pour les coachs, subscriber.html pour les users
+      link.href = isCoach ? '/pages/trainer.html' : '/pages/subscriber.html';
+      link.onclick = null;
+    });
+
+    accountLinks.forEach((link) => {
+      const item = link.closest('li') || link;
+      if (!isAuth) {
+        if (item) item.style.display = 'none';
+        link.removeAttribute('href');
+        link.onclick = null;
+        return;
+      }
+      if (item) item.style.display = '';
+      // Rediriger vers coach_account.html pour les coachs, user_account.html pour les users
+      link.href = isCoach ? '/pages/coach_account.html' : '/pages/user_account.html';
+      link.onclick = null;
+    });
+
+    const navLinks = document.querySelectorAll('.top-mnu a, .main-menu__inner a');
+    navLinks.forEach(link => {
+      const dataText = (link.getAttribute('data-text') || '').trim();
+      const text = (link.textContent || '').trim();
+      const href = link.getAttribute('href') || '';
+      const li = link.closest('li');
+
+      const setSignIn = () => {
+        link.setAttribute('data-text', 'Sign in');
+        link.textContent = 'Sign in';
+        link.href = isRoot ? 'pages/connexion.html' : 'connexion.html';
+        link.onclick = null;
+        if (li) li.style.display = '';
+      };
+
+      const setLogOut = () => {
+        link.setAttribute('data-text', 'Log out');
+        link.textContent = 'Log out';
+        link.href = '#';
+        link.onclick = (e) => { e.preventDefault(); logout(); };
+        if (li) li.style.display = '';
+      };
+
+      if (!isAuth) {
+        if (/Dashboard|My Dashboard|My Account|Account|Clients|Log out/i.test(dataText || text)) {
+          if (li) li.style.display = 'none';
+        }
+        if (/sign in|connexion|login/i.test(dataText || text || href)) {
+          setSignIn();
+        }
+      } else {
+        if (/sign in|connexion|login/i.test(dataText || text || href)) {
+          setLogOut();
+        }
+
+        if (this.isCoach()) {
+          // Masquer le lien "Coaches" pour les coachs connectés
+          if (/Coaches?/i.test(dataText || text)) {
+            if (li) li.style.display = 'none';
+          }
+          // Configurer My Dashboard pour rediriger vers trainer.html
+          if (/My Dashboard/i.test(dataText || text)) {
+            link.href = isRoot ? 'pages/trainer.html' : 'trainer.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+          // Configurer My Account pour rediriger vers coach_account.html
+          if (/My Account/i.test(dataText || text)) {
+            link.href = isRoot ? 'pages/coach_account.html' : 'coach_account.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+        } else {
+          const label = (dataText || text || '').trim();
+          if (['Dashboard', 'Clients'].includes(label)) {
+            if (li) li.style.display = 'none';
+          }
+          if (label === 'My Dashboard') {
+            link.href = '/pages/subscriber.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+          if (/My Account/i.test(label)) {
+            link.href = '/pages/user_account.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+        }
+      }
+    });
+  },
+
+  /**
+   * Déconnecte l'utilisateur
+   */
+  logout() {
+    CookieManager.remove("token");
+    UserSession.logout();
+    window.location.href = "../pages/connexion.html";
+  },
+
+  /**
+   * Récupère le token pour les requêtes API
+   * @returns {string|null}
+   */
+  getToken() {
+    return CookieManager.get("token");
+  },
+
+  /**
+   * Récupère l'utilisateur courant
+   * @returns {object|null}
+   */
+  getCurrentUser() {
+    return UserSession.getUser();
+  },
+
+  /**
+   * Redirige vers le dashboard approprié selon le rôle
+   */
+  redirectToDashboard() {
+    if (this.isCoach()) {
+      window.location.href = "../pages/trainer.html";
+    } else {
+      window.location.href = "../pages/subscriber.html";
+    }
+  },
+
+  /**
+   * Redirige vers la page de profil appropriée selon le rôle
+   */
+  redirectToAccount() {
+    if (this.isCoach()) {
+      window.location.href = "../pages/coach_account.html";
+    } else {
+      window.location.href = "../pages/user_account.html";
+    }
+  },
+
+  /**
+   * Met à jour la navigation selon l'état de connexion
+   */
+  updateNavigation() {
+    const isAuth = this.isAuthenticated();
+    const isCoach = this.isCoach();
+
+    // ❌ SUPPRIMÉ : this.ensureMyClientsLink(isAuth && isCoach);
+
+    const isSubscriberPage = window.location.pathname.includes('subscriber.html');
+    const isRoot = !window.location.pathname.includes('/pages/');
+    const navContainers = document.querySelectorAll('.top-mnu ul, .main-menu__inner ul');
+    const dashboardLinks = [];
+    const accountLinks = [];
+
+    navContainers.forEach((ul) => {
+      if (!isAuth) {
+        removeDashboardLink(ul);
+        removeAccountLink(ul);
+        // ✅ AJOUTÉ : Retirer My Clients si présent
+        removeMyClientsLink(ul);
+        return;
+      }
+
+      if (isSubscriberPage) {
+        removeDashboardLink(ul);
+      } else {
+        const dashLink = ensureDashboardLink(ul);
+        if (dashLink) dashboardLinks.push(dashLink);
+      }
+
+      // Créer les liens My Account pour tous les utilisateurs authentifiés
+      const accountLink = ensureAccountLink(ul);
+      if (accountLink) accountLinks.push(accountLink);
+      
+      // ✅ AJOUTÉ : Toujours retirer My Clients
+      removeMyClientsLink(ul);
+    });
+
+    dashboardLinks.forEach((link) => {
+      const item = link.closest('li') || link;
+      if (!isAuth) {
+        if (item) item.style.display = 'none';
+        link.removeAttribute('href');
+        link.onclick = null;
+        return;
+      }
+      if (item) item.style.display = '';
+      // Rediriger vers trainer.html pour les coachs, subscriber.html pour les users
+      link.href = isCoach ? '/pages/trainer.html' : '/pages/subscriber.html';
+      link.onclick = null;
+    });
+
+    accountLinks.forEach((link) => {
+      const item = link.closest('li') || link;
+      if (!isAuth) {
+        if (item) item.style.display = 'none';
+        link.removeAttribute('href');
+        link.onclick = null;
+        return;
+      }
+      if (item) item.style.display = '';
+      // Rediriger vers coach_account.html pour les coachs, user_account.html pour les users
+      link.href = isCoach ? '/pages/coach_account.html' : '/pages/user_account.html';
+      link.onclick = null;
+    });
+
+    const navLinks = document.querySelectorAll('.top-mnu a, .main-menu__inner a');
+    navLinks.forEach(link => {
+      const dataText = (link.getAttribute('data-text') || '').trim();
+      const text = (link.textContent || '').trim();
+      const href = link.getAttribute('href') || '';
+      const li = link.closest('li');
+
+      const setSignIn = () => {
+        link.setAttribute('data-text', 'Sign in');
+        link.textContent = 'Sign in';
+        link.href = isRoot ? 'pages/connexion.html' : 'connexion.html';
+        link.onclick = null;
+        if (li) li.style.display = '';
+      };
+
+      const setLogOut = () => {
+        link.setAttribute('data-text', 'Log out');
+        link.textContent = 'Log out';
+        link.href = '#';
+        link.onclick = (e) => { e.preventDefault(); logout(); };
+        if (li) li.style.display = '';
+      };
+
+      if (!isAuth) {
+        if (/Dashboard|My Dashboard|My Account|Account|Clients|Log out/i.test(dataText || text)) {
+          if (li) li.style.display = 'none';
+        }
+        if (/sign in|connexion|login/i.test(dataText || text || href)) {
+          setSignIn();
+        }
+      } else {
+        if (/sign in|connexion|login/i.test(dataText || text || href)) {
+          setLogOut();
+        }
+
+        if (this.isCoach()) {
+          // Masquer le lien "Coaches" pour les coachs connectés
+          if (/Coaches?/i.test(dataText || text)) {
+            if (li) li.style.display = 'none';
+          }
+          // Configurer My Dashboard pour rediriger vers trainer.html
+          if (/My Dashboard/i.test(dataText || text)) {
+            link.href = isRoot ? 'pages/trainer.html' : 'trainer.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+          // Configurer My Account pour rediriger vers coach_account.html
+          if (/My Account/i.test(dataText || text)) {
+            link.href = isRoot ? 'pages/coach_account.html' : 'coach_account.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+        } else {
+          const label = (dataText || text || '').trim();
+          if (['Dashboard', 'Clients'].includes(label)) {
+            if (li) li.style.display = 'none';
+          }
+          if (label === 'My Dashboard') {
+            link.href = '/pages/subscriber.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+          if (/My Account/i.test(label)) {
+            link.href = '/pages/user_account.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+        }
+      }
+    });
+  },
+
+  /**
+   * Déconnecte l'utilisateur
+   */
+  logout() {
+    CookieManager.remove("token");
+    UserSession.logout();
+    window.location.href = "../pages/connexion.html";
+  },
+
+  /**
+   * Récupère le token pour les requêtes API
+   * @returns {string|null}
+   */
+  getToken() {
+    return CookieManager.get("token");
+  },
+
+  /**
+   * Récupère l'utilisateur courant
+   * @returns {object|null}
+   */
+  getCurrentUser() {
+    return UserSession.getUser();
+  },
+
+  /**
+   * Redirige vers le dashboard approprié selon le rôle
+   */
+  redirectToDashboard() {
+    if (this.isCoach()) {
+      window.location.href = "../pages/trainer.html";
+    } else {
+      window.location.href = "../pages/subscriber.html";
+    }
+  },
+
+  /**
+   * Redirige vers la page de profil appropriée selon le rôle
+   */
+  redirectToAccount() {
+    if (this.isCoach()) {
+      window.location.href = "../pages/coach_account.html";
+    } else {
+      window.location.href = "../pages/user_account.html";
+    }
+  },
+
+  /**
+   * Met à jour la navigation selon l'état de connexion
+   */
+  updateNavigation() {
+    const isAuth = this.isAuthenticated();
+    const isCoach = this.isCoach();
+
+    // ❌ SUPPRIMÉ : this.ensureMyClientsLink(isAuth && isCoach);
+
+    const isSubscriberPage = window.location.pathname.includes('subscriber.html');
+    const isRoot = !window.location.pathname.includes('/pages/');
+    const navContainers = document.querySelectorAll('.top-mnu ul, .main-menu__inner ul');
+    const dashboardLinks = [];
+    const accountLinks = [];
+
+    navContainers.forEach((ul) => {
+      if (!isAuth) {
+        removeDashboardLink(ul);
+        removeAccountLink(ul);
+        // ✅ AJOUTÉ : Retirer My Clients si présent
+        removeMyClientsLink(ul);
+        return;
+      }
+
+      if (isSubscriberPage) {
+        removeDashboardLink(ul);
+      } else {
+        const dashLink = ensureDashboardLink(ul);
+        if (dashLink) dashboardLinks.push(dashLink);
+      }
+
+      // Créer les liens My Account pour tous les utilisateurs authentifiés
+      const accountLink = ensureAccountLink(ul);
+      if (accountLink) accountLinks.push(accountLink);
+      
+      // ✅ AJOUTÉ : Toujours retirer My Clients
+      removeMyClientsLink(ul);
+    });
+
+    dashboardLinks.forEach((link) => {
+      const item = link.closest('li') || link;
+      if (!isAuth) {
+        if (item) item.style.display = 'none';
+        link.removeAttribute('href');
+        link.onclick = null;
+        return;
+      }
+      if (item) item.style.display = '';
+      // Rediriger vers trainer.html pour les coachs, subscriber.html pour les users
+      link.href = isCoach ? '/pages/trainer.html' : '/pages/subscriber.html';
+      link.onclick = null;
+    });
+
+    accountLinks.forEach((link) => {
+      const item = link.closest('li') || link;
+      if (!isAuth) {
+        if (item) item.style.display = 'none';
+        link.removeAttribute('href');
+        link.onclick = null;
+        return;
+      }
+      if (item) item.style.display = '';
+      // Rediriger vers coach_account.html pour les coachs, user_account.html pour les users
+      link.href = isCoach ? '/pages/coach_account.html' : '/pages/user_account.html';
+      link.onclick = null;
+    });
+
+    const navLinks = document.querySelectorAll('.top-mnu a, .main-menu__inner a');
+    navLinks.forEach(link => {
+      const dataText = (link.getAttribute('data-text') || '').trim();
+      const text = (link.textContent || '').trim();
+      const href = link.getAttribute('href') || '';
+      const li = link.closest('li');
+
+      const setSignIn = () => {
+        link.setAttribute('data-text', 'Sign in');
+        link.textContent = 'Sign in';
+        link.href = isRoot ? 'pages/connexion.html' : 'connexion.html';
+        link.onclick = null;
+        if (li) li.style.display = '';
+      };
+
+      const setLogOut = () => {
+        link.setAttribute('data-text', 'Log out');
+        link.textContent = 'Log out';
+        link.href = '#';
+        link.onclick = (e) => { e.preventDefault(); logout(); };
+        if (li) li.style.display = '';
+      };
+
+      if (!isAuth) {
+        if (/Dashboard|My Dashboard|My Account|Account|Clients|Log out/i.test(dataText || text)) {
+          if (li) li.style.display = 'none';
+        }
+        if (/sign in|connexion|login/i.test(dataText || text || href)) {
+          setSignIn();
+        }
+      } else {
+        if (/sign in|connexion|login/i.test(dataText || text || href)) {
+          setLogOut();
+        }
+
+        if (this.isCoach()) {
+          // Masquer le lien "Coaches" pour les coachs connectés
+          if (/Coaches?/i.test(dataText || text)) {
+            if (li) li.style.display = 'none';
+          }
+          // Configurer My Dashboard pour rediriger vers trainer.html
+          if (/My Dashboard/i.test(dataText || text)) {
+            link.href = isRoot ? 'pages/trainer.html' : 'trainer.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+          // Configurer My Account pour rediriger vers coach_account.html
+          if (/My Account/i.test(dataText || text)) {
+            link.href = isRoot ? 'pages/coach_account.html' : 'coach_account.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+        } else {
+          const label = (dataText || text || '').trim();
+          if (['Dashboard', 'Clients'].includes(label)) {
+            if (li) li.style.display = 'none';
+          }
+          if (label === 'My Dashboard') {
+            link.href = '/pages/subscriber.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+          if (/My Account/i.test(label)) {
+            link.href = '/pages/user_account.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+        }
+      }
+    });
+  },
+
+  /**
+   * Déconnecte l'utilisateur
+   */
+  logout() {
+    CookieManager.remove("token");
+    UserSession.logout();
+    window.location.href = "../pages/connexion.html";
+  },
+
+  /**
+   * Récupère le token pour les requêtes API
+   * @returns {string|null}
+   */
+  getToken() {
+    return CookieManager.get("token");
+  },
+
+  /**
+   * Récupère l'utilisateur courant
+   * @returns {object|null}
+   */
+  getCurrentUser() {
+    return UserSession.getUser();
+  },
+
+  /**
+   * Redirige vers le dashboard approprié selon le rôle
+   */
+  redirectToDashboard() {
+    if (this.isCoach()) {
+      window.location.href = "../pages/trainer.html";
+    } else {
+      window.location.href = "../pages/subscriber.html";
+    }
+  },
+
+  /**
+   * Redirige vers la page de profil appropriée selon le rôle
+   */
+  redirectToAccount() {
+    if (this.isCoach()) {
+      window.location.href = "../pages/coach_account.html";
+    } else {
+      window.location.href = "../pages/user_account.html";
+    }
+  },
+
+  /**
+   * Met à jour la navigation selon l'état de connexion
+   */
+  updateNavigation() {
+    const isAuth = this.isAuthenticated();
+    const isCoach = this.isCoach();
+
+    // ❌ SUPPRIMÉ : this.ensureMyClientsLink(isAuth && isCoach);
+
+    const isSubscriberPage = window.location.pathname.includes('subscriber.html');
+    const isRoot = !window.location.pathname.includes('/pages/');
+    const navContainers = document.querySelectorAll('.top-mnu ul, .main-menu__inner ul');
+    const dashboardLinks = [];
+    const accountLinks = [];
+
+    navContainers.forEach((ul) => {
+      if (!isAuth) {
+        removeDashboardLink(ul);
+        removeAccountLink(ul);
+        // ✅ AJOUTÉ : Retirer My Clients si présent
+        removeMyClientsLink(ul);
+        return;
+      }
+
+      if (isSubscriberPage) {
+        removeDashboardLink(ul);
+      } else {
+        const dashLink = ensureDashboardLink(ul);
+        if (dashLink) dashboardLinks.push(dashLink);
+      }
+
+      // Créer les liens My Account pour tous les utilisateurs authentifiés
+      const accountLink = ensureAccountLink(ul);
+      if (accountLink) accountLinks.push(accountLink);
+      
+      // ✅ AJOUTÉ : Toujours retirer My Clients
+      removeMyClientsLink(ul);
+    });
+
+    dashboardLinks.forEach((link) => {
+      const item = link.closest('li') || link;
+      if (!isAuth) {
+        if (item) item.style.display = 'none';
+        link.removeAttribute('href');
+        link.onclick = null;
+        return;
+      }
+      if (item) item.style.display = '';
+      // Rediriger vers trainer.html pour les coachs, subscriber.html pour les users
+      link.href = isCoach ? '/pages/trainer.html' : '/pages/subscriber.html';
+      link.onclick = null;
+    });
+
+    accountLinks.forEach((link) => {
+      const item = link.closest('li') || link;
+      if (!isAuth) {
+        if (item) item.style.display = 'none';
+        link.removeAttribute('href');
+        link.onclick = null;
+        return;
+      }
+      if (item) item.style.display = '';
+      // Rediriger vers coach_account.html pour les coachs, user_account.html pour les users
+      link.href = isCoach ? '/pages/coach_account.html' : '/pages/user_account.html';
+      link.onclick = null;
+    });
+
+    const navLinks = document.querySelectorAll('.top-mnu a, .main-menu__inner a');
+    navLinks.forEach(link => {
+      const dataText = (link.getAttribute('data-text') || '').trim();
+      const text = (link.textContent || '').trim();
+      const href = link.getAttribute('href') || '';
+      const li = link.closest('li');
+
+      const setSignIn = () => {
+        link.setAttribute('data-text', 'Sign in');
+        link.textContent = 'Sign in';
+        link.href = isRoot ? 'pages/connexion.html' : 'connexion.html';
+        link.onclick = null;
+        if (li) li.style.display = '';
+      };
+
+      const setLogOut = () => {
+        link.setAttribute('data-text', 'Log out');
+        link.textContent = 'Log out';
+        link.href = '#';
+        link.onclick = (e) => { e.preventDefault(); logout(); };
+        if (li) li.style.display = '';
+      };
+
+      if (!isAuth) {
+        if (/Dashboard|My Dashboard|My Account|Account|Clients|Log out/i.test(dataText || text)) {
+          if (li) li.style.display = 'none';
+        }
+        if (/sign in|connexion|login/i.test(dataText || text || href)) {
+          setSignIn();
+        }
+      } else {
+        if (/sign in|connexion|login/i.test(dataText || text || href)) {
+          setLogOut();
+        }
+
+        if (this.isCoach()) {
+          // Masquer le lien "Coaches" pour les coachs connectés
+          if (/Coaches?/i.test(dataText || text)) {
+            if (li) li.style.display = 'none';
+          }
+          // Configurer My Dashboard pour rediriger vers trainer.html
+          if (/My Dashboard/i.test(dataText || text)) {
+            link.href = isRoot ? 'pages/trainer.html' : 'trainer.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+          // Configurer My Account pour rediriger vers coach_account.html
+          if (/My Account/i.test(dataText || text)) {
+            link.href = isRoot ? 'pages/coach_account.html' : 'coach_account.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+        } else {
+          const label = (dataText || text || '').trim();
+          if (['Dashboard', 'Clients'].includes(label)) {
+            if (li) li.style.display = 'none';
+          }
+          if (label === 'My Dashboard') {
+            link.href = '/pages/subscriber.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+          if (/My Account/i.test(label)) {
+            link.href = '/pages/user_account.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+        }
+      }
+    });
+  },
+
+  /**
+   * Déconnecte l'utilisateur
+   */
+  logout() {
+    CookieManager.remove("token");
+    UserSession.logout();
+    window.location.href = "../pages/connexion.html";
+  },
+
+  /**
+   * Récupère le token pour les requêtes API
+   * @returns {string|null}
+   */
+  getToken() {
+    return CookieManager.get("token");
+  },
+
+  /**
+   * Récupère l'utilisateur courant
+   * @returns {object|null}
+   */
+  getCurrentUser() {
+    return UserSession.getUser();
+  },
+
+  /**
+   * Redirige vers le dashboard approprié selon le rôle
+   */
+  redirectToDashboard() {
+    if (this.isCoach()) {
+      window.location.href = "../pages/trainer.html";
+    } else {
+      window.location.href = "../pages/subscriber.html";
+    }
+  },
+
+  /**
+   * Redirige vers la page de profil appropriée selon le rôle
+   */
+  redirectToAccount() {
+    if (this.isCoach()) {
+      window.location.href = "../pages/coach_account.html";
+    } else {
+      window.location.href = "../pages/user_account.html";
+    }
+  },
+
+  /**
+   * Met à jour la navigation selon l'état de connexion
+   */
+  updateNavigation() {
+    const isAuth = this.isAuthenticated();
+    const isCoach = this.isCoach();
+
+    // ❌ SUPPRIMÉ : this.ensureMyClientsLink(isAuth && isCoach);
+
+    const isSubscriberPage = window.location.pathname.includes('subscriber.html');
+    const isRoot = !window.location.pathname.includes('/pages/');
+    const navContainers = document.querySelectorAll('.top-mnu ul, .main-menu__inner ul');
+    const dashboardLinks = [];
+    const accountLinks = [];
+
+    navContainers.forEach((ul) => {
+      if (!isAuth) {
+        removeDashboardLink(ul);
+        removeAccountLink(ul);
+        // ✅ AJOUTÉ : Retirer My Clients si présent
+        removeMyClientsLink(ul);
+        return;
+      }
+
+      if (isSubscriberPage) {
+        removeDashboardLink(ul);
+      } else {
+        const dashLink = ensureDashboardLink(ul);
+        if (dashLink) dashboardLinks.push(dashLink);
+      }
+
+      // Créer les liens My Account pour tous les utilisateurs authentifiés
+      const accountLink = ensureAccountLink(ul);
+      if (accountLink) accountLinks.push(accountLink);
+      
+      // ✅ AJOUTÉ : Toujours retirer My Clients
+      removeMyClientsLink(ul);
+    });
+
+    dashboardLinks.forEach((link) => {
+      const item = link.closest('li') || link;
+      if (!isAuth) {
+        if (item) item.style.display = 'none';
+        link.removeAttribute('href');
+        link.onclick = null;
+        return;
+      }
+      if (item) item.style.display = '';
+      // Rediriger vers trainer.html pour les coachs, subscriber.html pour les users
+      link.href = isCoach ? '/pages/trainer.html' : '/pages/subscriber.html';
+      link.onclick = null;
+    });
+
+    accountLinks.forEach((link) => {
+      const item = link.closest('li') || link;
+      if (!isAuth) {
+        if (item) item.style.display = 'none';
+        link.removeAttribute('href');
+        link.onclick = null;
+        return;
+      }
+      if (item) item.style.display = '';
+      // Rediriger vers coach_account.html pour les coachs, user_account.html pour les users
+      link.href = isCoach ? '/pages/coach_account.html' : '/pages/user_account.html';
+      link.onclick = null;
+    });
+
+    const navLinks = document.querySelectorAll('.top-mnu a, .main-menu__inner a');
+    navLinks.forEach(link => {
+      const dataText = (link.getAttribute('data-text') || '').trim();
+      const text = (link.textContent || '').trim();
+      const href = link.getAttribute('href') || '';
+      const li = link.closest('li');
+
+      const setSignIn = () => {
+        link.setAttribute('data-text', 'Sign in');
+        link.textContent = 'Sign in';
+        link.href = isRoot ? 'pages/connexion.html' : 'connexion.html';
+        link.onclick = null;
+        if (li) li.style.display = '';
+      };
+
+      const setLogOut = () => {
+        link.setAttribute('data-text', 'Log out');
+        link.textContent = 'Log out';
+        link.href = '#';
+        link.onclick = (e) => { e.preventDefault(); logout(); };
+        if (li) li.style.display = '';
+      };
+
+      if (!isAuth) {
+        if (/Dashboard|My Dashboard|My Account|Account|Clients|Log out/i.test(dataText || text)) {
+          if (li) li.style.display = 'none';
+        }
+        if (/sign in|connexion|login/i.test(dataText || text || href)) {
+          setSignIn();
+        }
+      } else {
+        if (/sign in|connexion|login/i.test(dataText || text || href)) {
+          setLogOut();
+        }
+
+        if (this.isCoach()) {
+          // Masquer le lien "Coaches" pour les coachs connectés
+          if (/Coaches?/i.test(dataText || text)) {
+            if (li) li.style.display = 'none';
+          }
+          // Configurer My Dashboard pour rediriger vers trainer.html
+          if (/My Dashboard/i.test(dataText || text)) {
+            link.href = isRoot ? 'pages/trainer.html' : 'trainer.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+          // Configurer My Account pour rediriger vers coach_account.html
+          if (/My Account/i.test(dataText || text)) {
+            link.href = isRoot ? 'pages/coach_account.html' : 'coach_account.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+        } else {
+          const label = (dataText || text || '').trim();
+          if (['Dashboard', 'Clients'].includes(label)) {
+            if (li) li.style.display = 'none';
+          }
+          if (label === 'My Dashboard') {
+            link.href = '/pages/subscriber.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+          if (/My Account/i.test(label)) {
+            link.href = '/pages/user_account.html';
+            link.onclick = null;
+            if (li) li.style.display = '';
+          }
+        }
+      }
+    });
+  },
+};
+
+// Initialiser la navigation au chargement de chaque page
+document.addEventListener('DOMContentLoaded', () => {
+  // Première tentative immédiate
+  AuthManager.updateNavigation();
+  
+  // Deuxième tentative après un court délai pour s'assurer que tous les éléments sont chargés
+  setTimeout(() => {
+    AuthManager.updateNavigation();
+  }, 100);
+});
+
+// Aussi mettre à jour la navigation quand la page devient visible (changement d'onglet)
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) {
+    AuthManager.updateNavigation();
+  }
+});
+
+// Fonction globale de déconnexion (appelée depuis le HTML)
+function logout() {
+  AuthManager.logout();
+}
+
+function ensureDashboardLink(ul) {
+  if (!ul) return null;
+
+  let link = ul.querySelector('a[data-nav="my-dashboard"]');
+  if (!link) {
+    link = ul.querySelector('a[data-text="My Dashboard"]');
+  }
+
+  if (!link) {
+    const li = document.createElement('li');
+    link = document.createElement('a');
+    link.textContent = 'My Dashboard';
+    link.setAttribute('data-text', 'My Dashboard');
+    link.dataset.nav = 'my-dashboard';
+    link.href = '#';
+    li.appendChild(link);
+    
+    // ✅ AJOUTÉ : Insérer AVANT My Account ou Log out
+    const accountAnchor = ul.querySelector('a[data-nav="my-account"]');
+    const accountLi = accountAnchor ? accountAnchor.closest('li') : null;
+    const logoutAnchor = ul.querySelector('a[data-text="Log out"]');
+    const logoutLi = logoutAnchor ? logoutAnchor.closest('li') : null;
+    
+    if (accountLi) {
+      ul.insertBefore(li, accountLi);
+    } else if (logoutLi) {
+      ul.insertBefore(li, logoutLi);
+    } else {
+      ul.appendChild(li);
+    }
+  } else {
+    link.dataset.nav = 'my-dashboard';
+    link.textContent = 'My Dashboard';
+    link.setAttribute('data-text', 'My Dashboard');
+    
+    // ✅ AJOUTÉ : Repositionner le lien existant avant My Account ou Log out
+    const accountAnchor = ul.querySelector('a[data-nav="my-account"]');
+    const accountLi = accountAnchor ? accountAnchor.closest('li') : null;
+    const logoutAnchor = ul.querySelector('a[data-text="Log out"]');
+    const logoutLi = logoutAnchor ? logoutAnchor.closest('li') : null;
+    const dashboardLi = link.closest('li');
+    
+    if (accountLi && dashboardLi && dashboardLi !== accountLi.previousElementSibling) {
+      ul.insertBefore(dashboardLi, accountLi);
+    } else if (logoutLi && dashboardLi && dashboardLi !== logoutLi.previousElementSibling) {
+      ul.insertBefore(dashboardLi, logoutLi);
+    }
+  }
+
+  return link;
+}
+
+function removeDashboardLink(ul) {
+  if (!ul) return;
+  const existing = ul.querySelector('a[data-nav="my-dashboard"]');
+  if (existing) {
+    const li = existing.closest('li');
+    if (li) {
+      li.remove();
+    } else {
+      existing.remove();
+    }
+  }
+}
+
+function ensureAccountLink(ul) {
+  if (!ul) return null;
+
+  let link = ul.querySelector('a[data-nav="my-account"]');
+  if (!link) {
+    link = ul.querySelector('a[data-text="My Account"], a[data-text="Account"]');
+  }
+
+  if (!link) {
+    const li = document.createElement('li');
+    link = document.createElement('a');
+    link.textContent = 'My Account';
+    link.setAttribute('data-text', 'My Account');
+    link.dataset.nav = 'my-account';
+    link.href = '#';
+    li.appendChild(link);
+    
+    // ✅ MODIFIÉ : Insérer AVANT le bouton Log out
+    const logoutAnchor = ul.querySelector('a[data-text="Log out"]');
+    const logoutLi = logoutAnchor ? logoutAnchor.closest('li') : null;
+    
+    if (logoutLi) {
+      ul.insertBefore(li, logoutLi);
+    } else {
+      ul.appendChild(li);
+    }
+  } else {
+    link.dataset.nav = 'my-account';
+    link.textContent = 'My Account';
+    link.setAttribute('data-text', 'My Account');
+    
+    // ✅ MODIFIÉ : Repositionner le lien existant avant Log out
+    const logoutAnchor = ul.querySelector('a[data-text="Log out"]');
+    const logoutLi = logoutAnchor ? logoutAnchor.closest('li') : null;
+    const accountLi = link.closest('li');
+    
+    if (logoutLi && accountLi && accountLi !== logoutLi.previousElementSibling) {
+      ul.insertBefore(accountLi, logoutLi);
+    }
+  }
+
+  return link;
+}
+
+function removeAccountLink(ul) {
+  if (!ul) return;
+  const existing = ul.querySelector('a[data-nav="my-account"]');
+  if (existing) {
+    const li = existing.closest('li');
+    if (li) li.remove();
+    else existing.remove();
+  }
+}
+
+// ✅ AJOUTÉ : Fonction pour supprimer le lien My Clients
+function removeMyClientsLink(ul) {
+  if (!ul) return;
+  const existing = ul.querySelector('li.nav-my-clients');
+  if (existing) {
+    existing.remove();
+  }
+}
