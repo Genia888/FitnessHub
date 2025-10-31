@@ -115,15 +115,15 @@ async function loadCoachStats(coachId) {
 
       statsContainer.innerHTML = `
         <div class="stat-item">
-          <h4>${clients.length}</h4>
+          <h4>${clients.length}</h4>&nbsp;
           <p>Clients actifs</p>
         </div>
         <div class="stat-item">
-          <h4>${reviews.length}</h4>
+          <h4>${reviews.length}</h4>&nbsp;
           <p>Avis reçus</p>
         </div>
         <div class="stat-item">
-          <h4>${avgRating}</h4>
+          <h4>${avgRating}</h4>&nbsp;
           <p>Note moyenne</p>
         </div>
       `;
