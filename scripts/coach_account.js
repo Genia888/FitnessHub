@@ -64,8 +64,11 @@ function fillCoachForm(coachData) {
   }
 
   const profileImage = document.getElementById('profileImage');
-  if (profileImage && coachData.picture) {
-    profileImage.src = coachData.picture;
+  if (profileImage) {
+    if (coachData.picture)
+      profileImage.src = coachData.picture;
+    else
+      profileImage.src = "http://localhost:5500/public/images/ready/profil.webp";
   }
 
   const coachNameElements = document.querySelectorAll('.coach-name, .account-name');

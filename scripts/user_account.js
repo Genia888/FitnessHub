@@ -63,10 +63,12 @@ function fillUserForm(userData) {
 
     }
   });
-
   const profileImage = document.getElementById('profileImage');
   if (profileImage && userData.picture) {
-    profileImage.src = userData.picture;
+    if (userData.picture)
+      profileImage.src = userData.picture;
+    else
+      profileImage.src = "http://localhost:5500/public/images/ready/profil.webp";
   }
   const certifImage = document.getElementById('certifImage');
   if (certifImage && userData.coach_certif) {
