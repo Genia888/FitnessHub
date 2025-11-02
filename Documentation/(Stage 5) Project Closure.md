@@ -13,7 +13,7 @@
 - User retention: will be improved in the future through a badge system.
 - The MVP was completed in Week 12.
 
-# Write a lessons learned section:
+# Lessons Learned:
 
 During this project, we learned a lot about teamwork and communication. At first, communication was a small challenge, but it quickly improved as we got used to working together. We learned how to use project tools like Trello and shared notes to plan and track our progress.
 
