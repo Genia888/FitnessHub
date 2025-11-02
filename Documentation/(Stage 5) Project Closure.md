@@ -20,12 +20,11 @@
 - The MVP is done on week 12
 
 # Write a lessons learned section:
-- Reflect on what went well and why.
-  The have learn how to make a website with login acces
-- Identify challenges and how they were addressed.
-  we work to dynamise and synchronise back end and front end
-- Discuss how the team can improve for future projects.
-  he can improve to skill in javascript 
+
+During this project, we learned a lot about teamwork and communication. At first, communication was a small challenge, but it quickly improved as we got used to working together. We learned how to use project tools like Trello and shared notes to plan and track our progress.
+
+We also improved our technical and organizational skills learning how to move forward together on the same project, how to coordinate front-end and back-end work, and how to find and fix bugs as a team.
+This experience helped us understand how important clear communication and collaboration are for building a successful MVP.
 
 # Team retrospective hightligts 
 
