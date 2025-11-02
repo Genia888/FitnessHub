@@ -32,6 +32,6 @@ Overall, the FitnessHub project went very well. The balance within the team was 
 
 At the beginning of the project, we faced some communication difficulties, but this quickly improved as the project progressed. Once communication was clearer, collaboration became smooth and efficient. We helped each other, shared progress regularly, and solved problems together as a team.
 
-We sometimes had a bit of trouble making decisions collectively, but nothing serious — discussions and teamwork always helped us move forward.
+We sometimes had a bit of trouble making decisions collectively, but nothing serious discussions and teamwork always helped us move forward.
 
-For future projects, we aim to improve communication from the start and maintain the same positive and balanced teamwork we built during this project. Overall, it was a very good group experience — well-balanced, collaborative, and productive.
+For future projects, we aim to improve communication from the start and maintain the same positive and balanced teamwork we built during this project. Overall, it was a very good group experience well-balanced, collaborative, and productive.
