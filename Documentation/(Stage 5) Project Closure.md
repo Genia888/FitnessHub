@@ -29,7 +29,7 @@
 
 # Team retrospective hightligts 
 
-Overall, the FitnessHub project went very well. The balance within the team was excellent — everyone worked at their own pace, delivered quality work, and the task division was fair and well organized. There was no imbalance in the workload; each member contributed equally to the project.
+Overall, the FitnessHub project went very well. The balance within the team was excellent everyone worked at their own pace, delivered quality work, and the task division was fair and well organized. There was no imbalance in the workload; each member contributed equally to the project.
 
 At the beginning of the project, we faced some communication difficulties, but this quickly improved as the project progressed. Once communication was clearer, collaboration became smooth and efficient. We helped each other, shared progress regularly, and solved problems together as a team.
 
