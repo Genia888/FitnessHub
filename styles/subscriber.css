@@ -159,6 +159,18 @@
   }
 }
 
+.client-message {
+  background: rgba(100, 150, 255, 0.15);
+  border: 1px solid rgba(100, 150, 255, 0.3);
+  align-self: flex-start;
+}
+
+.coach-message {
+  background: rgba(255, 105, 180, 0.15);
+  border: 1px solid rgba(255, 105, 180, 0.3);
+  align-self: flex-end;
+}
+
 /* Alternative sur très petits écrans : 4 colonnes */
 @media (max-width: 480px) {
   .subscriber-readonly .calendar-grid {

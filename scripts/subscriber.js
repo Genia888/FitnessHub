@@ -217,7 +217,7 @@ async function loadMessages(userId, token) {
 
         messages.forEach(msg => {
           const messageDiv = document.createElement("div");
-          messageDiv.className = msg.is_from_user ? "message message-sent" : "message message-received";
+          messageDiv.className = msg.is_from_user ? "message client-message" : "message coach-message";
           messageDiv.innerHTML = `
             <p>${msg.text || "Message vide"}</p>
             <span class="message-time">${new Date(msg.created_at).toLocaleString()}</span>
