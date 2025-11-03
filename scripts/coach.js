@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const fullName = `${coach.first_name || ""} ${coach.last_name || ""}`.trim();
 
       // Moyenne des notes si disponibles
-      let averageRating = "N/A";
+      let averageRating = "-";
       if (coach.reviews && coach.reviews.length > 0) {
         const total = coach.reviews.reduce((sum, review) => sum + review.rating, 0);
         averageRating = (total / coach.reviews.length).toFixed(1);
