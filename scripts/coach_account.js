@@ -114,7 +114,7 @@ async function loadCoachStats(coachId) {
     if (statsContainer) {
       const avgRating = reviews.length > 0 
         ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1)
-        : 'N/A';
+        : '-';
 
       statsContainer.innerHTML = `
         <div class="stat-item">

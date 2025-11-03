@@ -347,218 +347,212 @@
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 0.5rem;
+  gap: 6px;
+  width: 100%;
 }
 
 .calendar-day {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 0.75rem 0.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 10px 5px;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .calendar-day:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 105, 180, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .calendar-day.active {
-  background: linear-gradient(135deg, rgba(255, 105, 180, 0.3), rgba(138, 43, 226, 0.3));
-  border-color: rgba(255, 105, 180, 0.6);
-  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+  background: rgba(142, 48, 246, 0.2);
+  border-color: rgba(142, 48, 246, 0.5);
 }
 
 .day-name {
   display: block;
-  font-size: 0.7rem;
+  font-size: 11px;
   color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 0.25rem;
+  margin-bottom: 3px;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .day-number {
   display: block;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 0.5rem;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 4px;
 }
 
 .day-exercises {
-  font-size: 0.65rem;
-  color: rgba(255, 105, 180, 1);
-  line-height: 1.3;
-  font-weight: 500;
-}
-
-/* ============================================
-   CHAT
-   ============================================ */
-.chat-card {
-  grid-column: span 2;
-}
-
-.chat-messages {
-  max-height: 300px;
-  overflow-y: auto;
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  padding-right: 0.5rem;
-}
-
-.chat-messages::-webkit-scrollbar {
-  width: 6px;
-}
-
-.chat-messages::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-}
-
-.chat-messages::-webkit-scrollbar-thumb {
-  background: rgba(255, 105, 180, 0.3);
-  border-radius: 10px;
-}
-
-.message {
-  padding: 0.75rem 1rem;
-  border-radius: 12px;
-  max-width: 70%;
-  position: relative;
-}
-
-.client-message {
-  background: rgba(100, 150, 255, 0.15);
-  border: 1px solid rgba(100, 150, 255, 0.3);
-  align-self: flex-start;
-}
-
-.coach-message {
-  background: rgba(255, 105, 180, 0.15);
-  border: 1px solid rgba(255, 105, 180, 0.3);
-  align-self: flex-end;
-}
-
-.message-time {
-  display: block;
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 0.25rem;
-}
-
-.message p {
-  margin: 0;
-  color: #fff;
-  font-size: 0.9rem;
-  line-height: 1.4;
-}
-
-.chat-input {
-  display: flex;
-  gap: 0.75rem;
-}
-
-.chat-input input {
-  flex: 1;
-  padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  color: #fff;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-}
-
-.chat-input input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.chat-input input:focus {
-  outline: none;
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 105, 180, 0.5);
-}
-
-.chat-input input:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* ============================================
-   BOUTONS
-   ============================================ */
-.btn-primary {
-  padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, rgba(255, 105, 180, 0.9), rgba(138, 43, 226, 0.9));
-  border: none;
-  border-radius: 12px;
-  color: #fff;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  margin-top: 4px;
   width: 100%;
+  overflow: hidden;
 }
 
-.btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, rgba(255, 105, 180, 1), rgba(138, 43, 226, 1));
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
-}
-
-.btn-primary:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+.day-exercises span {
+  display: block;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ============================================
    RESPONSIVE DESIGN
    ============================================ */
-@media (max-width: 1024px) {
-  .chat-card {
-    grid-column: span 1;
-  }
-}
 
-@media (max-width: 768px) {
-  .trainer-dashboard {
-    gap: 1.5rem;
-  }
-  
-  .client-profile-card {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .client-card {
-    min-width: 120px;
-    max-width: 120px;
-  }
-  
-  .client-card-image {
-    width: 60px;
-    height: 60px;
-  }
-  
+/* Tablettes et petits écrans desktop */
+@media (max-width: 1024px) {
   .calendar-grid {
-    gap: 0.25rem;
+    gap: 5px;
   }
   
   .calendar-day {
-    padding: 0.5rem 0.25rem;
+    padding: 10px 4px;
+  }
+  
+  .day-name {
+    font-size: 11px;
   }
   
   .day-number {
-    font-size: 0.9rem;
+    font-size: 16px;
   }
   
-  .day-exercises {
-    font-size: 0.55rem;
+  .day-exercises span {
+    font-size: 10px;
+  }
+}
+
+/* Tablettes en portrait */
+@media (max-width: 991.98px) {
+  .calendar-grid {
+    gap: 5px;
+  }
+  
+  .calendar-day {
+    padding: 10px 4px;
+  }
+  
+  .day-name {
+    font-size: 11px;
+  }
+  
+  .day-number {
+    font-size: 16px;
+  }
+  
+  .day-exercises span {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .calendar-grid {
+    gap: 4px;
+  }
+  
+  .calendar-day {
+    padding: 8px 4px;
+  }
+  
+  .day-name {
+    font-size: 10px;
+  }
+  
+  .day-number {
+    font-size: 15px;
+  }
+  
+  .day-exercises span {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 640px) {
+  .calendar-grid {
+    gap: 4px;
+  }
+  
+  .calendar-day {
+    padding: 6px 3px;
+  }
+  
+  .day-name {
+    font-size: 9px;
+  }
+  
+  .day-number {
+    font-size: 14px;
+  }
+  
+  .day-exercises span {
+    font-size: 8px;
+  }
+}
+
+/* Smartphones en portrait */
+@media (max-width: 575.98px) {
+  .calendar-grid {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+  }
+  
+  .calendar-day {
+    padding: 6px 2px;
+    border-radius: 6px;
+  }
+  
+  .day-name {
+    font-size: 8px;
+    margin-bottom: 2px;
+  }
+  
+  .day-number {
+    font-size: 12px;
+    margin-bottom: 3px;
+  }
+  
+  .day-exercises span {
+    font-size: 7px;
+  }
+}
+
+/* Alternative sur très petits écrans : 4 colonnes */
+@media (max-width: 480px) {
+  .calendar-grid.compact {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  
+  .calendar-grid.compact .calendar-day {
+    padding: 10px 6px;
+  }
+  
+  .calendar-grid.compact .day-name {
+    font-size: 10px;
+    margin-bottom: 3px;
+  }
+  
+  .calendar-grid.compact .day-number {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  
+  .calendar-grid.compact .day-exercises span {
+    font-size: 9px;
   }
 }
