@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           <p class="specialty">${coach.coach_description || 'Spécialité non renseignée'}</p>
           <p class="experience">${coach.coach_experience || ''}</p>
           <div class="rating">⭐ ${averageRating}/5</div>
-          <button class="btn-primary">Choisir ce coach</button>
+          <button class="btn-primary">Choose this coach</button>
         </div>
       `;
 

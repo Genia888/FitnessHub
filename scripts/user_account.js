@@ -15,6 +15,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     fillUserForm(userData);
 
+    // ✅ AJOUTÉ : Charger le plan d'abonnement
+    await loadUserSubscription(user.id);
+
     const accountForm = document.getElementById('account-form');
     if (accountForm) {
       accountForm.addEventListener('submit', async (e) => {
@@ -150,5 +153,67 @@ async function deleteAccount() {
   } catch (error) {
     console.error("❌ Erreur lors de la suppression:", error);
     alert("Erreur lors de la suppression du compte.");
+  }
+}
+
+// ✅ NOUVELLE FONCTION : Charger le plan d'abonnement de l'utilisateur
+async function loadUserSubscription(userId) {
+  const subscriptionStatusElement = document.getElementById('subscription-status');
+  
+  if (!subscriptionStatusElement) {
+    console.warn("⚠️ Élément subscription-status non trouvé");
+    return;
+  }
+
+  try {
+    const subscriptions = await ApiService.getUserSubscriptions(userId);
+    
+    // ✅ AJOUT : Log détaillé pour déboguer
+    console.log("🔍 Abonnements reçus:", subscriptions);
+    console.log("🔍 Nombre d'abonnements:", subscriptions ? subscriptions.length : 0);
+    
+    if (!subscriptions || subscriptions.length === 0) {
+      subscriptionStatusElement.textContent = 'No active subscription';
+      subscriptionStatusElement.className = 'user-status inactive';
+      return;
+    }
+
+    // ✅ Log de chaque abonnement
+    subscriptions.forEach((sub, index) => {
+      console.log(`📋 Abonnement ${index + 1}:`, {
+        id: sub.id,
+        plan_name: sub.plan_name,
+        status: sub.status,
+        start_date: sub.begin_date || sub.start_date,
+        end_date: sub.end_date
+      });
+    });
+
+    // ✅ MODIFICATION : Trier par date de début (plus récent en premier)
+    const sortedSubscriptions = subscriptions.sort((a, b) => {
+      const dateA = new Date(a.begin_date || a.start_date || 0);
+      const dateB = new Date(b.begin_date || b.start_date || 0);
+      return dateB - dateA; // Plus récent en premier
+    });
+
+    // Récupérer l'abonnement actif le plus récent
+    const activeSubscription = sortedSubscriptions.find(sub => sub.status === 'active') || sortedSubscriptions[0];
+    
+    console.log("✅ Abonnement sélectionné:", activeSubscription);
+    
+    if (activeSubscription) {
+      const planName = activeSubscription.plan_name || 'Basic';
+      subscriptionStatusElement.textContent = `${planName} subscription active`;
+      subscriptionStatusElement.className = 'user-status active';
+      
+      console.log("✅ Plan d'abonnement affiché:", planName);
+    } else {
+      subscriptionStatusElement.textContent = 'No active subscription';
+      subscriptionStatusElement.className = 'user-status inactive';
+    }
+  } catch (error) {
+    console.error("❌ Erreur lors du chargement de l'abonnement:", error);
+    subscriptionStatusElement.textContent = 'Unable to load subscription';
+    subscriptionStatusElement.className = 'user-status error';
   }
 }

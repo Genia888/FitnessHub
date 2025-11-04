@@ -104,9 +104,29 @@
 }
 
 .user-status {
-  font-size: 15px;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 15px;
+  display: inline-block;
+  margin-top: 8px;
+}
+
+.user-status.active {
   color: #4CAF50;
-  margin-bottom: 15px;
+  background: rgba(76, 175, 80, 0.1);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.user-status.inactive {
+  color: #FF9800;
+  background: rgba(255, 152, 0, 0.1);
+  border: 1px solid rgba(255, 152, 0, 0.3);
+}
+
+.user-status.error {
+  color: #f44336;
+  background: rgba(244, 67, 54, 0.1);
+  border: 1px solid rgba(244, 67, 54, 0.3);
 }
 
 .coach-stats {

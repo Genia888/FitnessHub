@@ -314,19 +314,38 @@ class HBnBFacade:
             if not coach:
                 raise ValueError("Coach not found")
             if not getattr(coach, "is_coach", False):
-                raise ValueError("Selected user is not a coach")
+                raise ValueError("Coach not found")
 
-        new_subscription = Subscription(
+        # ✅ AJOUT : Log pour déboguer
+        print(f"🔍 create_subscription - Données reçues:")
+        print(f"   plan_name={subscription_data.get('plan_name')}")
+        print(f"   status={subscription_data.get('status')}")
+        print(f"   user_id={subscription_data.get('user_id')}")
+        print(f"   coach_id={subscription_data.get('coach_id')}")
+
+        # ✅ CORRECTION : Passer les données dans le bon ordre
+        subscription = Subscription(
+            user_id=subscription_data['user_id'],
+            coach_id=subscription_data['coach_id'],
             begin_date=subscription_data['begin_date'],
             end_date=subscription_data['end_date'],
-            option_message=subscription_data.get('option_message', False),
+            option_message=subscription_data.get('option_message', True),
             option_nutrition=subscription_data.get('option_nutrition', False),
-            user_id=subscription_data['user_id'],
-            coach_id=coach_id
+            plan_name=subscription_data.get('plan_name', 'Basic'),  # ✅ S'assurer que c'est passé
+            status=subscription_data.get('status', 'active')
         )
 
-        self.subscription_repo.add(new_subscription)
-        return new_subscription
+        print(f"🔍 Subscription créée avant save:")
+        print(f"   plan_name={subscription.plan_name}")
+        print(f"   status={subscription.status}")
+
+        self.subscription_repo.add(subscription)
+        
+        print(f"🔍 Subscription sauvegardée:")
+        print(f"   ID={subscription.id}")
+        print(f"   plan_name={subscription.plan_name}")
+        
+        return subscription
 
     def get_subscription(self, subscription_id):
         subscription = self.subscription_repo.get(subscription_id)

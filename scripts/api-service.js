@@ -93,7 +93,19 @@ const ApiService = {
   },
 
   async getUserSubscriptions(userId) {
-    return this.request(`/subscription/user/${userId}`);
+    const token = CookieManager.get("token");
+    
+    console.log("🔍 Récupération des abonnements pour l'utilisateur:", userId);
+    
+    const response = await this.request(`/subscription/user/${userId}`, {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    });
+    
+    console.log("📥 Réponse API subscriptions:", response);
+    return response;
   },
 
   // ==================== PRODUCTS ====================

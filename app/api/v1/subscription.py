@@ -27,6 +27,9 @@ class SubscriptionList(Resource):
         sub_data = api.payload
         
         try:
+            # ✅ AJOUT : Log pour déboguer
+            print(f"🔍 Données reçues pour création subscription: {sub_data}")
+            
             # Transformer les données du frontend en format backend
             transformed_data = {
                 'user_id': sub_data['user_id'],
@@ -34,17 +37,33 @@ class SubscriptionList(Resource):
                 'plan_name': sub_data.get('plan_name', 'Basic'),
                 'price': sub_data.get('price', 0)
             }
-            # coach_id est optionnel et ne doit être ajouté que s'il existe et n'est pas vide
+            
+            print(f"🔍 Données transformées: {transformed_data}")
+            
+            # ✅ AJOUT : Désactiver tous les anciens abonnements actifs de cet utilisateur
+            user_id = sub_data['user_id']
+            all_subscriptions = facade.get_all_subscriptions()
+            for old_sub in all_subscriptions:
+                if old_sub.user_id == user_id and old_sub.status == 'active':
+                    facade.update_subscription(old_sub.id, {'status': 'replaced'})
+                    print(f"🔄 Ancien abonnement {old_sub.plan_name} désactivé pour user {user_id}")
+            
+            # coach_id est optionnel
             coach_id = sub_data.get('coach_id')
             if coach_id:
                 transformed_data['coach_id'] = coach_id
+            else:
+                # ✅ CORRECTION : Ne pas réimporter facade ici
+                all_coaches = facade.get_all_coach()  # ✅ Utiliser le facade déjà importé en haut
+                if all_coaches and len(all_coaches) > 0:
+                    transformed_data['coach_id'] = all_coaches[0].id
+                    print(f"✅ Coach par défaut assigné: {all_coaches[0].id}")
 
-            # Gérer la date de début
+            # begin_date et end_date
             if 'start_date' in sub_data and sub_data['start_date']:
                 try:
-                    start_date_obj = datetime.fromisoformat(sub_data['start_date'].replace('Z', '+00:00'))
-                    transformed_data['begin_date'] = start_date_obj.date()
-                except Exception:
+                    transformed_data['begin_date'] = datetime.fromisoformat(sub_data['start_date'].replace('Z', '+00:00')).date()
+                except:
                     transformed_data['begin_date'] = datetime.now().date()
             else:
                 transformed_data['begin_date'] = datetime.now().date()
@@ -66,33 +85,24 @@ class SubscriptionList(Resource):
             elif plan == 'Premium':
                 transformed_data['option_nutrition'] = True
                 transformed_data['option_message'] = True
-            elif plan == 'Elite':
+            else:  # Elite
                 transformed_data['option_nutrition'] = True
                 transformed_data['option_message'] = True
-            else:
-                transformed_data['option_nutrition'] = False
-                transformed_data['option_message'] = False
 
+            print(f"✅ Création subscription avec plan_name: {transformed_data.get('plan_name')}")
+            
             # Créer la subscription
             new_subscription = facade.create_subscription(transformed_data)
+            
+            print(f"✅ Subscription créée: ID={new_subscription.id}, Plan={new_subscription.plan_name}")
+            
+            return new_subscription.to_dict(), 201
 
-            return {
-                'id': new_subscription.id,
-                'user_id': new_subscription.user_id,
-                'coach_id': getattr(new_subscription, 'coach_id', None),
-                'begin_date': str(new_subscription.begin_date),
-                'end_date': str(new_subscription.end_date),
-                'option_nutrition': new_subscription.option_nutrition,
-                'option_message': new_subscription.option_message,
-                'status': transformed_data['status'],
-                'plan_name': transformed_data['plan_name'],
-                'price': transformed_data['price']
-            }, 201
-
-        except ValueError as e:
-            return {'error': str(e)}, 400
         except Exception as e:
-            return {'error': f'Internal server error: {str(e)}'}, 500
+            print(f"❌ Erreur lors de la création de la subscription: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            return {'error': str(e)}, 400
 
     @jwt_required()
     def get(self):
@@ -129,7 +139,8 @@ class SubscriptionResource(Resource):
         
         facade.delete_subscription(subscription_id)
         return {'message': 'Subscription deleted successfully'}, 200
-    
+
+
 @api.route('/user/<user_id>')
 class UserSubscriptions(Resource):
     @jwt_required()
@@ -145,6 +156,12 @@ class UserSubscriptions(Resource):
                 if sub.user_id == user_id
             ]
             
+            # ✅ AJOUT : Log pour déboguer
+            print(f"🔍 Subscriptions trouvées pour user {user_id}: {len(user_subscriptions)}")
+            for sub in user_subscriptions:
+                print(f"  - ID: {sub.id}, Plan: {sub.plan_name}, Status: {sub.status}")
+            
             return [sub.to_dict() for sub in user_subscriptions], 200
         except Exception as e:
+            print(f"❌ Erreur get user subscriptions: {str(e)}")
             return {'error': str(e)}, 400
