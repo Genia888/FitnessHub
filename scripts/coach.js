@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     coachGrid.innerHTML = "";
 
-    // ✅ On parcourt chaque coach
+    // On parcourt chaque coach
     coaches.forEach(coach => {
       // Calcul du nom complet
       const fullName = `${coach.first_name || ""} ${coach.last_name || ""}`.trim();

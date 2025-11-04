@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("📤 Payload :", payload);
 
     try {
-      // ✅ Utiliser le service centralisé
+      // Utiliser le service centralisé
       const data = await ApiService.login(payload.email, payload.password);
       console.log("📥 Réponse serveur :", data);
 

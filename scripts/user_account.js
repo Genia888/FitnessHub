@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     fillUserForm(userData);
 
-    // ✅ AJOUTÉ : Charger le plan d'abonnement
+    // Charger le plan d'abonnement
     await loadUserSubscription(user.id);
 
     const accountForm = document.getElementById('account-form');
@@ -156,7 +156,7 @@ async function deleteAccount() {
   }
 }
 
-// ✅ NOUVELLE FONCTION : Charger le plan d'abonnement de l'utilisateur
+// Charger le plan d'abonnement de l'utilisateur
 async function loadUserSubscription(userId) {
   const subscriptionStatusElement = document.getElementById('subscription-status');
   
@@ -168,7 +168,7 @@ async function loadUserSubscription(userId) {
   try {
     const subscriptions = await ApiService.getUserSubscriptions(userId);
     
-    // ✅ AJOUT : Log détaillé pour déboguer
+    // Log détaillé pour déboguer
     console.log("🔍 Abonnements reçus:", subscriptions);
     console.log("🔍 Nombre d'abonnements:", subscriptions ? subscriptions.length : 0);
     
@@ -178,7 +178,7 @@ async function loadUserSubscription(userId) {
       return;
     }
 
-    // ✅ Log de chaque abonnement
+    // Log de chaque abonnement
     subscriptions.forEach((sub, index) => {
       console.log(`📋 Abonnement ${index + 1}:`, {
         id: sub.id,
@@ -189,7 +189,7 @@ async function loadUserSubscription(userId) {
       });
     });
 
-    // ✅ MODIFICATION : Trier par date de début (plus récent en premier)
+    // Trier par date de début (plus récent en premier)
     const sortedSubscriptions = subscriptions.sort((a, b) => {
       const dateA = new Date(a.begin_date || a.start_date || 0);
       const dateB = new Date(b.begin_date || b.start_date || 0);

@@ -325,7 +325,7 @@ function initializeChat(userId, token) {
       }
 
       try {
-        // ✅ CORRECTION : Récupérer le coach_id depuis l'abonnement
+        //  Récupérer le coach_id depuis l'abonnement
         const subResponse = await fetch(`${API_BASE_URL}/subscription/?user_id=${userId}`, {
           headers: {
             "Authorization": `Bearer ${token}`
@@ -355,7 +355,7 @@ function initializeChat(userId, token) {
           },
           body: JSON.stringify({
             user_id: userId,
-            coach_id: coachId,  // ✅ AJOUTÉ
+            coach_id: coachId,
             text: messageText,
             is_from_user: true,
             is_read: false

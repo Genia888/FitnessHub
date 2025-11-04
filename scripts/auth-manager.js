@@ -85,9 +85,8 @@ const AuthManager = {
     }
   },
 
-  /**
-   * Redirige vers la page de profil appropriée selon le rôle
-   */
+  // Redirige vers la page de profil appropriée selon le rôle
+  
   redirectToAccount() {
     if (this.isCoach()) {
       window.location.href = "../pages/coach_account.html";
@@ -96,9 +95,7 @@ const AuthManager = {
     }
   },
 
-  /**
-   * Met à jour la navigation selon l'état de connexion
-   */
+  // Met à jour la navigation selon l'état de connexion
   updateNavigation() {
     const isAuth = this.isAuthenticated();
     const isCoach = this.isCoach();
@@ -118,13 +115,13 @@ const AuthManager = {
     const dashboardLinks = [];
     const accountLinks = [];
 
-    // ✅ AJOUTÉ : Gérer l'affichage du lien Coaches pour les coachs
+    // Gérer l'affichage du lien Coaches pour les coachs
     ensureCoachesLinkForCoach();
     
-    // ✅ AJOUTÉ : Gérer l'affichage du lien My Cart
+    // Gérer l'affichage du lien My Cart
     ensureCartLink();
     
-    // ✅ NOUVEAU : Gérer l'affichage du lien Subscriber pour les non-connectés
+    // Gérer l'affichage du lien Subscriber pour les non-connectés
     ensureSubscriberLink();
 
     navContainers.forEach((ul) => {
@@ -210,7 +207,7 @@ const AuthManager = {
           setLogOut();
         }
 
-        // ✅ Cacher les boutons selon la page actuelle
+        // Cacher les boutons selon la page actuelle
         if (isCartPage && /My Cart|Cart/i.test(dataText || text)) {
           if (li) li.style.display = 'none';
         }
@@ -447,7 +444,7 @@ function ensureCartLink() {
   });
 }
 
-// ✅ NOUVEAU : Fonction pour gérer le lien Subscriber pour les non-connectés
+// Fonction pour gérer le lien Subscriber pour les non-connectés
 function ensureSubscriberLink() {
   const isAuth = AuthManager.isAuthenticated();
   const isLoginPage = window.location.pathname.includes('login.html');

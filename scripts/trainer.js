@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Initialiser la recherche de clients
     initializeClientSearch();
     
-    // ✅ NOUVEAU : Vérifier si un client spécifique est demandé dans l'URL
+    // Vérifier si un client spécifique est demandé dans l'URL
     const urlParams = new URLSearchParams(window.location.search);
     const clientIdFromUrl = urlParams.get('client');
     
@@ -86,7 +86,7 @@ async function loadCoachClients(coachId, token) {
       return;
     }
 
-    // ✅ NOUVEAU : Filtrer les clients actifs uniquement
+    // Filtrer les clients actifs uniquement
     const activeClients = await filterActiveClients(clients, token);
     
     console.log(`✅ Clients actifs: ${activeClients.length}/${clients.length}`);
@@ -119,7 +119,7 @@ async function loadCoachClients(coachId, token) {
   }
 }
 
-// ✅ NOUVELLE FONCTION : Filtrer les clients avec abonnement actif
+// Filtrer les clients avec abonnement actif
 async function filterActiveClients(clients, token) {
   const activeClients = [];
   
@@ -169,7 +169,7 @@ function createClientCard(client) {
   
   const profileImage = client.picture || "../public/images/ready/client1.jpg";
   
-  // ✅ AJOUT : Afficher le plan d'abonnement si disponible
+  // Afficher le plan d'abonnement si disponible
   const planBadge = client.subscription 
     ? `<span class="client-plan-badge ${client.subscription.plan_name.toLowerCase()}">${client.subscription.plan_name}</span>` 
     : '';
@@ -203,9 +203,8 @@ function createClientCard(client) {
   return clientCard;
 }
 
-// ============================================
-// ✅ NOUVELLE FONCTION : Sélectionner un client par son ID
-// ============================================
+// Sélectionner un client par son ID
+
 function selectClientById(clientId, token) {
   console.log(`🔍 Recherche du client avec ID: ${clientId}`);
   
@@ -237,9 +236,7 @@ function selectClientById(clientId, token) {
   }
 }
 
-// ============================================
 // Sélectionner un client
-// ============================================
 async function selectClient(clientId, token) {
   currentClientId = clientId;
   
@@ -258,9 +255,8 @@ async function selectClient(clientId, token) {
   }
 }
 
-// ============================================
 // Charger les données d'un client spécifique
-// ============================================
+
 async function loadClientData(clientId, token) {
   try {
     // Charger le profil du client
@@ -334,9 +330,8 @@ async function loadClientData(clientId, token) {
   }
 }
 
-// ============================================
 // Calculer l'âge depuis la date de naissance
-// ============================================
+
 function calculateAge(birthdate) {
   const birth = new Date(birthdate);
   const today = new Date();
@@ -350,9 +345,8 @@ function calculateAge(birthdate) {
   return age;
 }
 
-// ============================================
 // Charger le planning d'exercices du client
-// ============================================
+
 async function loadClientWorkout(clientId, token) {
   const exerciseList = document.querySelector(".exercise-list");
   
@@ -394,9 +388,8 @@ async function loadClientWorkout(clientId, token) {
   }
 }
 
-// ============================================
 // Charger le planning nutritionnel du client
-// ============================================
+
 async function loadClientNutrition(clientId, token) {
   const nutritionList = document.querySelector(".nutrition-list");
   
@@ -438,9 +431,8 @@ async function loadClientNutrition(clientId, token) {
   }
 }
 
-// ============================================
 // Charger les messages avec le client
-// ============================================
+
 async function loadMessages(clientId, token) {
   const chatMessages = document.querySelector(".chat-messages");
   
@@ -489,9 +481,8 @@ async function loadMessages(clientId, token) {
   }
 }
 
-// ============================================
+
 // Activer le chat
-// ============================================
 function enableChat() {
   const chatInput = document.querySelector(".chat-input input");
   const sendButton = document.querySelector(".chat-input button");
@@ -500,9 +491,8 @@ function enableChat() {
   if (sendButton) sendButton.disabled = false;
 }
 
-// ============================================
+
 // Initialiser le chat
-// ============================================
 function initializeChat(coachId, clientId, token) {
   const chatInput = document.querySelector(".chat-input input");
   const sendButton = document.querySelector(".chat-input button");
@@ -528,9 +518,7 @@ function initializeChat(coachId, clientId, token) {
   });
 }
 
-// ============================================
 // Envoyer un message
-// ============================================
 async function sendMessage(coachId, clientId, token) {
   const chatInput = document.querySelector(".chat-input input");
   const messageText = chatInput.value.trim();
@@ -592,9 +580,7 @@ async function sendMessage(coachId, clientId, token) {
   }
 }
 
-// ============================================
 // Initialiser la recherche de clients
-// ============================================
 function initializeClientSearch() {
   const searchInput = document.getElementById("clientSearch");
   
@@ -616,9 +602,7 @@ function initializeClientSearch() {
   });
 }
 
-// ============================================
 // Initialiser les boutons d'action
-// ============================================
 function initializeActionButtons(clientId, token) {
   // Bouton "Change Schedule"
   const changeScheduleBtn = document.querySelector(".planning-card:first-child .btn-primary");

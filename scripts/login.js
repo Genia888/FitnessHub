@@ -18,11 +18,11 @@ document.addEventListener("DOMContentLoaded", () => {
       data.is_nutrition = false; // ajout pour cohérence avec le backend
 
       try {
-        // ✅ Utiliser le service centralisé
+        // Utiliser le service centralisé
         const result = await ApiService.register(data);
         console.log("🆕 Coach inscrit :", result);
 
-        // ⚠️ ATTENTION : l'API retourne "access_token" pas "token"
+        //  ATTENTION : l'API retourne "access_token" pas "token"
         if (result.access_token && result.user) {
           // Sauvegarde du cookie et de la session
           CookieManager.set("token", result.access_token);
@@ -51,11 +51,11 @@ document.addEventListener("DOMContentLoaded", () => {
       data.is_nutrition = false; // ajout pour cohérence avec le backend
 
       try {
-        // ✅ Utiliser le service centralisé
+        //  Utiliser le service centralisé
         const result = await ApiService.register(data);
         console.log("🆕 Utilisateur inscrit :", result);
 
-        // ⚠️ ATTENTION : l'API retourne "access_token" pas "token"
+        // ATTENTION : l'API retourne "access_token" pas "token"
         if (result.access_token && result.user) {
           // Sauvegarde du cookie et de la session
           CookieManager.set("token", result.access_token);

@@ -112,8 +112,8 @@ function removeFromCart(index) {
 function clearCart() {
   if (confirm('Are you sure you want to clear your cart?')) {
     localStorage.removeItem('cart');
-    localStorage.removeItem('promo_code');       // ✅ reset promo
-    localStorage.removeItem('promo_discount');   // ✅ reset promo
+    localStorage.removeItem('promo_code');       //  reset promo
+    localStorage.removeItem('promo_discount');   //  reset promo
     loadCart();
   }
 }
@@ -134,7 +134,7 @@ function applyPromoCode() {
     localStorage.setItem('promo_code', promoCode);
     localStorage.setItem('promo_discount', String(discount));
     alert(`Promo code applied! You saved ${(discount * 100)}%`);
-    loadCart(); // ✅ déclenche le recalcul et la mise à jour UI
+    loadCart(); // déclenche le recalcul et la mise à jour UI
   } else {
     alert('Invalid promo code');
   }

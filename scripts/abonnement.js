@@ -6,7 +6,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("✅ abonnement.js chargé");
 
-  // ✅ AJOUT : Afficher le plan actuel si connecté
+  // Afficher le plan actuel si connecté
   if (AuthManager.isAuthenticated() && !AuthManager.isCoach()) {
     await displayCurrentPlan();
   }
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 });
 
-// ✅ NOUVELLE FONCTION : Afficher le plan actuel
+// Afficher le plan actuel
 async function displayCurrentPlan() {
   const user = AuthManager.getCurrentUser();
   
@@ -52,7 +52,7 @@ async function displayCurrentPlan() {
   }
 }
 
-// ✅ NOUVELLE FONCTION : Mettre en évidence le plan actuel
+// Mettre en évidence le plan actuel
 function highlightCurrentPlan(currentPlanName) {
   const planCards = document.querySelectorAll('.plan-card');
   
@@ -77,7 +77,7 @@ function highlightCurrentPlan(currentPlanName) {
   });
 }
 
-// ✅ NOUVELLE FONCTION : Mettre à jour le texte des boutons
+// Mettre à jour le texte des boutons
 function updatePlanButtons(currentPlanName) {
   const planCards = document.querySelectorAll('.plan-card');
   
@@ -120,7 +120,7 @@ async function selectPlan(planName, planPrice) {
     return;
   }
 
-  // ✅ AJOUT : Vérifier si c'est un changement de plan
+  // Vérifier si c'est un changement de plan
   try {
     const subscriptions = await ApiService.getUserSubscriptions(user.id);
     const currentSubscription = subscriptions?.find(sub => sub.status === 'active');
@@ -157,7 +157,7 @@ async function selectPlan(planName, planPrice) {
       start_date: new Date().toISOString(),
     };
     
-    // ✅ AJOUT : Log pour déboguer
+    // Log pour déboguer
     console.log("📤 Données envoyées à l'API:", subscriptionData);
     
     // Créer l'abonnement (l'ancien sera automatiquement désactivé par le backend)
