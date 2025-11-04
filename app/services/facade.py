@@ -62,7 +62,7 @@ class HBnBFacade:
         if not coach:
             raise ValueError("Coach not found")
         return [self.user_repo.get(consumer.user_id) for consumer in
-                coach.consumerUsers]
+                coach.consumerUsers if consumer.status == "active"]
         
     
     def update_user(self, user_id, update_data):

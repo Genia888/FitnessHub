@@ -129,7 +129,7 @@ class User(BaseModel):
             "messagesFromUser": [{'id': message.id, 'is_from_user' : message.is_from_user, 'text': message.text, 'created_at': message.created_at.isoformat()}
                           for message in self.messagesFromUser],
             "consumerUsers": [{'id': subscription.id, 'user_id' : subscription.user_id}
-                          for subscription in self.consumerUsers],
+                          for subscription in self.consumerUsers if subscription.status == "active"],
             "nutritionSchedule": [{'id': nutrition.id, 'date' : nutrition.date_nutrition.isoformat(), 'calories' : nutrition.calories, 'quantity' : nutrition.quantity,  'category' : nutrition.category, 'description' : nutrition.description}
                           for nutrition in self.nutritionSchedule],
             "workoutSchedule": [{'id': workout.id, 'date' : workout.date_workout.isoformat(), 'category' : workout.category, 'description' : workout.description}
