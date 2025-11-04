@@ -86,13 +86,23 @@ async function loadCoachClients(coachId, token) {
       return;
     }
 
-    // Afficher la liste des clients
+    // ✅ NOUVEAU : Filtrer les clients actifs uniquement
+    const activeClients = await filterActiveClients(clients, token);
+    
+    console.log(`✅ Clients actifs: ${activeClients.length}/${clients.length}`);
+    
+    if (activeClients.length === 0) {
+      clientsList.innerHTML = '<div class="empty-message">No active clients at the moment</div>';
+      return;
+    }
+
+    // Afficher la liste des clients actifs
     clientsList.innerHTML = "";
     
-    clients.forEach((client, index) => {
+    activeClients.forEach((client, index) => {
       const clientCard = createClientCard(client);
       clientsList.appendChild(clientCard);
-      
+
       // Charger automatiquement le premier client seulement si aucun client n'est spécifié dans l'URL
       const urlParams = new URLSearchParams(window.location.search);
       const clientIdFromUrl = urlParams.get('client');
@@ -109,6 +119,45 @@ async function loadCoachClients(coachId, token) {
   }
 }
 
+// ✅ NOUVELLE FONCTION : Filtrer les clients avec abonnement actif
+async function filterActiveClients(clients, token) {
+  const activeClients = [];
+  
+  for (const client of clients) {
+    try {
+      // Récupérer les abonnements du client
+      const response = await fetch(`${API_BASE_URL}/subscription/user/${client.id}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      });
+      
+      if (response.ok) {
+        const subscriptions = await response.json();
+        
+        // Vérifier si le client a au moins un abonnement actif
+        const hasActiveSubscription = subscriptions.some(sub => sub.status === 'active');
+        
+        if (hasActiveSubscription) {
+          // Ajouter les informations d'abonnement au client
+          const activeSub = subscriptions.find(sub => sub.status === 'active');
+          client.subscription = activeSub;
+          activeClients.push(client);
+          
+          console.log(`✅ Client actif: ${client.first_name} ${client.last_name} - Plan: ${activeSub.plan_name}`);
+        } else {
+          console.log(`⚠️ Client inactif: ${client.first_name} ${client.last_name}`);
+        }
+      }
+    } catch (error) {
+      console.error(`❌ Erreur lors de la vérification de l'abonnement pour ${client.first_name}:`, error);
+    }
+  }
+  
+  return activeClients;
+}
+
 // ============================================
 // Créer une carte client
 // ============================================
@@ -120,12 +169,18 @@ function createClientCard(client) {
   
   const profileImage = client.picture || "../public/images/ready/client1.jpg";
   
+  // ✅ AJOUT : Afficher le plan d'abonnement si disponible
+  const planBadge = client.subscription 
+    ? `<span class="client-plan-badge ${client.subscription.plan_name.toLowerCase()}">${client.subscription.plan_name}</span>` 
+    : '';
+  
   clientCard.innerHTML = `
     <div class="client-card-image">
       <img src="${profileImage}" alt="${client.first_name} ${client.last_name}">
     </div>
     <div class="client-card-info">
       <h4>${client.first_name} ${client.last_name}</h4>
+      ${planBadge}
       <p class="client-card-email">${client.email}</p>
       ${client.weight ? `<p class="client-card-stats">${client.weight}kg${client.size ? ` • ${client.size}m` : ''}</p>` : ''}
     </div>
