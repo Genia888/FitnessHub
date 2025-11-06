@@ -42,3 +42,9 @@ Comprehensive support for both fitness and nutrition.
 
 ### 📥 Download
 (Soon in App Store and Google Play when available)
+
+### 🌐 Live Landing Page
+You can visit our FitnessHub Landing Page to explore the project’s concept, main features, and design.
+It gives a quick overview of how the platform works and what users can expect.
+
+[Visit the Landing Page](https://genia888.github.io/FitnessHub/)
