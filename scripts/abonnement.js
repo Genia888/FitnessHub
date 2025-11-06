@@ -103,11 +103,11 @@ function updatePlanButtons(currentPlanName) {
  * Sélectionne un plan d'abonnement
  */
 async function selectPlan(planName, planPrice) {
-  console.log("📋 Plan sélectionné:", planName, planPrice);
+  console.log("📋 Selected plan:", planName, planPrice);
 
   // Vérifier si l'utilisateur est connecté
   if (!AuthManager.isAuthenticated()) {
-    if (confirm('Vous devez être connecté pour souscrire à un abonnement. Voulez-vous vous connecter maintenant ?')) {
+    if (confirm('You must be logged in to subscribe. Do you want to log in now?')) {
       window.location.href = '../pages/connexion.html';
     }
     return;
@@ -116,7 +116,7 @@ async function selectPlan(planName, planPrice) {
   const user = AuthManager.getCurrentUser();
 
   if (AuthManager.isCoach()) {
-    alert('Les coachs ne peuvent pas souscrire à des abonnements utilisateur');
+    alert('Coaches cannot subscribe to user subscriptions');
     return;
   }
 
@@ -151,7 +151,7 @@ async function selectPlan(planName, planPrice) {
     const subscriptionData = {
       user_id: user.id,
       ...(coach_id && { coach_id }),
-      plan_name: planName,  // ✅ Vérifier que c'est le bon nom
+      plan_name: planName,  // Vérifier que c'est le bon nom
       price: price,
       status: 'active',
       start_date: new Date().toISOString(),
@@ -177,11 +177,11 @@ async function selectPlan(planName, planPrice) {
     }, 2000);
     
   } catch (error) {
-    let msg = "Erreur lors de la souscription. Veuillez réessayer.";
+    let msg = "Error during subscription. Please try again.";
     if (error && error.message) {
       msg += `\n${error.message}`;
     }
-    console.error("❌ Erreur lors de la création de l'abonnement:", error);
+    console.error("❌ Error creating subscription:", error);
     alert(msg);
   }
 }

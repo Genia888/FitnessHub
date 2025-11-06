@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const formData = new FormData(coachForm);
       const data = Object.fromEntries(formData.entries());
-      data.is_coach = true; // ✅ différencie les coachs
+      data.is_coach = true; // différencie les coachs
       data.is_nutrition = false; // ajout pour cohérence avec le backend
 
       try {
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const formData = new FormData(memberForm);
       const data = Object.fromEntries(formData.entries());
-      data.is_coach = false; // ✅ différencie les membres "lambda"
+      data.is_coach = false; // différencie les membres "lambda"
       data.is_nutrition = false; // ajout pour cohérence avec le backend
 
       try {

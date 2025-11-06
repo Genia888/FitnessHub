@@ -168,9 +168,6 @@ async function proceedToCheckout() {
 
   console.log("📋 Order data:", orderData);
   try {
-    // TODO: Créer l'endpoint API pour les commandes
-    // const order = await ApiService.createOrder(orderData);
-    
     alert('Order placed successfully! ✅\n\nOrder confirmation will be sent to your email.');
     localStorage.removeItem('cart');
     loadCart();

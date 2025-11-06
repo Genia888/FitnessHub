@@ -3,8 +3,6 @@
 //  GESTION DES COOKIES ET DU LOCALSTORAGE FITNESSHUB
 // ================================================
 
-// --- UTILITAIRES ---
-// Petite fonction pratique pour manipuler les cookies facilement
 const CookieManager = {
   set: (name, value, days = 7) => {
     const expires = new Date(Date.now() + days * 86400000).toUTCString();
@@ -38,7 +36,7 @@ const UserSession = {
   isLoggedIn: () => !!localStorage.getItem("fitnesshub_user"),
   logout: () => {
     localStorage.removeItem("fitnesshub_user");
-    CookieManager.remove("token");      // ✅ AJOUTÉ : Supprimer le token lors de la déconnexion
+    CookieManager.remove("token");      //Supprimer le token lors de la déconnexion
     CookieManager.remove("user_id");
     CookieManager.remove("user_role");
   }
