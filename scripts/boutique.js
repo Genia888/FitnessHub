@@ -79,6 +79,6 @@ function addToCart(productId, products) {
 
   localStorage.setItem('cart', JSON.stringify(cart));
 
-  alert(`${product.name} ajouté au panier !`);
+  alert(`${product.name} add to cart !`);
   console.log("🛒 Panier mis à jour:", cart);
 }
