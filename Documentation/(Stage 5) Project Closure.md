@@ -29,3 +29,8 @@ At the beginning of the project, we faced some communication difficulties, but t
 We sometimes had a bit of trouble making decisions collectively, but nothing serious discussions and teamwork always helped us move forward.
 
 For future projects, we aim to improve communication from the start and maintain the same positive and balanced teamwork we built during this project. Overall, it was a very good group experience well-balanced, collaborative, and productive.
+
+# Presentation
+You can check out the full project presentation on Canva here:
+[View the presentation on Canva](https://www.canva.com/design/DAG3oZNXgVk/MDP7Sx4oVhUAc0Yxv9yggQ/view?utm_content=DAG3oZNXgVk&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=heb8ecde0e7)
+
