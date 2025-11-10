@@ -32,5 +32,5 @@ For future projects, we aim to improve communication from the start and maintain
 
 # Presentation
 You can check out the full project presentation on Canva here:
-[View the presentation on Canva](https://www.canva.com/design/DAG3oZNXgVk/R-DULYqD20WXmTvocLFfWg/edit?utm_content=DAG3oZNXgVk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+[View the presentation on Canva](https://www.canva.com/design/DAG3oZNXgVk/MDP7Sx4oVhUAc0Yxv9yggQ/view?utm_content=DAG3oZNXgVk&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=heb8ecde0e7)
 
